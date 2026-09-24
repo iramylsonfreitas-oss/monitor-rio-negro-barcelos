@@ -1,118 +1,153 @@
-name: Diagnostico ANA Barcelos
+name: Diagnostico Swagger ANA
 
 on:
   workflow_dispatch:
 
 jobs:
-  diagnostico:
+  swagger:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Diagnosticar API ANA
-        env:
-          ANA_IDENTIFIER: ${{ secrets.ANA_IDENTIFIER }}
-          ANA_PASSWORD: ${{ secrets.ANA_PASSWORD }}
+      - name: Ler especificacao oficial da API ANA
         run: |
-          set -e
-
-          echo "======================================"
-          echo "1. AUTENTICAÇÃO"
-          echo "======================================"
-
-          curl -sS \
-            -H "Identificador: $ANA_IDENTIFIER" \
-            -H "Senha: $ANA_PASSWORD" \
-            "https://www.ana.gov.br/hidrowebservice/EstacoesTelemetricas/OAUth/v1" \
-            -o auth.json
-
-          TOKEN=$(python - <<'PY'
+          python - <<'PY'
           import json
+          import urllib.request
+          import urllib.parse
 
-          with open("auth.json", encoding="utf-8") as f:
-              data = json.load(f)
+          BASE = "https://www.ana.gov.br/hidrowebservice"
 
-          token = (data.get("items") or {}).get("tokenautenticacao")
+          def baixar(url):
+              print()
+              print("Consultando:", url)
 
-          if not token:
-              raise SystemExit("ERRO: token não encontrado")
+              req = urllib.request.Request(
+                  url,
+                  headers={"User-Agent": "Mozilla/5.0"}
+              )
 
-          print(token)
-          PY
-          )
+              try:
+                  with urllib.request.urlopen(req, timeout=30) as r:
+                      conteudo = r.read().decode("utf-8", errors="replace")
+                      print("HTTP:", r.status)
+                      return conteudo
+              except Exception as e:
+                  print("ERRO:", e)
+                  return None
 
-          echo "Autenticação OK."
-          echo
+          documentos = []
 
-          BASE="https://www.ana.gov.br/hidrowebservice/EstacoesTelemetricas/HidroinfoanaSerieTelemetricaAdotada/v1"
+          # Tenta descobrir os grupos publicados pelo Swagger
+          recursos = baixar(BASE + "/swagger-resources")
 
-          testar () {
-            NOME="$1"
-            URL="$2"
+          if recursos:
+              try:
+                  dados = json.loads(recursos)
 
-            echo "======================================"
-            echo "$NOME"
-            echo "======================================"
+                  print()
+                  print("GRUPOS SWAGGER ENCONTRADOS:")
 
-            HTTP=$(curl -sS \
-              -o resposta.json \
-              -w "%{http_code}" \
-              -H "Authorization: Bearer $TOKEN" \
-              -H "Accept: application/json" \
-              "$URL")
+                  for item in dados:
+                      nome = item.get("name")
+                      local = item.get("location")
 
-            echo "HTTP: $HTTP"
+                      print("-", nome, "=>", local)
 
-            python - <<'PY'
-          import json
+                      if local:
+                          if local.startswith("http"):
+                              url = local
+                          else:
+                              url = urllib.parse.urljoin(BASE + "/", local.lstrip("/"))
 
-          try:
-              with open("resposta.json", encoding="utf-8") as f:
-                  data = json.load(f)
+                          documentos.append(url)
 
-              print("Tipo da resposta:", type(data).__name__)
+              except Exception as e:
+                  print("Não foi possível interpretar swagger-resources:", e)
 
-              if isinstance(data, dict):
-                  print("Campos principais:", list(data.keys()))
+          # Endpoints comuns do Swagger
+          documentos.extend([
+              BASE + "/v2/api-docs",
+              BASE + "/v3/api-docs"
+          ])
 
-                  if "message" in data:
-                      print("Mensagem:", data["message"])
+          vistos = set()
+          encontrou = False
 
-                  items = data.get("items")
+          for url in documentos:
 
-                  if isinstance(items, list):
-                      print("Quantidade de registros:", len(items))
+              if url in vistos:
+                  continue
 
-                      if items:
-                          print("Primeiro registro:", items[0])
+              vistos.add(url)
 
-                  elif isinstance(items, dict):
-                      print("Campos de items:", list(items.keys()))
+              texto = baixar(url)
+
+              if not texto:
+                  continue
+
+              try:
+                  spec = json.loads(texto)
+              except:
+                  continue
+
+              paths = spec.get("paths", {})
 
               print()
+              print("Documento contém", len(paths), "rotas.")
 
-          except Exception as e:
-              print("Resposta não interpretada como JSON.")
-              print("Erro:", e)
-              print()
+              for caminho, metodos in paths.items():
+
+                  termo = caminho.lower()
+
+                  if (
+                      "hidroinfoanaserietelemetricaadotada" in termo
+                      or "serietelemetrica" in termo
+                      or "hidroinfoana" in termo
+                  ):
+                      encontrou = True
+
+                      print()
+                      print("==========================================")
+                      print("ROTA ENCONTRADA")
+                      print("==========================================")
+                      print("PATH:", caminho)
+
+                      for metodo, info in metodos.items():
+
+                          if metodo.lower() not in [
+                              "get", "post", "put", "delete", "patch"
+                          ]:
+                              continue
+
+                          print("MÉTODO:", metodo.upper())
+
+                          parametros = info.get("parameters", [])
+
+                          print("PARÂMETROS:")
+
+                          if not parametros:
+                              print("Nenhum parâmetro listado.")
+
+                          for p in parametros:
+                              schema = p.get("schema", {})
+
+                              print(
+                                  "- nome:", p.get("name"),
+                                  "| local:", p.get("in"),
+                                  "| obrigatório:", p.get("required"),
+                                  "| tipo:", p.get("type") or schema.get("type"),
+                                  "| enum:", p.get("enum") or schema.get("enum")
+                              )
+
+                          print("SEGURANÇA:", info.get("security"))
+
+          print()
+          print("==========================================")
+
+          if encontrou:
+              print("SUCESSO: rota telemétrica localizada no Swagger.")
+          else:
+              print("ATENÇÃO: a rota telemétrica não apareceu nos documentos consultados.")
+
+          print("==========================================")
           PY
-          }
-
-          testar \
-            "TESTE A - DIAS_30" \
-            "$BASE?CodigoDaEstacao=14480002&TipoFiltroData=DATA_LEITURA&RangeIntervaloDeBusca=DIAS_30"
-
-          testar \
-            "TESTE B - DIAS_2" \
-            "$BASE?CodigoDaEstacao=14480002&TipoFiltroData=DATA_LEITURA&RangeIntervaloDeBusca=DIAS_2"
-
-          testar \
-            "TESTE C - HORA_24" \
-            "$BASE?CodigoDaEstacao=14480002&TipoFiltroData=DATA_LEITURA&RangeIntervaloDeBusca=HORA_24"
-
-          testar \
-            "TESTE D - somente estação" \
-            "$BASE?CodigoDaEstacao=14480002"
-
-          echo "======================================"
-          echo "DIAGNÓSTICO CONCLUÍDO"
-          echo "======================================"

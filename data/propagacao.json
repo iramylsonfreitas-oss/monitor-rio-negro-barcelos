@@ -1,5 +1,5 @@
 {
-  "gerado_em_utc": "2026-09-24T16:44:51.348106+00:00",
+  "gerado_em_utc": "2026-09-24T16:45:24.386476+00:00",
   "metodo": "Correlação de Pearson entre variações horárias acumuladas de 24 horas, testando defasagens em passos de 6 horas.",
   "status": "experimental",
   "uso": "Diagnóstico histórico exploratório. Não representa previsão hidrológica nem confirma repiquete.",
@@ -72,23 +72,23 @@
       "estacao": "14110000",
       "nome": "Cucuí",
       "nivel_m": 16.5,
-      "variacao_6h_cm": -2.0,
+      "variacao_6h_cm": -1.0,
       "variacao_24h_cm": -8.0,
       "variacao_72h_cm": -17.0,
       "variacao_7d_cm": 20.0,
       "tendencia": "descendo",
-      "data_medicao_manaus": "2026-09-24 11:15:00"
+      "data_medicao_manaus": "2026-09-24 12:15:00"
     },
     {
       "estacao": "14280001",
       "nome": "Taracuá",
-      "nivel_m": 13.57,
+      "nivel_m": 13.56,
       "variacao_6h_cm": -3.0,
-      "variacao_24h_cm": -5.0,
-      "variacao_72h_cm": -5.0,
-      "variacao_7d_cm": 65.0,
+      "variacao_24h_cm": -7.0,
+      "variacao_72h_cm": -7.0,
+      "variacao_7d_cm": 63.0,
       "tendencia": "descendo",
-      "data_medicao_manaus": "2026-09-24 11:15:00"
+      "data_medicao_manaus": "2026-09-24 12:15:00"
     },
     {
       "estacao": "14330000",

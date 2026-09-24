@@ -1,135 +1,118 @@
-name: Teste ANA Barcelos
+name: Diagnostico ANA Barcelos
 
 on:
   workflow_dispatch:
 
 jobs:
-  testar-barcelos:
+  diagnostico:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Consultar estação 14480002
+      - name: Diagnosticar API ANA
         env:
           ANA_IDENTIFIER: ${{ secrets.ANA_IDENTIFIER }}
           ANA_PASSWORD: ${{ secrets.ANA_PASSWORD }}
         run: |
           set -e
 
-          echo "1. Autenticando na ANA..."
+          echo "======================================"
+          echo "1. AUTENTICAÇÃO"
+          echo "======================================"
 
-          AUTH_HTTP=$(curl -sS -o auth.json -w "%{http_code}" \
+          curl -sS \
             -H "Identificador: $ANA_IDENTIFIER" \
             -H "Senha: $ANA_PASSWORD" \
-            "https://www.ana.gov.br/hidrowebservice/EstacoesTelemetricas/OAUth/v1")
-
-          echo "HTTP autenticação: $AUTH_HTTP"
-
-          if [ "$AUTH_HTTP" != "200" ]; then
-            echo "ERRO na autenticação."
-            exit 1
-          fi
+            "https://www.ana.gov.br/hidrowebservice/EstacoesTelemetricas/OAUth/v1" \
+            -o auth.json
 
           TOKEN=$(python - <<'PY'
           import json
 
-          with open("auth.json", "r", encoding="utf-8") as f:
+          with open("auth.json", encoding="utf-8") as f:
               data = json.load(f)
 
-          items = data.get("items") or {}
-          token = items.get("tokenautenticacao")
+          token = (data.get("items") or {}).get("tokenautenticacao")
 
           if not token:
-              raise SystemExit("Token não encontrado.")
+              raise SystemExit("ERRO: token não encontrado")
 
           print(token)
           PY
           )
 
-          echo "Token obtido com sucesso."
-          echo "2. Consultando estação 14480002 - Barcelos..."
+          echo "Autenticação OK."
+          echo
 
-          HTTP_CODE=$(curl -sS -o telemetria.json -w "%{http_code}" \
-            --get \
-            -H "Authorization: Bearer $TOKEN" \
-            -H "Accept: application/json" \
-            --data-urlencode "CodigoDaEstacao=14480002" \
-            --data-urlencode "TipoFiltroData=DATA_LEITURA" \
-            --data-urlencode "RangeIntervaloDeBusca=DIAS_30" \
-            "https://www.ana.gov.br/hidrowebservice/EstacoesTelemetricas/HidroinfoanaSerieTelemetricaAdotada/v1")
+          BASE="https://www.ana.gov.br/hidrowebservice/EstacoesTelemetricas/HidroinfoanaSerieTelemetricaAdotada/v1"
 
-          echo "HTTP telemetria: $HTTP_CODE"
+          testar () {
+            NOME="$1"
+            URL="$2"
 
-          if [ "$HTTP_CODE" != "200" ]; then
-            echo "A consulta da estação não retornou HTTP 200."
-            echo "Resposta da ANA:"
-            head -c 2000 telemetria.json
-            echo
-            exit 1
-          fi
+            echo "======================================"
+            echo "$NOME"
+            echo "======================================"
 
-          python - <<'PY'
+            HTTP=$(curl -sS \
+              -o resposta.json \
+              -w "%{http_code}" \
+              -H "Authorization: Bearer $TOKEN" \
+              -H "Accept: application/json" \
+              "$URL")
+
+            echo "HTTP: $HTTP"
+
+            python - <<'PY'
           import json
 
-          with open("telemetria.json", "r", encoding="utf-8") as f:
-              data = json.load(f)
-
-          print("Resposta recebida da ANA.")
-
-          items = data.get("items")
-
-          registros = []
-
-          def procurar(obj):
-              if isinstance(obj, dict):
-                  if (
-                      "Data_Hora_Medicao" in obj
-                      or "Cota_Adotada" in obj
-                      or "codigoestacao" in obj
-                  ):
-                      registros.append(obj)
-
-                  for valor in obj.values():
-                      procurar(valor)
-
-              elif isinstance(obj, list):
-                  for valor in obj:
-                      procurar(valor)
-
-          procurar(items)
-
-          if not registros:
-              print("ERRO: a ANA respondeu, mas nenhum registro de telemetria foi localizado.")
-              print("Campos principais:", list(data.keys()))
-              raise SystemExit(1)
-
-          registros_validos = [
-              r for r in registros
-              if r.get("Data_Hora_Medicao") and r.get("Cota_Adotada") not in (None, "")
-          ]
-
-          if not registros_validos:
-              print("ERRO: registros encontrados, mas nenhum contém data e cota válidas.")
-              raise SystemExit(1)
-
-          ultimo = max(
-              registros_validos,
-              key=lambda r: str(r.get("Data_Hora_Medicao", ""))
-          )
-
-          cota = ultimo.get("Cota_Adotada")
-
-          print("--------------------------------")
-          print("ESTAÇÃO:", ultimo.get("codigoestacao", "14480002"))
-          print("DATA/HORA:", ultimo.get("Data_Hora_Medicao"))
-          print("COTA ANA:", cota, "cm")
-
           try:
-              print("NÍVEL:", round(float(str(cota).replace(",", ".")) / 100, 2), "m")
-          except:
-              pass
+              with open("resposta.json", encoding="utf-8") as f:
+                  data = json.load(f)
 
-          print("STATUS DA COTA:", ultimo.get("Cota_Adotada_Status"))
-          print("ATUALIZAÇÃO:", ultimo.get("Data_Atualizacao"))
-          print("--------------------------------")
-          print("SUCESSO: Barcelos foi consultada.")
+              print("Tipo da resposta:", type(data).__name__)
+
+              if isinstance(data, dict):
+                  print("Campos principais:", list(data.keys()))
+
+                  if "message" in data:
+                      print("Mensagem:", data["message"])
+
+                  items = data.get("items")
+
+                  if isinstance(items, list):
+                      print("Quantidade de registros:", len(items))
+
+                      if items:
+                          print("Primeiro registro:", items[0])
+
+                  elif isinstance(items, dict):
+                      print("Campos de items:", list(items.keys()))
+
+              print()
+
+          except Exception as e:
+              print("Resposta não interpretada como JSON.")
+              print("Erro:", e)
+              print()
           PY
+          }
+
+          testar \
+            "TESTE A - DIAS_30" \
+            "$BASE?CodigoDaEstacao=14480002&TipoFiltroData=DATA_LEITURA&RangeIntervaloDeBusca=DIAS_30"
+
+          testar \
+            "TESTE B - DIAS_2" \
+            "$BASE?CodigoDaEstacao=14480002&TipoFiltroData=DATA_LEITURA&RangeIntervaloDeBusca=DIAS_2"
+
+          testar \
+            "TESTE C - HORA_24" \
+            "$BASE?CodigoDaEstacao=14480002&TipoFiltroData=DATA_LEITURA&RangeIntervaloDeBusca=HORA_24"
+
+          testar \
+            "TESTE D - somente estação" \
+            "$BASE?CodigoDaEstacao=14480002"
+
+          echo "======================================"
+          echo "DIAGNÓSTICO CONCLUÍDO"
+          echo "======================================"

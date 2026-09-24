@@ -1,0 +1,276 @@
+name: Backfill Historico Rio Negro
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: atualizar-rio-negro
+  cancel-in-progress: false
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Baixar projeto
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+
+      - name: Executar backfill de 1 ano
+        env:
+          ANA_IDENTIFIER: ${{ secrets.ANA_IDENTIFIER }}
+          ANA_PASSWORD: ${{ secrets.ANA_PASSWORD }}
+        run: |
+          python collector/backfill.py
+
+
+      - name: Recalcular analise de propagacao
+        run: |
+          python collector/propagacao.py
+
+
+      - name: Conferir historico gerado
+        run: |
+          echo "======================================"
+          echo "HISTÓRICO APÓS BACKFILL"
+          echo "======================================"
+
+          if [ ! -f data/history/hourly.csv ]; then
+            echo "ERRO:"
+            echo "data/history/hourly.csv não encontrado."
+            exit 1
+          fi
+
+          echo
+          echo "Total de linhas:"
+          wc -l data/history/hourly.csv
+
+          echo
+          echo "Primeira linha de dados:"
+          sed -n '2p' data/history/hourly.csv
+
+          echo
+          echo "Última linha:"
+          tail -n 1 data/history/hourly.csv
+
+          echo
+          echo "Primeira data:"
+          python - <<'PY'
+          import csv
+
+          with open(
+              "data/history/hourly.csv",
+              encoding="utf-8",
+              newline=""
+          ) as f:
+              rows = list(csv.DictReader(f))
+
+          if not rows:
+              raise RuntimeError(
+                  "Histórico vazio."
+              )
+
+          dates = [
+              row["hora_manaus"]
+              for row in rows
+          ]
+
+          print(min(dates))
+          print()
+          print("Última data:")
+          print(max(dates))
+          print()
+          print("Registros horários:")
+          print(len(rows))
+          PY
+
+
+      - name: Conferir cobertura por estacao
+        run: |
+          echo "======================================"
+          echo "COBERTURA POR ESTAÇÃO"
+          echo "======================================"
+
+          python - <<'PY'
+          import csv
+          from collections import defaultdict
+
+          nomes = {
+              "14110000": "Cucuí",
+              "14280001": "Taracuá",
+              "14330000": "Curicuriari",
+              "14420000": "Serrinha",
+              "14480002": "Barcelos"
+          }
+
+          dados = defaultdict(list)
+
+          with open(
+              "data/history/hourly.csv",
+              encoding="utf-8",
+              newline=""
+          ) as f:
+
+              reader = csv.DictReader(f)
+
+              for row in reader:
+                  dados[
+                      row["estacao"]
+                  ].append(
+                      row["hora_manaus"]
+                  )
+
+          for codigo, nome in nomes.items():
+
+              linhas = dados.get(
+                  codigo,
+                  []
+              )
+
+              print()
+              print(
+                  nome,
+                  codigo
+              )
+
+              print(
+                  "Registros:",
+                  len(linhas)
+              )
+
+              if linhas:
+                  print(
+                      "Início:",
+                      min(linhas)
+                  )
+
+                  print(
+                      "Fim:",
+                      max(linhas)
+                  )
+          PY
+
+
+      - name: Conferir nova analise de propagacao
+        run: |
+          echo "======================================"
+          echo "PROPAGAÇÃO APÓS 1 ANO"
+          echo "======================================"
+
+          if [ ! -f data/propagacao.json ]; then
+            echo "ERRO:"
+            echo "data/propagacao.json não encontrado."
+            exit 1
+          fi
+
+          python - <<'PY'
+          import json
+
+          with open(
+              "data/propagacao.json",
+              encoding="utf-8"
+          ) as f:
+              data = json.load(f)
+
+          cobertura = (
+              data.get(
+                  "cobertura_historica"
+              )
+              or {}
+          )
+
+          print(
+              "Status:",
+              data.get("status")
+          )
+
+          print(
+              "Cobertura:",
+              cobertura.get("dias"),
+              "dias"
+          )
+
+          print()
+
+          for pair in data.get(
+              "pares",
+              []
+          ):
+
+              print(
+                  pair.get(
+                      "nome_origem"
+                  ),
+                  "→ Barcelos"
+              )
+
+              print(
+                  "Defasagem:",
+                  pair.get(
+                      "melhor_defasagem_h"
+                  ),
+                  "h"
+              )
+
+              print(
+                  "Dias:",
+                  pair.get(
+                      "melhor_defasagem_dias"
+                  )
+              )
+
+              print(
+                  "Correlação:",
+                  pair.get(
+                      "correlacao"
+                  )
+              )
+
+              print(
+                  "Força:",
+                  pair.get(
+                      "forca_correlacao"
+                  )
+              )
+
+              print(
+                  "Amostras:",
+                  pair.get(
+                      "amostras"
+                  )
+              )
+
+              print()
+          PY
+
+
+      - name: Salvar historico no repositorio
+        run: |
+          git config user.name "rio-negro-bot"
+          git config user.email "actions@github.com"
+
+          git add data/history/hourly.csv
+          git add data/propagacao.json
+
+          if git diff --cached --quiet; then
+            echo "Nenhuma alteração para salvar."
+            exit 0
+          fi
+
+          git commit -m "Adiciona historico anual ANA"
+
+          git pull --rebase origin main
+
+          git push origin main

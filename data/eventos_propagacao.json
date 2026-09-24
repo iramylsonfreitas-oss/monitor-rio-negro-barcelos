@@ -1,0 +1,813 @@
+{
+  "gerado_em_utc": "2026-09-24T16:54:55.114034+00:00",
+  "status": "experimental",
+  "metodo": "Detecção de início de alta sustentada com variação de 24 horas, amostragem a cada 6 horas e casamento temporal entre eventos de montante e Barcelos.",
+  "parametros": {
+    "alta_minima_24h_cm": 3.0,
+    "intervalo_amostragem_h": 6,
+    "confirmacoes": 3,
+    "separacao_eventos_h": 72
+  },
+  "cobertura": {
+    "14110000": {
+      "nome": "Cucuí",
+      "inicio": "2025-09-24 00:00:00",
+      "fim": "2026-09-24 12:00:00",
+      "registros": 8759
+    },
+    "14280001": {
+      "nome": "Taracuá",
+      "inicio": "2025-09-24 00:00:00",
+      "fim": "2026-09-24 12:00:00",
+      "registros": 8748
+    },
+    "14330000": {
+      "nome": "Curicuriari",
+      "inicio": "2025-09-24 06:00:00",
+      "fim": "2026-09-24 11:00:00",
+      "registros": 4503
+    },
+    "14420000": {
+      "nome": "Serrinha",
+      "inicio": "2025-09-24 00:00:00",
+      "fim": "2026-09-24 11:00:00",
+      "registros": 8765
+    },
+    "14480002": {
+      "nome": "Barcelos",
+      "inicio": "2025-09-24 00:00:00",
+      "fim": "2026-09-24 12:00:00",
+      "registros": 6763
+    }
+  },
+  "pares": [
+    {
+      "origem": "14420000",
+      "nome_origem": "Serrinha",
+      "destino": "14480002",
+      "nome_destino": "Barcelos",
+      "eventos_montante": 44,
+      "eventos_barcelos": 32,
+      "eventos_correspondentes": 27,
+      "taxa_correspondencia": 0.614,
+      "eventos": [
+        {
+          "inicio_montante": "2025-10-12 06:00:00",
+          "inicio_barcelos": "2025-10-19 18:00:00",
+          "defasagem_h": 180.0,
+          "defasagem_dias": 7.5,
+          "variacao_24h_montante_cm": 3.0,
+          "variacao_24h_barcelos_cm": 3.0
+        },
+        {
+          "inicio_montante": "2025-11-18 06:00:00",
+          "inicio_barcelos": "2025-11-20 18:00:00",
+          "defasagem_h": 60.0,
+          "defasagem_dias": 2.5,
+          "variacao_24h_montante_cm": 4.0,
+          "variacao_24h_barcelos_cm": 3.0
+        },
+        {
+          "inicio_montante": "2025-11-21 06:00:00",
+          "inicio_barcelos": "2025-11-24 06:00:00",
+          "defasagem_h": 72.0,
+          "defasagem_dias": 3.0,
+          "variacao_24h_montante_cm": 9.0,
+          "variacao_24h_barcelos_cm": 3.0
+        },
+        {
+          "inicio_montante": "2025-11-25 18:00:00",
+          "inicio_barcelos": "2025-11-28 18:00:00",
+          "defasagem_h": 72.0,
+          "defasagem_dias": 3.0,
+          "variacao_24h_montante_cm": 3.5,
+          "variacao_24h_barcelos_cm": 4.0
+        },
+        {
+          "inicio_montante": "2025-11-28 18:00:00",
+          "inicio_barcelos": "2025-12-01 18:00:00",
+          "defasagem_h": 72.0,
+          "defasagem_dias": 3.0,
+          "variacao_24h_montante_cm": 5.0,
+          "variacao_24h_barcelos_cm": 3.0
+        },
+        {
+          "inicio_montante": "2025-12-01 18:00:00",
+          "inicio_barcelos": "2025-12-04 18:00:00",
+          "defasagem_h": 72.0,
+          "defasagem_dias": 3.0,
+          "variacao_24h_montante_cm": 3.0,
+          "variacao_24h_barcelos_cm": 4.0
+        },
+        {
+          "inicio_montante": "2026-01-19 00:00:00",
+          "inicio_barcelos": "2026-01-26 06:00:00",
+          "defasagem_h": 174.0,
+          "defasagem_dias": 7.25,
+          "variacao_24h_montante_cm": 14.5,
+          "variacao_24h_barcelos_cm": 9.0
+        },
+        {
+          "inicio_montante": "2026-01-22 00:00:00",
+          "inicio_barcelos": "2026-01-29 06:00:00",
+          "defasagem_h": 174.0,
+          "defasagem_dias": 7.25,
+          "variacao_24h_montante_cm": 13.0,
+          "variacao_24h_barcelos_cm": 7.0
+        },
+        {
+          "inicio_montante": "2026-01-25 00:00:00",
+          "inicio_barcelos": "2026-02-01 06:00:00",
+          "defasagem_h": 174.0,
+          "defasagem_dias": 7.25,
+          "variacao_24h_montante_cm": 13.0,
+          "variacao_24h_barcelos_cm": 11.0
+        },
+        {
+          "inicio_montante": "2026-01-28 00:00:00",
+          "inicio_barcelos": "2026-02-04 06:00:00",
+          "defasagem_h": 174.0,
+          "defasagem_dias": 7.25,
+          "variacao_24h_montante_cm": 10.0,
+          "variacao_24h_barcelos_cm": 3.0
+        },
+        {
+          "inicio_montante": "2026-03-15 12:00:00",
+          "inicio_barcelos": "2026-03-19 06:00:00",
+          "defasagem_h": 90.0,
+          "defasagem_dias": 3.75,
+          "variacao_24h_montante_cm": 3.0,
+          "variacao_24h_barcelos_cm": 10.0
+        },
+        {
+          "inicio_montante": "2026-03-19 12:00:00",
+          "inicio_barcelos": "2026-03-23 12:00:00",
+          "defasagem_h": 96.0,
+          "defasagem_dias": 4.0,
+          "variacao_24h_montante_cm": 3.0,
+          "variacao_24h_barcelos_cm": 3.0
+        },
+        {
+          "inicio_montante": "2026-03-22 12:00:00",
+          "inicio_barcelos": "2026-03-26 12:00:00",
+          "defasagem_h": 96.0,
+          "defasagem_dias": 4.0,
+          "variacao_24h_montante_cm": 6.0,
+          "variacao_24h_barcelos_cm": 5.0
+        },
+        {
+          "inicio_montante": "2026-03-28 00:00:00",
+          "inicio_barcelos": "2026-03-30 18:00:00",
+          "defasagem_h": 66.0,
+          "defasagem_dias": 2.75,
+          "variacao_24h_montante_cm": 3.0,
+          "variacao_24h_barcelos_cm": 4.5
+        },
+        {
+          "inicio_montante": "2026-04-02 06:00:00",
+          "inicio_barcelos": "2026-04-05 18:00:00",
+          "defasagem_h": 84.0,
+          "defasagem_dias": 3.5,
+          "variacao_24h_montante_cm": 4.5,
+          "variacao_24h_barcelos_cm": 7.0
+        },
+        {
+          "inicio_montante": "2026-04-05 06:00:00",
+          "inicio_barcelos": "2026-04-08 18:00:00",
+          "defasagem_h": 84.0,
+          "defasagem_dias": 3.5,
+          "variacao_24h_montante_cm": 26.0,
+          "variacao_24h_barcelos_cm": 13.0
+        },
+        {
+          "inicio_montante": "2026-04-08 06:00:00",
+          "inicio_barcelos": "2026-04-11 18:00:00",
+          "defasagem_h": 84.0,
+          "defasagem_dias": 3.5,
+          "variacao_24h_montante_cm": 9.0,
+          "variacao_24h_barcelos_cm": 8.5
+        },
+        {
+          "inicio_montante": "2026-04-12 00:00:00",
+          "inicio_barcelos": "2026-04-14 18:00:00",
+          "defasagem_h": 66.0,
+          "defasagem_dias": 2.75,
+          "variacao_24h_montante_cm": 3.0,
+          "variacao_24h_barcelos_cm": 17.0
+        },
+        {
+          "inicio_montante": "2026-04-15 00:00:00",
+          "inicio_barcelos": "2026-04-17 18:00:00",
+          "defasagem_h": 66.0,
+          "defasagem_dias": 2.75,
+          "variacao_24h_montante_cm": 12.0,
+          "variacao_24h_barcelos_cm": 6.0
+        },
+        {
+          "inicio_montante": "2026-04-18 00:00:00",
+          "inicio_barcelos": "2026-04-20 18:00:00",
+          "defasagem_h": 66.0,
+          "defasagem_dias": 2.75,
+          "variacao_24h_montante_cm": 5.0,
+          "variacao_24h_barcelos_cm": 7.0
+        },
+        {
+          "inicio_montante": "2026-04-21 00:00:00",
+          "inicio_barcelos": "2026-04-23 18:00:00",
+          "defasagem_h": 66.0,
+          "defasagem_dias": 2.75,
+          "variacao_24h_montante_cm": 8.0,
+          "variacao_24h_barcelos_cm": 6.5
+        },
+        {
+          "inicio_montante": "2026-05-07 06:00:00",
+          "inicio_barcelos": "2026-05-11 18:00:00",
+          "defasagem_h": 108.0,
+          "defasagem_dias": 4.5,
+          "variacao_24h_montante_cm": 4.0,
+          "variacao_24h_barcelos_cm": 6.0
+        },
+        {
+          "inicio_montante": "2026-05-10 06:00:00",
+          "inicio_barcelos": "2026-05-14 18:00:00",
+          "defasagem_h": 108.0,
+          "defasagem_dias": 4.5,
+          "variacao_24h_montante_cm": 22.0,
+          "variacao_24h_barcelos_cm": 6.0
+        },
+        {
+          "inicio_montante": "2026-05-13 06:00:00",
+          "inicio_barcelos": "2026-05-17 18:00:00",
+          "defasagem_h": 108.0,
+          "defasagem_dias": 4.5,
+          "variacao_24h_montante_cm": 11.0,
+          "variacao_24h_barcelos_cm": 8.0
+        },
+        {
+          "inicio_montante": "2026-05-16 06:00:00",
+          "inicio_barcelos": "2026-05-20 18:00:00",
+          "defasagem_h": 108.0,
+          "defasagem_dias": 4.5,
+          "variacao_24h_montante_cm": 6.0,
+          "variacao_24h_barcelos_cm": 9.0
+        },
+        {
+          "inicio_montante": "2026-05-19 06:00:00",
+          "inicio_barcelos": "2026-05-23 18:00:00",
+          "defasagem_h": 108.0,
+          "defasagem_dias": 4.5,
+          "variacao_24h_montante_cm": 8.0,
+          "variacao_24h_barcelos_cm": 13.5
+        },
+        {
+          "inicio_montante": "2026-05-22 06:00:00",
+          "inicio_barcelos": "2026-05-26 18:00:00",
+          "defasagem_h": 108.0,
+          "defasagem_dias": 4.5,
+          "variacao_24h_montante_cm": 10.0,
+          "variacao_24h_barcelos_cm": 16.0
+        }
+      ],
+      "mediana_h": 90.0,
+      "mediana_dias": 3.75,
+      "q25_h": 72.0,
+      "q75_h": 108.0,
+      "q25_dias": 3.0,
+      "q75_dias": 4.5,
+      "min_h": 60.0,
+      "max_h": 180.0,
+      "min_dias": 2.5,
+      "max_dias": 7.5
+    },
+    {
+      "origem": "14330000",
+      "nome_origem": "Curicuriari",
+      "destino": "14480002",
+      "nome_destino": "Barcelos",
+      "eventos_montante": 22,
+      "eventos_barcelos": 32,
+      "eventos_correspondentes": 6,
+      "taxa_correspondencia": 0.273,
+      "eventos": [
+        {
+          "inicio_montante": "2026-05-05 18:00:00",
+          "inicio_barcelos": "2026-05-11 18:00:00",
+          "defasagem_h": 144.0,
+          "defasagem_dias": 6.0,
+          "variacao_24h_montante_cm": 16.0,
+          "variacao_24h_barcelos_cm": 6.0
+        },
+        {
+          "inicio_montante": "2026-05-08 18:00:00",
+          "inicio_barcelos": "2026-05-14 18:00:00",
+          "defasagem_h": 144.0,
+          "defasagem_dias": 6.0,
+          "variacao_24h_montante_cm": 37.0,
+          "variacao_24h_barcelos_cm": 6.0
+        },
+        {
+          "inicio_montante": "2026-05-12 06:00:00",
+          "inicio_barcelos": "2026-05-17 18:00:00",
+          "defasagem_h": 132.0,
+          "defasagem_dias": 5.5,
+          "variacao_24h_montante_cm": 4.0,
+          "variacao_24h_barcelos_cm": 8.0
+        },
+        {
+          "inicio_montante": "2026-05-15 06:00:00",
+          "inicio_barcelos": "2026-05-20 18:00:00",
+          "defasagem_h": 132.0,
+          "defasagem_dias": 5.5,
+          "variacao_24h_montante_cm": 13.0,
+          "variacao_24h_barcelos_cm": 9.0
+        },
+        {
+          "inicio_montante": "2026-05-18 06:00:00",
+          "inicio_barcelos": "2026-05-23 18:00:00",
+          "defasagem_h": 132.0,
+          "defasagem_dias": 5.5,
+          "variacao_24h_montante_cm": 27.0,
+          "variacao_24h_barcelos_cm": 13.5
+        },
+        {
+          "inicio_montante": "2026-05-21 06:00:00",
+          "inicio_barcelos": "2026-05-26 18:00:00",
+          "defasagem_h": 132.0,
+          "defasagem_dias": 5.5,
+          "variacao_24h_montante_cm": 17.0,
+          "variacao_24h_barcelos_cm": 16.0
+        }
+      ],
+      "mediana_h": 132.0,
+      "mediana_dias": 5.5,
+      "q25_h": 132.0,
+      "q75_h": 141.0,
+      "q25_dias": 5.5,
+      "q75_dias": 5.88,
+      "min_h": 132.0,
+      "max_h": 144.0,
+      "min_dias": 5.5,
+      "max_dias": 6.0
+    },
+    {
+      "origem": "14280001",
+      "nome_origem": "Taracuá",
+      "destino": "14480002",
+      "nome_destino": "Barcelos",
+      "eventos_montante": 52,
+      "eventos_barcelos": 32,
+      "eventos_correspondentes": 26,
+      "taxa_correspondencia": 0.5,
+      "eventos": [
+        {
+          "inicio_montante": "2025-10-10 12:00:00",
+          "inicio_barcelos": "2025-10-19 18:00:00",
+          "defasagem_h": 222.0,
+          "defasagem_dias": 9.25,
+          "variacao_24h_montante_cm": 5.5,
+          "variacao_24h_barcelos_cm": 3.0
+        },
+        {
+          "inicio_montante": "2025-11-13 12:00:00",
+          "inicio_barcelos": "2025-11-20 18:00:00",
+          "defasagem_h": 174.0,
+          "defasagem_dias": 7.25,
+          "variacao_24h_montante_cm": 3.599999999999909,
+          "variacao_24h_barcelos_cm": 3.0
+        },
+        {
+          "inicio_montante": "2025-11-16 12:00:00",
+          "inicio_barcelos": "2025-11-24 06:00:00",
+          "defasagem_h": 186.0,
+          "defasagem_dias": 7.75,
+          "variacao_24h_montante_cm": 17.09999999999991,
+          "variacao_24h_barcelos_cm": 3.0
+        },
+        {
+          "inicio_montante": "2025-11-21 06:00:00",
+          "inicio_barcelos": "2025-11-28 18:00:00",
+          "defasagem_h": 180.0,
+          "defasagem_dias": 7.5,
+          "variacao_24h_montante_cm": 4.100000000000136,
+          "variacao_24h_barcelos_cm": 4.0
+        },
+        {
+          "inicio_montante": "2025-11-24 06:00:00",
+          "inicio_barcelos": "2025-12-01 18:00:00",
+          "defasagem_h": 180.0,
+          "defasagem_dias": 7.5,
+          "variacao_24h_montante_cm": 20.200000000000045,
+          "variacao_24h_barcelos_cm": 3.0
+        },
+        {
+          "inicio_montante": "2025-11-27 06:00:00",
+          "inicio_barcelos": "2025-12-04 18:00:00",
+          "defasagem_h": 180.0,
+          "defasagem_dias": 7.5,
+          "variacao_24h_montante_cm": 30.0,
+          "variacao_24h_barcelos_cm": 4.0
+        },
+        {
+          "inicio_montante": "2026-01-10 18:00:00",
+          "inicio_barcelos": "2026-01-26 06:00:00",
+          "defasagem_h": 372.0,
+          "defasagem_dias": 15.5,
+          "variacao_24h_montante_cm": 7.0,
+          "variacao_24h_barcelos_cm": 9.0
+        },
+        {
+          "inicio_montante": "2026-01-13 18:00:00",
+          "inicio_barcelos": "2026-01-29 06:00:00",
+          "defasagem_h": 372.0,
+          "defasagem_dias": 15.5,
+          "variacao_24h_montante_cm": 41.5,
+          "variacao_24h_barcelos_cm": 7.0
+        },
+        {
+          "inicio_montante": "2026-01-16 18:00:00",
+          "inicio_barcelos": "2026-02-01 06:00:00",
+          "defasagem_h": 372.0,
+          "defasagem_dias": 15.5,
+          "variacao_24h_montante_cm": 16.0,
+          "variacao_24h_barcelos_cm": 11.0
+        },
+        {
+          "inicio_montante": "2026-02-01 00:00:00",
+          "inicio_barcelos": "2026-02-04 06:00:00",
+          "defasagem_h": 78.0,
+          "defasagem_dias": 3.25,
+          "variacao_24h_montante_cm": 8.5,
+          "variacao_24h_barcelos_cm": 3.0
+        },
+        {
+          "inicio_montante": "2026-03-09 06:00:00",
+          "inicio_barcelos": "2026-03-19 06:00:00",
+          "defasagem_h": 240.0,
+          "defasagem_dias": 10.0,
+          "variacao_24h_montante_cm": 3.0,
+          "variacao_24h_barcelos_cm": 10.0
+        },
+        {
+          "inicio_montante": "2026-03-12 06:00:00",
+          "inicio_barcelos": "2026-03-23 12:00:00",
+          "defasagem_h": 270.0,
+          "defasagem_dias": 11.25,
+          "variacao_24h_montante_cm": 13.5,
+          "variacao_24h_barcelos_cm": 3.0
+        },
+        {
+          "inicio_montante": "2026-03-15 06:00:00",
+          "inicio_barcelos": "2026-03-26 12:00:00",
+          "defasagem_h": 270.0,
+          "defasagem_dias": 11.25,
+          "variacao_24h_montante_cm": 3.0,
+          "variacao_24h_barcelos_cm": 5.0
+        },
+        {
+          "inicio_montante": "2026-03-28 18:00:00",
+          "inicio_barcelos": "2026-04-02 18:00:00",
+          "defasagem_h": 120.0,
+          "defasagem_dias": 5.0,
+          "variacao_24h_montante_cm": 5.0,
+          "variacao_24h_barcelos_cm": 4.5
+        },
+        {
+          "inicio_montante": "2026-03-31 18:00:00",
+          "inicio_barcelos": "2026-04-05 18:00:00",
+          "defasagem_h": 120.0,
+          "defasagem_dias": 5.0,
+          "variacao_24h_montante_cm": 17.0,
+          "variacao_24h_barcelos_cm": 7.0
+        },
+        {
+          "inicio_montante": "2026-04-03 18:00:00",
+          "inicio_barcelos": "2026-04-08 18:00:00",
+          "defasagem_h": 120.0,
+          "defasagem_dias": 5.0,
+          "variacao_24h_montante_cm": 25.699999999999818,
+          "variacao_24h_barcelos_cm": 13.0
+        },
+        {
+          "inicio_montante": "2026-04-06 18:00:00",
+          "inicio_barcelos": "2026-04-11 18:00:00",
+          "defasagem_h": 120.0,
+          "defasagem_dias": 5.0,
+          "variacao_24h_montante_cm": 38.700000000000045,
+          "variacao_24h_barcelos_cm": 8.5
+        },
+        {
+          "inicio_montante": "2026-04-12 00:00:00",
+          "inicio_barcelos": "2026-04-17 18:00:00",
+          "defasagem_h": 138.0,
+          "defasagem_dias": 5.75,
+          "variacao_24h_montante_cm": 4.7000000000000455,
+          "variacao_24h_barcelos_cm": 6.0
+        },
+        {
+          "inicio_montante": "2026-04-18 00:00:00",
+          "inicio_barcelos": "2026-04-23 18:00:00",
+          "defasagem_h": 138.0,
+          "defasagem_dias": 5.75,
+          "variacao_24h_montante_cm": 5.0,
+          "variacao_24h_barcelos_cm": 6.5
+        },
+        {
+          "inicio_montante": "2026-04-22 12:00:00",
+          "inicio_barcelos": "2026-04-26 18:00:00",
+          "defasagem_h": 102.0,
+          "defasagem_dias": 4.25,
+          "variacao_24h_montante_cm": 3.5,
+          "variacao_24h_barcelos_cm": 7.0
+        },
+        {
+          "inicio_montante": "2026-05-03 18:00:00",
+          "inicio_barcelos": "2026-05-11 18:00:00",
+          "defasagem_h": 192.0,
+          "defasagem_dias": 8.0,
+          "variacao_24h_montante_cm": 10.0,
+          "variacao_24h_barcelos_cm": 6.0
+        },
+        {
+          "inicio_montante": "2026-05-06 18:00:00",
+          "inicio_barcelos": "2026-05-14 18:00:00",
+          "defasagem_h": 192.0,
+          "defasagem_dias": 8.0,
+          "variacao_24h_montante_cm": 32.0,
+          "variacao_24h_barcelos_cm": 6.0
+        },
+        {
+          "inicio_montante": "2026-05-12 06:00:00",
+          "inicio_barcelos": "2026-05-17 18:00:00",
+          "defasagem_h": 132.0,
+          "defasagem_dias": 5.5,
+          "variacao_24h_montante_cm": 3.5,
+          "variacao_24h_barcelos_cm": 8.0
+        },
+        {
+          "inicio_montante": "2026-05-15 06:00:00",
+          "inicio_barcelos": "2026-05-20 18:00:00",
+          "defasagem_h": 132.0,
+          "defasagem_dias": 5.5,
+          "variacao_24h_montante_cm": 8.0,
+          "variacao_24h_barcelos_cm": 9.0
+        },
+        {
+          "inicio_montante": "2026-05-18 06:00:00",
+          "inicio_barcelos": "2026-05-23 18:00:00",
+          "defasagem_h": 132.0,
+          "defasagem_dias": 5.5,
+          "variacao_24h_montante_cm": 12.0,
+          "variacao_24h_barcelos_cm": 13.5
+        },
+        {
+          "inicio_montante": "2026-05-22 00:00:00",
+          "inicio_barcelos": "2026-05-26 18:00:00",
+          "defasagem_h": 114.0,
+          "defasagem_dias": 4.75,
+          "variacao_24h_montante_cm": 3.0,
+          "variacao_24h_barcelos_cm": 16.0
+        }
+      ],
+      "mediana_h": 177.0,
+      "mediana_dias": 7.38,
+      "q25_h": 123.0,
+      "q75_h": 214.5,
+      "q25_dias": 5.12,
+      "q75_dias": 8.94,
+      "min_h": 78.0,
+      "max_h": 372.0,
+      "min_dias": 3.25,
+      "max_dias": 15.5
+    },
+    {
+      "origem": "14110000",
+      "nome_origem": "Cucuí",
+      "destino": "14480002",
+      "nome_destino": "Barcelos",
+      "eventos_montante": 50,
+      "eventos_barcelos": 32,
+      "eventos_correspondentes": 26,
+      "taxa_correspondencia": 0.52,
+      "eventos": [
+        {
+          "inicio_montante": "2025-10-06 12:00:00",
+          "inicio_barcelos": "2025-10-19 18:00:00",
+          "defasagem_h": 318.0,
+          "defasagem_dias": 13.25,
+          "variacao_24h_montante_cm": 3.0,
+          "variacao_24h_barcelos_cm": 3.0
+        },
+        {
+          "inicio_montante": "2025-11-01 06:00:00",
+          "inicio_barcelos": "2025-11-20 18:00:00",
+          "defasagem_h": 468.0,
+          "defasagem_dias": 19.5,
+          "variacao_24h_montante_cm": 3.0,
+          "variacao_24h_barcelos_cm": 3.0
+        },
+        {
+          "inicio_montante": "2025-11-15 12:00:00",
+          "inicio_barcelos": "2025-11-24 06:00:00",
+          "defasagem_h": 210.0,
+          "defasagem_dias": 8.75,
+          "variacao_24h_montante_cm": 3.0,
+          "variacao_24h_barcelos_cm": 3.0
+        },
+        {
+          "inicio_montante": "2025-11-18 12:00:00",
+          "inicio_barcelos": "2025-11-28 18:00:00",
+          "defasagem_h": 246.0,
+          "defasagem_dias": 10.25,
+          "variacao_24h_montante_cm": 8.0,
+          "variacao_24h_barcelos_cm": 4.0
+        },
+        {
+          "inicio_montante": "2025-11-21 12:00:00",
+          "inicio_barcelos": "2025-12-01 18:00:00",
+          "defasagem_h": 246.0,
+          "defasagem_dias": 10.25,
+          "variacao_24h_montante_cm": 13.0,
+          "variacao_24h_barcelos_cm": 3.0
+        },
+        {
+          "inicio_montante": "2025-11-24 12:00:00",
+          "inicio_barcelos": "2025-12-04 18:00:00",
+          "defasagem_h": 246.0,
+          "defasagem_dias": 10.25,
+          "variacao_24h_montante_cm": 5.0,
+          "variacao_24h_barcelos_cm": 4.0
+        },
+        {
+          "inicio_montante": "2026-01-10 12:00:00",
+          "inicio_barcelos": "2026-01-26 06:00:00",
+          "defasagem_h": 378.0,
+          "defasagem_dias": 15.75,
+          "variacao_24h_montante_cm": 3.5,
+          "variacao_24h_barcelos_cm": 9.0
+        },
+        {
+          "inicio_montante": "2026-01-13 12:00:00",
+          "inicio_barcelos": "2026-01-29 06:00:00",
+          "defasagem_h": 378.0,
+          "defasagem_dias": 15.75,
+          "variacao_24h_montante_cm": 29.0,
+          "variacao_24h_barcelos_cm": 7.0
+        },
+        {
+          "inicio_montante": "2026-01-16 12:00:00",
+          "inicio_barcelos": "2026-02-01 06:00:00",
+          "defasagem_h": 378.0,
+          "defasagem_dias": 15.75,
+          "variacao_24h_montante_cm": 4.0,
+          "variacao_24h_barcelos_cm": 11.0
+        },
+        {
+          "inicio_montante": "2026-01-19 12:00:00",
+          "inicio_barcelos": "2026-02-04 06:00:00",
+          "defasagem_h": 378.0,
+          "defasagem_dias": 15.75,
+          "variacao_24h_montante_cm": 18.0,
+          "variacao_24h_barcelos_cm": 3.0
+        },
+        {
+          "inicio_montante": "2026-03-12 00:00:00",
+          "inicio_barcelos": "2026-03-19 06:00:00",
+          "defasagem_h": 174.0,
+          "defasagem_dias": 7.25,
+          "variacao_24h_montante_cm": 3.0,
+          "variacao_24h_barcelos_cm": 10.0
+        },
+        {
+          "inicio_montante": "2026-03-15 00:00:00",
+          "inicio_barcelos": "2026-03-23 12:00:00",
+          "defasagem_h": 204.0,
+          "defasagem_dias": 8.5,
+          "variacao_24h_montante_cm": 13.0,
+          "variacao_24h_barcelos_cm": 3.0
+        },
+        {
+          "inicio_montante": "2026-03-18 00:00:00",
+          "inicio_barcelos": "2026-03-26 12:00:00",
+          "defasagem_h": 204.0,
+          "defasagem_dias": 8.5,
+          "variacao_24h_montante_cm": 12.0,
+          "variacao_24h_barcelos_cm": 5.0
+        },
+        {
+          "inicio_montante": "2026-03-29 12:00:00",
+          "inicio_barcelos": "2026-04-02 18:00:00",
+          "defasagem_h": 102.0,
+          "defasagem_dias": 4.25,
+          "variacao_24h_montante_cm": 3.0,
+          "variacao_24h_barcelos_cm": 4.5
+        },
+        {
+          "inicio_montante": "2026-04-01 12:00:00",
+          "inicio_barcelos": "2026-04-05 18:00:00",
+          "defasagem_h": 102.0,
+          "defasagem_dias": 4.25,
+          "variacao_24h_montante_cm": 84.5,
+          "variacao_24h_barcelos_cm": 7.0
+        },
+        {
+          "inicio_montante": "2026-04-05 06:00:00",
+          "inicio_barcelos": "2026-04-11 18:00:00",
+          "defasagem_h": 156.0,
+          "defasagem_dias": 6.5,
+          "variacao_24h_montante_cm": 3.0,
+          "variacao_24h_barcelos_cm": 8.5
+        },
+        {
+          "inicio_montante": "2026-04-08 06:00:00",
+          "inicio_barcelos": "2026-04-14 18:00:00",
+          "defasagem_h": 156.0,
+          "defasagem_dias": 6.5,
+          "variacao_24h_montante_cm": 9.5,
+          "variacao_24h_barcelos_cm": 17.0
+        },
+        {
+          "inicio_montante": "2026-04-11 06:00:00",
+          "inicio_barcelos": "2026-04-17 18:00:00",
+          "defasagem_h": 156.0,
+          "defasagem_dias": 6.5,
+          "variacao_24h_montante_cm": 6.0,
+          "variacao_24h_barcelos_cm": 6.0
+        },
+        {
+          "inicio_montante": "2026-04-17 06:00:00",
+          "inicio_barcelos": "2026-04-23 18:00:00",
+          "defasagem_h": 156.0,
+          "defasagem_dias": 6.5,
+          "variacao_24h_montante_cm": 3.5,
+          "variacao_24h_barcelos_cm": 6.5
+        },
+        {
+          "inicio_montante": "2026-04-20 06:00:00",
+          "inicio_barcelos": "2026-04-26 18:00:00",
+          "defasagem_h": 156.0,
+          "defasagem_dias": 6.5,
+          "variacao_24h_montante_cm": 18.0,
+          "variacao_24h_barcelos_cm": 7.0
+        },
+        {
+          "inicio_montante": "2026-05-03 18:00:00",
+          "inicio_barcelos": "2026-05-11 18:00:00",
+          "defasagem_h": 192.0,
+          "defasagem_dias": 8.0,
+          "variacao_24h_montante_cm": 3.0,
+          "variacao_24h_barcelos_cm": 6.0
+        },
+        {
+          "inicio_montante": "2026-05-06 18:00:00",
+          "inicio_barcelos": "2026-05-14 18:00:00",
+          "defasagem_h": 192.0,
+          "defasagem_dias": 8.0,
+          "variacao_24h_montante_cm": 50.0,
+          "variacao_24h_barcelos_cm": 6.0
+        },
+        {
+          "inicio_montante": "2026-05-09 18:00:00",
+          "inicio_barcelos": "2026-05-17 18:00:00",
+          "defasagem_h": 192.0,
+          "defasagem_dias": 8.0,
+          "variacao_24h_montante_cm": 11.5,
+          "variacao_24h_barcelos_cm": 8.0
+        },
+        {
+          "inicio_montante": "2026-05-12 18:00:00",
+          "inicio_barcelos": "2026-05-20 18:00:00",
+          "defasagem_h": 192.0,
+          "defasagem_dias": 8.0,
+          "variacao_24h_montante_cm": 10.5,
+          "variacao_24h_barcelos_cm": 9.0
+        },
+        {
+          "inicio_montante": "2026-05-15 18:00:00",
+          "inicio_barcelos": "2026-05-23 18:00:00",
+          "defasagem_h": 192.0,
+          "defasagem_dias": 8.0,
+          "variacao_24h_montante_cm": 22.0,
+          "variacao_24h_barcelos_cm": 13.5
+        },
+        {
+          "inicio_montante": "2026-05-18 18:00:00",
+          "inicio_barcelos": "2026-05-26 18:00:00",
+          "defasagem_h": 192.0,
+          "defasagem_dias": 8.0,
+          "variacao_24h_montante_cm": 3.0,
+          "variacao_24h_barcelos_cm": 16.0
+        }
+      ],
+      "mediana_h": 192.0,
+      "mediana_dias": 8.0,
+      "q25_h": 160.5,
+      "q75_h": 246.0,
+      "q25_dias": 6.69,
+      "q75_dias": 10.25,
+      "min_h": 102.0,
+      "max_h": 468.0,
+      "min_dias": 4.25,
+      "max_dias": 19.5
+    }
+  ]
+}

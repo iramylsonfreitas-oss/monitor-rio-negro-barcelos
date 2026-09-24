@@ -1,0 +1,127 @@
+{
+  "gerado_em_utc": "2026-09-24T16:29:07.079955+00:00",
+  "metodo": "Correlação de Pearson entre variações horárias acumuladas de 24 horas, testando defasagens em passos de 6 horas.",
+  "status": "experimental",
+  "uso": "Diagnóstico histórico exploratório. Não representa previsão hidrológica nem confirma repiquete.",
+  "cobertura_historica": {
+    "inicio_manaus": "2026-08-26 23:00:00",
+    "fim_manaus": "2026-09-24 12:00:00",
+    "horas": 685.0,
+    "dias": 28.5
+  },
+  "pares": [
+    {
+      "origem": "14420000",
+      "nome_origem": "Serrinha",
+      "destino": "14480002",
+      "nome_destino": "Barcelos",
+      "resultado": "exploratorio",
+      "melhor_defasagem_h": 138,
+      "melhor_defasagem_dias": 5.75,
+      "correlacao": 0.856,
+      "forca_correlacao": "alta",
+      "amostras": 524,
+      "passo_testado_h": 6,
+      "defasagem_maxima_testada_h": 168
+    },
+    {
+      "origem": "14330000",
+      "nome_origem": "Curicuriari",
+      "destino": "14480002",
+      "nome_destino": "Barcelos",
+      "resultado": "exploratorio",
+      "melhor_defasagem_h": 186,
+      "melhor_defasagem_dias": 7.75,
+      "correlacao": 0.909,
+      "forca_correlacao": "alta",
+      "amostras": 472,
+      "passo_testado_h": 6,
+      "defasagem_maxima_testada_h": 240
+    },
+    {
+      "origem": "14280001",
+      "nome_origem": "Taracuá",
+      "destino": "14480002",
+      "nome_destino": "Barcelos",
+      "resultado": "exploratorio",
+      "melhor_defasagem_h": 282,
+      "melhor_defasagem_dias": 11.75,
+      "correlacao": 0.567,
+      "forca_correlacao": "moderada",
+      "amostras": 380,
+      "passo_testado_h": 6,
+      "defasagem_maxima_testada_h": 336
+    },
+    {
+      "origem": "14110000",
+      "nome_origem": "Cucuí",
+      "destino": "14480002",
+      "nome_destino": "Barcelos",
+      "resultado": "exploratorio",
+      "melhor_defasagem_h": 210,
+      "melhor_defasagem_dias": 8.75,
+      "correlacao": 0.937,
+      "forca_correlacao": "alta",
+      "amostras": 452,
+      "passo_testado_h": 6,
+      "defasagem_maxima_testada_h": 480
+    }
+  ],
+  "situacao_atual": [
+    {
+      "estacao": "14110000",
+      "nome": "Cucuí",
+      "nivel_m": 16.5,
+      "variacao_6h_cm": -2.0,
+      "variacao_24h_cm": -8.0,
+      "variacao_72h_cm": -17.0,
+      "variacao_7d_cm": 20.0,
+      "tendencia": "descendo",
+      "data_medicao_manaus": "2026-09-24 11:15:00"
+    },
+    {
+      "estacao": "14280001",
+      "nome": "Taracuá",
+      "nivel_m": 13.57,
+      "variacao_6h_cm": -3.0,
+      "variacao_24h_cm": -5.0,
+      "variacao_72h_cm": -5.0,
+      "variacao_7d_cm": 65.0,
+      "tendencia": "descendo",
+      "data_medicao_manaus": "2026-09-24 11:15:00"
+    },
+    {
+      "estacao": "14330000",
+      "nome": "Curicuriari",
+      "nivel_m": 9.79,
+      "variacao_6h_cm": 0.0,
+      "variacao_24h_cm": 2.0,
+      "variacao_72h_cm": 13.0,
+      "variacao_7d_cm": 39.0,
+      "tendencia": "estavel",
+      "data_medicao_manaus": "2026-09-24 11:45:00"
+    },
+    {
+      "estacao": "14420000",
+      "nome": "Serrinha",
+      "nivel_m": 6.55,
+      "variacao_6h_cm": 1.0,
+      "variacao_24h_cm": 3.0,
+      "variacao_72h_cm": 6.0,
+      "variacao_7d_cm": 10.0,
+      "tendencia": "subindo",
+      "data_medicao_manaus": "2026-09-24 11:30:00"
+    },
+    {
+      "estacao": "14480002",
+      "nome": "Barcelos",
+      "nivel_m": 3.89,
+      "variacao_6h_cm": -1.0,
+      "variacao_24h_cm": -2.0,
+      "variacao_72h_cm": -9.0,
+      "variacao_7d_cm": -33.0,
+      "tendencia": "descendo",
+      "data_medicao_manaus": "2026-09-24 12:00:00"
+    }
+  ]
+}

@@ -1,53 +1,70 @@
-name: Ler Swagger Initializer ANA
+name: Resolver Swagger ANA
 
 on:
   workflow_dispatch:
 
 jobs:
-  initializer:
+  resolver:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Ler configuracao Swagger ANA
+      - name: Resolver caminhos reais do Swagger
         run: |
-          set -e
+          python - <<'PY'
+          import urllib.request
+          import urllib.parse
+          import re
 
-          URL="https://www.ana.gov.br/hidrowebservice/swagger-initializer.js"
+          PAGE = "https://www.ana.gov.br/hidrowebservice/swagger-ui.html"
 
-          echo "======================================"
-          echo "CONSULTANDO SWAGGER INITIALIZER"
-          echo "======================================"
-          echo "$URL"
-          echo
+          def baixar(url):
+              req = urllib.request.Request(
+                  url,
+                  headers={"User-Agent": "Mozilla/5.0"}
+              )
 
-          HTTP=$(curl -sS \
-            -o initializer.js \
-            -w "%{http_code}" \
-            "$URL")
+              try:
+                  with urllib.request.urlopen(req, timeout=30) as r:
+                      conteudo = r.read().decode("utf-8", errors="replace")
+                      return r.status, conteudo, r.geturl()
+              except Exception as e:
+                  return None, str(e), None
 
-          echo "HTTP: $HTTP"
-          echo
+          print("========================================")
+          print("1. PAGINA SWAGGER")
+          print("========================================")
 
-          if [ "$HTTP" != "200" ]; then
-            echo "ERRO: não foi possível baixar swagger-initializer.js"
-            exit 1
-          fi
+          status, html, final_url = baixar(PAGE)
 
-          echo "======================================"
-          echo "CONTEUDO DO ARQUIVO"
-          echo "======================================"
+          print("HTTP:", status)
+          print("URL final:", final_url)
+          print()
 
-          cat initializer.js
+          if status != 200:
+              print("ERRO ao abrir página Swagger.")
+              raise SystemExit(1)
 
-          echo
-          echo
-          echo "======================================"
-          echo "URLs IDENTIFICADAS"
-          echo "======================================"
+          print("========================================")
+          print("2. HTML COMPLETO")
+          print("========================================")
+          print(html)
+          print()
 
-          grep -Eo 'https?://[^"'"'"' ]+|url:[[:space:]]*"[^"]+"|url:[[:space:]]*'"'"'[^'"'"']+'"'"'' initializer.js || true
+          base_match = re.search(
+              r'<base[^>]+href=["\']([^"\']+)["\']',
+              html,
+              flags=re.I
+          )
 
-          echo
-          echo "======================================"
-          echo "FIM"
-          echo "======================================"
+          base_href = base_match.group(1) if base_match else None
+
+          print("========================================")
+          print("3. BASE HREF")
+          print("========================================")
+          print(base_href if base_href else "Nenhum <base href> encontrado.")
+          print()
+
+          scripts = re.findall(
+              r'<script[^>]+src=["\']([^"\']+)["\']',
+              html,
+              flags=re.I

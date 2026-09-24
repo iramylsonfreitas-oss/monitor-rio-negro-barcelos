@@ -1,87 +1,53 @@
-name: Descobrir Swagger ANA
+name: Ler Swagger Initializer ANA
 
 on:
   workflow_dispatch:
 
 jobs:
-  descobrir:
+  initializer:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Inspecionar pagina oficial Swagger ANA
+      - name: Ler configuracao Swagger ANA
         run: |
-          python - <<'PY'
-          import urllib.request
-          import re
+          set -e
 
-          URL = "https://www.ana.gov.br/hidrowebservice/swagger-ui.html"
+          URL="https://www.ana.gov.br/hidrowebservice/swagger-initializer.js"
 
-          print("Consultando página oficial:")
-          print(URL)
-          print()
+          echo "======================================"
+          echo "CONSULTANDO SWAGGER INITIALIZER"
+          echo "======================================"
+          echo "$URL"
+          echo
 
-          req = urllib.request.Request(
-              URL,
-              headers={"User-Agent": "Mozilla/5.0"}
-          )
+          HTTP=$(curl -sS \
+            -o initializer.js \
+            -w "%{http_code}" \
+            "$URL")
 
-          try:
-              with urllib.request.urlopen(req, timeout=30) as r:
-                  html = r.read().decode("utf-8", errors="replace")
-                  print("HTTP:", r.status)
-                  print("Tamanho da página:", len(html), "caracteres")
-          except Exception as e:
-              print("ERRO ao abrir swagger-ui.html:", e)
-              raise SystemExit(1)
+          echo "HTTP: $HTTP"
+          echo
 
-          print()
-          print("======================================")
-          print("REFERÊNCIAS ENCONTRADAS NA PÁGINA")
-          print("======================================")
+          if [ "$HTTP" != "200" ]; then
+            echo "ERRO: não foi possível baixar swagger-initializer.js"
+            exit 1
+          fi
 
-          padroes = [
-              r'[^"\']*api-docs[^"\']*',
-              r'[^"\']*swagger-resources[^"\']*',
-              r'[^"\']*swagger[^"\']*\.json[^"\']*',
-              r'[^"\']*configuration[^"\']*',
-              r'url\s*:\s*["\']([^"\']+)["\']',
-              r'urls\s*:\s*(\[[^\]]+\])'
-          ]
+          echo "======================================"
+          echo "CONTEUDO DO ARQUIVO"
+          echo "======================================"
 
-          encontrados = set()
+          cat initializer.js
 
-          for padrao in padroes:
-              for item in re.findall(padrao, html, flags=re.I):
-                  if isinstance(item, tuple):
-                      item = " ".join(item)
-                  item = str(item).strip()
+          echo
+          echo
+          echo "======================================"
+          echo "URLs IDENTIFICADAS"
+          echo "======================================"
 
-                  if item and item not in encontrados:
-                      encontrados.add(item)
-                      print(item)
+          grep -Eo 'https?://[^"'"'"' ]+|url:[[:space:]]*"[^"]+"|url:[[:space:]]*'"'"'[^'"'"']+'"'"'' initializer.js || true
 
-          print()
-          print("======================================")
-          print("SCRIPTS CARREGADOS")
-          print("======================================")
-
-          scripts = re.findall(
-              r'<script[^>]+src=["\']([^"\']+)["\']',
-              html,
-              flags=re.I
-          )
-
-          for src in scripts:
-              print(src)
-
-          print()
-          print("======================================")
-
-          if encontrados:
-              print("SUCESSO: referências da configuração foram encontradas.")
-          else:
-              print("Nenhuma referência direta encontrada no HTML.")
-              print("Os scripts listados acima serão o próximo ponto de análise.")
-
-          print("======================================")
-          PY
+          echo
+          echo "======================================"
+          echo "FIM"
+          echo "======================================"

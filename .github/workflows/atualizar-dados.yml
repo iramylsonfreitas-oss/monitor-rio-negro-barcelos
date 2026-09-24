@@ -31,7 +31,7 @@ jobs:
           python-version: "3.12"
 
 
-      - name: Consultar ANA e atualizar dados
+      - name: Consultar ANA
         env:
           ANA_IDENTIFIER: ${{ secrets.ANA_IDENTIFIER }}
           ANA_PASSWORD: ${{ secrets.ANA_PASSWORD }}
@@ -39,24 +39,10 @@ jobs:
           python collector/ana.py
 
 
-      - name: Analisar propagacao
-        run: |
-          python collector/propagacao.py
-
-
-      - name: Conferir Barcelos
+      - name: Conferir dados atuais
         run: |
           echo "======================================"
-          echo "BARCELOS - LATEST.JSON"
-          echo "======================================"
-
-          cat data/latest.json
-
-
-      - name: Conferir estacoes
-        run: |
-          echo "======================================"
-          echo "ESTACOES"
+          echo "MONITOR RIO NEGRO"
           echo "======================================"
 
           python - <<'PY'
@@ -72,189 +58,87 @@ jobs:
               "estacoes",
               []
           ):
+
               print()
               print(
                   station["nome"],
-                  "|",
                   station["estacao"]
               )
 
               print(
                   "Nível:",
-                  f'{station["nivel_m"]:.2f} m'
+                  station["nivel_m"],
+                  "m"
               )
 
               print(
                   "6 h:",
-                  station["variacao_6h_cm"],
+                  station[
+                      "variacao_6h_cm"
+                  ],
                   "cm"
               )
 
               print(
                   "24 h:",
-                  station["variacao_24h_cm"],
+                  station[
+                      "variacao_24h_cm"
+                  ],
                   "cm"
               )
 
               print(
                   "72 h:",
-                  station["variacao_72h_cm"],
+                  station[
+                      "variacao_72h_cm"
+                  ],
                   "cm"
               )
 
               print(
                   "7 dias:",
-                  station["variacao_7d_cm"],
+                  station[
+                      "variacao_7d_cm"
+                  ],
                   "cm"
               )
 
               print(
                   "Tendência:",
-                  station["tendencia"]
+                  station[
+                      "tendencia"
+                  ]
+              )
+
+              print(
+                  "Medição:",
+                  station.get(
+                      "data_medicao_manaus"
+                  )
               )
           PY
 
 
-      - name: Conferir historico horario
+      - name: Descartar alteracao do historico nesta execucao
         run: |
-          echo "======================================"
-          echo "HISTÓRICO HORÁRIO"
-          echo "======================================"
-
-          if [ -f data/history/hourly.csv ]; then
-
-            echo "Arquivo criado com sucesso."
-
-            echo
-            echo "Total de linhas:"
-            wc -l data/history/hourly.csv
-
-            echo
-            echo "Primeiras linhas:"
-            head -n 6 data/history/hourly.csv
-
-            echo
-            echo "Últimas linhas:"
-            tail -n 6 data/history/hourly.csv
-
-          else
-
-            echo "ERRO:"
-            echo "data/history/hourly.csv não foi criado."
-
-            exit 1
-
-          fi
+          git restore data/history/hourly.csv || true
 
 
-      - name: Conferir analise de propagacao
-        run: |
-          echo "======================================"
-          echo "ANÁLISE DE PROPAGAÇÃO"
-          echo "======================================"
-
-          if [ ! -f data/propagacao.json ]; then
-            echo "ERRO:"
-            echo "data/propagacao.json não foi criado."
-            exit 1
-          fi
-
-          python - <<'PY'
-          import json
-
-          with open(
-              "data/propagacao.json",
-              encoding="utf-8"
-          ) as f:
-              data = json.load(f)
-
-          cobertura = data.get(
-              "cobertura_historica"
-          ) or {}
-
-          print(
-              "Status:",
-              data.get("status")
-          )
-
-          print(
-              "Cobertura histórica:",
-              cobertura.get("dias"),
-              "dias"
-          )
-
-          print()
-
-          for pair in data.get(
-              "pares",
-              []
-          ):
-
-              print(
-                  pair.get(
-                      "nome_origem"
-                  ),
-                  "→ Barcelos"
-              )
-
-              print(
-                  "Defasagem:",
-                  pair.get(
-                      "melhor_defasagem_h"
-                  ),
-                  "h"
-              )
-
-              print(
-                  "Defasagem em dias:",
-                  pair.get(
-                      "melhor_defasagem_dias"
-                  )
-              )
-
-              print(
-                  "Correlação:",
-                  pair.get(
-                      "correlacao"
-                  )
-              )
-
-              print(
-                  "Força:",
-                  pair.get(
-                      "forca_correlacao"
-                  )
-              )
-
-              print(
-                  "Amostras:",
-                  pair.get(
-                      "amostras"
-                  )
-              )
-
-              print()
-
-          print(
-              "Observação:",
-              data.get("uso")
-          )
-          PY
-
-
-      - name: Salvar dados no repositorio
+      - name: Salvar somente dados em tempo real
         run: |
           git config user.name "rio-negro-bot"
           git config user.email "actions@github.com"
 
-          git add data/
+          git add data/latest.json
+          git add data/series_30d.json
+          git add data/estacoes.json
 
           if git diff --cached --quiet; then
-            echo "Nenhuma alteração de dados."
+            echo "Nenhuma alteração para salvar."
             exit 0
           fi
 
-          git commit -m "Atualiza dados ANA e propagacao"
+          git commit -m "Atualiza dados atuais ANA"
 
           git pull --rebase origin main
 

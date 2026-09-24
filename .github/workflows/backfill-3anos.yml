@@ -1,0 +1,553 @@
+name: Backfill Historico 3 Anos
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: atualizar-rio-negro
+  cancel-in-progress: false
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Baixar projeto
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+
+      - name: Executar backfill de 3 anos
+        env:
+          ANA_IDENTIFIER: ${{ secrets.ANA_IDENTIFIER }}
+          ANA_PASSWORD: ${{ secrets.ANA_PASSWORD }}
+        run: |
+          python collector/backfill_3anos.py
+
+
+      - name: Executar detector de eventos V2
+        run: |
+          python collector/eventos_v2.py
+
+
+      - name: Conferir tamanho do historico
+        run: |
+          echo "======================================"
+          echo "HISTÓRICO DE 3 ANOS"
+          echo "======================================"
+
+          if [ ! -f data/history/hourly.csv ]; then
+            echo "ERRO:"
+            echo "data/history/hourly.csv não encontrado."
+            exit 1
+          fi
+
+          echo
+          echo "Total de linhas:"
+          wc -l data/history/hourly.csv
+
+          echo
+          echo "Tamanho do arquivo:"
+          ls -lh data/history/hourly.csv
+
+          echo
+          echo "Primeira linha de dados:"
+          sed -n '2p' data/history/hourly.csv
+
+          echo
+          echo "Última linha:"
+          tail -n 1 data/history/hourly.csv
+
+
+      - name: Conferir cobertura por estacao
+        run: |
+          echo "======================================"
+          echo "COBERTURA POR ESTAÇÃO"
+          echo "======================================"
+
+          python - <<'PY'
+          import csv
+          from collections import defaultdict
+          from datetime import datetime
+
+
+          nomes = {
+              "14110000": "Cucuí",
+              "14280001": "Taracuá",
+              "14330000": "Curicuriari",
+              "14420000": "Serrinha",
+              "14480002": "Barcelos",
+          }
+
+
+          dados = defaultdict(list)
+
+
+          with open(
+              "data/history/hourly.csv",
+              encoding="utf-8",
+              newline=""
+          ) as f:
+
+              reader = csv.DictReader(f)
+
+              for row in reader:
+
+                  dados[
+                      row["estacao"]
+                  ].append(
+                      row["hora_manaus"]
+                  )
+
+
+          for codigo, nome in nomes.items():
+
+              registros = (
+                  dados.get(
+                      codigo,
+                      []
+                  )
+              )
+
+
+              print()
+              print(
+                  nome,
+                  codigo
+              )
+
+              print(
+                  "Registros:",
+                  len(registros)
+              )
+
+
+              if registros:
+
+                  inicio = min(
+                      registros
+                  )
+
+                  fim = max(
+                      registros
+                  )
+
+
+                  dt_inicio = datetime.strptime(
+                      inicio,
+                      "%Y-%m-%d %H:%M:%S"
+                  )
+
+                  dt_fim = datetime.strptime(
+                      fim,
+                      "%Y-%m-%d %H:%M:%S"
+                  )
+
+
+                  cobertura_dias = (
+                      dt_fim
+                      - dt_inicio
+                  ).total_seconds() / 86400
+
+
+                  horas_teoricas = (
+                      int(
+                          cobertura_dias * 24
+                      )
+                      + 1
+                  )
+
+
+                  disponibilidade = (
+                      len(registros)
+                      / horas_teoricas
+                      * 100
+                  )
+
+
+                  print(
+                      "Início:",
+                      inicio
+                  )
+
+                  print(
+                      "Fim:",
+                      fim
+                  )
+
+                  print(
+                      "Cobertura:",
+                      round(
+                          cobertura_dias,
+                          1
+                      ),
+                      "dias"
+                  )
+
+                  print(
+                      "Disponibilidade aproximada:",
+                      round(
+                          disponibilidade,
+                          1
+                      ),
+                      "%"
+                  )
+          PY
+
+
+      - name: Conferir eventos independentes V2
+        run: |
+          echo "======================================"
+          echo "EVENTOS INDEPENDENTES V2"
+          echo "======================================"
+
+          if [ ! -f data/eventos_propagacao_v2.json ]; then
+            echo "ERRO:"
+            echo "data/eventos_propagacao_v2.json não encontrado."
+            exit 1
+          fi
+
+          python - <<'PY'
+          import json
+
+
+          with open(
+              "data/eventos_propagacao_v2.json",
+              encoding="utf-8"
+          ) as f:
+              data = json.load(f)
+
+
+          stations = (
+              data.get(
+                  "eventos_por_estacao",
+                  {}
+              )
+          )
+
+
+          ordem = [
+              "14110000",
+              "14280001",
+              "14330000",
+              "14420000",
+              "14480002",
+          ]
+
+
+          for codigo in ordem:
+
+              station = (
+                  stations.get(
+                      codigo,
+                      {}
+                  )
+              )
+
+
+              print()
+
+              print(
+                  station.get(
+                      "nome",
+                      codigo
+                  )
+              )
+
+              print(
+                  "Eventos independentes:",
+                  station.get(
+                      "quantidade"
+                  )
+              )
+          PY
+
+
+      - name: Mostrar propagacao V2
+        run: |
+          echo "======================================"
+          echo "PROPAGAÇÃO V2 - BASE DE 3 ANOS"
+          echo "======================================"
+
+          python - <<'PY'
+          import json
+
+
+          with open(
+              "data/eventos_propagacao_v2.json",
+              encoding="utf-8"
+          ) as f:
+              data = json.load(f)
+
+
+          for pair in data.get(
+              "pares",
+              []
+          ):
+
+              print()
+              print(
+                  "======================================"
+              )
+
+              print(
+                  pair.get(
+                      "nome_origem"
+                  ),
+                  "→ Barcelos"
+              )
+
+              print(
+                  "======================================"
+              )
+
+
+              print(
+                  "Eventos na origem:",
+                  pair.get(
+                      "eventos_montante"
+                  )
+              )
+
+              print(
+                  "Eventos em Barcelos:",
+                  pair.get(
+                      "eventos_barcelos"
+                  )
+              )
+
+              print(
+                  "Correspondentes:",
+                  pair.get(
+                      "eventos_correspondentes"
+                  )
+              )
+
+              print(
+                  "Taxa:",
+                  pair.get(
+                      "taxa_correspondencia"
+                  )
+              )
+
+              print(
+                  "Mediana:",
+                  pair.get(
+                      "mediana_h"
+                  ),
+                  "h |",
+                  pair.get(
+                      "mediana_dias"
+                  ),
+                  "dias"
+              )
+
+              print(
+                  "Faixa central:",
+                  pair.get(
+                      "q25_dias"
+                  ),
+                  "a",
+                  pair.get(
+                      "q75_dias"
+                  ),
+                  "dias"
+              )
+
+              print(
+                  "Mínimo / máximo:",
+                  pair.get(
+                      "min_dias"
+                  ),
+                  "/",
+                  pair.get(
+                      "max_dias"
+                  ),
+                  "dias"
+              )
+          PY
+
+
+      - name: Mostrar eventos Serrinha para Barcelos
+        run: |
+          echo "======================================"
+          echo "SERRINHA → BARCELOS - EVENTOS V2"
+          echo "======================================"
+
+          python - <<'PY'
+          import json
+
+
+          with open(
+              "data/eventos_propagacao_v2.json",
+              encoding="utf-8"
+          ) as f:
+              data = json.load(f)
+
+
+          serrinha = next(
+              (
+                  pair
+                  for pair in data.get(
+                      "pares",
+                      []
+                  )
+                  if pair.get(
+                      "origem"
+                  ) == "14420000"
+              ),
+              None
+          )
+
+
+          if not serrinha:
+
+              raise RuntimeError(
+                  "Serrinha não encontrada."
+              )
+
+
+          print(
+              "Eventos em Serrinha:",
+              serrinha.get(
+                  "eventos_montante"
+              )
+          )
+
+          print(
+              "Eventos em Barcelos:",
+              serrinha.get(
+                  "eventos_barcelos"
+              )
+          )
+
+          print(
+              "Correspondentes:",
+              serrinha.get(
+                  "eventos_correspondentes"
+              )
+          )
+
+          print(
+              "Taxa:",
+              serrinha.get(
+                  "taxa_correspondencia"
+              )
+          )
+
+          print(
+              "Mediana:",
+              serrinha.get(
+                  "mediana_h"
+              ),
+              "h |",
+              serrinha.get(
+                  "mediana_dias"
+              ),
+              "dias"
+          )
+
+          print(
+              "Faixa central:",
+              serrinha.get(
+                  "q25_dias"
+              ),
+              "a",
+              serrinha.get(
+                  "q75_dias"
+              ),
+              "dias"
+          )
+
+
+          for index, evento in enumerate(
+              serrinha.get(
+                  "eventos",
+                  []
+              ),
+              start=1
+          ):
+
+              print()
+              print(
+                  "--------------------------------------"
+              )
+
+              print(
+                  "Evento",
+                  index
+              )
+
+              print(
+                  "Serrinha:",
+                  evento.get(
+                      "inicio_montante"
+                  )
+              )
+
+              print(
+                  "Barcelos:",
+                  evento.get(
+                      "inicio_barcelos"
+                  )
+              )
+
+              print(
+                  "Defasagem:",
+                  evento.get(
+                      "defasagem_h"
+                  ),
+                  "h |",
+                  evento.get(
+                      "defasagem_dias"
+                  ),
+                  "dias"
+              )
+
+              print(
+                  "Máxima Serrinha:",
+                  evento.get(
+                      "variacao_maxima_montante_cm"
+                  ),
+                  "cm/24h"
+              )
+
+              print(
+                  "Máxima Barcelos:",
+                  evento.get(
+                      "variacao_maxima_barcelos_cm"
+                  ),
+                  "cm/24h"
+              )
+          PY
+
+
+      - name: Salvar historico e resultados
+        run: |
+          git config user.name "rio-negro-bot"
+          git config user.email "actions@github.com"
+
+          git add data/history/hourly.csv
+          git add data/eventos_propagacao_v2.json
+
+          if git diff --cached --quiet; then
+            echo "Nenhuma alteração para salvar."
+            exit 0
+          fi
+
+          git commit -m "Expande historico ANA para 3 anos"
+
+          git pull --rebase origin main
+
+          git push origin main

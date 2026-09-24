@@ -1,0 +1,244 @@
+name: Atualizar Historico Diario
+
+on:
+  workflow_dispatch:
+
+  schedule:
+    # 10:17 UTC = 06:17 em Manaus
+    - cron: "17 10 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: atualizar-rio-negro
+  cancel-in-progress: false
+
+jobs:
+  atualizar-historico:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Baixar projeto
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+
+      - name: Atualizar dados ANA e historico
+        env:
+          ANA_IDENTIFIER: ${{ secrets.ANA_IDENTIFIER }}
+          ANA_PASSWORD: ${{ secrets.ANA_PASSWORD }}
+        run: |
+          python collector/ana.py
+
+
+      - name: Recalcular eventos V2
+        run: |
+          python collector/eventos_v2.py
+
+
+      - name: Recalcular correlacoes historicas
+        run: |
+          python collector/propagacao.py
+
+
+      - name: Conferir historico
+        run: |
+          echo "======================================"
+          echo "ATUALIZAÇÃO HISTÓRICA DIÁRIA"
+          echo "======================================"
+
+          if [ ! -f data/history/hourly.csv ]; then
+            echo "ERRO:"
+            echo "data/history/hourly.csv não encontrado."
+            exit 1
+          fi
+
+          echo
+          echo "Total de linhas:"
+          wc -l data/history/hourly.csv
+
+          echo
+          echo "Tamanho:"
+          ls -lh data/history/hourly.csv
+
+          echo
+          echo "Últimas 10 linhas:"
+          tail -n 10 data/history/hourly.csv
+
+
+      - name: Conferir eventos V2
+        run: |
+          echo "======================================"
+          echo "EVENTOS V2"
+          echo "======================================"
+
+          python - <<'PY'
+          import json
+
+          with open(
+              "data/eventos_propagacao_v2.json",
+              encoding="utf-8"
+          ) as f:
+              data = json.load(f)
+
+          for pair in data.get(
+              "pares",
+              []
+          ):
+
+              print()
+              print(
+                  pair.get(
+                      "nome_origem"
+                  ),
+                  "→ Barcelos"
+              )
+
+              print(
+                  "Eventos origem:",
+                  pair.get(
+                      "eventos_montante"
+                  )
+              )
+
+              print(
+                  "Correspondentes:",
+                  pair.get(
+                      "eventos_correspondentes"
+                  )
+              )
+
+              print(
+                  "Taxa:",
+                  pair.get(
+                      "taxa_correspondencia"
+                  )
+              )
+
+              print(
+                  "Mediana:",
+                  pair.get(
+                      "mediana_dias"
+                  ),
+                  "dias"
+              )
+
+              print(
+                  "Faixa central:",
+                  pair.get(
+                      "q25_dias"
+                  ),
+                  "a",
+                  pair.get(
+                      "q75_dias"
+                  ),
+                  "dias"
+              )
+          PY
+
+
+      - name: Mostrar situacao atual
+        run: |
+          echo "======================================"
+          echo "SITUAÇÃO ATUAL"
+          echo "======================================"
+
+          python - <<'PY'
+          import json
+
+          with open(
+              "data/estacoes.json",
+              encoding="utf-8"
+          ) as f:
+              data = json.load(f)
+
+          for station in data.get(
+              "estacoes",
+              []
+          ):
+
+              print()
+              print(
+                  station["nome"]
+              )
+
+              print(
+                  "Nível:",
+                  station["nivel_m"],
+                  "m"
+              )
+
+              print(
+                  "6 h:",
+                  station[
+                      "variacao_6h_cm"
+                  ],
+                  "cm"
+              )
+
+              print(
+                  "24 h:",
+                  station[
+                      "variacao_24h_cm"
+                  ],
+                  "cm"
+              )
+
+              print(
+                  "72 h:",
+                  station[
+                      "variacao_72h_cm"
+                  ],
+                  "cm"
+              )
+
+              print(
+                  "7 dias:",
+                  station[
+                      "variacao_7d_cm"
+                  ],
+                  "cm"
+              )
+
+              print(
+                  "Tendência:",
+                  station[
+                      "tendencia"
+                  ]
+              )
+          PY
+
+
+      - name: Salvar atualizacao diaria
+        run: |
+          git config user.name "rio-negro-bot"
+          git config user.email "actions@github.com"
+
+          git add data/history/hourly.csv
+
+          git add data/latest.json
+          git add data/series_30d.json
+          git add data/estacoes.json
+
+          git add data/eventos_propagacao_v2.json
+          git add data/propagacao.json
+
+          if git diff --cached --quiet; then
+            echo "Nenhuma alteração para salvar."
+            exit 0
+          fi
+
+          git commit -m "Atualiza historico diario ANA"
+
+          git pull --rebase origin main
+
+          git push origin main

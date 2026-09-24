@@ -3,9 +3,12 @@ const SERIES_URL = "data/series_30d.json";
 
 let riverChart = null;
 
+let latestData = null;
+let latestLoadedAt = null;
+
 
 /* =========================
-   FUNÇÕES AUXILIARES
+   FORMATAÇÃO
 ========================= */
 
 function formatLevel(value) {
@@ -52,25 +55,40 @@ function formatDateTime(value) {
     return value;
   }
 
-  const datePart = parts[0];
-  const timePart = parts[1];
+  const date = parts[0].split("-");
+  const time = parts[1].substring(0, 5);
 
-  const datePieces = datePart.split("-");
-
-  if (datePieces.length !== 3) {
+  if (date.length !== 3) {
     return value;
   }
 
-  const year = datePieces[0];
-  const month = datePieces[1];
-  const day = datePieces[2];
+  return (
+    `${date[2]}/${date[1]}/${date[0]} ` +
+    `${time}`
+  );
+}
 
-  const shortTime =
-    timePart.substring(0, 5);
+
+function formatAnaUpdate(value) {
+  if (!value) {
+    return "—";
+  }
+
+  const parts = value.split(" ");
+
+  if (parts.length < 2) {
+    return value;
+  }
+
+  const date = parts[0].split("-");
+  const time = parts[1].substring(0, 5);
+
+  if (date.length !== 3) {
+    return value;
+  }
 
   return (
-    `${day}/${month}/${year} ` +
-    `${shortTime}`
+    `${date[2]}/${date[1]} às ${time}`
   );
 }
 
@@ -97,12 +115,42 @@ function formatChartLabel(value) {
 }
 
 
+/* =========================
+   IDADE DO DADO
+========================= */
+
+function getCurrentAgeMinutes() {
+  if (!latestData) {
+    return null;
+  }
+
+  const baseAge =
+    Number(latestData.idade_dado_min);
+
+  if (!Number.isFinite(baseAge)) {
+    return null;
+  }
+
+  if (!latestLoadedAt) {
+    return baseAge;
+  }
+
+  const elapsedMinutes =
+    Math.floor(
+      (Date.now() - latestLoadedAt) /
+      60000
+    );
+
+  return baseAge + elapsedMinutes;
+}
+
+
 function ageText(minutes) {
   if (
     minutes === null ||
     minutes === undefined
   ) {
-    return "Horário da atualização indisponível";
+    return "Horário indisponível";
   }
 
   const value = Number(minutes);
@@ -111,9 +159,8 @@ function ageText(minutes) {
     return `Atualizado há ${value} min`;
   }
 
-  const hours = Math.floor(
-    value / 60
-  );
+  const hours =
+    Math.floor(value / 60);
 
   const remainingMinutes =
     value % 60;
@@ -129,13 +176,16 @@ function ageText(minutes) {
     );
   }
 
-  const days = Math.floor(
-    hours / 24
-  );
+  const days =
+    Math.floor(hours / 24);
 
   return `Atualizado há ${days} dia(s)`;
 }
 
+
+/* =========================
+   CORES DAS VARIAÇÕES
+========================= */
 
 function applyVariationClass(
   element,
@@ -152,21 +202,14 @@ function applyVariationClass(
     value === undefined ||
     Number(value) === 0
   ) {
-    element.classList.add(
-      "neutral"
-    );
-
+    element.classList.add("neutral");
     return;
   }
 
   if (Number(value) > 0) {
-    element.classList.add(
-      "positive"
-    );
+    element.classList.add("positive");
   } else {
-    element.classList.add(
-      "negative"
-    );
+    element.classList.add("negative");
   }
 }
 
@@ -175,43 +218,52 @@ function applyVariationClass(
    STATUS
 ========================= */
 
-function updateStatus(data) {
-  const dot = document.getElementById(
-    "status-dot"
-  );
+function updateLiveStatus() {
+  if (!latestData) {
+    return;
+  }
 
-  const text = document.getElementById(
-    "status-text"
-  );
+  const dot =
+    document.getElementById(
+      "status-dot"
+    );
 
-  const time = document.getElementById(
-    "last-update"
-  );
+  const text =
+    document.getElementById(
+      "status-text"
+    );
+
+  const time =
+    document.getElementById(
+      "last-update"
+    );
+
+  const currentAge =
+    getCurrentAgeMinutes();
+
+  const stale =
+    currentAge !== null &&
+    currentAge > 180;
 
   dot.classList.remove(
     "ok",
     "warning"
   );
 
-  if (data.dado_desatualizado) {
-    dot.classList.add(
-      "warning"
-    );
+  if (stale) {
+    dot.classList.add("warning");
 
     text.textContent =
       "Dado desatualizado";
   } else {
-    dot.classList.add(
-      "ok"
-    );
+    dot.classList.add("ok");
 
     text.textContent =
       "Dados atualizados";
   }
 
-  time.textContent = ageText(
-    data.idade_dado_min
-  );
+  time.textContent =
+    ageText(currentAge);
 }
 
 
@@ -220,13 +272,15 @@ function updateStatus(data) {
 ========================= */
 
 function updateTrend(data) {
-  const icon = document.getElementById(
-    "trend-icon"
-  );
+  const icon =
+    document.getElementById(
+      "trend-icon"
+    );
 
-  const text = document.getElementById(
-    "trend-text"
-  );
+  const text =
+    document.getElementById(
+      "trend-text"
+    );
 
   icon.classList.remove(
     "up",
@@ -234,27 +288,35 @@ function updateTrend(data) {
   );
 
   const trend =
-    data.tendencia || "indisponivel";
+    data.tendencia ||
+    "indisponivel";
 
   if (trend === "subindo") {
     icon.textContent = "↑";
     icon.classList.add("up");
-    text.textContent = "Subindo";
+
+    text.textContent =
+      "Subindo";
   }
 
   else if (trend === "descendo") {
     icon.textContent = "↓";
     icon.classList.add("down");
-    text.textContent = "Descendo";
+
+    text.textContent =
+      "Descendo";
   }
 
   else if (trend === "estavel") {
     icon.textContent = "→";
-    text.textContent = "Estável";
+
+    text.textContent =
+      "Estável";
   }
 
   else {
     icon.textContent = "—";
+
     text.textContent =
       "Indisponível";
   }
@@ -262,7 +324,7 @@ function updateTrend(data) {
 
 
 /* =========================
-   DADOS PRINCIPAIS
+   PAINEL
 ========================= */
 
 function updateDashboard(data) {
@@ -271,6 +333,7 @@ function updateDashboard(data) {
   ).textContent =
     formatLevel(data.nivel_m);
 
+
   document.getElementById(
     "measurement-time"
   ).textContent =
@@ -278,6 +341,16 @@ function updateDashboard(data) {
     formatDateTime(
       data.data_medicao
     );
+
+
+  document.getElementById(
+    "ana-update-time"
+  ).textContent =
+    "ANA: última atualização " +
+    formatAnaUpdate(
+      data.data_atualizacao_ana
+    );
+
 
   const variation6h =
     document.getElementById(
@@ -294,6 +367,7 @@ function updateDashboard(data) {
       "variation-7d"
     );
 
+
   variation6h.textContent =
     formatVariation(
       data.variacao_6h_cm
@@ -308,6 +382,7 @@ function updateDashboard(data) {
     formatVariation(
       data.variacao_7d_cm
     );
+
 
   applyVariationClass(
     variation6h,
@@ -324,19 +399,21 @@ function updateDashboard(data) {
     data.variacao_7d_cm
   );
 
+
   document.getElementById(
     "records-count"
   ).textContent =
     data.registros_30d ?? "—";
 
-  updateStatus(data);
 
   updateTrend(data);
+
+  updateLiveStatus();
 }
 
 
 /* =========================
-   REDUÇÃO PARA O GRÁFICO
+   REDUZIR PONTOS DO GRÁFICO
 ========================= */
 
 function downsampleSeries(
@@ -357,9 +434,8 @@ function downsampleSeries(
     i < maxPoints;
     i++
   ) {
-    const index = Math.floor(
-      i * step
-    );
+    const index =
+      Math.floor(i * step);
 
     reduced.push(
       series[index]
@@ -367,10 +443,14 @@ function downsampleSeries(
   }
 
   const last =
-    series[series.length - 1];
+    series[
+      series.length - 1
+    ];
 
   const reducedLast =
-    reduced[reduced.length - 1];
+    reduced[
+      reduced.length - 1
+    ];
 
   if (
     reducedLast.data_medicao !==
@@ -400,21 +480,25 @@ function createChart(series) {
   const reduced =
     downsampleSeries(series);
 
-  const labels = reduced.map(
-    item =>
-      formatChartLabel(
-        item.data_medicao
-      )
-  );
+  const labels =
+    reduced.map(
+      item =>
+        formatChartLabel(
+          item.data_medicao
+        )
+    );
 
-  const values = reduced.map(
-    item =>
-      Number(item.nivel_m)
-  );
+  const values =
+    reduced.map(
+      item =>
+        Number(item.nivel_m)
+    );
+
 
   if (riverChart) {
     riverChart.destroy();
   }
+
 
   riverChart = new Chart(
     canvas,
@@ -470,17 +554,14 @@ function createChart(series) {
 
           tooltip: {
             callbacks: {
-              label: function (
+              label: function(
                 context
               ) {
                 return (
                   "Nível: " +
                   context.parsed.y
                     .toFixed(2)
-                    .replace(
-                      ".",
-                      ","
-                    ) +
+                    .replace(".", ",") +
                   " m"
                 );
               }
@@ -523,16 +604,13 @@ function createChart(series) {
               color:
                 "#8fa7bc",
 
-              callback: function (
+              callback: function(
                 value
               ) {
                 return (
                   Number(value)
                     .toFixed(2)
-                    .replace(
-                      ".",
-                      ","
-                    ) +
+                    .replace(".", ",") +
                   " m"
                 );
               }
@@ -577,17 +655,20 @@ async function loadData() {
       )
     ]);
 
+
     if (!latestResponse.ok) {
       throw new Error(
-        "Não foi possível carregar latest.json"
+        "Erro ao carregar latest.json"
       );
     }
 
+
     if (!seriesResponse.ok) {
       throw new Error(
-        "Não foi possível carregar series_30d.json"
+        "Erro ao carregar series_30d.json"
       );
     }
+
 
     const latest =
       await latestResponse.json();
@@ -595,9 +676,20 @@ async function loadData() {
     const series =
       await seriesResponse.json();
 
-    updateDashboard(latest);
 
-    createChart(series);
+    latestData = latest;
+
+    latestLoadedAt =
+      Date.now();
+
+
+    updateDashboard(
+      latest
+    );
+
+    createChart(
+      series
+    );
   }
 
   catch (error) {
@@ -617,6 +709,7 @@ async function loadData() {
       document.getElementById(
         "status-dot"
       );
+
 
     statusText.textContent =
       "Erro ao carregar dados";
@@ -640,13 +733,25 @@ async function loadData() {
 document.addEventListener(
   "DOMContentLoaded",
   () => {
+
     loadData();
 
-    // A página consulta novamente os JSON
+
+    // Busca novos dados no GitHub
     // a cada 5 minutos.
     setInterval(
       loadData,
       5 * 60 * 1000
     );
+
+
+    // Atualiza apenas o texto
+    // "Atualizado há..."
+    // a cada minuto.
+    setInterval(
+      updateLiveStatus,
+      60 * 1000
+    );
+
   }
 );

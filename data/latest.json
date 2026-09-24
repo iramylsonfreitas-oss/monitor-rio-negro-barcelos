@@ -1,0 +1,11 @@
+{
+  "estacao": "14480002",
+  "nome": "Rio Negro em Barcelos",
+  "nivel_cm": 389.0,
+  "nivel_m": 3.89,
+  "data_medicao": "2026-09-24 11:00:00.0",
+  "data_atualizacao_ana": "2026-09-24 11:08:58.883",
+  "status_cota": "0",
+  "fonte": "ANA - HidroWebService",
+  "coletado_em_utc": "2026-09-24T14:35:13.338569+00:00"
+}

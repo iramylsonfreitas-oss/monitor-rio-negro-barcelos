@@ -538,3 +538,26 @@ footer strong {
   }
 
 }
+/* AJUSTE FINAL DE CORES */
+
+.metric-value.positive {
+  color: #58d6ff !important;
+}
+
+.metric-value.negative {
+  color: #43a5ff !important;
+}
+
+.metric-value.neutral {
+  color: #f3f7fb !important;
+}
+
+.trend-icon.up {
+  color: #58d6ff !important;
+  background: rgba(88, 214, 255, 0.10) !important;
+}
+
+.trend-icon.down {
+  color: #43a5ff !important;
+  background: rgba(67, 165, 255, 0.12) !important;
+}

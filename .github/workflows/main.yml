@@ -1,70 +1,63 @@
-name: Resolver Swagger ANA
+name: Inspecionar Swagger ANA
 
 on:
   workflow_dispatch:
 
 jobs:
-  resolver:
+  inspecionar:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Resolver caminhos reais do Swagger
+      - name: Mostrar HTML e testar arquivos Swagger
         run: |
-          python - <<'PY'
-          import urllib.request
-          import urllib.parse
-          import re
+          echo "======================================"
+          echo "1. PAGINA OFICIAL"
+          echo "======================================"
 
-          PAGE = "https://www.ana.gov.br/hidrowebservice/swagger-ui.html"
+          curl -L -sS \
+            -w "\nHTTP_FINAL: %{http_code}\nURL_FINAL: %{url_effective}\n" \
+            "https://www.ana.gov.br/hidrowebservice/swagger-ui.html" \
+            -o pagina.html
 
-          def baixar(url):
-              req = urllib.request.Request(
-                  url,
-                  headers={"User-Agent": "Mozilla/5.0"}
-              )
+          cat pagina.html
 
-              try:
-                  with urllib.request.urlopen(req, timeout=30) as r:
-                      conteudo = r.read().decode("utf-8", errors="replace")
-                      return r.status, conteudo, r.geturl()
-              except Exception as e:
-                  return None, str(e), None
+          echo
+          echo "======================================"
+          echo "2. TESTE swagger-initializer.js"
+          echo "======================================"
 
-          print("========================================")
-          print("1. PAGINA SWAGGER")
-          print("========================================")
+          curl -L -sS \
+            -w "\nHTTP_FINAL: %{http_code}\nURL_FINAL: %{url_effective}\n" \
+            "https://www.ana.gov.br/hidrowebservice/swagger-initializer.js" \
+            -o initializer1.js
 
-          status, html, final_url = baixar(PAGE)
+          cat initializer1.js
 
-          print("HTTP:", status)
-          print("URL final:", final_url)
-          print()
+          echo
+          echo "======================================"
+          echo "3. TESTE /swagger-ui/swagger-initializer.js"
+          echo "======================================"
 
-          if status != 200:
-              print("ERRO ao abrir página Swagger.")
-              raise SystemExit(1)
+          curl -L -sS \
+            -w "\nHTTP_FINAL: %{http_code}\nURL_FINAL: %{url_effective}\n" \
+            "https://www.ana.gov.br/hidrowebservice/swagger-ui/swagger-initializer.js" \
+            -o initializer2.js
 
-          print("========================================")
-          print("2. HTML COMPLETO")
-          print("========================================")
-          print(html)
-          print()
+          cat initializer2.js
 
-          base_match = re.search(
-              r'<base[^>]+href=["\']([^"\']+)["\']',
-              html,
-              flags=re.I
-          )
+          echo
+          echo "======================================"
+          echo "4. TESTE index.html"
+          echo "======================================"
 
-          base_href = base_match.group(1) if base_match else None
+          curl -L -sS \
+            -w "\nHTTP_FINAL: %{http_code}\nURL_FINAL: %{url_effective}\n" \
+            "https://www.ana.gov.br/hidrowebservice/swagger-ui/index.html" \
+            -o index.html
 
-          print("========================================")
-          print("3. BASE HREF")
-          print("========================================")
-          print(base_href if base_href else "Nenhum <base href> encontrado.")
-          print()
+          cat index.html
 
-          scripts = re.findall(
-              r'<script[^>]+src=["\']([^"\']+)["\']',
-              html,
-              flags=re.I
+          echo
+          echo "======================================"
+          echo "FIM"
+          echo "======================================"

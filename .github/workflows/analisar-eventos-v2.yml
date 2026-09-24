@@ -1,0 +1,459 @@
+name: Comparar Eventos V1 e V2
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: analisar-eventos-v2
+  cancel-in-progress: false
+
+jobs:
+  comparar:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Baixar projeto
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+
+      - name: Executar detector V1
+        run: |
+          python collector/eventos.py
+
+
+      - name: Executar detector V2
+        run: |
+          python collector/eventos_v2.py
+
+
+      - name: Comparar V1 e V2
+        run: |
+          echo "======================================"
+          echo "COMPARAÇÃO V1 x V2"
+          echo "======================================"
+
+          python - <<'PY'
+          import json
+
+
+          with open(
+              "data/eventos_propagacao.json",
+              encoding="utf-8"
+          ) as f:
+              v1 = json.load(f)
+
+
+          with open(
+              "data/eventos_propagacao_v2.json",
+              encoding="utf-8"
+          ) as f:
+              v2 = json.load(f)
+
+
+          def pares_por_origem(data):
+              return {
+                  item["origem"]: item
+                  for item in data.get(
+                      "pares",
+                      []
+                  )
+              }
+
+
+          p1 = pares_por_origem(v1)
+          p2 = pares_por_origem(v2)
+
+
+          nomes = {
+              "14420000": "Serrinha",
+              "14330000": "Curicuriari",
+              "14280001": "Taracuá",
+              "14110000": "Cucuí"
+          }
+
+
+          for codigo, nome in nomes.items():
+
+              antigo = p1.get(
+                  codigo,
+                  {}
+              )
+
+              novo = p2.get(
+                  codigo,
+                  {}
+              )
+
+
+              print()
+              print(
+                  "======================================"
+              )
+
+              print(
+                  nome,
+                  "→ Barcelos"
+              )
+
+              print(
+                  "======================================"
+              )
+
+
+              print(
+                  "V1"
+              )
+
+              print(
+                  "Eventos montante:",
+                  antigo.get(
+                      "eventos_montante"
+                  )
+              )
+
+              print(
+                  "Correspondentes:",
+                  antigo.get(
+                      "eventos_correspondentes"
+                  )
+              )
+
+              print(
+                  "Taxa:",
+                  antigo.get(
+                      "taxa_correspondencia"
+                  )
+              )
+
+              print(
+                  "Mediana:",
+                  antigo.get(
+                      "mediana_dias"
+                  ),
+                  "dias"
+              )
+
+              print(
+                  "Faixa central:",
+                  antigo.get(
+                      "q25_dias"
+                  ),
+                  "a",
+                  antigo.get(
+                      "q75_dias"
+                  ),
+                  "dias"
+              )
+
+
+              print()
+              print(
+                  "V2"
+              )
+
+              print(
+                  "Eventos montante:",
+                  novo.get(
+                      "eventos_montante"
+                  )
+              )
+
+              print(
+                  "Correspondentes:",
+                  novo.get(
+                      "eventos_correspondentes"
+                  )
+              )
+
+              print(
+                  "Taxa:",
+                  novo.get(
+                      "taxa_correspondencia"
+                  )
+              )
+
+              print(
+                  "Mediana:",
+                  novo.get(
+                      "mediana_dias"
+                  ),
+                  "dias"
+              )
+
+              print(
+                  "Faixa central:",
+                  novo.get(
+                      "q25_dias"
+                  ),
+                  "a",
+                  novo.get(
+                      "q75_dias"
+                  ),
+                  "dias"
+              )
+
+              print(
+                  "Mínimo / máximo:",
+                  novo.get(
+                      "min_dias"
+                  ),
+                  "/",
+                  novo.get(
+                      "max_dias"
+                  ),
+                  "dias"
+              )
+          PY
+
+
+      - name: Mostrar eventos independentes da V2
+        run: |
+          echo "======================================"
+          echo "EVENTOS INDEPENDENTES V2"
+          echo "======================================"
+
+          python - <<'PY'
+          import json
+
+
+          with open(
+              "data/eventos_propagacao_v2.json",
+              encoding="utf-8"
+          ) as f:
+              data = json.load(f)
+
+
+          stations = (
+              data.get(
+                  "eventos_por_estacao",
+                  {}
+              )
+          )
+
+
+          ordem = [
+              "14110000",
+              "14280001",
+              "14330000",
+              "14420000",
+              "14480002"
+          ]
+
+
+          for codigo in ordem:
+
+              station = stations.get(
+                  codigo,
+                  {}
+              )
+
+              print()
+
+              print(
+                  station.get(
+                      "nome",
+                      codigo
+                  ),
+                  "| eventos:",
+                  station.get(
+                      "quantidade"
+                  )
+              )
+          PY
+
+
+      - name: Mostrar Serrinha para Barcelos V2
+        run: |
+          echo "======================================"
+          echo "SERRINHA → BARCELOS - V2"
+          echo "======================================"
+
+          python - <<'PY'
+          import json
+
+
+          with open(
+              "data/eventos_propagacao_v2.json",
+              encoding="utf-8"
+          ) as f:
+              data = json.load(f)
+
+
+          serrinha = next(
+              (
+                  pair
+                  for pair in data.get(
+                      "pares",
+                      []
+                  )
+                  if pair.get(
+                      "origem"
+                  ) == "14420000"
+              ),
+              None
+          )
+
+
+          if not serrinha:
+
+              raise RuntimeError(
+                  "Resultado de Serrinha "
+                  "não encontrado."
+              )
+
+
+          print(
+              "Eventos em Serrinha:",
+              serrinha.get(
+                  "eventos_montante"
+              )
+          )
+
+          print(
+              "Eventos em Barcelos:",
+              serrinha.get(
+                  "eventos_barcelos"
+              )
+          )
+
+          print(
+              "Correspondentes:",
+              serrinha.get(
+                  "eventos_correspondentes"
+              )
+          )
+
+          print(
+              "Taxa:",
+              serrinha.get(
+                  "taxa_correspondencia"
+              )
+          )
+
+          print(
+              "Mediana:",
+              serrinha.get(
+                  "mediana_h"
+              ),
+              "h |",
+              serrinha.get(
+                  "mediana_dias"
+              ),
+              "dias"
+          )
+
+          print(
+              "Faixa central:",
+              serrinha.get(
+                  "q25_dias"
+              ),
+              "a",
+              serrinha.get(
+                  "q75_dias"
+              ),
+              "dias"
+          )
+
+          print()
+
+
+          for index, evento in enumerate(
+              serrinha.get(
+                  "eventos",
+                  []
+              ),
+              start=1
+          ):
+
+              print(
+                  "--------------------------------------"
+              )
+
+              print(
+                  "Evento",
+                  index
+              )
+
+              print(
+                  "Serrinha:",
+                  evento.get(
+                      "inicio_montante"
+                  )
+              )
+
+              print(
+                  "Fim da alta em Serrinha:",
+                  evento.get(
+                      "fim_montante"
+                  )
+              )
+
+              print(
+                  "Barcelos:",
+                  evento.get(
+                      "inicio_barcelos"
+                  )
+              )
+
+              print(
+                  "Defasagem:",
+                  evento.get(
+                      "defasagem_h"
+                  ),
+                  "h |",
+                  evento.get(
+                      "defasagem_dias"
+                  ),
+                  "dias"
+              )
+
+              print(
+                  "Máxima Serrinha:",
+                  evento.get(
+                      "variacao_maxima_montante_cm"
+                  ),
+                  "cm/24h"
+              )
+
+              print(
+                  "Máxima Barcelos:",
+                  evento.get(
+                      "variacao_maxima_barcelos_cm"
+                  ),
+                  "cm/24h"
+              )
+
+              print()
+          PY
+
+
+      - name: Salvar resultados
+        run: |
+          git config user.name "rio-negro-bot"
+          git config user.email "actions@github.com"
+
+          git add data/eventos_propagacao.json
+          git add data/eventos_propagacao_v2.json
+
+          if git diff --cached --quiet; then
+            echo "Nenhuma alteração para salvar."
+            exit 0
+          fi
+
+          git commit -m "Compara detectores de eventos V1 e V2"
+
+          git pull --rebase origin main
+
+          git push origin main

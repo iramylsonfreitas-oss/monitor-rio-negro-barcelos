@@ -1,4 +1,4 @@
-name: Testar Barcelos API v2
+name: Testar Barcelos Python
 
 on:
   workflow_dispatch:
@@ -8,162 +8,168 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Consultar dados reais de Barcelos
+      - name: Consultar Barcelos na ANA
         env:
           ANA_IDENTIFIER: ${{ secrets.ANA_IDENTIFIER }}
           ANA_PASSWORD: ${{ secrets.ANA_PASSWORD }}
 
         run: |
-          set -e
-
-          echo "=========================================="
-          echo "1. AUTENTICANDO NA ANA"
-          echo "=========================================="
-
-          curl -sS \
-            -H "Identificador: $ANA_IDENTIFIER" \
-            -H "Senha: $ANA_PASSWORD" \
-            "https://www.ana.gov.br/hidrowebservice/EstacoesTelemetricas/OAUth/v1" \
-            -o auth.json
-
-          TOKEN=$(python - <<'PY'
+          python - <<'PY'
+          import os
           import json
+          import urllib.request
+          import urllib.parse
+          import urllib.error
 
-          with open("auth.json", encoding="utf-8") as f:
-              data = json.load(f)
+          IDENTIFICADOR = os.environ["ANA_IDENTIFIER"]
+          SENHA = os.environ["ANA_PASSWORD"]
 
-          token = (data.get("items") or {}).get("tokenautenticacao")
+          print("======================================")
+          print("1. AUTENTICAÇÃO")
+          print("======================================")
+
+          auth_url = (
+              "https://www.ana.gov.br/hidrowebservice/"
+              "EstacoesTelemetricas/OAUth/v1"
+          )
+
+          req = urllib.request.Request(
+              auth_url,
+              headers={
+                  "Identificador": IDENTIFICADOR,
+                  "Senha": SENHA,
+                  "Accept": "application/json"
+              }
+          )
+
+          with urllib.request.urlopen(req, timeout=30) as r:
+              auth = json.loads(r.read().decode("utf-8"))
+              print("HTTP autenticação:", r.status)
+
+          token = (auth.get("items") or {}).get("tokenautenticacao")
 
           if not token:
               raise SystemExit("ERRO: token não encontrado.")
 
-          print(token)
-          PY
+          print("Token obtido corretamente.")
+          print()
+
+          print("======================================")
+          print("2. CONSULTANDO BARCELOS")
+          print("======================================")
+
+          base_url = (
+              "https://www.ana.gov.br/hidrowebservice/"
+              "EstacoesTelemetricas/"
+              "HidroinfoanaSerieTelemetricaAdotada/v2"
           )
 
-          echo "Autenticação OK."
-          echo
+          parametros = {
+              "Codigos_Estacoes": "14480002",
+              "Tipo Filtro Data": "DATA_LEITURA",
+              "Range Intervalo de busca": "HORA_24"
+          }
 
-          URL="https://www.ana.gov.br/hidrowebservice/EstacoesTelemetricas/HidroinfoanaSerieTelemetricaAdotada/v2"
+          query = urllib.parse.urlencode(parametros)
 
-          echo "=========================================="
-          echo "2. CONSULTANDO BARCELOS"
-          echo "=========================================="
+          url = base_url + "?" + query
 
-          HTTP=$(curl -sS \
-            --get \
-            -o barcelos.json \
-            -w "%{http_code}" \
-            -H "Authorization: Bearer $TOKEN" \
-            -H "Accept: application/json" \
-            --data-urlencode "Codigos_Estacoes=14480002" \
-            --data-urlencode "Tipo Filtro Data=DATA_LEITURA" \
-            --data-urlencode "Range Intervalo de busca=HORA_24" \
-            "$URL")
+          print("URL montada:")
+          print(url)
+          print()
 
-          echo "HTTP: $HTTP"
+          formas = [
+              ("Bearer", "Bearer " + token),
+              ("Token direto", token)
+          ]
 
-          if [ "$HTTP" != "200" ]; then
+          resposta = None
 
-            echo
-            echo "Bearer não retornou 200."
-            echo "Testando token direto no header Authorization..."
+          for nome, authorization in formas:
 
-            HTTP=$(curl -sS \
-              --get \
-              -o barcelos.json \
-              -w "%{http_code}" \
-              -H "Authorization: $TOKEN" \
-              -H "Accept: application/json" \
-              --data-urlencode "Codigos_Estacoes=14480002" \
-              --data-urlencode "Tipo Filtro Data=DATA_LEITURA" \
-              --data-urlencode "Range Intervalo de busca=HORA_24" \
-              "$URL")
+              print("Testando Authorization:", nome)
 
-            echo "HTTP token direto: $HTTP"
+              req = urllib.request.Request(
+                  url,
+                  headers={
+                      "Authorization": authorization,
+                      "Accept": "application/json",
+                      "User-Agent": "Monitor-Rio-Negro/1.0"
+                  }
+              )
 
-          fi
+              try:
+                  with urllib.request.urlopen(req, timeout=30) as r:
+                      texto = r.read().decode("utf-8", errors="replace")
 
-          echo
-          echo "=========================================="
-          echo "3. ANALISANDO RESPOSTA"
-          echo "=========================================="
+                      print("HTTP:", r.status)
 
-          python - <<'PY'
-          import json
-          import sys
+                      resposta = json.loads(texto)
 
-          with open("barcelos.json", encoding="utf-8") as f:
-              data = json.load(f)
+                      if r.status == 200:
+                          print("SUCESSO.")
+                          break
 
-          if isinstance(data, dict):
+              except urllib.error.HTTPError as e:
 
-              print("Campos principais:", list(data.keys()))
+                  texto = e.read().decode(
+                      "utf-8",
+                      errors="replace"
+                  )
 
-              if data.get("status") and data.get("status") != 200:
-                  print("Status:", data.get("status"))
-                  print("Erro:", data.get("error"))
-                  print("Mensagem:", data.get("message"))
-                  sys.exit(1)
+                  print("HTTP:", e.code)
+                  print("Resposta:", texto[:2000])
 
-              items = data.get("items")
+              print()
+
+          if resposta is None:
+              raise SystemExit(
+                  "Nenhuma das formas de Authorization retornou HTTP 200."
+              )
+
+          print()
+          print("======================================")
+          print("3. ESTRUTURA RECEBIDA")
+          print("======================================")
+
+          if isinstance(resposta, dict):
+
+              print(
+                  "Campos principais:",
+                  list(resposta.keys())
+              )
+
+              items = resposta.get("items")
 
           else:
-              items = data
+              items = resposta
 
           print("Tipo de items:", type(items).__name__)
 
-          registros = []
+          if isinstance(items, list):
+              print("Quantidade de registros:", len(items))
 
-          def procurar(obj):
-
-              if isinstance(obj, dict):
-
-                  campos = {str(k).lower(): v for k, v in obj.items()}
-
-                  if any(
-                      termo in chave
-                      for chave in campos
-                      for termo in ["cota", "nivel", "nível", "data_hora", "datahora"]
-                  ):
-                      registros.append(obj)
-
-                  for v in obj.values():
-                      procurar(v)
-
-              elif isinstance(obj, list):
-
-                  for v in obj:
-                      procurar(v)
-
-          procurar(items)
-
-          print("Registros candidatos encontrados:", len(registros))
+          elif isinstance(items, dict):
+              print(
+                  "Campos dentro de items:",
+                  list(items.keys())
+              )
 
           print()
-          print("==========================================")
-          print("AMOSTRA DOS DADOS RECEBIDOS")
-          print("==========================================")
+          print("======================================")
+          print("4. PRIMEIROS DADOS")
+          print("======================================")
 
-          if registros:
-
-              for i, r in enumerate(registros[:5], start=1):
-                  print()
-                  print("REGISTRO", i)
-
-                  for k, v in r.items():
-                      print(f"{k}: {v}")
-
-          else:
-
-              print(json.dumps(
-                  data,
+          print(
+              json.dumps(
+                  resposta,
                   indent=2,
                   ensure_ascii=False
-              )[:8000])
+              )[:12000]
+          )
 
           print()
-          print("==========================================")
-          print("FIM DA CONSULTA")
-          print("==========================================")
+          print("======================================")
+          print("CONSULTA FINALIZADA")
+          print("======================================")
           PY

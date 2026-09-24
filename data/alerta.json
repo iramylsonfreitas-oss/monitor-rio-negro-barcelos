@@ -1,5 +1,5 @@
 {
-  "gerado_em_utc": "2026-09-24T19:43:06.713230+00:00",
+  "gerado_em_utc": "2026-09-24T20:19:20.062265+00:00",
   "timezone": "America/Manaus",
   "nivel": 1,
   "status": "observacao",
@@ -7,9 +7,9 @@
   "titulo": "Mudança a montante em acompanhamento",
   "mensagem": "Há sinais de elevação a montante, mas Serrinha ainda não atende ao critério de alta sustentada usado pelo detector histórico.",
   "motivos": [
-    "Serrinha apresenta +2.0 cm em 24 h.",
+    "Serrinha apresenta +3.0 cm em 24 h.",
     "Serrinha acumula +6.0 cm em 72 h.",
-    "Curicuriari acumula +13.0 cm em 72 h.",
+    "Curicuriari acumula +12.0 cm em 72 h.",
     "Barcelos ainda acumula -8.0 cm em 72 h."
   ],
   "criterio_evento_serrinha": {
@@ -73,30 +73,30 @@
       "nivel_m": 9.79,
       "variacao_6h_cm": 0.0,
       "variacao_24h_cm": 1.0,
-      "variacao_72h_cm": 13.0,
+      "variacao_72h_cm": 12.0,
       "variacao_7d_cm": 38.0,
       "tendencia": "estavel",
-      "data_medicao_manaus": "2026-09-24 14:45:00"
+      "data_medicao_manaus": "2026-09-24 15:45:00"
     },
     "serrinha": {
       "nome": "Serrinha",
-      "nivel_m": 6.55,
+      "nivel_m": 6.56,
       "variacao_6h_cm": 1.0,
-      "variacao_24h_cm": 2.0,
+      "variacao_24h_cm": 3.0,
       "variacao_72h_cm": 6.0,
-      "variacao_7d_cm": 11.0,
+      "variacao_7d_cm": 12.0,
       "tendencia": "subindo",
-      "data_medicao_manaus": "2026-09-24 14:30:00"
+      "data_medicao_manaus": "2026-09-24 15:30:00"
     },
     "barcelos": {
       "nome": "Barcelos",
       "nivel_m": 3.89,
-      "variacao_6h_cm": -1.0,
+      "variacao_6h_cm": 0.0,
       "variacao_24h_cm": -2.0,
       "variacao_72h_cm": -8.0,
-      "variacao_7d_cm": -32.0,
-      "tendencia": "descendo",
-      "data_medicao_manaus": "2026-09-24 15:00:00"
+      "variacao_7d_cm": -31.0,
+      "tendencia": "estavel",
+      "data_medicao_manaus": "2026-09-24 16:00:00"
     }
   },
   "aviso": "O alerta é experimental e utiliza relações históricas entre estações. Uma alta em Serrinha não garante uma alta posterior em Barcelos."

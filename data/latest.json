@@ -12,10 +12,10 @@
   "variacao_72h_cm": -8.0,
   "variacao_7d_cm": -31.0,
   "tendencia": "estavel",
-  "idade_dado_min": 17,
+  "idade_dado_min": 42,
   "dado_desatualizado": false,
   "status_cota": "0",
   "registros_30d": 2761,
   "fonte": "ANA - HidroWebService",
-  "coletado_em_utc": "2026-09-24T22:17:53.923441+00:00"
+  "coletado_em_utc": "2026-09-24T22:42:45.373198+00:00"
 }

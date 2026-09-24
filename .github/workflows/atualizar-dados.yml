@@ -1,0 +1,61 @@
+name: Atualizar dados do Rio Negro
+
+on:
+  workflow_dispatch:
+
+  schedule:
+    - cron: "7,37 * * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  atualizar:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar projeto
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Consultar ANA
+        env:
+          ANA_IDENTIFIER: ${{ secrets.ANA_IDENTIFIER }}
+          ANA_PASSWORD: ${{ secrets.ANA_PASSWORD }}
+        run: |
+          python collector/ana.py
+
+      - name: Mostrar resultado
+        run: |
+          echo "===== latest.json ====="
+          cat data/latest.json
+
+          echo
+          echo "===== quantidade de registros ====="
+          python - <<'PY'
+          import json
+
+          with open("data/series_30d.json", encoding="utf-8") as f:
+              dados = json.load(f)
+
+          print(len(dados), "registros")
+          PY
+
+      - name: Salvar dados no repositorio
+        run: |
+          git config user.name "rio-negro-bot"
+          git config user.email "actions@github.com"
+
+          git add data/latest.json data/series_30d.json
+
+          if git diff --cached --quiet; then
+            echo "Nenhuma alteração de dados."
+            exit 0
+          fi
+
+          git commit -m "Atualiza dados ANA"
+          git push

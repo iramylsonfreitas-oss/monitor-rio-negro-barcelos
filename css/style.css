@@ -13,6 +13,7 @@
   --green: #39d98a;
   --red: #ff6376;
   --yellow: #f5c451;
+  --cyan: #58d6ff;
 
   --radius: 22px;
 }
@@ -197,6 +198,13 @@ h1 {
   color: var(--muted);
 }
 
+.ana-update-time {
+  margin-top: 6px;
+
+  font-size: 12px;
+  color: var(--muted);
+}
+
 .hero-right {
   display: flex;
 
@@ -231,15 +239,15 @@ h1 {
 }
 
 .trend-icon.up {
-  color: var(--green);
+  color: var(--cyan);
 
-  background: rgba(57, 217, 138, 0.10);
+  background: rgba(88, 214, 255, 0.10);
 }
 
 .trend-icon.down {
-  color: var(--red);
+  color: var(--blue);
 
-  background: rgba(255, 99, 118, 0.10);
+  background: rgba(67, 165, 255, 0.12);
 }
 
 .trend-text {
@@ -304,11 +312,11 @@ h1 {
 }
 
 .metric-value.positive {
-  color: var(--green);
+  color: var(--cyan);
 }
 
 .metric-value.negative {
-  color: var(--red);
+  color: var(--blue);
 }
 
 .metric-value.neutral {

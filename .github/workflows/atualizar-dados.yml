@@ -39,6 +39,11 @@ jobs:
           python collector/ana.py
 
 
+      - name: Gerar alerta atual
+        run: |
+          python collector/alerta.py
+
+
       - name: Conferir dados atuais
         run: |
           echo "======================================"
@@ -119,12 +124,220 @@ jobs:
           PY
 
 
+      - name: Conferir alerta
+        run: |
+          echo "======================================"
+          echo "ALERTA ATUAL"
+          echo "======================================"
+
+          if [ ! -f data/alerta.json ]; then
+            echo "ERRO:"
+            echo "data/alerta.json não foi criado."
+            exit 1
+          fi
+
+          python - <<'PY'
+          import json
+
+          with open(
+              "data/alerta.json",
+              encoding="utf-8"
+          ) as f:
+              alerta = json.load(f)
+
+          print(
+              "Status:",
+              alerta.get(
+                  "rotulo"
+              )
+          )
+
+          print(
+              "Nível:",
+              alerta.get(
+                  "nivel"
+              )
+          )
+
+          print(
+              "Título:",
+              alerta.get(
+                  "titulo"
+              )
+          )
+
+          print()
+
+          print(
+              "Mensagem:"
+          )
+
+          print(
+              alerta.get(
+                  "mensagem"
+              )
+          )
+
+          print()
+
+          evento = (
+              alerta.get(
+                  "evento_serrinha"
+              )
+              or {}
+          )
+
+          print(
+              "Evento confirmado em Serrinha:",
+              evento.get(
+                  "confirmado"
+              )
+          )
+
+          print(
+              "Início do evento:",
+              evento.get(
+                  "inicio_manaus"
+              )
+          )
+
+          print()
+
+          historico = (
+              alerta.get(
+                  "historico_serrinha_barcelos"
+              )
+              or {}
+          )
+
+          print(
+              "Histórico Serrinha → Barcelos"
+          )
+
+          print(
+              "Eventos em Serrinha:",
+              historico.get(
+                  "eventos_serrinha"
+              )
+          )
+
+          print(
+              "Correspondentes:",
+              historico.get(
+                  "eventos_correspondentes"
+              )
+          )
+
+          print(
+              "Mediana:",
+              historico.get(
+                  "mediana_dias"
+              ),
+              "dias"
+          )
+
+          print(
+              "Faixa central:",
+              historico.get(
+                  "q25_dias"
+              ),
+              "a",
+              historico.get(
+                  "q75_dias"
+              ),
+              "dias"
+          )
+
+          print()
+
+          janela = (
+              alerta.get(
+                  "janela_historica"
+              )
+              or {}
+          )
+
+          print(
+              "Janela aplicável agora:",
+              janela.get(
+                  "aplicavel"
+              )
+          )
+
+          if janela.get(
+              "aplicavel"
+          ):
+
+              print(
+                  "Início:",
+                  janela.get(
+                      "inicio_janela_manaus"
+                  )
+              )
+
+              print(
+                  "Mediana:",
+                  janela.get(
+                      "mediana_manaus"
+                  )
+              )
+
+              print(
+                  "Fim:",
+                  janela.get(
+                      "fim_janela_manaus"
+                  )
+              )
+
+          print()
+
+          print(
+              "Motivos:"
+          )
+
+          for motivo in (
+              alerta.get(
+                  "motivos"
+              )
+              or []
+          ):
+              print(
+                  "-",
+                  motivo
+              )
+
+          print()
+
+          print(
+              "Últimas amostras de Serrinha:"
+          )
+
+          for sample in (
+              alerta.get(
+                  "ultimas_amostras_serrinha"
+              )
+              or []
+          ):
+
+              print(
+                  sample.get(
+                      "hora_manaus"
+                  ),
+                  "|",
+                  sample.get(
+                      "variacao_24h_cm"
+                  ),
+                  "cm/24h"
+              )
+          PY
+
+
       - name: Descartar alteracao do historico nesta execucao
         run: |
           git restore data/history/hourly.csv || true
 
 
-      - name: Salvar somente dados em tempo real
+      - name: Salvar dados em tempo real e alerta
         run: |
           git config user.name "rio-negro-bot"
           git config user.email "actions@github.com"
@@ -132,13 +345,14 @@ jobs:
           git add data/latest.json
           git add data/series_30d.json
           git add data/estacoes.json
+          git add data/alerta.json
 
           if git diff --cached --quiet; then
             echo "Nenhuma alteração para salvar."
             exit 0
           fi
 
-          git commit -m "Atualiza dados atuais ANA"
+          git commit -m "Atualiza dados ANA e alerta"
 
           git pull --rebase origin main
 

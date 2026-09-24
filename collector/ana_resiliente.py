@@ -3,23 +3,38 @@ import time
 import ana
 
 
-MAX_TENTATIVAS_401 = 3
+MAX_TENTATIVAS = 3
 
 ESPERAS_SEGUNDOS = [
-    15,
-    30,
+    20,
+    40,
 ]
 
 
-def is_unauthorized(error):
+def erro_transitorio(error):
 
     text = str(
         error
     ).lower()
 
-    return (
-        "http 401" in text
-        or "unauthorized" in text
+    sinais_transitorios = [
+        "http 401",
+        "unauthorized",
+        "http 429",
+        "http 502",
+        "http 503",
+        "http 504",
+        "timed out",
+        "timeout",
+        "temporarily unavailable",
+        "service unavailable",
+        "connection reset",
+        "remote end closed connection",
+    ]
+
+    return any(
+        sinal in text
+        for sinal in sinais_transitorios
     )
 
 
@@ -27,7 +42,7 @@ def main():
 
     for tentativa in range(
         1,
-        MAX_TENTATIVAS_401 + 1
+        MAX_TENTATIVAS + 1
     ):
 
         print()
@@ -36,14 +51,14 @@ def main():
         )
 
         print(
-            "COLETA ANA"
+            "COLETA ANA RESILIENTE"
         )
 
         print(
             "Tentativa:",
             tentativa,
             "de",
-            MAX_TENTATIVAS_401
+            MAX_TENTATIVAS
         )
 
         print(
@@ -73,18 +88,18 @@ def main():
 
         except Exception as error:
 
-            if not is_unauthorized(
+            if not erro_transitorio(
                 error
             ):
 
                 print()
                 print(
-                    "Erro não relacionado "
-                    "à autenticação."
+                    "Erro não considerado "
+                    "transitório."
                 )
 
                 print(
-                    "O erro será mantido "
+                    "A execução será interrompida "
                     "para diagnóstico."
                 )
 
@@ -92,18 +107,27 @@ def main():
 
             print()
             print(
-                "ANA retornou 401 / Unauthorized."
+                "Falha temporária na consulta "
+                "à ANA."
+            )
+
+            print(
+                "Erro detectado:"
+            )
+
+            print(
+                str(error)[:500]
             )
 
             if (
                 tentativa
-                >= MAX_TENTATIVAS_401
+                >= MAX_TENTATIVAS
             ):
 
                 print()
                 print(
-                    "A ANA recusou a autenticação "
-                    "em todas as tentativas."
+                    "Todas as tentativas "
+                    "foram utilizadas."
                 )
 
                 print(
@@ -119,9 +143,15 @@ def main():
                 ]
             )
 
+            print()
             print(
-                "Um novo token será solicitado "
-                "na próxima tentativa."
+                "O processo inteiro será "
+                "repetido."
+            )
+
+            print(
+                "Isso inclui uma nova "
+                "autenticação na ANA."
             )
 
             print(

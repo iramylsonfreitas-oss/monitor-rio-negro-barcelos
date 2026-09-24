@@ -6,6 +6,13 @@
   "data_medicao": "2026-09-24 11:00:00.0",
   "data_atualizacao_ana": "2026-09-24 11:08:58.883",
   "status_cota": "0",
+  "variacao_6h_cm": -1.0,
+  "variacao_24h_cm": -2.0,
+  "variacao_7d_cm": -33.0,
+  "tendencia": "descendo",
+  "idade_dado_min": 42,
+  "dado_desatualizado": false,
+  "registros_30d": 2729,
   "fonte": "ANA - HidroWebService",
-  "coletado_em_utc": "2026-09-24T14:35:13.338569+00:00"
+  "coletado_em_utc": "2026-09-24T14:42:09.161337+00:00"
 }

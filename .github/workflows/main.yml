@@ -1,14 +1,14 @@
-name: Testar Barcelos Python
+name: Diagnosticar Dados Barcelos
 
 on:
   workflow_dispatch:
 
 jobs:
-  barcelos:
+  diagnostico:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Consultar Barcelos na ANA
+      - name: Verificar disponibilidade dos dados de Barcelos
         env:
           ANA_IDENTIFIER: ${{ secrets.ANA_IDENTIFIER }}
           ANA_PASSWORD: ${{ secrets.ANA_PASSWORD }}
@@ -24,9 +24,9 @@ jobs:
           IDENTIFICADOR = os.environ["ANA_IDENTIFIER"]
           SENHA = os.environ["ANA_PASSWORD"]
 
-          print("======================================")
-          print("1. AUTENTICAÇÃO")
-          print("======================================")
+          # =========================
+          # AUTENTICAÇÃO
+          # =========================
 
           auth_url = (
               "https://www.ana.gov.br/hidrowebservice/"
@@ -44,71 +44,137 @@ jobs:
 
           with urllib.request.urlopen(req, timeout=30) as r:
               auth = json.loads(r.read().decode("utf-8"))
-              print("HTTP autenticação:", r.status)
 
           token = (auth.get("items") or {}).get("tokenautenticacao")
 
           if not token:
               raise SystemExit("ERRO: token não encontrado.")
 
-          print("Token obtido corretamente.")
+          print("AUTENTICAÇÃO: OK")
           print()
 
-          print("======================================")
-          print("2. CONSULTANDO BARCELOS")
-          print("======================================")
-
-          base_url = (
+          BASE = (
               "https://www.ana.gov.br/hidrowebservice/"
               "EstacoesTelemetricas/"
-              "HidroinfoanaSerieTelemetricaAdotada/v2"
           )
 
-          parametros = {
-              "Codigos_Estacoes": "14480002",
-              "Tipo Filtro Data": "DATA_LEITURA",
-              "Range Intervalo de busca": "HORA_24"
-          }
-
-          query = urllib.parse.urlencode(parametros)
-
-          url = base_url + "?" + query
-
-          print("URL montada:")
-          print(url)
-          print()
-
-          formas = [
-              ("Bearer", "Bearer " + token),
-              ("Token direto", token)
+          testes = [
+              {
+                  "nome": "ADOTADA V2 - 24 HORAS",
+                  "endpoint": "HidroinfoanaSerieTelemetricaAdotada/v2",
+                  "filtro": "DATA_LEITURA",
+                  "range": "HORA_24"
+              },
+              {
+                  "nome": "ADOTADA V2 - 2 DIAS",
+                  "endpoint": "HidroinfoanaSerieTelemetricaAdotada/v2",
+                  "filtro": "DATA_LEITURA",
+                  "range": "DIAS_2"
+              },
+              {
+                  "nome": "ADOTADA V2 - 7 DIAS",
+                  "endpoint": "HidroinfoanaSerieTelemetricaAdotada/v2",
+                  "filtro": "DATA_LEITURA",
+                  "range": "DIAS_7"
+              },
+              {
+                  "nome": "ADOTADA V2 - 30 DIAS",
+                  "endpoint": "HidroinfoanaSerieTelemetricaAdotada/v2",
+                  "filtro": "DATA_LEITURA",
+                  "range": "DIAS_30"
+              },
+              {
+                  "nome": "ADOTADA V2 - ATUALIZAÇÃO 30 DIAS",
+                  "endpoint": "HidroinfoanaSerieTelemetricaAdotada/v2",
+                  "filtro": "DATA_ULTIMA_ATUALIZACAO",
+                  "range": "DIAS_30"
+              },
+              {
+                  "nome": "DETALHADA V2 - 30 DIAS",
+                  "endpoint": "HidroinfoanaSerieTelemetricaDetalhada/v2",
+                  "filtro": "DATA_LEITURA",
+                  "range": "DIAS_30"
+              }
           ]
 
-          resposta = None
+          resultados = []
 
-          for nome, authorization in formas:
+          for teste in testes:
 
-              print("Testando Authorization:", nome)
+              parametros = {
+                  "Codigos_Estacoes": "14480002",
+                  "Tipo Filtro Data": teste["filtro"],
+                  "Range Intervalo de busca": teste["range"]
+              }
+
+              url = (
+                  BASE
+                  + teste["endpoint"]
+                  + "?"
+                  + urllib.parse.urlencode(parametros)
+              )
+
+              print("==========================================")
+              print(teste["nome"])
+              print("==========================================")
 
               req = urllib.request.Request(
                   url,
                   headers={
-                      "Authorization": authorization,
+                      "Authorization": "Bearer " + token,
                       "Accept": "application/json",
                       "User-Agent": "Monitor-Rio-Negro/1.0"
                   }
               )
 
               try:
-                  with urllib.request.urlopen(req, timeout=30) as r:
-                      texto = r.read().decode("utf-8", errors="replace")
+
+                  with urllib.request.urlopen(req, timeout=40) as r:
+
+                      resposta = json.loads(
+                          r.read().decode(
+                              "utf-8",
+                              errors="replace"
+                          )
+                      )
+
+                      items = resposta.get("items") or []
 
                       print("HTTP:", r.status)
+                      print("CODE:", resposta.get("code"))
+                      print("MESSAGE:", resposta.get("message"))
+                      print("REGISTROS:", len(items))
 
-                      resposta = json.loads(texto)
+                      if items:
 
-                      if r.status == 200:
-                          print("SUCESSO.")
-                          break
+                          print()
+                          print("PRIMEIRO REGISTRO:")
+                          print(
+                              json.dumps(
+                                  items[0],
+                                  indent=2,
+                                  ensure_ascii=False
+                              )[:5000]
+                          )
+
+                          print()
+                          print("ÚLTIMO REGISTRO:")
+                          print(
+                              json.dumps(
+                                  items[-1],
+                                  indent=2,
+                                  ensure_ascii=False
+                              )[:5000]
+                          )
+
+                      resultados.append(
+                          (
+                              teste["nome"],
+                              r.status,
+                              len(items),
+                              resposta.get("message")
+                          )
+                      )
 
               except urllib.error.HTTPError as e:
 
@@ -118,58 +184,34 @@ jobs:
                   )
 
                   print("HTTP:", e.code)
-                  print("Resposta:", texto[:2000])
+                  print("ERRO:", texto[:2000])
+
+                  resultados.append(
+                      (
+                          teste["nome"],
+                          e.code,
+                          0,
+                          "ERRO HTTP"
+                      )
+                  )
 
               print()
 
-          if resposta is None:
-              raise SystemExit(
-                  "Nenhuma das formas de Authorization retornou HTTP 200."
-              )
+          print()
+          print("==========================================")
+          print("RESUMO FINAL")
+          print("==========================================")
+
+          for nome, http, qtd, mensagem in resultados:
+
+              print()
+              print(nome)
+              print("HTTP:", http)
+              print("REGISTROS:", qtd)
+              print("MENSAGEM:", mensagem)
 
           print()
-          print("======================================")
-          print("3. ESTRUTURA RECEBIDA")
-          print("======================================")
-
-          if isinstance(resposta, dict):
-
-              print(
-                  "Campos principais:",
-                  list(resposta.keys())
-              )
-
-              items = resposta.get("items")
-
-          else:
-              items = resposta
-
-          print("Tipo de items:", type(items).__name__)
-
-          if isinstance(items, list):
-              print("Quantidade de registros:", len(items))
-
-          elif isinstance(items, dict):
-              print(
-                  "Campos dentro de items:",
-                  list(items.keys())
-              )
-
-          print()
-          print("======================================")
-          print("4. PRIMEIROS DADOS")
-          print("======================================")
-
-          print(
-              json.dumps(
-                  resposta,
-                  indent=2,
-                  ensure_ascii=False
-              )[:12000]
-          )
-
-          print()
-          print("======================================")
-          print("CONSULTA FINALIZADA")
-          print("======================================")
+          print("==========================================")
+          print("DIAGNÓSTICO CONCLUÍDO")
+          print("==========================================")
           PY

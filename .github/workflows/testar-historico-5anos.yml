@@ -1,0 +1,361 @@
+name: Testar Historico ANA 5 Anos
+
+on:
+  workflow_dispatch:
+
+jobs:
+  testar:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Testar anos anteriores na ANA
+        env:
+          ANA_IDENTIFIER: ${{ secrets.ANA_IDENTIFIER }}
+          ANA_PASSWORD: ${{ secrets.ANA_PASSWORD }}
+
+        run: |
+          python - <<'PY'
+          import os
+          import json
+          import time
+          import urllib.request
+          import urllib.parse
+
+
+          IDENTIFICADOR = os.environ[
+              "ANA_IDENTIFIER"
+          ]
+
+          SENHA = os.environ[
+              "ANA_PASSWORD"
+          ]
+
+
+          AUTH_URL = (
+              "https://www.ana.gov.br/"
+              "hidrowebservice/"
+              "EstacoesTelemetricas/"
+              "OAUth/v1"
+          )
+
+
+          DATA_URL = (
+              "https://www.ana.gov.br/"
+              "hidrowebservice/"
+              "EstacoesTelemetricas/"
+              "HidroinfoanaSerieTelemetricaAdotada/v2"
+          )
+
+
+          ESTACOES = {
+              "14110000": "Cucuí",
+              "14280001": "Taracuá",
+              "14330000": "Curicuriari",
+              "14420000": "Serrinha",
+              "14480002": "Barcelos",
+          }
+
+
+          DATAS_TESTE = [
+              "2025-09-24",
+              "2024-09-24",
+              "2023-09-24",
+              "2022-09-24",
+              "2021-09-24",
+          ]
+
+
+          def request_json(
+              url,
+              headers,
+              attempts=4,
+              timeout=180
+          ):
+
+              last_error = None
+
+              for attempt in range(
+                  1,
+                  attempts + 1
+              ):
+
+                  try:
+
+                      req = (
+                          urllib.request.Request(
+                              url,
+                              headers=headers
+                          )
+                      )
+
+                      with urllib.request.urlopen(
+                          req,
+                          timeout=timeout
+                      ) as response:
+
+                          return json.loads(
+                              response
+                              .read()
+                              .decode(
+                                  "utf-8",
+                                  errors="replace"
+                              )
+                          )
+
+                  except Exception as error:
+
+                      last_error = error
+
+                      print(
+                          "Tentativa",
+                          attempt,
+                          "falhou:",
+                          error
+                      )
+
+                      if attempt == attempts:
+                          raise
+
+                      time.sleep(
+                          10 * attempt
+                      )
+
+
+              raise RuntimeError(
+                  str(last_error)
+              )
+
+
+          print(
+              "======================================"
+          )
+
+          print(
+              "AUTENTICAÇÃO"
+          )
+
+          print(
+              "======================================"
+          )
+
+
+          auth = request_json(
+              AUTH_URL,
+              {
+                  "Identificador":
+                      IDENTIFICADOR,
+
+                  "Senha":
+                      SENHA,
+
+                  "Accept":
+                      "application/json",
+
+                  "User-Agent":
+                      "Monitor-Rio-Negro/1.0",
+              }
+          )
+
+
+          token = (
+              auth.get("items")
+              or {}
+          ).get(
+              "tokenautenticacao"
+          )
+
+
+          if not token:
+
+              raise RuntimeError(
+                  "Token não encontrado."
+              )
+
+
+          print(
+              "Autenticação OK."
+          )
+
+
+          for data_busca in DATAS_TESTE:
+
+              print()
+              print()
+              print(
+                  "======================================"
+              )
+
+              print(
+                  "DATA FINAL:",
+                  data_busca
+              )
+
+              print(
+                  "======================================"
+              )
+
+
+              params = {
+                  "Codigos_Estacoes":
+                      ",".join(
+                          ESTACOES.keys()
+                      ),
+
+                  "Tipo Filtro Data":
+                      "DATA_LEITURA",
+
+                  "Data de Busca (yyyy-MM-dd)":
+                      data_busca,
+
+                  "Range Intervalo de busca":
+                      "DIAS_30",
+              }
+
+
+              url = (
+                  DATA_URL
+                  + "?"
+                  + urllib.parse.urlencode(
+                      params
+                  )
+              )
+
+
+              response = request_json(
+                  url,
+                  {
+                      "Authorization":
+                          "Bearer " + token,
+
+                      "Accept":
+                          "application/json",
+
+                      "User-Agent":
+                          "Monitor-Rio-Negro/1.0",
+                  }
+              )
+
+
+              items = (
+                  response.get("items")
+                  or []
+              )
+
+
+              print(
+                  "Mensagem:",
+                  response.get(
+                      "message"
+                  )
+              )
+
+              print(
+                  "Total de registros:",
+                  len(items)
+              )
+
+
+              station_data = {
+                  codigo: []
+                  for codigo in ESTACOES
+              }
+
+
+              for row in items:
+
+                  codigo = str(
+                      row.get(
+                          "codigoestacao"
+                      )
+                  )
+
+                  measurement = (
+                      row.get(
+                          "Data_Hora_Medicao"
+                      )
+                  )
+
+
+                  if (
+                      codigo
+                      in station_data
+                      and measurement
+                  ):
+
+                      station_data[
+                          codigo
+                      ].append(
+                          measurement
+                      )
+
+
+              for codigo, nome in (
+                  ESTACOES.items()
+              ):
+
+                  records = (
+                      station_data[
+                          codigo
+                      ]
+                  )
+
+
+                  print()
+                  print(
+                      nome,
+                      codigo
+                  )
+
+                  print(
+                      "Registros:",
+                      len(records)
+                  )
+
+
+                  if records:
+
+                      print(
+                          "Primeiro:",
+                          min(records)
+                      )
+
+                      print(
+                          "Último:",
+                          max(records)
+                      )
+
+                  else:
+
+                      print(
+                          "SEM DADOS"
+                      )
+
+
+              if (
+                  data_busca
+                  != DATAS_TESTE[-1]
+              ):
+
+                  print()
+                  print(
+                      "Aguardando 8 segundos..."
+                  )
+
+                  time.sleep(8)
+
+
+          print()
+          print()
+          print(
+              "======================================"
+          )
+
+          print(
+              "TESTE DE 5 ANOS CONCLUÍDO"
+          )
+
+          print(
+              "======================================"
+          )
+          PY

@@ -1,63 +1,188 @@
-name: Inspecionar Swagger ANA
+name: Ler API Oficial ANA
 
 on:
   workflow_dispatch:
 
 jobs:
-  inspecionar:
+  documentacao:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Mostrar HTML e testar arquivos Swagger
+      - name: Descobrir endpoint e parametros oficiais
         run: |
-          echo "======================================"
-          echo "1. PAGINA OFICIAL"
-          echo "======================================"
+          python - <<'PY'
+          import json
+          import urllib.request
+          import urllib.parse
 
-          curl -L -sS \
-            -w "\nHTTP_FINAL: %{http_code}\nURL_FINAL: %{url_effective}\n" \
-            "https://www.ana.gov.br/hidrowebservice/swagger-ui.html" \
-            -o pagina.html
+          HOST = "https://www.ana.gov.br"
 
-          cat pagina.html
+          CONFIG = HOST + "/hidrowebservice/api-docs/swagger-config"
 
-          echo
-          echo "======================================"
-          echo "2. TESTE swagger-initializer.js"
-          echo "======================================"
+          def baixar(url):
+              print()
+              print("CONSULTANDO:", url)
 
-          curl -L -sS \
-            -w "\nHTTP_FINAL: %{http_code}\nURL_FINAL: %{url_effective}\n" \
-            "https://www.ana.gov.br/hidrowebservice/swagger-initializer.js" \
-            -o initializer1.js
+              req = urllib.request.Request(
+                  url,
+                  headers={
+                      "User-Agent": "Mozilla/5.0",
+                      "Accept": "application/json"
+                  }
+              )
 
-          cat initializer1.js
+              try:
+                  with urllib.request.urlopen(req, timeout=30) as r:
+                      texto = r.read().decode("utf-8", errors="replace")
+                      print("HTTP:", r.status)
+                      return texto
+              except Exception as e:
+                  print("ERRO:", e)
+                  return None
 
-          echo
-          echo "======================================"
-          echo "3. TESTE /swagger-ui/swagger-initializer.js"
-          echo "======================================"
+          print("==========================================")
+          print("1. SWAGGER CONFIG")
+          print("==========================================")
 
-          curl -L -sS \
-            -w "\nHTTP_FINAL: %{http_code}\nURL_FINAL: %{url_effective}\n" \
-            "https://www.ana.gov.br/hidrowebservice/swagger-ui/swagger-initializer.js" \
-            -o initializer2.js
+          texto = baixar(CONFIG)
 
-          cat initializer2.js
+          if not texto:
+              raise SystemExit("Não foi possível obter swagger-config.")
 
-          echo
-          echo "======================================"
-          echo "4. TESTE index.html"
-          echo "======================================"
+          config = json.loads(texto)
 
-          curl -L -sS \
-            -w "\nHTTP_FINAL: %{http_code}\nURL_FINAL: %{url_effective}\n" \
-            "https://www.ana.gov.br/hidrowebservice/swagger-ui/index.html" \
-            -o index.html
+          print()
+          print(json.dumps(config, indent=2, ensure_ascii=False))
 
-          cat index.html
+          candidatos = []
 
-          echo
-          echo "======================================"
-          echo "FIM"
-          echo "======================================"
+          if config.get("url"):
+              candidatos.append(config["url"])
+
+          for item in config.get("urls", []):
+              if isinstance(item, dict) and item.get("url"):
+                  candidatos.append(item["url"])
+
+          # fallback esperado pelo Springdoc
+          candidatos.append("/hidrowebservice/api-docs")
+
+          print()
+          print("==========================================")
+          print("2. DOCUMENTOS OPENAPI CANDIDATOS")
+          print("==========================================")
+
+          vistos = set()
+          encontrou_spec = False
+
+          for caminho in candidatos:
+
+              url = urllib.parse.urljoin(HOST, caminho)
+
+              if url in vistos:
+                  continue
+
+              vistos.add(url)
+
+              spec_texto = baixar(url)
+
+              if not spec_texto:
+                  continue
+
+              try:
+                  spec = json.loads(spec_texto)
+              except Exception:
+                  print("Resposta não é JSON.")
+                  continue
+
+              if "paths" not in spec:
+                  print("JSON recebido, mas não parece ser OpenAPI.")
+                  continue
+
+              encontrou_spec = True
+
+              print()
+              print("OPENAPI:", spec.get("openapi") or spec.get("swagger"))
+              print("ROTAS:", len(spec.get("paths", {})))
+
+              print()
+              print("==========================================")
+              print("3. ROTAS RELACIONADAS A TELEMETRIA")
+              print("==========================================")
+
+              encontrou_rota = False
+
+              for path, metodos in spec.get("paths", {}).items():
+
+                  p = path.lower()
+
+                  if (
+                      "telemet" in p
+                      or "hidroinfoana" in p
+                      or "serie" in p
+                  ):
+                      encontrou_rota = True
+
+                      print()
+                      print("------------------------------------------")
+                      print("PATH:", path)
+
+                      for metodo, info in metodos.items():
+
+                          if metodo.lower() not in [
+                              "get", "post", "put", "delete", "patch"
+                          ]:
+                              continue
+
+                          print("MÉTODO:", metodo.upper())
+                          print("SUMMARY:", info.get("summary"))
+                          print("DESCRIPTION:", info.get("description"))
+
+                          print("PARÂMETROS:")
+
+                          parametros = info.get("parameters", [])
+
+                          if not parametros:
+                              print("  Nenhum parâmetro listado.")
+
+                          for parametro in parametros:
+
+                              schema = parametro.get("schema", {})
+
+                              print()
+                              print("  NOME:", parametro.get("name"))
+                              print("  LOCAL:", parametro.get("in"))
+                              print("  OBRIGATÓRIO:", parametro.get("required"))
+                              print("  TIPO:", schema.get("type"))
+                              print("  FORMATO:", schema.get("format"))
+                              print("  ENUM:", schema.get("enum"))
+                              print("  EXEMPLO:", parametro.get("example") or schema.get("example"))
+                              print("  DESCRIÇÃO:", parametro.get("description"))
+
+                          body = info.get("requestBody")
+
+                          if body:
+                              print()
+                              print("REQUEST BODY:")
+                              print(json.dumps(
+                                  body,
+                                  indent=2,
+                                  ensure_ascii=False
+                              ))
+
+                          print()
+                          print("SEGURANÇA:")
+                          print(info.get("security"))
+
+              if not encontrou_rota:
+                  print("Nenhuma rota relacionada à telemetria foi encontrada neste documento.")
+
+          print()
+          print("==========================================")
+
+          if not encontrou_spec:
+              print("ERRO: nenhum documento OpenAPI válido foi localizado.")
+              raise SystemExit(1)
+
+          print("DIAGNÓSTICO CONCLUÍDO.")
+          print("==========================================")
+          PY

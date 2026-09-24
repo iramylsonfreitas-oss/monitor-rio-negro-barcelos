@@ -1,175 +1,158 @@
-name: Testar Barcelos Python
+Run python - <<'PY' 
+python - <<'PY'
+import os
+import json
+import urllib.request
+import urllib.parse
+import urllib.error
+IDENTIFICADOR = os.environ["ANA_IDENTIFIER"]
+SENHA = os.environ["ANA_PASSWORD"]
+print("======================================")
+print("1. AUTENTICAÇÃO")
+print("======================================")
+auth_url = (
+ "https://www.ana.gov.br/hidrowebservice/"
+ "EstacoesTelemetricas/OAUth/v1"
+)
+req = urllib.request.Request(
+ auth_url,
+ headers={
+ "Identificador": IDENTIFICADOR,
+ "Senha": SENHA,
+ "Accept": "application/json"
+ }
+)
+with urllib.request.urlopen(req, timeout=30) as r:
+ auth = json.loads(r.read().decode("utf-8"))
+ print("HTTP autenticação:", r.status)
+token = (auth.get("items") or {}).get("tokenautenticacao")
+if not token:
+ raise SystemExit("ERRO: token não encontrado.")
+print("Token obtido corretamente.")
+print()
+print("======================================")
+print("2. CONSULTANDO BARCELOS")
+print("======================================")
+base_url = (
+ "https://www.ana.gov.br/hidrowebservice/"
+ "EstacoesTelemetricas/"
+ "HidroinfoanaSerieTelemetricaAdotada/v2"
+)
+parametros = {
+ "Codigos_Estacoes": "14480002",
+ "Tipo Filtro Data": "DATA_LEITURA",
+ "Range Intervalo de busca": "HORA_24"
+}
+query = urllib.parse.urlencode(parametros)
+url = base_url + "?" + query
+print("URL montada:")
+print(url)
+print()
+formas = [
+ ("Bearer", "Bearer " + token),
+ ("Token direto", token)
+]
+resposta = None
+for nome, authorization in formas:
+ print("Testando Authorization:", nome)
+ req = urllib.request.Request(
+ url,
+ headers={
+ "Authorization": authorization,
+ "Accept": "application/json",
+ "User-Agent": "Monitor-Rio-Negro/1.0"
+ }
+ )
+ try:
+ with urllib.request.urlopen(req, timeout=30) as r:
+ texto = r.read().decode("utf-8", errors="replace")
+ print("HTTP:", r.status)
+ resposta = json.loads(texto)
+ if r.status == 200:
+ print("SUCESSO.")
+ break
+ except urllib.error.HTTPError as e:
+ texto = e.read().decode(
+ "utf-8",
+ errors="replace"
+ )
+ print("HTTP:", e.code)
+ print("Resposta:", texto[:2000])
+ print()
+if resposta is None:
+ raise SystemExit(
+ "Nenhuma das formas de Authorization retornou HTTP 200."
+ )
+print()
+print("======================================")
+print("3. ESTRUTURA RECEBIDA")
+print("======================================")
+if isinstance(resposta, dict):
+ print(
+ "Campos principais:",
+ list(resposta.keys())
+ )
+ items = resposta.get("items")
+else:
+ items = resposta
+print("Tipo de items:", type(items).__name__)
+if isinstance(items, list):
+ print("Quantidade de registros:", len(items))
+elif isinstance(items, dict):
+ print(
+ "Campos dentro de items:",
+ list(items.keys())
+ )
+print()
+print("======================================")
+print("4. PRIMEIROS DADOS")
+print("======================================")
+print(
+ json.dumps(
+ resposta,
+ indent=2,
+ ensure_ascii=False
+ )[:12000]
+)
+print()
+print("======================================")
+print("CONSULTA FINALIZADA")
+print("======================================")
+PY
+shell: /usr/bin/bash -e {0} 
+env: 
+ ANA_IDENTIFIER: *** 
+ ANA_PASSWORD: *** 
+====================================== 
+1. AUTENTICAÇÃO 
+====================================== 
+HTTP autenticação: 200 
+Token obtido corretamente. 
+====================================== 
+2. CONSULTANDO BARCELOS 
+====================================== 
+URL montada: 
+https://www.ana.gov.br/hidrowebservice/EstacoesTelemetricas/HidroinfoanaSerieTelemetricaAdotada/v2?Codigos_Estacoes=14480002&Tipo+Filtro+Data=DATA_LEITURA&Range+Intervalo+de+busca=HORA_24
+Testando Authorization: Bearer 
+HTTP: 200 
+SUCESSO. 
+====================================== 
+3. ESTRUTURA RECEBIDA 
+====================================== 
+Campos principais: ['status', 'code', 'message', 'items'] 
+Tipo de items: list 
+Quantidade de registros: 0 
+====================================== 
+4. PRIMEIROS DADOS 
+====================================== 
+{ 
+ "status": "OK", 
+ "code": 200, 
+ "message": "Não houve retorno de registros. Verifique!", 
+ "items": [] 
+} 
+====================================== 
+CONSULTA FINALIZADA 
+====================================== 
+0s
 
-on:
-  workflow_dispatch:
-
-jobs:
-  barcelos:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Consultar Barcelos na ANA
-        env:
-          ANA_IDENTIFIER: ${{ secrets.ANA_IDENTIFIER }}
-          ANA_PASSWORD: ${{ secrets.ANA_PASSWORD }}
-
-        run: |
-          python - <<'PY'
-          import os
-          import json
-          import urllib.request
-          import urllib.parse
-          import urllib.error
-
-          IDENTIFICADOR = os.environ["ANA_IDENTIFIER"]
-          SENHA = os.environ["ANA_PASSWORD"]
-
-          print("======================================")
-          print("1. AUTENTICAÇÃO")
-          print("======================================")
-
-          auth_url = (
-              "https://www.ana.gov.br/hidrowebservice/"
-              "EstacoesTelemetricas/OAUth/v1"
-          )
-
-          req = urllib.request.Request(
-              auth_url,
-              headers={
-                  "Identificador": IDENTIFICADOR,
-                  "Senha": SENHA,
-                  "Accept": "application/json"
-              }
-          )
-
-          with urllib.request.urlopen(req, timeout=30) as r:
-              auth = json.loads(r.read().decode("utf-8"))
-              print("HTTP autenticação:", r.status)
-
-          token = (auth.get("items") or {}).get("tokenautenticacao")
-
-          if not token:
-              raise SystemExit("ERRO: token não encontrado.")
-
-          print("Token obtido corretamente.")
-          print()
-
-          print("======================================")
-          print("2. CONSULTANDO BARCELOS")
-          print("======================================")
-
-          base_url = (
-              "https://www.ana.gov.br/hidrowebservice/"
-              "EstacoesTelemetricas/"
-              "HidroinfoanaSerieTelemetricaAdotada/v2"
-          )
-
-          parametros = {
-              "Codigos_Estacoes": "14480002",
-              "Tipo Filtro Data": "DATA_LEITURA",
-              "Range Intervalo de busca": "HORA_24"
-          }
-
-          query = urllib.parse.urlencode(parametros)
-
-          url = base_url + "?" + query
-
-          print("URL montada:")
-          print(url)
-          print()
-
-          formas = [
-              ("Bearer", "Bearer " + token),
-              ("Token direto", token)
-          ]
-
-          resposta = None
-
-          for nome, authorization in formas:
-
-              print("Testando Authorization:", nome)
-
-              req = urllib.request.Request(
-                  url,
-                  headers={
-                      "Authorization": authorization,
-                      "Accept": "application/json",
-                      "User-Agent": "Monitor-Rio-Negro/1.0"
-                  }
-              )
-
-              try:
-                  with urllib.request.urlopen(req, timeout=30) as r:
-                      texto = r.read().decode("utf-8", errors="replace")
-
-                      print("HTTP:", r.status)
-
-                      resposta = json.loads(texto)
-
-                      if r.status == 200:
-                          print("SUCESSO.")
-                          break
-
-              except urllib.error.HTTPError as e:
-
-                  texto = e.read().decode(
-                      "utf-8",
-                      errors="replace"
-                  )
-
-                  print("HTTP:", e.code)
-                  print("Resposta:", texto[:2000])
-
-              print()
-
-          if resposta is None:
-              raise SystemExit(
-                  "Nenhuma das formas de Authorization retornou HTTP 200."
-              )
-
-          print()
-          print("======================================")
-          print("3. ESTRUTURA RECEBIDA")
-          print("======================================")
-
-          if isinstance(resposta, dict):
-
-              print(
-                  "Campos principais:",
-                  list(resposta.keys())
-              )
-
-              items = resposta.get("items")
-
-          else:
-              items = resposta
-
-          print("Tipo de items:", type(items).__name__)
-
-          if isinstance(items, list):
-              print("Quantidade de registros:", len(items))
-
-          elif isinstance(items, dict):
-              print(
-                  "Campos dentro de items:",
-                  list(items.keys())
-              )
-
-          print()
-          print("======================================")
-          print("4. PRIMEIROS DADOS")
-          print("======================================")
-
-          print(
-              json.dumps(
-                  resposta,
-                  indent=2,
-                  ensure_ascii=False
-              )[:12000]
-          )
-
-          print()
-          print("======================================")
-          print("CONSULTA FINALIZADA")
-          print("======================================")
-          PY

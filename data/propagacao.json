@@ -1,13 +1,13 @@
 {
-  "gerado_em_utc": "2026-09-24T16:29:07.079955+00:00",
+  "gerado_em_utc": "2026-09-24T16:44:51.348106+00:00",
   "metodo": "Correlação de Pearson entre variações horárias acumuladas de 24 horas, testando defasagens em passos de 6 horas.",
   "status": "experimental",
   "uso": "Diagnóstico histórico exploratório. Não representa previsão hidrológica nem confirma repiquete.",
   "cobertura_historica": {
-    "inicio_manaus": "2026-08-26 23:00:00",
+    "inicio_manaus": "2025-09-24 00:00:00",
     "fim_manaus": "2026-09-24 12:00:00",
-    "horas": 685.0,
-    "dias": 28.5
+    "horas": 8772.0,
+    "dias": 365.5
   },
   "pares": [
     {
@@ -16,11 +16,11 @@
       "destino": "14480002",
       "nome_destino": "Barcelos",
       "resultado": "exploratorio",
-      "melhor_defasagem_h": 138,
-      "melhor_defasagem_dias": 5.75,
-      "correlacao": 0.856,
+      "melhor_defasagem_h": 114,
+      "melhor_defasagem_dias": 4.75,
+      "correlacao": 0.774,
       "forca_correlacao": "alta",
-      "amostras": 524,
+      "amostras": 6481,
       "passo_testado_h": 6,
       "defasagem_maxima_testada_h": 168
     },
@@ -32,9 +32,9 @@
       "resultado": "exploratorio",
       "melhor_defasagem_h": 186,
       "melhor_defasagem_dias": 7.75,
-      "correlacao": 0.909,
+      "correlacao": 0.705,
       "forca_correlacao": "alta",
-      "amostras": 472,
+      "amostras": 2743,
       "passo_testado_h": 6,
       "defasagem_maxima_testada_h": 240
     },
@@ -44,11 +44,11 @@
       "destino": "14480002",
       "nome_destino": "Barcelos",
       "resultado": "exploratorio",
-      "melhor_defasagem_h": 282,
-      "melhor_defasagem_dias": 11.75,
-      "correlacao": 0.567,
-      "forca_correlacao": "moderada",
-      "amostras": 380,
+      "melhor_defasagem_h": 216,
+      "melhor_defasagem_dias": 9.0,
+      "correlacao": 0.43,
+      "forca_correlacao": "baixa",
+      "amostras": 6374,
       "passo_testado_h": 6,
       "defasagem_maxima_testada_h": 336
     },
@@ -58,11 +58,11 @@
       "destino": "14480002",
       "nome_destino": "Barcelos",
       "resultado": "exploratorio",
-      "melhor_defasagem_h": 210,
-      "melhor_defasagem_dias": 8.75,
-      "correlacao": 0.937,
-      "forca_correlacao": "alta",
-      "amostras": 452,
+      "melhor_defasagem_h": 198,
+      "melhor_defasagem_dias": 8.25,
+      "correlacao": 0.64,
+      "forca_correlacao": "moderada",
+      "amostras": 6386,
       "passo_testado_h": 6,
       "defasagem_maxima_testada_h": 480
     }

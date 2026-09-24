@@ -1,6 +1,7 @@
 const LATEST_URL = "data/latest.json";
 const SERIES_URL = "data/series_30d.json";
 const STATIONS_URL = "data/estacoes.json";
+const ALERT_URL = "data/alerta.json";
 
 let riverChart = null;
 
@@ -36,9 +37,10 @@ function formatVariation(value) {
 
   const number = Number(value);
 
-  const formatted = Number.isInteger(number)
-    ? Math.abs(number).toFixed(0)
-    : Math.abs(number).toFixed(1);
+  const formatted =
+    Number.isInteger(number)
+      ? Math.abs(number).toFixed(0)
+      : Math.abs(number).toFixed(1);
 
   if (number > 0) {
     return `+${formatted} cm`;
@@ -49,6 +51,21 @@ function formatVariation(value) {
   }
 
   return "0 cm";
+}
+
+
+function formatNumber(value, decimals = 2) {
+  if (
+    value === null ||
+    value === undefined ||
+    Number.isNaN(Number(value))
+  ) {
+    return "—";
+  }
+
+  return Number(value)
+    .toFixed(decimals)
+    .replace(".", ",");
 }
 
 
@@ -207,7 +224,9 @@ function getCurrentAgeMinutes() {
   }
 
   const baseAge =
-    Number(latestData.idade_dado_min);
+    Number(
+      latestData.idade_dado_min
+    );
 
   if (!Number.isFinite(baseAge)) {
     return null;
@@ -219,11 +238,16 @@ function getCurrentAgeMinutes() {
 
   const elapsedMinutes =
     Math.floor(
-      (Date.now() - latestLoadedAt) /
-      60000
+      (
+        Date.now() -
+        latestLoadedAt
+      ) / 60000
     );
 
-  return baseAge + elapsedMinutes;
+  return (
+    baseAge +
+    elapsedMinutes
+  );
 }
 
 
@@ -235,21 +259,30 @@ function ageText(minutes) {
     return "Horário indisponível";
   }
 
-  const value = Number(minutes);
+  const value =
+    Number(minutes);
 
   if (value < 60) {
-    return `Atualizado há ${value} min`;
+    return (
+      `Atualizado há ${value} min`
+    );
   }
 
   const hours =
-    Math.floor(value / 60);
+    Math.floor(
+      value / 60
+    );
 
   const remainingMinutes =
     value % 60;
 
   if (hours < 24) {
-    if (remainingMinutes === 0) {
-      return `Atualizado há ${hours} h`;
+    if (
+      remainingMinutes === 0
+    ) {
+      return (
+        `Atualizado há ${hours} h`
+      );
     }
 
     return (
@@ -259,9 +292,13 @@ function ageText(minutes) {
   }
 
   const days =
-    Math.floor(hours / 24);
+    Math.floor(
+      hours / 24
+    );
 
-  return `Atualizado há ${days} dia(s)`;
+  return (
+    `Atualizado há ${days} dia(s)`
+  );
 }
 
 
@@ -302,19 +339,25 @@ function updateLiveStatus() {
   );
 
   if (stale) {
-    dot.classList.add("warning");
+    dot.classList.add(
+      "warning"
+    );
 
     text.textContent =
       "Dado desatualizado";
   } else {
-    dot.classList.add("ok");
+    dot.classList.add(
+      "ok"
+    );
 
     text.textContent =
       "Dados atualizados";
   }
 
   time.textContent =
-    ageText(currentAge);
+    ageText(
+      currentAge
+    );
 }
 
 
@@ -350,11 +393,15 @@ function updateTrend(data) {
     info.label;
 
   if (info.css === "up") {
-    icon.classList.add("up");
+    icon.classList.add(
+      "up"
+    );
   }
 
   if (info.css === "down") {
-    icon.classList.add("down");
+    icon.classList.add(
+      "down"
+    );
   }
 }
 
@@ -446,12 +493,350 @@ function updateDashboard(data) {
   document.getElementById(
     "records-count"
   ).textContent =
-    data.registros_30d ?? "—";
+    data.registros_30d ??
+    "—";
 
 
-  updateTrend(data);
+  updateTrend(
+    data
+  );
 
   updateLiveStatus();
+}
+
+
+/* =========================
+   ALERTA ANTECIPADO
+========================= */
+
+function renderAlert(data) {
+  const card =
+    document.getElementById(
+      "alert-card"
+    );
+
+  const badge =
+    document.getElementById(
+      "alert-badge"
+    );
+
+  const icon =
+    document.getElementById(
+      "alert-icon"
+    );
+
+  const title =
+    document.getElementById(
+      "alert-title"
+    );
+
+  const message =
+    document.getElementById(
+      "alert-message"
+    );
+
+  const reasons =
+    document.getElementById(
+      "alert-reasons"
+    );
+
+  const eventStatus =
+    document.getElementById(
+      "alert-event-status"
+    );
+
+  const eventDetail =
+    document.getElementById(
+      "alert-event-detail"
+    );
+
+  const windowValue =
+    document.getElementById(
+      "alert-window"
+    );
+
+  const windowDetail =
+    document.getElementById(
+      "alert-window-detail"
+    );
+
+  const historyValue =
+    document.getElementById(
+      "alert-history"
+    );
+
+  const historyDetail =
+    document.getElementById(
+      "alert-history-detail"
+    );
+
+
+  const level =
+    Number(
+      data.nivel ?? 0
+    );
+
+
+  card.classList.remove(
+    "loading",
+    "level-0",
+    "level-1",
+    "level-2"
+  );
+
+  card.classList.add(
+    `level-${level}`
+  );
+
+
+  badge.textContent =
+    data.rotulo ||
+    "SEM INFORMAÇÃO";
+
+
+  title.textContent =
+    data.titulo ||
+    "Situação indisponível";
+
+
+  message.textContent =
+    data.mensagem ||
+    "Não foi possível interpretar o alerta atual.";
+
+
+  if (level === 0) {
+    icon.textContent =
+      "✓";
+  }
+
+  else if (level === 1) {
+    icon.textContent =
+      "!";
+  }
+
+  else if (level === 2) {
+    icon.textContent =
+      "↑";
+  }
+
+  else {
+    icon.textContent =
+      "•";
+  }
+
+
+  const motivos =
+    data.motivos || [];
+
+
+  if (motivos.length) {
+    reasons.innerHTML =
+      motivos.map(
+        motivo => `
+          <div class="alert-reason">
+            ${motivo}
+          </div>
+        `
+      ).join("");
+  } else {
+    reasons.innerHTML = "";
+  }
+
+
+  const evento =
+    data.evento_serrinha || {};
+
+
+  if (evento.confirmado) {
+    eventStatus.textContent =
+      "CONFIRMADO";
+
+    eventDetail.textContent =
+      evento.inicio_manaus
+        ? (
+            "Início detectado: " +
+            formatDateTime(
+              evento.inicio_manaus
+            )
+          )
+        : (
+            "Evento ativo"
+          );
+  } else {
+    eventStatus.textContent =
+      "NÃO CONFIRMADO";
+
+    eventDetail.textContent =
+      "Aguardando alta ≥ +3 cm/24 h sustentada";
+  }
+
+
+  const janela =
+    data.janela_historica || {};
+
+
+  if (janela.aplicavel) {
+    const inicio =
+      formatNumber(
+        janela.inicio_dias,
+        2
+      );
+
+    const fim =
+      formatNumber(
+        janela.fim_dias,
+        2
+      );
+
+    const mediana =
+      formatNumber(
+        janela.mediana_dias,
+        2
+      );
+
+
+    windowValue.textContent =
+      `${inicio}–${fim} dias`;
+
+
+    if (
+      janela.inicio_janela_manaus &&
+      janela.fim_janela_manaus
+    ) {
+      windowDetail.textContent =
+        (
+          `Mediana histórica: ${mediana} dias. ` +
+          `Janela: ${formatDateTime(
+            janela.inicio_janela_manaus
+          )} até ${formatDateTime(
+            janela.fim_janela_manaus
+          )}.`
+        );
+    } else {
+      windowDetail.textContent =
+        (
+          `Mediana histórica: ` +
+          `${mediana} dias`
+        );
+    }
+  } else {
+    windowValue.textContent =
+      "NÃO APLICÁVEL";
+
+    windowDetail.textContent =
+      (
+        "Só é calculada após um evento " +
+        "confirmado em Serrinha"
+      );
+  }
+
+
+  const historico =
+    data.historico_serrinha_barcelos ||
+    {};
+
+
+  if (historico.disponivel) {
+    const total =
+      historico.eventos_serrinha ??
+      0;
+
+    const correspondentes =
+      historico.eventos_correspondentes ??
+      0;
+
+    const mediana =
+      formatNumber(
+        historico.mediana_dias,
+        2
+      );
+
+    const q25 =
+      formatNumber(
+        historico.q25_dias,
+        2
+      );
+
+    const q75 =
+      formatNumber(
+        historico.q75_dias,
+        2
+      );
+
+
+    historyValue.textContent =
+      `${correspondentes} de ${total} eventos`;
+
+
+    historyDetail.textContent =
+      (
+        `Mediana ${mediana} dias • ` +
+        `faixa central ${q25}–${q75} dias`
+      );
+  } else {
+    historyValue.textContent =
+      "INDISPONÍVEL";
+
+    historyDetail.textContent =
+      "Estatística histórica não encontrada";
+  }
+}
+
+
+/* =========================
+   ALERTA INDISPONÍVEL
+========================= */
+
+function renderAlertUnavailable() {
+  const card =
+    document.getElementById(
+      "alert-card"
+    );
+
+  const badge =
+    document.getElementById(
+      "alert-badge"
+    );
+
+  const icon =
+    document.getElementById(
+      "alert-icon"
+    );
+
+  const title =
+    document.getElementById(
+      "alert-title"
+    );
+
+  const message =
+    document.getElementById(
+      "alert-message"
+    );
+
+  card.classList.remove(
+    "level-0",
+    "level-1",
+    "level-2"
+  );
+
+  card.classList.add(
+    "loading"
+  );
+
+  badge.textContent =
+    "INDISPONÍVEL";
+
+  icon.textContent =
+    "?";
+
+  title.textContent =
+    "Alerta temporariamente indisponível";
+
+  message.textContent =
+    (
+      "Os dados hidrológicos continuam sendo exibidos, " +
+      "mas o motor de alerta não pôde ser carregado."
+    );
 }
 
 
@@ -503,6 +888,7 @@ function renderStations(data) {
     return;
   }
 
+
   const cards =
     stations.map(
       station => {
@@ -512,14 +898,18 @@ function renderStations(data) {
             station.tendencia
           );
 
+
         const barcelosClass =
-          station.estacao === "14480002"
+          station.estacao ===
+          "14480002"
             ? "barcelos"
             : "";
+
 
         const measurement =
           station.data_medicao_manaus ||
           station.data_medicao;
+
 
         return `
           <article
@@ -540,7 +930,9 @@ function renderStations(data) {
 
 
             <div class="upstream-level">
-              ${formatLevel(station.nivel_m)}
+              ${formatLevel(
+                station.nivel_m
+              )}
               <span>m</span>
             </div>
 
@@ -551,6 +943,7 @@ function renderStations(data) {
                 ${trend.css}
               "
             >
+
               <span>
                 ${trend.icon}
               </span>
@@ -558,6 +951,7 @@ function renderStations(data) {
               <span>
                 ${trend.label}
               </span>
+
             </div>
 
 
@@ -598,6 +992,7 @@ function renderStations(data) {
       }
     )
     .join("");
+
 
   container.innerHTML =
     cards;
@@ -673,7 +1068,10 @@ function updatePropagation(data) {
   ) {
 
     title.textContent =
-      "Mudança de comportamento próxima de Barcelos";
+      (
+        "Mudança de comportamento " +
+        "próxima de Barcelos"
+      );
 
 
     let message =
@@ -698,17 +1096,23 @@ function updatePropagation(data) {
         curicuriari.variacao_72h_cm
       ) > 0
     ) {
+
       message +=
-        ` Curicuriari também acumula ` +
-        `${formatVariation(
-          curicuriari.variacao_72h_cm
-        )} em 72 h.`;
+        (
+          ` Curicuriari também acumula ` +
+          `${formatVariation(
+            curicuriari.variacao_72h_cm
+          )} em 72 h.`
+        );
     }
 
 
     message +=
-      " O painel registra essa diferença para acompanhamento. " +
-      "Ainda não estima data de chegada nem confirma repiquete.";
+      (
+        " O painel registra essa diferença " +
+        "para acompanhamento. Ainda não " +
+        "confirma repiquete."
+      );
 
 
     text.textContent =
@@ -737,16 +1141,24 @@ function updatePropagation(data) {
   ) {
 
     title.textContent =
-      "Alta observada em Serrinha e Barcelos";
+      (
+        "Alta observada em " +
+        "Serrinha e Barcelos"
+      );
+
 
     text.textContent =
-      `Serrinha registra ` +
-      `${formatVariation(
-        serrinha.variacao_24h_cm
-      )} em 24 h e Barcelos ` +
-      `${formatVariation(
-        barcelos.variacao_24h_cm
-      )}. O movimento já aparece nas duas estações.`;
+      (
+        `Serrinha registra ` +
+        `${formatVariation(
+          serrinha.variacao_24h_cm
+        )} em 24 h e Barcelos ` +
+        `${formatVariation(
+          barcelos.variacao_24h_cm
+        )}. O movimento já aparece ` +
+        `nas duas estações.`
+      );
+
 
     icon.textContent =
       "↑";
@@ -786,16 +1198,23 @@ function updatePropagation(data) {
   ) {
 
     title.textContent =
-      "Alta ainda concentrada a montante";
+      (
+        "Alta ainda concentrada " +
+        "a montante"
+      );
+
 
     text.textContent =
-      `${rising72h.length} das 4 estações ` +
-      `a montante acumulam alta nas últimas 72 h, ` +
-      `enquanto Barcelos registra ` +
-      `${formatVariation(
-        barcelos.variacao_72h_cm
-      )} no mesmo período. ` +
-      `O comportamento será acompanhado nas próximas atualizações.`;
+      (
+        `${rising72h.length} das 4 estações ` +
+        `a montante acumulam alta nas últimas ` +
+        `72 h, enquanto Barcelos registra ` +
+        `${formatVariation(
+          barcelos.variacao_72h_cm
+        )} no mesmo período. O comportamento ` +
+        `será acompanhado nas próximas atualizações.`
+      );
+
 
     icon.textContent =
       "↑";
@@ -813,11 +1232,19 @@ function updatePropagation(data) {
   ) {
 
     title.textContent =
-      "Sem alta consistente a montante";
+      (
+        "Sem alta consistente " +
+        "a montante"
+      );
+
 
     text.textContent =
-      "As quatro estações a montante não apresentam " +
-      "alta acumulada nas últimas 72 horas.";
+      (
+        "As quatro estações a montante " +
+        "não apresentam alta acumulada " +
+        "nas últimas 72 horas."
+      );
+
 
     icon.textContent =
       "↓";
@@ -829,10 +1256,14 @@ function updatePropagation(data) {
   title.textContent =
     "Comportamento misto a montante";
 
+
   text.textContent =
-    "As estações apresentam movimentos diferentes. " +
-    "O sistema continuará comparando as variações " +
-    "de 6 h, 24 h, 72 h e 7 dias.";
+    (
+      "As estações apresentam movimentos diferentes. " +
+      "O sistema continuará comparando as variações " +
+      "de 6 h, 24 h, 72 h e 7 dias."
+    );
+
 
   icon.textContent =
     "→";
@@ -847,46 +1278,62 @@ function downsampleSeries(
   series,
   maxPoints = 420
 ) {
-  if (series.length <= maxPoints) {
+  if (
+    series.length <=
+    maxPoints
+  ) {
     return series;
   }
 
+
   const step =
-    series.length / maxPoints;
+    series.length /
+    maxPoints;
+
 
   const reduced = [];
+
 
   for (
     let i = 0;
     i < maxPoints;
     i++
   ) {
+
     const index =
       Math.floor(
         i * step
       );
+
 
     reduced.push(
       series[index]
     );
   }
 
+
   const last =
     series[
       series.length - 1
     ];
+
 
   const reducedLast =
     reduced[
       reduced.length - 1
     ];
 
+
   if (
     reducedLast.data_medicao !==
     last.data_medicao
   ) {
-    reduced.push(last);
+
+    reduced.push(
+      last
+    );
   }
+
 
   return reduced;
 }
@@ -901,6 +1348,7 @@ function createChart(series) {
     document.getElementById(
       "river-chart"
     );
+
 
   if (!canvas) {
     return;
@@ -992,20 +1440,22 @@ function createChart(series) {
 
             tooltip: {
               callbacks: {
-                label: function(
-                  context
-                ) {
-                  return (
-                    "Nível: " +
-                    context.parsed.y
-                      .toFixed(2)
-                      .replace(
-                        ".",
-                        ","
-                      ) +
-                    " m"
-                  );
-                }
+                label:
+                  function(
+                    context
+                  ) {
+
+                    return (
+                      "Nível: " +
+                      context.parsed.y
+                        .toFixed(2)
+                        .replace(
+                          ".",
+                          ","
+                        ) +
+                      " m"
+                    );
+                  }
               }
             }
           },
@@ -1045,19 +1495,21 @@ function createChart(series) {
                 color:
                   "#8fa7bc",
 
-                callback: function(
-                  value
-                ) {
-                  return (
-                    Number(value)
-                      .toFixed(2)
-                      .replace(
-                        ".",
-                        ","
-                      ) +
-                    " m"
-                  );
-                }
+                callback:
+                  function(
+                    value
+                  ) {
+
+                    return (
+                      Number(value)
+                        .toFixed(2)
+                        .replace(
+                          ".",
+                          ","
+                        ) +
+                      " m"
+                    );
+                  }
               },
 
               border: {
@@ -1072,13 +1524,14 @@ function createChart(series) {
 
 
 /* =========================
-   CARREGAMENTO
+   CARREGAMENTO JSON
 ========================= */
 
 async function fetchJson(
   url,
   cacheKey
 ) {
+
   const response =
     await fetch(
       `${url}?v=${cacheKey}`,
@@ -1087,18 +1540,61 @@ async function fetchJson(
       }
     );
 
+
   if (!response.ok) {
     throw new Error(
       `Erro ao carregar ${url}`
     );
   }
 
+
   return response.json();
 }
 
 
+/* =========================
+   CARREGAR ALERTA
+========================= */
+
+async function loadAlert(
+  cacheKey
+) {
+
+  try {
+
+    const alertData =
+      await fetchJson(
+        ALERT_URL,
+        cacheKey
+      );
+
+
+    renderAlert(
+      alertData
+    );
+
+  }
+
+  catch (error) {
+
+    console.error(
+      "Erro no alerta:",
+      error
+    );
+
+
+    renderAlertUnavailable();
+  }
+}
+
+
+/* =========================
+   CARREGAMENTO PRINCIPAL
+========================= */
+
 async function loadData() {
   try {
+
     const cacheKey =
       Date.now();
 
@@ -1107,22 +1603,23 @@ async function loadData() {
       latest,
       series,
       stations
-    ] = await Promise.all([
-      fetchJson(
-        LATEST_URL,
-        cacheKey
-      ),
+    ] =
+      await Promise.all([
+        fetchJson(
+          LATEST_URL,
+          cacheKey
+        ),
 
-      fetchJson(
-        SERIES_URL,
-        cacheKey
-      ),
+        fetchJson(
+          SERIES_URL,
+          cacheKey
+        ),
 
-      fetchJson(
-        STATIONS_URL,
-        cacheKey
-      )
-    ]);
+        fetchJson(
+          STATIONS_URL,
+          cacheKey
+        )
+      ]);
 
 
     latestData =
@@ -1136,20 +1633,30 @@ async function loadData() {
       latest
     );
 
+
     renderStations(
       stations
     );
+
 
     updatePropagation(
       stations
     );
 
+
     createChart(
       series
     );
+
+
+    await loadAlert(
+      cacheKey
+    );
+
   }
 
   catch (error) {
+
     console.error(
       error
     );
@@ -1174,12 +1681,15 @@ async function loadData() {
     statusText.textContent =
       "Erro ao carregar dados";
 
+
     statusTime.textContent =
       "Tente novamente em instantes";
+
 
     dot.classList.remove(
       "ok"
     );
+
 
     dot.classList.add(
       "warning"
@@ -1191,7 +1701,9 @@ async function loadData() {
         "upstream-grid"
       );
 
+
     if (upstream) {
+
       upstream.innerHTML = `
         <div class="upstream-loading">
           Não foi possível carregar
@@ -1199,6 +1711,9 @@ async function loadData() {
         </div>
       `;
     }
+
+
+    renderAlertUnavailable();
   }
 }
 
@@ -1226,7 +1741,7 @@ document.addEventListener(
 
 
     /*
-      Atualiza apenas o texto
+      Atualiza somente o texto
       "Atualizado há..."
       a cada minuto.
     */

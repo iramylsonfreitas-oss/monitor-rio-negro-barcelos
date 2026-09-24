@@ -24,7 +24,6 @@ jobs:
 
           if [ "$HTTP_CODE" != "200" ]; then
             echo "ERRO: a ANA não retornou HTTP 200."
-            cat resposta.json
             exit 1
           fi
 
@@ -34,14 +33,16 @@ jobs:
           with open("resposta.json", "r", encoding="utf-8") as f:
               data = json.load(f)
 
-          token = data.get("tokenautenticacao")
+          items = data.get("items") or {}
+          token = items.get("tokenautenticacao")
 
           if not token:
-              print("ERRO: a ANA respondeu, mas nenhum tokenautenticacao foi encontrado.")
-              print("Campos recebidos:", list(data.keys()))
+              print("ERRO: resposta recebida, mas tokenautenticacao não foi localizado.")
+              print("Campos principais:", list(data.keys()))
+              print("Campos de items:", list(items.keys()) if isinstance(items, dict) else "formato inesperado")
               raise SystemExit(1)
 
           print("SUCESSO: autenticação realizada.")
           print("Token recebido corretamente.")
-          print("O valor do token não será exibido por segurança.")
+          print("O token não será exibido por segurança.")
           PY

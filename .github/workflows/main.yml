@@ -1,0 +1,47 @@
+name: Teste ANA
+
+on:
+  workflow_dispatch:
+
+jobs:
+  testar-ana:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Testar autenticação na ANA
+        env:
+          ANA_IDENTIFIER: ${{ secrets.ANA_IDENTIFIER }}
+          ANA_PASSWORD: ${{ secrets.ANA_PASSWORD }}
+        run: |
+          echo "Iniciando teste de autenticação na ANA..."
+
+          HTTP_CODE=$(curl -s -o resposta.json -w "%{http_code}" \
+            -H "Identificador: $ANA_IDENTIFIER" \
+            -H "Senha: $ANA_PASSWORD" \
+            "https://www.ana.gov.br/hidrowebservice/EstacoesTelemetricas/OAUth/v1")
+
+          echo "HTTP recebido: $HTTP_CODE"
+
+          if [ "$HTTP_CODE" != "200" ]; then
+            echo "ERRO: a ANA não retornou HTTP 200."
+            cat resposta.json
+            exit 1
+          fi
+
+          python - <<'PY'
+          import json
+
+          with open("resposta.json", "r", encoding="utf-8") as f:
+              data = json.load(f)
+
+          token = data.get("tokenautenticacao")
+
+          if not token:
+              print("ERRO: a ANA respondeu, mas nenhum tokenautenticacao foi encontrado.")
+              print("Campos recebidos:", list(data.keys()))
+              raise SystemExit(1)
+
+          print("SUCESSO: autenticação realizada.")
+          print("Token recebido corretamente.")
+          print("O valor do token não será exibido por segurança.")
+          PY

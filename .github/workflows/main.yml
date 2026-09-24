@@ -1,14 +1,14 @@
-name: Ler API Oficial ANA
+name: Localizar Telemetria ANA
 
 on:
   workflow_dispatch:
 
 jobs:
-  documentacao:
+  localizar:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Descobrir endpoint e parametros oficiais
+      - name: Procurar rota telemetrica oficial
         run: |
           python - <<'PY'
           import json
@@ -17,11 +17,22 @@ jobs:
 
           HOST = "https://www.ana.gov.br"
 
-          CONFIG = HOST + "/hidrowebservice/api-docs/swagger-config"
+          documentos = [
+              "/hidrowebservice/api-docs",
+              "/hidrowebservice/api-docs/Versão - v1.0.3984.2",
+              "/hidrowebservice/api-docs/Versão - v2.0.6581.0"
+          ]
+
+          def montar_url(caminho):
+              return HOST + urllib.parse.quote(
+                  caminho,
+                  safe="/:-._"
+              )
 
           def baixar(url):
               print()
-              print("CONSULTANDO:", url)
+              print("CONSULTANDO:")
+              print(url)
 
               req = urllib.request.Request(
                   url,
@@ -35,95 +46,40 @@ jobs:
                   with urllib.request.urlopen(req, timeout=30) as r:
                       texto = r.read().decode("utf-8", errors="replace")
                       print("HTTP:", r.status)
-                      return texto
+                      return json.loads(texto)
               except Exception as e:
                   print("ERRO:", e)
                   return None
 
-          print("==========================================")
-          print("1. SWAGGER CONFIG")
-          print("==========================================")
+          encontrou = False
 
-          texto = baixar(CONFIG)
+          for caminho_doc in documentos:
 
-          if not texto:
-              raise SystemExit("Não foi possível obter swagger-config.")
+              spec = baixar(montar_url(caminho_doc))
 
-          config = json.loads(texto)
-
-          print()
-          print(json.dumps(config, indent=2, ensure_ascii=False))
-
-          candidatos = []
-
-          if config.get("url"):
-              candidatos.append(config["url"])
-
-          for item in config.get("urls", []):
-              if isinstance(item, dict) and item.get("url"):
-                  candidatos.append(item["url"])
-
-          # fallback esperado pelo Springdoc
-          candidatos.append("/hidrowebservice/api-docs")
-
-          print()
-          print("==========================================")
-          print("2. DOCUMENTOS OPENAPI CANDIDATOS")
-          print("==========================================")
-
-          vistos = set()
-          encontrou_spec = False
-
-          for caminho in candidatos:
-
-              url = urllib.parse.urljoin(HOST, caminho)
-
-              if url in vistos:
+              if not spec:
                   continue
 
-              vistos.add(url)
-
-              spec_texto = baixar(url)
-
-              if not spec_texto:
-                  continue
-
-              try:
-                  spec = json.loads(spec_texto)
-              except Exception:
-                  print("Resposta não é JSON.")
-                  continue
-
-              if "paths" not in spec:
-                  print("JSON recebido, mas não parece ser OpenAPI.")
-                  continue
-
-              encontrou_spec = True
-
-              print()
-              print("OPENAPI:", spec.get("openapi") or spec.get("swagger"))
-              print("ROTAS:", len(spec.get("paths", {})))
-
-              print()
-              print("==========================================")
-              print("3. ROTAS RELACIONADAS A TELEMETRIA")
-              print("==========================================")
-
-              encontrou_rota = False
+              print("OpenAPI:", spec.get("openapi") or spec.get("swagger"))
+              print("Quantidade de rotas:", len(spec.get("paths", {})))
 
               for path, metodos in spec.get("paths", {}).items():
 
                   p = path.lower()
 
                   if (
-                      "telemet" in p
-                      or "hidroinfoana" in p
-                      or "serie" in p
+                      "hidroinfoanaserietelemetricaadotada" in p
+                      or "telemetricaadotada" in p
+                      or "serietelemetrica" in p
                   ):
-                      encontrou_rota = True
+
+                      encontrou = True
 
                       print()
-                      print("------------------------------------------")
+                      print("============================================")
+                      print("ROTA ENCONTRADA")
+                      print("============================================")
+                      print("DOCUMENTO:", caminho_doc)
                       print("PATH:", path)
 
                       for metodo, info in metodos.items():
@@ -133,56 +89,57 @@ jobs:
                           ]:
                               continue
 
+                          print()
                           print("MÉTODO:", metodo.upper())
                           print("SUMMARY:", info.get("summary"))
-                          print("DESCRIPTION:", info.get("description"))
 
+                          print()
                           print("PARÂMETROS:")
 
                           parametros = info.get("parameters", [])
 
                           if not parametros:
-                              print("  Nenhum parâmetro listado.")
+                              print("Nenhum parâmetro.")
 
-                          for parametro in parametros:
+                          for p in parametros:
 
-                              schema = parametro.get("schema", {})
+                              schema = p.get("schema", {})
 
                               print()
-                              print("  NOME:", parametro.get("name"))
-                              print("  LOCAL:", parametro.get("in"))
-                              print("  OBRIGATÓRIO:", parametro.get("required"))
-                              print("  TIPO:", schema.get("type"))
-                              print("  FORMATO:", schema.get("format"))
-                              print("  ENUM:", schema.get("enum"))
-                              print("  EXEMPLO:", parametro.get("example") or schema.get("example"))
-                              print("  DESCRIÇÃO:", parametro.get("description"))
+                              print("NOME EXATO:", p.get("name"))
+                              print("LOCAL:", p.get("in"))
+                              print("OBRIGATÓRIO:", p.get("required"))
+                              print("TIPO:", schema.get("type"))
+                              print("FORMATO:", schema.get("format"))
+                              print("ENUM:", schema.get("enum"))
+                              print("EXEMPLO:", p.get("example") or schema.get("example"))
+                              print("DESCRIÇÃO:", p.get("description"))
 
-                          body = info.get("requestBody")
-
-                          if body:
+                          if info.get("requestBody"):
                               print()
                               print("REQUEST BODY:")
                               print(json.dumps(
-                                  body,
+                                  info["requestBody"],
                                   indent=2,
                                   ensure_ascii=False
                               ))
 
                           print()
                           print("SEGURANÇA:")
-                          print(info.get("security"))
-
-              if not encontrou_rota:
-                  print("Nenhuma rota relacionada à telemetria foi encontrada neste documento.")
+                          print(
+                              json.dumps(
+                                  info.get("security"),
+                                  ensure_ascii=False
+                              )
+                          )
 
           print()
-          print("==========================================")
+          print("============================================")
 
-          if not encontrou_spec:
-              print("ERRO: nenhum documento OpenAPI válido foi localizado.")
-              raise SystemExit(1)
+          if encontrou:
+              print("SUCESSO: rota telemétrica localizada.")
+          else:
+              print("ATENÇÃO: rota telemétrica não encontrada nos três documentos.")
 
-          print("DIAGNÓSTICO CONCLUÍDO.")
-          print("==========================================")
+          print("============================================")
           PY

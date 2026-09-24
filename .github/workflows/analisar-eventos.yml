@@ -1,0 +1,309 @@
+name: Analisar Eventos de Propagacao
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: atualizar-rio-negro
+  cancel-in-progress: false
+
+jobs:
+  analisar:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Baixar projeto
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+
+      - name: Executar analise de eventos
+        run: |
+          python collector/eventos.py
+
+
+      - name: Conferir resultado
+        run: |
+          echo "======================================"
+          echo "EVENTOS DE PROPAGAÇÃO"
+          echo "======================================"
+
+          if [ ! -f data/eventos_propagacao.json ]; then
+            echo "ERRO:"
+            echo "data/eventos_propagacao.json não foi criado."
+            exit 1
+          fi
+
+          python - <<'PY'
+          import json
+
+          with open(
+              "data/eventos_propagacao.json",
+              encoding="utf-8"
+          ) as f:
+              data = json.load(f)
+
+
+          print(
+              "Status:",
+              data.get("status")
+          )
+
+          print()
+
+          parametros = (
+              data.get("parametros")
+              or {}
+          )
+
+          print(
+              "Alta mínima em 24 h:",
+              parametros.get(
+                  "alta_minima_24h_cm"
+              ),
+              "cm"
+          )
+
+          print(
+              "Amostragem:",
+              parametros.get(
+                  "intervalo_amostragem_h"
+              ),
+              "h"
+          )
+
+          print(
+              "Confirmações:",
+              parametros.get(
+                  "confirmacoes"
+              )
+          )
+
+          print(
+              "Separação mínima entre eventos:",
+              parametros.get(
+                  "separacao_eventos_h"
+              ),
+              "h"
+          )
+
+
+          print()
+          print(
+              "======================================"
+          )
+
+          print(
+              "RESUMO"
+          )
+
+          print(
+              "======================================"
+          )
+
+
+          for pair in data.get(
+              "pares",
+              []
+          ):
+
+              print()
+
+              print(
+                  pair.get(
+                      "nome_origem"
+                  ),
+                  "→ Barcelos"
+              )
+
+              print(
+                  "Eventos em montante:",
+                  pair.get(
+                      "eventos_montante"
+                  )
+              )
+
+              print(
+                  "Eventos em Barcelos:",
+                  pair.get(
+                      "eventos_barcelos"
+                  )
+              )
+
+              print(
+                  "Correspondentes:",
+                  pair.get(
+                      "eventos_correspondentes"
+                  )
+              )
+
+              print(
+                  "Taxa de correspondência:",
+                  pair.get(
+                      "taxa_correspondencia"
+                  )
+              )
+
+              print(
+                  "Mediana:",
+                  pair.get(
+                      "mediana_h"
+                  ),
+                  "h |",
+                  pair.get(
+                      "mediana_dias"
+                  ),
+                  "dias"
+              )
+
+              print(
+                  "Faixa central:",
+                  pair.get(
+                      "q25_dias"
+                  ),
+                  "a",
+                  pair.get(
+                      "q75_dias"
+                  ),
+                  "dias"
+              )
+
+              print(
+                  "Mínimo:",
+                  pair.get(
+                      "min_dias"
+                  ),
+                  "dias"
+              )
+
+              print(
+                  "Máximo:",
+                  pair.get(
+                      "max_dias"
+                  ),
+                  "dias"
+              )
+
+
+          print()
+          print(
+              "======================================"
+          )
+
+          print(
+              "EVENTOS SERRINHA → BARCELOS"
+          )
+
+          print(
+              "======================================"
+          )
+
+
+          serrinha = next(
+              (
+                  pair
+                  for pair in data.get(
+                      "pares",
+                      []
+                  )
+                  if pair.get(
+                      "origem"
+                  ) == "14420000"
+              ),
+              None
+          )
+
+
+          if serrinha:
+
+              eventos = (
+                  serrinha.get(
+                      "eventos"
+                  )
+                  or []
+              )
+
+              for index, evento in enumerate(
+                  eventos,
+                  start=1
+              ):
+
+                  print()
+
+                  print(
+                      "Evento",
+                      index
+                  )
+
+                  print(
+                      "Serrinha:",
+                      evento.get(
+                          "inicio_montante"
+                      )
+                  )
+
+                  print(
+                      "Barcelos:",
+                      evento.get(
+                          "inicio_barcelos"
+                      )
+                  )
+
+                  print(
+                      "Defasagem:",
+                      evento.get(
+                          "defasagem_h"
+                      ),
+                      "h |",
+                      evento.get(
+                          "defasagem_dias"
+                      ),
+                      "dias"
+                  )
+
+                  print(
+                      "Variação Serrinha:",
+                      evento.get(
+                          "variacao_24h_montante_cm"
+                      ),
+                      "cm/24h"
+                  )
+
+                  print(
+                      "Variação Barcelos:",
+                      evento.get(
+                          "variacao_24h_barcelos_cm"
+                      ),
+                      "cm/24h"
+                  )
+          PY
+
+
+      - name: Salvar resultado
+        run: |
+          git config user.name "rio-negro-bot"
+          git config user.email "actions@github.com"
+
+          git add data/eventos_propagacao.json
+
+          if git diff --cached --quiet; then
+            echo "Nenhuma alteração para salvar."
+            exit 0
+          fi
+
+          git commit -m "Analisa eventos historicos de propagacao"
+
+          git pull --rebase origin main
+
+          git push origin main

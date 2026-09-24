@@ -18,33 +18,45 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
       - name: Baixar projeto
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
 
       - name: Configurar Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
-      - name: Consultar ANA e atualizar arquivos
+
+      - name: Consultar ANA e atualizar dados
         env:
           ANA_IDENTIFIER: ${{ secrets.ANA_IDENTIFIER }}
           ANA_PASSWORD: ${{ secrets.ANA_PASSWORD }}
         run: |
           python collector/ana.py
 
-      - name: Conferir dados gerados
+
+      - name: Analisar propagacao
+        run: |
+          python collector/propagacao.py
+
+
+      - name: Conferir Barcelos
         run: |
           echo "======================================"
           echo "BARCELOS - LATEST.JSON"
           echo "======================================"
+
           cat data/latest.json
 
-          echo
+
+      - name: Conferir estacoes
+        run: |
           echo "======================================"
-          echo "ESTAÇÕES"
+          echo "ESTACOES"
           echo "======================================"
 
           python - <<'PY'
@@ -60,32 +72,59 @@ jobs:
               "estacoes",
               []
           ):
+              print()
               print(
                   station["nome"],
                   "|",
-                  f'{station["nivel_m"]:.2f} m',
-                  "| 6h:",
+                  station["estacao"]
+              )
+
+              print(
+                  "Nível:",
+                  f'{station["nivel_m"]:.2f} m'
+              )
+
+              print(
+                  "6 h:",
                   station["variacao_6h_cm"],
-                  "cm",
-                  "| 24h:",
+                  "cm"
+              )
+
+              print(
+                  "24 h:",
                   station["variacao_24h_cm"],
-                  "cm",
-                  "| 72h:",
+                  "cm"
+              )
+
+              print(
+                  "72 h:",
                   station["variacao_72h_cm"],
-                  "cm",
-                  "| 7d:",
+                  "cm"
+              )
+
+              print(
+                  "7 dias:",
                   station["variacao_7d_cm"],
                   "cm"
               )
+
+              print(
+                  "Tendência:",
+                  station["tendencia"]
+              )
           PY
 
-          echo
+
+      - name: Conferir historico horario
+        run: |
           echo "======================================"
           echo "HISTÓRICO HORÁRIO"
           echo "======================================"
 
           if [ -f data/history/hourly.csv ]; then
+
             echo "Arquivo criado com sucesso."
+
             echo
             echo "Total de linhas:"
             wc -l data/history/hourly.csv
@@ -97,10 +136,111 @@ jobs:
             echo
             echo "Últimas linhas:"
             tail -n 6 data/history/hourly.csv
+
           else
-            echo "ERRO: data/history/hourly.csv não foi criado."
+
+            echo "ERRO:"
+            echo "data/history/hourly.csv não foi criado."
+
+            exit 1
+
+          fi
+
+
+      - name: Conferir analise de propagacao
+        run: |
+          echo "======================================"
+          echo "ANÁLISE DE PROPAGAÇÃO"
+          echo "======================================"
+
+          if [ ! -f data/propagacao.json ]; then
+            echo "ERRO:"
+            echo "data/propagacao.json não foi criado."
             exit 1
           fi
+
+          python - <<'PY'
+          import json
+
+          with open(
+              "data/propagacao.json",
+              encoding="utf-8"
+          ) as f:
+              data = json.load(f)
+
+          cobertura = data.get(
+              "cobertura_historica"
+          ) or {}
+
+          print(
+              "Status:",
+              data.get("status")
+          )
+
+          print(
+              "Cobertura histórica:",
+              cobertura.get("dias"),
+              "dias"
+          )
+
+          print()
+
+          for pair in data.get(
+              "pares",
+              []
+          ):
+
+              print(
+                  pair.get(
+                      "nome_origem"
+                  ),
+                  "→ Barcelos"
+              )
+
+              print(
+                  "Defasagem:",
+                  pair.get(
+                      "melhor_defasagem_h"
+                  ),
+                  "h"
+              )
+
+              print(
+                  "Defasagem em dias:",
+                  pair.get(
+                      "melhor_defasagem_dias"
+                  )
+              )
+
+              print(
+                  "Correlação:",
+                  pair.get(
+                      "correlacao"
+                  )
+              )
+
+              print(
+                  "Força:",
+                  pair.get(
+                      "forca_correlacao"
+                  )
+              )
+
+              print(
+                  "Amostras:",
+                  pair.get(
+                      "amostras"
+                  )
+              )
+
+              print()
+
+          print(
+              "Observação:",
+              data.get("uso")
+          )
+          PY
+
 
       - name: Salvar dados no repositorio
         run: |
@@ -114,7 +254,7 @@ jobs:
             exit 0
           fi
 
-          git commit -m "Atualiza dados ANA"
+          git commit -m "Atualiza dados ANA e propagacao"
 
           git pull --rebase origin main
 

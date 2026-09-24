@@ -1,12 +1,12 @@
 {
-  "gerado_em_utc": "2026-09-24T16:45:24.386476+00:00",
+  "gerado_em_utc": "2026-09-24T17:21:53.115379+00:00",
   "metodo": "Correlação de Pearson entre variações horárias acumuladas de 24 horas, testando defasagens em passos de 6 horas.",
   "status": "experimental",
   "uso": "Diagnóstico histórico exploratório. Não representa previsão hidrológica nem confirma repiquete.",
   "cobertura_historica": {
     "inicio_manaus": "2025-09-24 00:00:00",
-    "fim_manaus": "2026-09-24 12:00:00",
-    "horas": 8772.0,
+    "fim_manaus": "2026-09-24 13:00:00",
+    "horas": 8773.0,
     "dias": 365.5
   },
   "pares": [
@@ -20,7 +20,7 @@
       "melhor_defasagem_dias": 4.75,
       "correlacao": 0.774,
       "forca_correlacao": "alta",
-      "amostras": 6481,
+      "amostras": 6482,
       "passo_testado_h": 6,
       "defasagem_maxima_testada_h": 168
     },
@@ -34,7 +34,7 @@
       "melhor_defasagem_dias": 7.75,
       "correlacao": 0.705,
       "forca_correlacao": "alta",
-      "amostras": 2743,
+      "amostras": 2744,
       "passo_testado_h": 6,
       "defasagem_maxima_testada_h": 240
     },
@@ -48,7 +48,7 @@
       "melhor_defasagem_dias": 9.0,
       "correlacao": 0.43,
       "forca_correlacao": "baixa",
-      "amostras": 6374,
+      "amostras": 6375,
       "passo_testado_h": 6,
       "defasagem_maxima_testada_h": 336
     },
@@ -62,7 +62,7 @@
       "melhor_defasagem_dias": 8.25,
       "correlacao": 0.64,
       "forca_correlacao": "moderada",
-      "amostras": 6386,
+      "amostras": 6387,
       "passo_testado_h": 6,
       "defasagem_maxima_testada_h": 480
     }
@@ -99,18 +99,18 @@
       "variacao_72h_cm": 13.0,
       "variacao_7d_cm": 39.0,
       "tendencia": "estavel",
-      "data_medicao_manaus": "2026-09-24 11:45:00"
+      "data_medicao_manaus": "2026-09-24 12:45:00"
     },
     {
       "estacao": "14420000",
       "nome": "Serrinha",
       "nivel_m": 6.55,
       "variacao_6h_cm": 1.0,
-      "variacao_24h_cm": 3.0,
+      "variacao_24h_cm": 2.0,
       "variacao_72h_cm": 6.0,
-      "variacao_7d_cm": 10.0,
+      "variacao_7d_cm": 11.0,
       "tendencia": "subindo",
-      "data_medicao_manaus": "2026-09-24 11:30:00"
+      "data_medicao_manaus": "2026-09-24 12:30:00"
     },
     {
       "estacao": "14480002",
@@ -121,7 +121,7 @@
       "variacao_72h_cm": -9.0,
       "variacao_7d_cm": -33.0,
       "tendencia": "descendo",
-      "data_medicao_manaus": "2026-09-24 12:00:00"
+      "data_medicao_manaus": "2026-09-24 13:00:00"
     }
   ]
 }

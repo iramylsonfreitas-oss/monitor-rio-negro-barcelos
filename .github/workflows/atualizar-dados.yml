@@ -9,6 +9,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: atualizar-rio-negro
+  cancel-in-progress: false
+
 jobs:
   atualizar:
     runs-on: ubuntu-latest
@@ -16,41 +20,94 @@ jobs:
     steps:
       - name: Baixar projeto
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Configurar Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
-      - name: Consultar ANA
+      - name: Consultar ANA e atualizar arquivos
         env:
           ANA_IDENTIFIER: ${{ secrets.ANA_IDENTIFIER }}
           ANA_PASSWORD: ${{ secrets.ANA_PASSWORD }}
         run: |
           python collector/ana.py
 
-      - name: Mostrar resultado
+      - name: Conferir dados gerados
         run: |
-          echo "===== latest.json ====="
+          echo "======================================"
+          echo "BARCELOS - LATEST.JSON"
+          echo "======================================"
           cat data/latest.json
 
           echo
-          echo "===== quantidade de registros ====="
+          echo "======================================"
+          echo "ESTAÇÕES"
+          echo "======================================"
+
           python - <<'PY'
           import json
 
-          with open("data/series_30d.json", encoding="utf-8") as f:
-              dados = json.load(f)
+          with open(
+              "data/estacoes.json",
+              encoding="utf-8"
+          ) as f:
+              data = json.load(f)
 
-          print(len(dados), "registros")
+          for station in data.get(
+              "estacoes",
+              []
+          ):
+              print(
+                  station["nome"],
+                  "|",
+                  f'{station["nivel_m"]:.2f} m',
+                  "| 6h:",
+                  station["variacao_6h_cm"],
+                  "cm",
+                  "| 24h:",
+                  station["variacao_24h_cm"],
+                  "cm",
+                  "| 72h:",
+                  station["variacao_72h_cm"],
+                  "cm",
+                  "| 7d:",
+                  station["variacao_7d_cm"],
+                  "cm"
+              )
           PY
+
+          echo
+          echo "======================================"
+          echo "HISTÓRICO HORÁRIO"
+          echo "======================================"
+
+          if [ -f data/history/hourly.csv ]; then
+            echo "Arquivo criado com sucesso."
+            echo
+            echo "Total de linhas:"
+            wc -l data/history/hourly.csv
+
+            echo
+            echo "Primeiras linhas:"
+            head -n 6 data/history/hourly.csv
+
+            echo
+            echo "Últimas linhas:"
+            tail -n 6 data/history/hourly.csv
+          else
+            echo "ERRO: data/history/hourly.csv não foi criado."
+            exit 1
+          fi
 
       - name: Salvar dados no repositorio
         run: |
           git config user.name "rio-negro-bot"
           git config user.email "actions@github.com"
 
-          git add data/*.json
+          git add data/
 
           if git diff --cached --quiet; then
             echo "Nenhuma alteração de dados."
@@ -58,4 +115,7 @@ jobs:
           fi
 
           git commit -m "Atualiza dados ANA"
-          git push
+
+          git pull --rebase origin main
+
+          git push origin main

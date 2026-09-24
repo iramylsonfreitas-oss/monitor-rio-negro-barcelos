@@ -1,10 +1,13 @@
+import csv
 import json
 import os
+import statistics
 import time
 import urllib.error
 import urllib.parse
 import urllib.request
 
+from collections import defaultdict
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -42,6 +45,20 @@ MANAUS_TIMEZONE = ZoneInfo(
     "America/Manaus"
 )
 
+DATA_DIR = Path("data")
+
+HISTORY_DIR = (
+    DATA_DIR / "history"
+)
+
+HISTORY_FILE = (
+    HISTORY_DIR / "hourly.csv"
+)
+
+
+# ==========================================================
+# HTTP
+# ==========================================================
 
 def request_json(
     url,
@@ -77,7 +94,8 @@ def request_json(
             last_error = error
 
             if (
-                error.code not in
+                error.code
+                not in
                 (429, 502, 503, 504)
                 or attempt == attempts
             ):
@@ -108,6 +126,10 @@ def request_json(
     )
 
 
+# ==========================================================
+# DATAS E NÍVEL
+# ==========================================================
+
 def parse_time(value):
     return datetime.fromisoformat(
         value.replace(
@@ -117,7 +139,7 @@ def parse_time(value):
     )
 
 
-def ana_time_with_timezone(value):
+def ana_datetime(value):
     return parse_time(
         value
     ).replace(
@@ -125,17 +147,21 @@ def ana_time_with_timezone(value):
     )
 
 
-def to_manaus(value):
-    if not value:
-        return None
-
-    dt = ana_time_with_timezone(
+def manaus_datetime(value):
+    return ana_datetime(
         value
     ).astimezone(
         MANAUS_TIMEZONE
     )
 
-    return dt.strftime(
+
+def to_manaus(value):
+    if not value:
+        return None
+
+    return manaus_datetime(
+        value
+    ).strftime(
         "%Y-%m-%d %H:%M:%S"
     )
 
@@ -151,6 +177,10 @@ def level_cm(row):
     )
 
 
+# ==========================================================
+# MÉTRICAS DAS ESTAÇÕES
+# ==========================================================
+
 def find_reference(
     series,
     target,
@@ -159,9 +189,10 @@ def find_reference(
     anteriores = [
         row
         for row in series
-
         if parse_time(
-            row["Data_Hora_Medicao"]
+            row[
+                "Data_Hora_Medicao"
+            ]
         ) <= target
     ]
 
@@ -184,7 +215,10 @@ def find_reference(
         ]
     )
 
-    gap = target - reference_time
+    gap = (
+        target
+        - reference_time
+    )
 
     if gap > timedelta(
         hours=max_gap_hours
@@ -242,7 +276,6 @@ def station_metrics(
         row[
             "Data_Hora_Medicao"
         ]: row
-
         for row in valid
     }
 
@@ -331,7 +364,7 @@ def station_metrics(
     )
 
     measurement_tz = (
-        ana_time_with_timezone(
+        ana_datetime(
             measurement_ana
         )
     )
@@ -424,9 +457,238 @@ def station_metrics(
     return result, series
 
 
+# ==========================================================
+# HISTÓRICO HORÁRIO
+# ==========================================================
+
+HISTORY_FIELDS = [
+    "estacao",
+    "nome",
+    "hora_manaus",
+    "nivel_cm",
+    "nivel_m",
+    "nivel_min_cm",
+    "nivel_max_cm",
+    "medicoes",
+    "ultima_medicao_manaus",
+]
+
+
+def build_hourly_rows(
+    codigo,
+    nome,
+    series
+):
+    groups = defaultdict(
+        list
+    )
+
+    for row in series:
+        measurement = (
+            manaus_datetime(
+                row[
+                    "Data_Hora_Medicao"
+                ]
+            )
+        )
+
+        hour = measurement.replace(
+            minute=0,
+            second=0,
+            microsecond=0
+        )
+
+        groups[hour].append(
+            {
+                "nivel_cm":
+                    level_cm(row),
+
+                "medicao":
+                    measurement,
+            }
+        )
+
+    hourly_rows = []
+
+    for hour in sorted(groups):
+        values = groups[hour]
+
+        levels = [
+            item["nivel_cm"]
+            for item in values
+        ]
+
+        median_cm = float(
+            statistics.median(
+                levels
+            )
+        )
+
+        latest_measurement = max(
+            item["medicao"]
+            for item in values
+        )
+
+        hourly_rows.append(
+            {
+                "estacao":
+                    codigo,
+
+                "nome":
+                    nome,
+
+                "hora_manaus":
+                    hour.strftime(
+                        "%Y-%m-%d %H:00:00"
+                    ),
+
+                "nivel_cm":
+                    f"{median_cm:.1f}",
+
+                "nivel_m":
+                    f"{median_cm / 100:.3f}",
+
+                "nivel_min_cm":
+                    f"{min(levels):.1f}",
+
+                "nivel_max_cm":
+                    f"{max(levels):.1f}",
+
+                "medicoes":
+                    str(
+                        len(levels)
+                    ),
+
+                "ultima_medicao_manaus":
+                    latest_measurement.strftime(
+                        "%Y-%m-%d %H:%M:%S"
+                    ),
+            }
+        )
+
+    return hourly_rows
+
+
+def load_existing_history():
+    if not HISTORY_FILE.exists():
+        return {}
+
+    rows = {}
+
+    with HISTORY_FILE.open(
+        "r",
+        encoding="utf-8",
+        newline=""
+    ) as file:
+
+        reader = csv.DictReader(
+            file
+        )
+
+        for row in reader:
+            key = (
+                row["estacao"],
+                row["hora_manaus"]
+            )
+
+            rows[key] = row
+
+    return rows
+
+
+def save_history(
+    history
+):
+    HISTORY_DIR.mkdir(
+        parents=True,
+        exist_ok=True
+    )
+
+    ordered = sorted(
+        history.values(),
+        key=lambda row: (
+            row["hora_manaus"],
+            row["estacao"]
+        )
+    )
+
+    with HISTORY_FILE.open(
+        "w",
+        encoding="utf-8",
+        newline=""
+    ) as file:
+
+        writer = csv.DictWriter(
+            file,
+            fieldnames=
+                HISTORY_FIELDS
+        )
+
+        writer.writeheader()
+
+        writer.writerows(
+            ordered
+        )
+
+    return len(
+        ordered
+    )
+
+
+def update_history(
+    station_series
+):
+    history = (
+        load_existing_history()
+    )
+
+    before = len(
+        history
+    )
+
+    for codigo, nome in (
+        ESTACOES.items()
+    ):
+        series = station_series.get(
+            codigo,
+            []
+        )
+
+        hourly_rows = (
+            build_hourly_rows(
+                codigo,
+                nome,
+                series
+            )
+        )
+
+        for row in hourly_rows:
+            key = (
+                row["estacao"],
+                row["hora_manaus"]
+            )
+
+            history[key] = row
+
+    total = save_history(
+        history
+    )
+
+    return (
+        before,
+        total
+    )
+
+
+# ==========================================================
+# EXECUÇÃO
+# ==========================================================
+
 def main():
 
+    # ------------------------------------------
     # AUTENTICAÇÃO
+    # ------------------------------------------
 
     auth = request_json(
         AUTH_URL,
@@ -457,7 +719,9 @@ def main():
         )
 
 
-    # CONSULTA ÚNICA DAS 5 ESTAÇÕES
+    # ------------------------------------------
+    # CONSULTA CONJUNTA DAS 5 ESTAÇÕES
+    # ------------------------------------------
 
     query = urllib.parse.urlencode(
         {
@@ -499,9 +763,13 @@ def main():
         )
 
 
+    # ------------------------------------------
     # PROCESSAMENTO
+    # ------------------------------------------
 
     resultados = []
+
+    station_series = {}
 
     barcelos_series = []
 
@@ -528,6 +796,10 @@ def main():
             metrics
         )
 
+        station_series[
+            codigo
+        ] = series
+
         if codigo == BARCELOS:
             barcelos_series = series
 
@@ -539,7 +811,9 @@ def main():
         )
 
 
-    # LOCALIZA BARCELOS
+    # ------------------------------------------
+    # BARCELOS
+    # ------------------------------------------
 
     barcelos = next(
         item
@@ -557,7 +831,9 @@ def main():
     ).isoformat()
 
 
-    # SÉRIE DE BARCELOS
+    # ------------------------------------------
+    # SÉRIE DE 30 DIAS DE BARCELOS
+    # ------------------------------------------
 
     output_series = [
         {
@@ -598,13 +874,17 @@ def main():
     ]
 
 
+    # ------------------------------------------
     # ARQUIVO MULTIESTAÇÃO
+    # ------------------------------------------
+
+    now_utc = datetime.now(
+        timezone.utc
+    )
 
     output_estacoes = {
         "gerado_em_utc":
-            datetime.now(
-                timezone.utc
-            ).isoformat(),
+            now_utc.isoformat(),
 
         "fonte":
             "ANA - HidroWebService",
@@ -617,20 +897,22 @@ def main():
     }
 
 
-    # GRAVAÇÃO
+    # ------------------------------------------
+    # PASTA DATA
+    # ------------------------------------------
 
-    data_dir = Path(
-        "data"
-    )
-
-    data_dir.mkdir(
+    DATA_DIR.mkdir(
         parents=True,
         exist_ok=True
     )
 
 
+    # ------------------------------------------
+    # latest.json
+    # ------------------------------------------
+
     with (
-        data_dir / "latest.json"
+        DATA_DIR / "latest.json"
     ).open(
         "w",
         encoding="utf-8"
@@ -646,8 +928,12 @@ def main():
         file.write("\n")
 
 
+    # ------------------------------------------
+    # series_30d.json
+    # ------------------------------------------
+
     with (
-        data_dir /
+        DATA_DIR /
         "series_30d.json"
     ).open(
         "w",
@@ -664,8 +950,12 @@ def main():
         file.write("\n")
 
 
+    # ------------------------------------------
+    # estacoes.json
+    # ------------------------------------------
+
     with (
-        data_dir /
+        DATA_DIR /
         "estacoes.json"
     ).open(
         "w",
@@ -682,16 +972,28 @@ def main():
         file.write("\n")
 
 
-    # LOG
+    # ------------------------------------------
+    # HISTÓRICO HORÁRIO
+    # ------------------------------------------
 
+    history_before, history_total = (
+        update_history(
+            station_series
+        )
+    )
+
+
+    # ------------------------------------------
+    # LOG
+    # ------------------------------------------
+
+    print()
     print(
         "Coleta multiestação concluída."
     )
-
     print()
 
     for station in resultados:
-
         print(
             station["nome"],
             "|",
@@ -706,6 +1008,11 @@ def main():
                 "variacao_24h_cm"
             ],
             "cm",
+            "| 72h:",
+            station[
+                "variacao_72h_cm"
+            ],
+            "cm",
             "| tendência:",
             station[
                 "tendencia"
@@ -715,9 +1022,23 @@ def main():
     print()
 
     print(
-        "Total recebido da ANA:",
-        len(items),
-        "registros"
+        "Registros brutos recebidos:",
+        len(items)
+    )
+
+    print(
+        "Histórico horário anterior:",
+        history_before
+    )
+
+    print(
+        "Histórico horário atual:",
+        history_total
+    )
+
+    print(
+        "Arquivo histórico:",
+        HISTORY_FILE
     )
 
 

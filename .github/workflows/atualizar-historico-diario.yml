@@ -37,7 +37,7 @@ jobs:
           ANA_IDENTIFIER: ${{ secrets.ANA_IDENTIFIER }}
           ANA_PASSWORD: ${{ secrets.ANA_PASSWORD }}
         run: |
-          python collector/ana.py
+          python collector/ana_resiliente.py
 
 
       - name: Recalcular eventos V2

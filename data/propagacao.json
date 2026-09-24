@@ -1,13 +1,13 @@
 {
-  "gerado_em_utc": "2026-09-24T17:21:53.115379+00:00",
+  "gerado_em_utc": "2026-09-24T17:45:37.490059+00:00",
   "metodo": "Correlação de Pearson entre variações horárias acumuladas de 24 horas, testando defasagens em passos de 6 horas.",
   "status": "experimental",
   "uso": "Diagnóstico histórico exploratório. Não representa previsão hidrológica nem confirma repiquete.",
   "cobertura_historica": {
-    "inicio_manaus": "2025-09-24 00:00:00",
+    "inicio_manaus": "2023-09-24 00:00:00",
     "fim_manaus": "2026-09-24 13:00:00",
-    "horas": 8773.0,
-    "dias": 365.5
+    "horas": 26317.0,
+    "dias": 1096.5
   },
   "pares": [
     {
@@ -16,11 +16,11 @@
       "destino": "14480002",
       "nome_destino": "Barcelos",
       "resultado": "exploratorio",
-      "melhor_defasagem_h": 114,
-      "melhor_defasagem_dias": 4.75,
-      "correlacao": 0.774,
+      "melhor_defasagem_h": 108,
+      "melhor_defasagem_dias": 4.5,
+      "correlacao": 0.812,
       "forca_correlacao": "alta",
-      "amostras": 6482,
+      "amostras": 19227,
       "passo_testado_h": 6,
       "defasagem_maxima_testada_h": 168
     },
@@ -30,11 +30,11 @@
       "destino": "14480002",
       "nome_destino": "Barcelos",
       "resultado": "exploratorio",
-      "melhor_defasagem_h": 186,
-      "melhor_defasagem_dias": 7.75,
-      "correlacao": 0.705,
+      "melhor_defasagem_h": 180,
+      "melhor_defasagem_dias": 7.5,
+      "correlacao": 0.725,
       "forca_correlacao": "alta",
-      "amostras": 2744,
+      "amostras": 15652,
       "passo_testado_h": 6,
       "defasagem_maxima_testada_h": 240
     },
@@ -44,11 +44,11 @@
       "destino": "14480002",
       "nome_destino": "Barcelos",
       "resultado": "exploratorio",
-      "melhor_defasagem_h": 216,
-      "melhor_defasagem_dias": 9.0,
-      "correlacao": 0.43,
+      "melhor_defasagem_h": 228,
+      "melhor_defasagem_dias": 9.5,
+      "correlacao": 0.478,
       "forca_correlacao": "baixa",
-      "amostras": 6375,
+      "amostras": 18974,
       "passo_testado_h": 6,
       "defasagem_maxima_testada_h": 336
     },
@@ -58,11 +58,11 @@
       "destino": "14480002",
       "nome_destino": "Barcelos",
       "resultado": "exploratorio",
-      "melhor_defasagem_h": 198,
-      "melhor_defasagem_dias": 8.25,
-      "correlacao": 0.64,
+      "melhor_defasagem_h": 210,
+      "melhor_defasagem_dias": 8.75,
+      "correlacao": 0.66,
       "forca_correlacao": "moderada",
-      "amostras": 6387,
+      "amostras": 17964,
       "passo_testado_h": 6,
       "defasagem_maxima_testada_h": 480
     }
@@ -71,24 +71,24 @@
     {
       "estacao": "14110000",
       "nome": "Cucuí",
-      "nivel_m": 16.5,
-      "variacao_6h_cm": -1.0,
-      "variacao_24h_cm": -8.0,
-      "variacao_72h_cm": -17.0,
-      "variacao_7d_cm": 20.0,
+      "nivel_m": 16.49,
+      "variacao_6h_cm": -2.0,
+      "variacao_24h_cm": -9.0,
+      "variacao_72h_cm": -18.0,
+      "variacao_7d_cm": 18.0,
       "tendencia": "descendo",
-      "data_medicao_manaus": "2026-09-24 12:15:00"
+      "data_medicao_manaus": "2026-09-24 13:15:00"
     },
     {
       "estacao": "14280001",
       "nome": "Taracuá",
-      "nivel_m": 13.56,
-      "variacao_6h_cm": -3.0,
-      "variacao_24h_cm": -7.0,
-      "variacao_72h_cm": -7.0,
-      "variacao_7d_cm": 63.0,
+      "nivel_m": 13.55,
+      "variacao_6h_cm": -4.0,
+      "variacao_24h_cm": -10.0,
+      "variacao_72h_cm": -8.0,
+      "variacao_7d_cm": 61.0,
       "tendencia": "descendo",
-      "data_medicao_manaus": "2026-09-24 12:15:00"
+      "data_medicao_manaus": "2026-09-24 13:15:00"
     },
     {
       "estacao": "14330000",

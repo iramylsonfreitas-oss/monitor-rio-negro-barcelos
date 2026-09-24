@@ -28,9 +28,9 @@
   >
 
   <link
-  rel="stylesheet"
-  href="css/style.css?v=2"
->
+    rel="stylesheet"
+    href="css/style.css?v=3"
+  >
 
   <script
     src="https://cdn.jsdelivr.net/npm/chart.js"
@@ -46,6 +46,7 @@
     <header class="topbar">
 
       <div>
+
         <div class="eyebrow">
           MONITORAMENTO HIDROLÓGICO
         </div>
@@ -57,7 +58,9 @@
         <div class="location">
           Barcelos • Amazonas
         </div>
+
       </div>
+
 
       <div class="status-area">
 
@@ -67,6 +70,7 @@
         ></div>
 
         <div>
+
           <div
             id="status-text"
             class="status-text"
@@ -80,6 +84,7 @@
           >
             —
           </div>
+
         </div>
 
       </div>
@@ -118,12 +123,14 @@
         >
           Última medição: —
         </div>
-<div
-  id="ana-update-time"
-  class="ana-update-time"
->
-  ANA: última atualização —
-</div>
+
+        <div
+          id="ana-update-time"
+          class="ana-update-time"
+        >
+          ANA: última atualização —
+        </div>
+
       </div>
 
 
@@ -160,7 +167,7 @@
     </section>
 
 
-    <!-- VARIAÇÕES -->
+    <!-- VARIAÇÕES DE BARCELOS -->
 
     <section class="metrics-grid">
 
@@ -243,7 +250,81 @@
     </section>
 
 
-    <!-- GRÁFICO -->
+    <!-- ESTAÇÕES A MONTANTE -->
+
+    <section class="upstream-section">
+
+      <div class="upstream-header">
+
+        <div>
+
+          <div class="section-label">
+            RIO NEGRO A MONTANTE
+          </div>
+
+          <h2>
+            Movimento do rio antes de Barcelos
+          </h2>
+
+        </div>
+
+        <div class="upstream-note">
+          Dados automáticos da ANA
+        </div>
+
+      </div>
+
+
+      <div
+        id="upstream-grid"
+        class="upstream-grid"
+      >
+
+        <div class="upstream-loading">
+          Carregando estações...
+        </div>
+
+      </div>
+
+
+      <div class="propagation-card">
+
+        <div>
+
+          <div class="section-label">
+            PROPAGAÇÃO
+          </div>
+
+          <div
+            id="propagation-title"
+            class="propagation-title"
+          >
+            Analisando estações a montante
+          </div>
+
+          <div
+            id="propagation-text"
+            class="propagation-text"
+          >
+            Comparando Cucuí, Taracuá,
+            Curicuriari, Serrinha e Barcelos.
+          </div>
+
+        </div>
+
+        <div
+          id="propagation-icon"
+          class="propagation-icon"
+        >
+          →
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- GRÁFICO DE BARCELOS -->
 
     <section class="chart-card">
 
@@ -256,7 +337,7 @@
           </div>
 
           <h2>
-            Nível nos últimos 30 dias
+            Nível em Barcelos nos últimos 30 dias
           </h2>
 
         </div>
@@ -305,7 +386,7 @@
   </main>
 
 
-  <script src="js/dashboard.js?v=2"></script>
+  <script src="js/dashboard.js?v=3"></script>
 
 </body>
 

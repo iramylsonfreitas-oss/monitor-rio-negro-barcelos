@@ -1,133 +1,36 @@
-const SEASONAL_DATA_URL =
-  "data/barcelos_anual.json";
+const SEASONAL_DATA_URL = "data/barcelos_anual.json";
+let seasonalChartInstance = null;
 
-let seasonalChartInstance =
-  null;
+function seasonalQuantile(values, q) {
+  const sorted = values.filter(Number.isFinite).slice().sort((a, b) => a - b);
+  if (!sorted.length) return null;
+  if (sorted.length === 1) return sorted[0];
 
+  const pos = (sorted.length - 1) * q;
+  const base = Math.floor(pos);
+  const rest = pos - base;
+  const next = sorted[base + 1];
 
-/* =========================
-   ESTATÍSTICA
-========================= */
-
-function seasonalQuantile(
-  values,
-  q
-) {
-  const sorted =
-    values
-      .filter(
-        Number.isFinite
-      )
-      .slice()
-      .sort(
-        (a, b) =>
-          a - b
-      );
-
-  if (!sorted.length) {
-    return null;
-  }
-
-  if (
-    sorted.length === 1
-  ) {
-    return sorted[0];
-  }
-
-  const pos =
-    (
-      sorted.length - 1
-    ) * q;
-
-  const base =
-    Math.floor(pos);
-
-  const rest =
-    pos - base;
-
-  const next =
-    sorted[
-      base + 1
-    ];
-
-  return (
-    next === undefined
-      ? sorted[base]
-      : (
-          sorted[base] +
-          rest *
-          (
-            next -
-            sorted[base]
-          )
-        )
-  );
+  return next === undefined
+    ? sorted[base]
+    : sorted[base] + rest * (next - sorted[base]);
 }
 
+function seasonalDayIndex(dayMonth) {
+  if (!dayMonth) return null;
 
-/* =========================
-   CALENDÁRIO
-========================= */
+  const [month, day] = dayMonth.split("-").map(Number);
+  const date = new Date(Date.UTC(2024, month - 1, day));
 
-function seasonalDayIndex(
-  dayMonth
-) {
-  if (!dayMonth) {
-    return null;
-  }
+  if (Number.isNaN(date.getTime())) return null;
 
-  const [
-    month,
-    day
-  ] =
-    dayMonth
-      .split("-")
-      .map(Number);
+  const start = new Date(Date.UTC(2024, 0, 1));
 
-  const date =
-    new Date(
-      Date.UTC(
-        2024,
-        month - 1,
-        day
-      )
-    );
-
-  if (
-    Number.isNaN(
-      date.getTime()
-    )
-  ) {
-    return null;
-  }
-
-  const start =
-    new Date(
-      Date.UTC(
-        2024,
-        0,
-        1
-      )
-    );
-
-  return Math.round(
-    (
-      date -
-      start
-    ) /
-    86400000
-  );
+  return Math.round((date - start) / 86400000);
 }
 
-
-function seasonalCircularDistance(
-  a,
-  b
-) {
-  const diff =
-    Math.abs(
-      a - b
-    );
+function seasonalCircularDistance(a, b) {
+  const diff = Math.abs(a - b);
 
   return Math.min(
     diff,
@@ -135,50 +38,40 @@ function seasonalCircularDistance(
   );
 }
 
-
 function seasonalCalendar() {
   const keys = [];
   const labels = [];
 
-  const cursor =
-    new Date(
-      Date.UTC(
-        2024,
-        0,
-        1
-      )
+  const cursor = new Date(
+    Date.UTC(
+      2024,
+      0,
+      1
+    )
+  );
+
+  const end = new Date(
+    Date.UTC(
+      2024,
+      11,
+      31
+    )
+  );
+
+  while (cursor <= end) {
+    const month = String(
+      cursor.getUTCMonth() + 1
+    ).padStart(
+      2,
+      "0"
     );
 
-  const end =
-    new Date(
-      Date.UTC(
-        2024,
-        11,
-        31
-      )
+    const day = String(
+      cursor.getUTCDate()
+    ).padStart(
+      2,
+      "0"
     );
-
-  while (
-    cursor <= end
-  ) {
-    const month =
-      String(
-        cursor
-          .getUTCMonth() +
-        1
-      ).padStart(
-        2,
-        "0"
-      );
-
-    const day =
-      String(
-        cursor
-          .getUTCDate()
-      ).padStart(
-        2,
-        "0"
-      );
 
     keys.push(
       `${month}-${day}`
@@ -189,9 +82,7 @@ function seasonalCalendar() {
     );
 
     cursor.setUTCDate(
-      cursor
-        .getUTCDate() +
-      1
+      cursor.getUTCDate() + 1
     );
   }
 
@@ -201,14 +92,7 @@ function seasonalCalendar() {
   };
 }
 
-
-/* =========================
-   FORMATAÇÃO
-========================= */
-
-function seasonalFormatLevel(
-  value
-) {
+function seasonalFormatLevel(value) {
   return Number(value)
     .toFixed(2)
     .replace(
@@ -217,19 +101,12 @@ function seasonalFormatLevel(
     );
 }
 
-
-function seasonalFormatDate(
-  dateText
-) {
+function seasonalFormatDate(dateText) {
   if (!dateText) {
     return "—";
   }
 
-  const [
-    year,
-    month,
-    day
-  ] =
+  const [, month, day] =
     dateText.split("-");
 
   const months = [
@@ -249,49 +126,29 @@ function seasonalFormatDate(
 
   return (
     `${Number(day)} de ` +
-    `${months[
-      Number(month) - 1
-    ] || month}`
+    `${months[Number(month) - 1] || month}`
   );
 }
 
-
-function seasonalPositionLabel(
-  percentile
-) {
-  if (
-    percentile <= 10
-  ) {
+function seasonalPositionLabel(percentile) {
+  if (percentile <= 10) {
     return "Muito baixo";
   }
 
-  if (
-    percentile <= 25
-  ) {
+  if (percentile <= 25) {
     return "Baixo";
   }
 
-  if (
-    percentile < 75
-  ) {
-    return (
-      "Dentro da faixa típica"
-    );
+  if (percentile < 75) {
+    return "Dentro da faixa típica";
   }
 
-  if (
-    percentile < 90
-  ) {
+  if (percentile < 90) {
     return "Alto";
   }
 
   return "Muito alto";
 }
-
-
-/* =========================
-   REFERÊNCIA ±7 DIAS
-========================= */
 
 function seasonalReferenceValues(
   referencePoints,
@@ -326,7 +183,6 @@ function seasonalReferenceValues(
     );
 }
 
-
 function seasonalBuildReference(
   data,
   latestYear,
@@ -343,33 +199,30 @@ function seasonalBuildReference(
       .map(String)
       .filter(
         year =>
-          year !==
-          latestYear
+          year !== latestYear
       )
       .sort();
 
   const referencePoints =
-    referenceYears
-      .flatMap(
-        year =>
-          (
-            data.series?.[
-              year
-            ] || []
-          ).map(
-            point => ({
-              dia_mes:
-                point.dia_mes,
+    referenceYears.flatMap(
+      year =>
+        (
+          data.series?.[year] ||
+          []
+        ).map(
+          point => ({
+            dia_mes:
+              point.dia_mes,
 
-              nivel_m:
-                Number(
-                  point.nivel_m
-                ),
+            nivel_m:
+              Number(
+                point.nivel_m
+              ),
 
-              year
-            })
-          )
-      );
+            year
+          })
+        )
+    );
 
   const p25 = [];
   const median = [];
@@ -435,7 +288,163 @@ function seasonalBuildReference(
 
 
 /* =========================
-   CRIAÇÃO DO CARD
+   MARCADOR HOJE
+========================= */
+
+const seasonalTodayLinePlugin = {
+  id:
+    "seasonalTodayLine",
+
+  afterDatasetsDraw(
+    chart,
+    args,
+    pluginOptions
+  ) {
+    const index =
+      pluginOptions?.index;
+
+    if (
+      index === null ||
+      index === undefined ||
+      index < 0
+    ) {
+      return;
+    }
+
+    const xScale =
+      chart.scales.x;
+
+    const area =
+      chart.chartArea;
+
+    if (
+      !xScale ||
+      !area
+    ) {
+      return;
+    }
+
+    const x =
+      xScale.getPixelForValue(
+        index
+      );
+
+    if (
+      !Number.isFinite(x) ||
+      x < area.left ||
+      x > area.right
+    ) {
+      return;
+    }
+
+    const ctx =
+      chart.ctx;
+
+    ctx.save();
+
+    ctx.strokeStyle =
+      "rgba(88,214,255,0.72)";
+
+    ctx.lineWidth =
+      1.25;
+
+    ctx.setLineDash(
+      [
+        5,
+        5
+      ]
+    );
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+      x,
+      area.top
+    );
+
+    ctx.lineTo(
+      x,
+      area.bottom
+    );
+
+    ctx.stroke();
+
+    ctx.setLineDash([]);
+
+    const label =
+      "HOJE";
+
+    ctx.font =
+      "700 10px Inter, sans-serif";
+
+    const width =
+      ctx.measureText(
+        label
+      ).width + 14;
+
+    const height =
+      22;
+
+    let left =
+      x - width / 2;
+
+    left =
+      Math.max(
+        area.left,
+        Math.min(
+          area.right - width,
+          left
+        )
+      );
+
+    const top =
+      area.top + 8;
+
+    ctx.fillStyle =
+      "rgba(6,23,37,0.94)";
+
+    ctx.strokeStyle =
+      "rgba(88,214,255,0.72)";
+
+    ctx.lineWidth =
+      1;
+
+    ctx.fillRect(
+      left,
+      top,
+      width,
+      height
+    );
+
+    ctx.strokeRect(
+      left,
+      top,
+      width,
+      height
+    );
+
+    ctx.fillStyle =
+      "#58d6ff";
+
+    ctx.textAlign =
+      "center";
+
+    ctx.textBaseline =
+      "middle";
+
+    ctx.fillText(
+      label,
+      left + width / 2,
+      top + height / 2
+    );
+
+    ctx.restore();
+  }
+};
+
+
+/* =========================
+   CRIAÇÃO DO PAINEL
 ========================= */
 
 function seasonalInsertPanel() {
@@ -517,11 +526,19 @@ function seasonalInsertPanel() {
               </div>
 
 
-              <div
-                id="seasonal-percentile"
-                class="seasonal-percentile"
-              >
-                —
+              <div class="seasonal-percentile-box">
+
+                <div
+                  id="seasonal-percentile"
+                  class="seasonal-percentile"
+                >
+                  —
+                </div>
+
+                <div class="seasonal-percentile-note">
+                  referência sazonal
+                </div>
+
               </div>
 
             </div>
@@ -640,14 +657,13 @@ function seasonalInsertPanel() {
 
         <div class="seasonal-note">
 
-          Faixa típica = percentis 25–75
-          da referência móvel.
-
-          A referência exclui o ano atual
-          e usa os anos históricos disponíveis;
-          por isso deve ser lida como comparação
-          exploratória, não como climatologia
-          de longo prazo.
+          Faixa típica = percentis 25–75 da
+          referência móvel. Referência exploratória
+          baseada nos anos históricos disponíveis.
+          Os valores de dias vizinhos são utilizados
+          para suavizar a comparação e não representam
+          anos independentes. Não se trata de uma
+          climatologia de longo prazo.
 
         </div>
 
@@ -819,15 +835,38 @@ function seasonalRenderSummary(
   ).textContent =
     differenceText;
 
+  const firstRefYear =
+    reference
+      .referenceYears[0] ||
+    "—";
+
+  const lastRefYear =
+    reference
+      .referenceYears[
+        reference
+          .referenceYears
+          .length - 1
+      ] ||
+    "—";
+
+  const refYearsText =
+    firstRefYear ===
+    lastRefYear
+      ? firstRefYear
+      : (
+          `${firstRefYear}–` +
+          `${lastRefYear}`
+        );
+
   document.getElementById(
     "seasonal-status"
   ).textContent =
     (
       `${seasonalFormatDate(
         currentPoint.data
-      )} • ` +
-      `${values.length} valores históricos ` +
-      `na janela ±7 dias`
+      )} • base ${refYearsText} • ` +
+      `janela móvel ±7 dias • ` +
+      `${values.length} valores diários`
     );
 
   return {
@@ -840,7 +879,7 @@ function seasonalRenderSummary(
 
 
 /* =========================
-   GRÁFICO SAZONAL
+   GRÁFICO
 ========================= */
 
 function seasonalRenderChart(
@@ -862,13 +901,14 @@ function seasonalRenderChart(
     return;
   }
 
+  const latestSeries =
+    data.series?.[
+      latestYear
+    ] || [];
+
   const currentByDay =
     Object.fromEntries(
-      (
-        data.series?.[
-          latestYear
-        ] || []
-      ).map(
+      latestSeries.map(
         point => [
           point.dia_mes,
           Number(
@@ -891,6 +931,20 @@ function seasonalRenderChart(
           : null
     );
 
+  const currentPoint =
+    latestSeries.length
+      ? latestSeries[
+          latestSeries.length - 1
+        ]
+      : null;
+
+  const currentIndex =
+    currentPoint
+      ? calendar.keys.indexOf(
+          currentPoint.dia_mes
+        )
+      : -1;
+
   if (
     seasonalChartInstance
   ) {
@@ -905,6 +959,10 @@ function seasonalRenderChart(
 
         type:
           "line",
+
+        plugins: [
+          seasonalTodayLinePlugin
+        ],
 
         data: {
 
@@ -1053,6 +1111,11 @@ function seasonalRenderChart(
 
           plugins: {
 
+            seasonalTodayLine: {
+              index:
+                currentIndex
+            },
+
             legend: {
 
               position:
@@ -1106,6 +1169,39 @@ function seasonalRenderChart(
                       null
                     ) {
                       return "";
+                    }
+
+                    if (
+                      context.dataset.label ===
+                      "Faixa típica (P25–P75)"
+                    ) {
+                      const index =
+                        context.dataIndex;
+
+                      const lower =
+                        reference.p25[
+                          index
+                        ];
+
+                      const upper =
+                        reference.p75[
+                          index
+                        ];
+
+                      if (
+                        lower !== null &&
+                        upper !== null
+                      ) {
+                        return (
+                          `Faixa típica: ` +
+                          `${seasonalFormatLevel(
+                            lower
+                          )}–` +
+                          `${seasonalFormatLevel(
+                            upper
+                          )} m`
+                        );
+                      }
                     }
 
                     return (
@@ -1334,8 +1430,7 @@ async function seasonalInit() {
                 .referenceYears[
                   reference
                     .referenceYears
-                    .length -
-                  1
+                    .length - 1
                 ]}`
             )
 

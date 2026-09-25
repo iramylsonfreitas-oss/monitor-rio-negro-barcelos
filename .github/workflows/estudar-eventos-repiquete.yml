@@ -1,0 +1,287 @@
+name: Estudar Eventos Repiquete
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: estudo-eventos-repiquete
+  cancel-in-progress: false
+
+jobs:
+  estudar:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Baixar projeto
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+
+      - name: Executar estudo dos eventos
+        run: |
+          python collector/repiquete_estudo_eventos.py
+
+
+      - name: Conferir resultado
+        run: |
+          echo "======================================"
+          echo "ESTUDO DOS EVENTOS DE REPIQUETE"
+          echo "======================================"
+
+          if [ ! -f data/repiquete_estudo_eventos.json ]; then
+            echo "ERRO:"
+            echo "data/repiquete_estudo_eventos.json não foi criado."
+            exit 1
+          fi
+
+          python - <<'PY'
+          import json
+
+          with open(
+              "data/repiquete_estudo_eventos.json",
+              encoding="utf-8"
+          ) as f:
+              data = json.load(f)
+
+          metodologia = (
+              data.get("metodologia")
+              or {}
+          )
+
+          print(
+              "Configuração:",
+              metodologia.get(
+                  "configuracao_analisada"
+              )
+          )
+
+          print(
+              "Eventos analisados:",
+              metodologia.get(
+                  "eventos_analisados"
+              )
+          )
+
+          print()
+          print(
+              "RESUMO DOS GRUPOS"
+          )
+
+          for grupo in data.get(
+              "resumo_grupos",
+              []
+          ):
+
+              print()
+
+              print(
+                  "Grupo:",
+                  grupo.get(
+                      "classificacao"
+                  )
+              )
+
+              print(
+                  "Eventos:",
+                  grupo.get(
+                      "eventos"
+                  )
+              )
+
+              print(
+                  "Mediana 12 h:",
+                  grupo.get(
+                      "mediana_ganho_desde_sinal_12h_cm"
+                  ),
+                  "cm"
+              )
+
+              print(
+                  "Mediana 24 h:",
+                  grupo.get(
+                      "mediana_ganho_desde_sinal_24h_cm"
+                  ),
+                  "cm"
+              )
+
+              print(
+                  "Mediana 48 h:",
+                  grupo.get(
+                      "mediana_ganho_desde_sinal_48h_cm"
+                  ),
+                  "cm"
+              )
+
+              print(
+                  "Mediana 72 h:",
+                  grupo.get(
+                      "mediana_ganho_desde_sinal_72h_cm"
+                  ),
+                  "cm"
+              )
+
+              print(
+                  "Mediana 96 h:",
+                  grupo.get(
+                      "mediana_ganho_desde_sinal_96h_cm"
+                  ),
+                  "cm"
+              )
+
+              print(
+                  "Mediana 7 dias:",
+                  grupo.get(
+                      "mediana_ganho_desde_sinal_7d_cm"
+                  ),
+                  "cm"
+              )
+
+              print(
+                  "Blocos positivos em 24 h:",
+                  grupo.get(
+                      "mediana_blocos_6h_positivos_primeiras_24h"
+                  )
+              )
+
+              print(
+                  "Blocos positivos em 48 h:",
+                  grupo.get(
+                      "mediana_blocos_6h_positivos_primeiras_48h"
+                  )
+              )
+
+              print(
+                  "Máxima mediana de variação 24 h:",
+                  grupo.get(
+                      "mediana_max_variacao_24h_primeiras_24h_cm"
+                  ),
+                  "cm"
+              )
+
+          print()
+          print(
+              "EVENTOS INDIVIDUAIS"
+          )
+
+          for event in data.get(
+              "eventos",
+              []
+          ):
+
+              print()
+
+              print(
+                  "Evento",
+                  event.get(
+                      "evento"
+                  )
+              )
+
+              print(
+                  "Sinal:",
+                  event.get(
+                      "inicio_sinal_manaus"
+                  )
+              )
+
+              print(
+                  "Confirmado:",
+                  event.get(
+                      "confirmado_em_manaus"
+                  )
+              )
+
+              print(
+                  "Classificação retrospectiva:",
+                  (
+                      event.get(
+                          "marcador_retrospectivo"
+                      )
+                      or {}
+                  ).get(
+                      "classificacao"
+                  )
+              )
+
+              print(
+                  "Blocos positivos nas primeiras 24 h:",
+                  (
+                      event.get(
+                          "persistencia_24h"
+                      )
+                      or {}
+                  ).get(
+                      "blocos_positivos"
+                  )
+              )
+
+              print(
+                  "Blocos positivos nas primeiras 48 h:",
+                  (
+                      event.get(
+                          "persistencia_48h"
+                      )
+                      or {}
+                  ).get(
+                      "blocos_positivos"
+                  )
+              )
+
+              print(
+                  "Trajetória:"
+              )
+
+              for point in (
+                  (
+                      event.get(
+                          "trajetoria"
+                      )
+                      or {}
+                  ).get(
+                      "pontos",
+                      []
+                  )
+              ):
+
+                  print(
+                      " ",
+                      point.get(
+                          "horas_apos_sinal"
+                      ),
+                      "h:",
+                      point.get(
+                          "ganho_desde_sinal_cm"
+                      ),
+                      "cm"
+                  )
+          PY
+
+
+      - name: Salvar resultado
+        run: |
+          git config user.name "rio-negro-bot"
+          git config user.email "actions@github.com"
+
+          git add data/repiquete_estudo_eventos.json
+
+          if git diff --cached --quiet; then
+            echo "Nenhuma alteração para salvar."
+            exit 0
+          fi
+
+          git commit -m "Atualiza estudo historico dos repiquetes"
+
+          git pull --rebase origin main
+
+          git push origin main

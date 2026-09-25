@@ -83,6 +83,330 @@
 
 
 /* =========================
+   MESMA DATA NOS OUTROS ANOS
+========================= */
+
+.same-day-panel {
+  margin:
+    4px 0 18px;
+
+  padding: 18px;
+
+  border:
+    1px solid
+    rgba(
+      88,
+      214,
+      255,
+      0.14
+    );
+
+  border-radius: 16px;
+
+  background:
+    rgba(
+      4,
+      18,
+      31,
+      0.40
+    );
+}
+
+
+.same-day-header {
+  display: flex;
+
+  align-items:
+    flex-start;
+
+  justify-content:
+    space-between;
+
+  gap: 20px;
+}
+
+
+.same-day-kicker {
+  margin-bottom: 5px;
+
+  color:
+    #58d6ff;
+
+  font-size: 10px;
+
+  font-weight: 800;
+
+  letter-spacing:
+    0.10em;
+}
+
+
+.same-day-title {
+  color:
+    #f1f6fa;
+
+  font-size: 21px;
+
+  font-weight: 700;
+
+  line-height: 1.2;
+}
+
+
+.same-day-reference {
+  flex-shrink: 0;
+
+  padding:
+    6px 10px;
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius: 9px;
+
+  color:
+    var(--muted);
+
+  font-size: 10px;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+
+.same-day-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      4,
+      minmax(0, 1fr)
+    );
+
+  gap: 10px;
+
+  margin-top: 16px;
+}
+
+
+.same-day-card {
+  min-width: 0;
+
+  padding:
+    14px 13px;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.08
+    );
+
+  border-radius: 13px;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.025
+    );
+}
+
+
+.same-day-card.current {
+  border-color:
+    rgba(
+      88,
+      214,
+      255,
+      0.48
+    );
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(
+        88,
+        214,
+        255,
+        0.13
+      ),
+      rgba(
+        88,
+        214,
+        255,
+        0.035
+      )
+    );
+}
+
+
+.same-day-card.above {
+  border-color:
+    rgba(
+      88,
+      214,
+      255,
+      0.20
+    );
+}
+
+
+.same-day-card.below {
+  border-color:
+    rgba(
+      245,
+      196,
+      81,
+      0.20
+    );
+}
+
+
+.same-day-card.same {
+  border-color:
+    rgba(
+      190,
+      205,
+      220,
+      0.20
+    );
+}
+
+
+.same-day-card.unavailable {
+  opacity: 0.55;
+}
+
+
+.same-day-year {
+  color:
+    var(--muted);
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  letter-spacing:
+    0.05em;
+}
+
+
+.same-day-card.current
+.same-day-year {
+  color:
+    #58d6ff;
+}
+
+
+.same-day-level {
+  margin-top: 7px;
+
+  color:
+    #f4f8fb;
+
+  font-size: 26px;
+
+  font-weight: 800;
+
+  letter-spacing:
+    -0.03em;
+
+  line-height: 1.1;
+}
+
+
+.same-day-difference {
+  margin-top: 8px;
+
+  min-height: 15px;
+
+  color:
+    var(--muted);
+
+  font-size: 10px;
+
+  font-weight: 600;
+
+  line-height: 1.35;
+}
+
+
+.same-day-difference.reference {
+  color:
+    #58d6ff;
+}
+
+
+.same-day-difference.above {
+  color:
+    #79dff8;
+}
+
+
+.same-day-difference.below {
+  color:
+    #e9c66f;
+}
+
+
+.same-day-difference.same {
+  color:
+    #b8c5d0;
+}
+
+
+.same-day-summary {
+  margin-top: 14px;
+
+  padding-top: 12px;
+
+  border-top:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.07
+    );
+
+  color:
+    #b6c5d1;
+
+  font-size: 11px;
+
+  line-height: 1.55;
+}
+
+
+.same-day-loading {
+  grid-column:
+    1 / -1;
+
+  padding:
+    16px;
+
+  border:
+    1px dashed
+    var(--border);
+
+  border-radius: 12px;
+
+  color:
+    var(--muted);
+
+  font-size: 11px;
+
+  text-align: center;
+}
+
+
+/* =========================
    PEQUENO DESTAQUE VISUAL
    DO COMPARATIVO
 ========================= */
@@ -102,245 +426,3 @@
         255,
         255,
         0.01
-      )
-    ),
-    var(--panel);
-}
-
-
-/* =========================
-   TABLET
-========================= */
-
-@media (
-  max-width: 900px
-) {
-
-  .annual-chart-container {
-    height: 350px;
-  }
-
-}
-
-
-/* =========================
-   CELULAR
-========================= */
-
-@media (
-  max-width: 560px
-) {
-
-  /*
-    Mantém as quatro métricas
-    em formato 2 x 2.
-  */
-
-  .metrics-grid {
-    grid-template-columns:
-      repeat(
-        2,
-        minmax(0, 1fr)
-      );
-
-    gap: 9px;
-  }
-
-
-  .metric-card {
-    padding: 14px;
-  }
-
-
-  .metric-label {
-    font-size: 9px;
-
-    letter-spacing:
-      0.06em;
-  }
-
-
-  .metric-value {
-    font-size: 25px;
-  }
-
-
-  .station-value {
-    font-size: 19px;
-  }
-
-
-  .metric-description {
-    font-size: 10px;
-  }
-
-
-  /*
-    Card principal um pouco
-    mais compacto no celular.
-  */
-
-  .hero-card {
-    padding: 18px;
-  }
-
-
-  .measurement-time {
-    font-size: 12px;
-
-    line-height: 1.45;
-  }
-
-
-  .ana-update-time {
-    font-size: 11px;
-
-    line-height: 1.45;
-  }
-
-
-  /*
-    Alerta mais compacto.
-  */
-
-  .alert-card {
-    padding: 17px;
-  }
-
-
-  .alert-reasons {
-    gap: 6px;
-  }
-
-
-  .alert-reason {
-    width: 100%;
-
-    padding:
-      8px 9px;
-  }
-
-
-  /*
-    Estações a montante.
-  */
-
-  .upstream-card {
-    padding: 16px;
-  }
-
-
-  .upstream-level {
-    margin-top: 11px;
-
-    font-size: 32px;
-  }
-
-
-  /*
-    Gráficos.
-  */
-
-  .chart-card {
-    padding:
-      18px 12px;
-  }
-
-
-  .chart-header {
-    margin-bottom: 14px;
-  }
-
-
-  .chart-header h2 {
-    font-size: 21px;
-
-    line-height: 1.18;
-  }
-
-
-  .chart-subtitle {
-    margin-top: 7px;
-
-    font-size: 11px;
-
-    line-height: 1.45;
-  }
-
-
-  .annual-chart-card {
-    margin-top: 14px;
-  }
-
-
-  .annual-chart-status {
-    width: 100%;
-
-    margin-bottom: 10px;
-
-    font-size: 10px;
-
-    line-height: 1.4;
-  }
-
-
-  .annual-chart-container {
-    height: 320px;
-  }
-
-
-  .annual-chart-note {
-    margin-top: 10px;
-
-    font-size: 10px;
-  }
-
-}
-
-
-/* =========================
-   CELULARES MENORES
-========================= */
-
-@media (
-  max-width: 390px
-) {
-
-  /*
-    Mesmo em telas menores,
-    mantemos as métricas 2 x 2.
-  */
-
-  .metrics-grid {
-    grid-template-columns:
-      1fr 1fr;
-
-    gap: 8px;
-  }
-
-
-  .metric-card {
-    padding: 12px;
-  }
-
-
-  .metric-value {
-    font-size: 23px;
-  }
-
-
-  .station-value {
-    font-size: 17px;
-  }
-
-
-  .metric-description {
-    font-size: 9px;
-  }
-
-
-  .annual-chart-container {
-    height: 300px;
-  }
-
-}

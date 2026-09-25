@@ -9,21 +9,10 @@ from pathlib import Path
 # ARQUIVOS
 # ==========================================================
 
-HISTORY_FILE = Path(
-    "data/history/hourly.csv"
-)
-
-STATIONS_FILE = Path(
-    "data/estacoes.json"
-)
-
-ALERT_FILE = Path(
-    "data/alerta.json"
-)
-
-OUTPUT_FILE = Path(
-    "data/repiquete.json"
-)
+HISTORY_FILE = Path("data/history/hourly.csv")
+STATIONS_FILE = Path("data/estacoes.json")
+ALERT_FILE = Path("data/alerta.json")
+OUTPUT_FILE = Path("data/repiquete.json")
 
 
 # ==========================================================
@@ -56,6 +45,11 @@ CONFIRMATION_POINTS = 3
 # Espaçamento dos pontos.
 SAMPLE_INTERVAL_HOURS = 6
 
+# Além das três confirmações de +3 cm/24 h, o nível no
+# terceiro checkpoint precisa estar pelo menos 1 cm acima
+# do nível no primeiro checkpoint do sinal.
+MIN_NET_GAIN_CONFIRMATION_CM = 1.0
+
 # Critério para considerar o evento encerrado.
 RESET_RISE_24H_CM = 1.0
 
@@ -73,14 +67,12 @@ def number(value):
         return None
 
     try:
-
         return float(value)
 
     except (
         TypeError,
         ValueError
     ):
-
         return None
 
 
@@ -105,7 +97,6 @@ def format_datetime(value):
 def load_json(path):
 
     if not path.exists():
-
         return {}
 
     with path.open(
@@ -113,9 +104,7 @@ def load_json(path):
         encoding="utf-8"
     ) as file:
 
-        return json.load(
-            file
-        )
+        return json.load(file)
 
 
 # ==========================================================
@@ -129,9 +118,7 @@ def load_stations():
     )
 
     return {
-        station[
-            "estacao"
-        ]: station
+        station["estacao"]: station
 
         for station
         in data.get(
@@ -144,7 +131,6 @@ def load_stations():
 def station_snapshot(station):
 
     if not station:
-
         return None
 
     return {
@@ -522,67 +508,130 @@ def detect_current_confirmed_event(
                     expected
                 )
 
-            if valid:
+            if not valid:
 
-                active = True
+                continue
 
-                end_counter = 0
+            signal_level = number(
+                record.get(
+                    "nivel_cm"
+                )
+            )
 
-                current_event = {
-                    "inicio":
-                        timestamp,
+            confirmation_record = (
+                confirmation_records[
+                    -1
+                ]
+            )
 
-                    "nivel_inicio_cm":
-                        record.get(
-                            "nivel_cm"
-                        ),
+            confirmation_level = number(
+                confirmation_record.get(
+                    "nivel_cm"
+                )
+            )
 
-                    "queda_72h_inicio_cm":
-                        record.get(
-                            "variacao_72h_cm"
-                        ),
+            if (
+                signal_level is None
+                or confirmation_level is None
+            ):
 
-                    "queda_7d_inicio_cm":
-                        record.get(
-                            "variacao_7d_cm"
-                        ),
+                continue
 
-                    "variacao_maxima_24h_cm":
-                        max(
-                            number(
-                                item.get(
-                                    "variacao_24h_cm"
-                                )
+            net_gain = (
+                confirmation_level
+                - signal_level
+            )
+
+            # A janela móvel de 24 h não basta sozinha.
+            # Barcelos precisa ter avançado de fato
+            # entre o primeiro e o terceiro checkpoint.
+            if (
+                net_gain
+                < MIN_NET_GAIN_CONFIRMATION_CM
+            ):
+
+                continue
+
+            active = True
+
+            end_counter = 0
+
+            current_event = {
+                "inicio":
+                    timestamp,
+
+                "confirmado_em":
+                    confirmation_record[
+                        "timestamp"
+                    ],
+
+                "nivel_inicio_cm":
+                    signal_level,
+
+                "nivel_confirmacao_cm":
+                    confirmation_level,
+
+                "ganho_liquido_confirmacao_cm":
+                    net_gain,
+
+                "queda_72h_inicio_cm":
+                    record.get(
+                        "variacao_72h_cm"
+                    ),
+
+                "queda_7d_inicio_cm":
+                    record.get(
+                        "variacao_7d_cm"
+                    ),
+
+                "variacao_maxima_24h_cm":
+                    max(
+                        number(
+                            item.get(
+                                "variacao_24h_cm"
                             )
-                            for item
-                            in confirmation_records
-                        ),
+                        )
 
-                    "confirmacoes_inicio":
-                        [
-                            {
-                                "hora_manaus":
-                                    format_datetime(
-                                        item[
-                                            "timestamp"
-                                        ]
+                        for item
+                        in confirmation_records
+                    ),
+
+                "confirmacoes_inicio":
+                    [
+                        {
+                            "hora_manaus":
+                                format_datetime(
+                                    item[
+                                        "timestamp"
+                                    ]
+                                ),
+
+                            "nivel_m":
+                                round(
+                                    number(
+                                        item.get(
+                                            "nivel_cm"
+                                        )
+                                    )
+                                    / 100,
+                                    2
+                                ),
+
+                            "variacao_24h_cm":
+                                round(
+                                    number(
+                                        item.get(
+                                            "variacao_24h_cm"
+                                        )
                                     ),
+                                    1
+                                ),
+                        }
 
-                                "variacao_24h_cm":
-                                    round(
-                                        number(
-                                            item.get(
-                                                "variacao_24h_cm"
-                                            )
-                                        ),
-                                        1
-                                    ),
-                            }
-
-                            for item
-                            in confirmation_records
-                        ],
-                }
+                        for item
+                        in confirmation_records
+                    ],
+            }
 
         # ==================================================
         # EVENTO ATIVO
@@ -738,11 +787,14 @@ def build_upstream_context(
 
     positive_72h = sum(
         1
-        for value in (
+
+        for value
+        in (
             t72,
             c72,
             s72
         )
+
         if (
             value is not None
             and value > 0
@@ -963,6 +1015,22 @@ def classify(
 
     if event_active:
 
+        net_gain = number(
+            event.get(
+                "ganho_liquido_confirmacao_cm"
+            )
+        )
+
+        if net_gain is not None:
+
+            reasons.append(
+                (
+                    "Entre o primeiro e o terceiro "
+                    "checkpoint do sinal, Barcelos "
+                    f"avançou {net_gain:+.1f} cm."
+                )
+            )
+
         return {
             "nivel":
                 4,
@@ -982,12 +1050,13 @@ def classify(
             "mensagem":
                 (
                     "Após um período de queda, "
-                    "Barcelos atingiu o critério "
-                    "de alta sustentada definido "
-                    "pelo detector: pelo menos "
-                    "+3 cm em 24 h em três "
-                    "verificações consecutivas "
-                    "separadas por 6 horas."
+                    "Barcelos atingiu os critérios "
+                    "do detector: pelo menos +3 cm "
+                    "em 24 h em três verificações "
+                    "consecutivas separadas por "
+                    "6 horas e ganho líquido mínimo "
+                    "de +1 cm entre a primeira e a "
+                    "terceira verificação."
                 ),
 
             "motivos":
@@ -1029,7 +1098,7 @@ def classify(
                     "O rio vinha em queda e "
                     "passou a apresentar alta "
                     "em 24 horas. Ainda não há "
-                    "persistência suficiente para "
+                    "evidência suficiente para "
                     "classificar o movimento como "
                     "repiquete confirmado."
                 ),
@@ -1265,6 +1334,9 @@ def main():
             "intervalo_confirmacoes_h":
                 SAMPLE_INTERVAL_HOURS,
 
+            "ganho_liquido_minimo_confirmacao_cm":
+                MIN_NET_GAIN_CONFIRMATION_CM,
+
             "criterio_encerramento_24h_cm":
                 RESET_RISE_24H_CM,
 
@@ -1287,6 +1359,17 @@ def main():
                     else None
                 ),
 
+            "confirmado_em_manaus":
+                (
+                    format_datetime(
+                        event.get(
+                            "confirmado_em"
+                        )
+                    )
+                    if event_active
+                    else None
+                ),
+
             "nivel_inicio_m":
                 (
                     round(
@@ -1294,6 +1377,30 @@ def main():
                             "nivel_inicio_cm"
                         ] / 100,
                         2
+                    )
+                    if event_active
+                    else None
+                ),
+
+            "nivel_confirmacao_m":
+                (
+                    round(
+                        event[
+                            "nivel_confirmacao_cm"
+                        ] / 100,
+                        2
+                    )
+                    if event_active
+                    else None
+                ),
+
+            "ganho_liquido_confirmacao_cm":
+                (
+                    round(
+                        event[
+                            "ganho_liquido_confirmacao_cm"
+                        ],
+                        1
                     )
                     if event_active
                     else None
@@ -1408,9 +1515,13 @@ def main():
                 "de tendência. 'Possível reversão' "
                 "e 'repiquete em formação' não são "
                 "confirmações. O estado confirmado "
-                "exige persistência da alta em "
-                "Barcelos e descreve um movimento "
-                "já observado, não uma previsão."
+                "exige três verificações consecutivas "
+                "de alta mínima de +3 cm em 24 h e "
+                "ganho líquido mínimo de +1 cm entre "
+                "o primeiro e o terceiro checkpoint. "
+                "O estado confirmado descreve um "
+                "movimento já observado, não uma "
+                "previsão."
             ),
     }
 

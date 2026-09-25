@@ -1,5 +1,5 @@
 {
-  "gerado_em_utc": "2026-09-25T15:07:30.500657+00:00",
+  "gerado_em_utc": "2026-09-25T15:15:18.351151+00:00",
   "timezone": "America/Manaus",
   "nivel": 1,
   "status": "observacao",
@@ -91,12 +91,12 @@
     "barcelos": {
       "nome": "Barcelos",
       "nivel_m": 3.89,
-      "variacao_6h_cm": 0.0,
-      "variacao_24h_cm": 0.0,
+      "variacao_6h_cm": 1.0,
+      "variacao_24h_cm": -1.0,
       "variacao_72h_cm": -5.0,
       "variacao_7d_cm": -26.0,
-      "tendencia": "estavel",
-      "data_medicao_manaus": "2026-09-25 10:00:00"
+      "tendencia": "subindo",
+      "data_medicao_manaus": "2026-09-25 11:00:00"
     }
   },
   "aviso": "O alerta é experimental e utiliza relações históricas entre estações. Uma alta em Serrinha não garante uma alta posterior em Barcelos."

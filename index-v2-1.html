@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Monitor Rio Negro | Barcelos — V2</title>
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="css/style.css?v=6">
+  <link rel="stylesheet" href="css/enhancements.css?v=2">
+  <link rel="stylesheet" href="css/seasonal.css?v=2">
+  <link rel="stylesheet" href="css/repiquete.css?v=1">
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    /* =========================================================
+       MONITOR RIO NEGRO — V2 VISUAL
+       Mantém coleta e lógica; altera hierarquia e responsividade.
+    ========================================================= */
+
+    :root {
+      --v2-surface: rgba(255,255,255,0.035);
+      --v2-surface-strong: rgba(255,255,255,0.055);
+      --v2-divider: rgba(255,255,255,0.075);
+      --v2-rise: #58d6b1;
+      --v2-fall: #ff7180;
+      --v2-stable: #b6c5d1;
+      --v2-watch: #f5c451;
+    }
+
+    html,
+    body {
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    .dashboard,
+    .dashboard * {
+      min-width: 0;
+    }
+
+    .dashboard {
+      width: min(1320px, calc(100% - 40px));
+    }
+
+    .topbar {
+      margin-bottom: 18px;
+    }
+
+    .status-area {
+      padding: 11px 14px;
+      border-radius: 14px;
+      background: var(--v2-surface);
+    }
+
+    .hero-card.v2-hero {
+      grid-template-columns: minmax(0, 1.15fr) minmax(250px, .85fr);
+      gap: 20px;
+      padding: 28px;
+      margin-bottom: 12px;
+    }
+
+    .v2-hero .level-number {
+      font-size: clamp(66px, 7.2vw, 104px);
+    }
+
+    .v2-hero .hero-right {
+      justify-content: flex-start;
+    }
+
+    .v2-update-details {
+      margin-top: 12px;
+      max-width: 560px;
+    }
+
+    .v2-update-details summary {
+      width: fit-content;
+      cursor: pointer;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 650;
+    }
+
+    .v2-update-details[open] summary {
+      margin-bottom: 6px;
+    }
+
+    .v2-update-details .ana-update-time {
+      display: block;
+      margin-top: 4px;
+    }
+
+    .metrics-grid.v2-metrics {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin: 4px 0 0;
+      padding-top: 18px;
+      border-top: 1px solid var(--v2-divider);
+    }
+
+    .v2-metrics .metric-card {
+      padding: 13px 14px;
+      border: 0;
+      border-radius: 13px;
+      background: var(--v2-surface);
+    }
+
+    .v2-metrics .metric-label {
+      font-size: 9px;
+    }
+
+    .v2-metrics .metric-value {
+      margin-top: 7px;
+      font-size: clamp(22px, 2.2vw, 30px);
+    }
+
+    .v2-metrics .metric-description {
+      margin-top: 3px;
+      font-size: 10px;
+    }
+
+    .metric-value.positive,
+    .upstream-variation-value.positive {
+      color: var(--v2-rise);
+    }
+
+    .metric-value.negative,
+    .upstream-variation-value.negative {
+      color: var(--v2-fall);
+    }
+
+    /* O alerta antigo continua no DOM para a lógica existente,
+       mas deixa de aparecer como um segundo painel repetido. */
+    #alert-card,
+    .propagation-card,
+    .river-pulse-section {
+      display: none !important;
+    }
+
+    .repiquete-card {
+      margin-top: 0 !important;
+      margin-bottom: 26px !important;
+    }
+
+    .repiquete-header {
+      gap: 16px;
+    }
+
+    .repiquete-metrics {
+      display: none !important;
+    }
+
+    .repiquete-main-grid {
+      grid-template-columns: 1fr !important;
+    }
+
+    .repiquete-message-card {
+      padding: 20px !important;
+    }
+
+    .repiquete-context-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+      gap: 10px !important;
+    }
+
+    .repiquete-context-card {
+      padding: 14px !important;
+      background: var(--v2-surface) !important;
+    }
+
+    .v2-next-trigger {
+      margin-top: 12px;
+      padding: 13px 15px;
+      border-radius: 13px;
+      border: 1px solid rgba(245,196,81,.18);
+      background: rgba(245,196,81,.055);
+    }
+
+    .v2-next-trigger-label {
+      color: var(--v2-watch);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: .09em;
+    }
+
+    .v2-next-trigger-text {
+      margin-top: 5px;
+      color: #edf4f8;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .v2-history-inline {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--v2-divider);
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.45;
+    }
+
+    .upstream-section {
+      margin-top: 0;
+    }
+
+    .upstream-grid {
+      gap: 10px;
+    }
+
+    .upstream-card {
+      padding: 16px;
+      border-radius: 16px;
+    }
+
+    .upstream-variation {
+      background: rgba(255,255,255,.03);
+    }
+
+    /* Radar fica como leitura principal do corredor. */
+    .river-radar-section {
+      margin-top: 22px !important;
+      margin-bottom: 24px !important;
+    }
+
+    .river-radar-summary,
+    .river-radar-transition {
+      box-shadow: none !important;
+    }
+
+    .v2-history-heading {
+      margin: 28px 2px 8px;
+    }
+
+    .v2-history-heading .section-label {
+      margin-bottom: 6px;
+    }
+
+    .v2-history-heading h2 {
+      margin: 0;
+      font-size: clamp(22px, 2.3vw, 30px);
+      letter-spacing: -0.035em;
+    }
+
+    .v2-history-tabs {
+      display: flex;
+      gap: 7px;
+      margin: 12px 0 10px;
+      padding: 5px;
+      width: fit-content;
+      max-width: 100%;
+      border: 1px solid var(--v2-divider);
+      border-radius: 13px;
+      background: rgba(255,255,255,.025);
+      overflow-x: auto;
+    }
+
+    .v2-history-tab {
+      appearance: none;
+      border: 0;
+      border-radius: 9px;
+      padding: 8px 12px;
+      background: transparent;
+      color: var(--muted);
+      font: inherit;
+      font-size: 11px;
+      font-weight: 700;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    .v2-history-tab.active {
+      background: rgba(88,214,255,.12);
+      color: #eaf8ff;
+    }
+
+    .v2-history-panel[hidden] {
+      display: none !important;
+    }
+
+    .seasonal-percentile-box {
+      opacity: .70;
+      transform: scale(.88);
+      transform-origin: top right;
+    }
+
+    @media (max-width: 900px) {
+      .dashboard {
+        width: min(100% - 24px, 1320px);
+      }
+
+      .hero-card.v2-hero {
+        grid-template-columns: 1fr;
+        padding: 22px;
+      }
+
+      .v2-hero .hero-right {
+        border-left: 0;
+        border-top: 1px solid var(--v2-divider);
+        padding: 18px 0 0;
+      }
+
+      .repiquete-context-grid {
+        grid-template-columns: 1fr !important;
+      }
+
+      .river-radar-track {
+        grid-template-columns: 1fr !important;
+        gap: 8px !important;
+        padding-top: 6px !important;
+      }
+
+      .river-radar-line,
+      .river-radar-flow,
+      .river-radar-node-wrap,
+      .river-radar-direction {
+        display: none !important;
+      }
+
+      .river-radar-station {
+        text-align: left !important;
+      }
+
+      .river-radar-card {
+        min-height: 0 !important;
+        margin-top: 0 !important;
+        padding: 13px 14px !important;
+        display: grid !important;
+        grid-template-columns: minmax(120px, 1fr) auto;
+        column-gap: 12px;
+        align-items: center;
+      }
+
+      .river-radar-main-value,
+      .river-radar-main-label,
+      .river-radar-mini,
+      .river-radar-status {
+        grid-column: 2;
+      }
+
+      .river-radar-name,
+      .river-radar-code,
+      .river-radar-time {
+        grid-column: 1;
+      }
+
+      .river-radar-main-value {
+        grid-row: 1;
+        margin: 0 !important;
+        text-align: right;
+      }
+
+      .river-radar-main-label {
+        grid-row: 2;
+        margin-top: 2px !important;
+        text-align: right;
+      }
+
+      .river-radar-mini {
+        grid-row: 3;
+        justify-content: flex-end !important;
+        margin-top: 7px !important;
+      }
+
+      .river-radar-status {
+        grid-row: 4;
+        justify-self: end;
+        margin-top: 7px !important;
+      }
+
+      .river-radar-destination {
+        position: static !important;
+        width: fit-content;
+        margin-top: 6px;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .dashboard {
+        width: calc(100% - 18px);
+        padding-top: 14px;
+      }
+
+      .topbar {
+        gap: 14px;
+      }
+
+      .status-area {
+        width: 100%;
+      }
+
+      .hero-card.v2-hero {
+        padding: 18px;
+        border-radius: 18px;
+      }
+
+      .v2-hero .level-number {
+        font-size: 64px;
+      }
+
+      .v2-hero .trend-icon {
+        width: 52px;
+        height: 52px;
+        font-size: 31px;
+      }
+
+      .v2-hero .trend-text {
+        font-size: 24px;
+      }
+
+      .metrics-grid.v2-metrics {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+      }
+
+      .v2-metrics .metric-card {
+        padding: 11px 12px;
+      }
+
+      .repiquete-card,
+      .river-radar-section,
+      .chart-card,
+      .seasonal-card,
+      .annual-chart-card {
+        border-radius: 18px !important;
+      }
+
+      .repiquete-card,
+      .river-radar-section {
+        padding: 18px 14px !important;
+      }
+
+      .repiquete-progress {
+        overflow-x: auto;
+        padding-bottom: 5px;
+      }
+
+      .repiquete-stage {
+        min-width: 92px;
+      }
+
+      .upstream-grid {
+        grid-template-columns: 1fr !important;
+      }
+
+      .upstream-card {
+        padding: 14px;
+      }
+
+      .chart-card {
+        padding: 18px 12px !important;
+      }
+
+      .chart-container,
+      .annual-chart-container,
+      .seasonal-chart-container {
+        height: 250px !important;
+      }
+
+      .same-day-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      }
+
+      .same-day-header {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .river-radar-header,
+      .river-radar-footer {
+        display: block !important;
+      }
+
+      .river-radar-live {
+        margin-top: 10px;
+      }
+
+      .river-radar-footer > * + * {
+        margin-top: 8px;
+      }
+
+      .river-radar-card {
+        grid-template-columns: 1fr auto;
+      }
+
+      .river-radar-mini {
+        flex-wrap: wrap;
+      }
+    }
+
+    @media (max-width: 390px) {
+      .metrics-grid.v2-metrics {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      }
+
+      .v2-metrics .metric-value {
+        font-size: 23px;
+      }
+
+      .river-radar-card {
+        grid-template-columns: 1fr;
+      }
+
+      .river-radar-main-value,
+      .river-radar-main-label,
+      .river-radar-mini,
+      .river-radar-status,
+      .river-radar-name,
+      .river-radar-code,
+      .river-radar-time {
+        grid-column: 1;
+        text-align: left;
+        justify-content: flex-start !important;
+        justify-self: start;
+      }
+
+      .river-radar-main-value {
+        margin-top: 10px !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="dashboard">
+
+    <header class="topbar">
+      <div>
+        <div class="eyebrow">MONITORAMENTO HIDROLÓGICO</div>
+        <h1>Rio Negro</h1>
+        <div class="location">Barcelos • Amazonas</div>
+      </div>
+
+      <div class="status-area">
+        <div id="status-dot" class="status-dot"></div>
+        <div>
+          <div id="status-text" class="status-text">Carregando dados...</div>
+          <div id="last-update" class="status-time">—</div>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero-card">
+      <div class="hero-left">
+        <div class="section-label">NÍVEL ATUAL</div>
+
+        <div class="level-line">
+          <span id="level" class="level-number">——</span>
+          <span class="level-unit">m</span>
+        </div>
+
+        <div id="measurement-time" class="measurement-time">
+          Última medição ANA: —
+        </div>
+
+        <div id="ana-update-time" class="ana-update-time">
+          ANA atualizou o registro: —
+        </div>
+
+        <div id="collector-update-time" class="ana-update-time">
+          Nosso sistema consultou a ANA: —
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div id="trend-icon" class="trend-icon">→</div>
+
+        <div>
+          <div class="section-label">TENDÊNCIA RECENTE</div>
+          <div id="trend-text" class="trend-text">—</div>
+          <div class="trend-detail">baseada nas últimas 6 horas</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="alert-card" class="alert-card loading">
+      <div class="alert-main">
+        <div class="section-label">ALERTA ANTECIPADO</div>
+
+        <div class="alert-heading">
+          <div id="alert-badge" class="alert-badge">ANALISANDO</div>
+          <div id="alert-icon" class="alert-icon">…</div>
+        </div>
+
+        <h2 id="alert-title" class="alert-title">
+          Analisando comportamento a montante
+        </h2>
+
+        <div id="alert-message" class="alert-message">
+          Comparando o comportamento recente de Serrinha,
+          Curicuriari e Barcelos com o histórico disponível.
+        </div>
+
+        <div id="alert-reasons" class="alert-reasons"></div>
+      </div>
+
+      <div class="alert-side">
+        <div class="alert-info-box">
+          <div class="alert-info-label">EVENTO EM SERRINHA</div>
+          <div id="alert-event-status" class="alert-info-value">—</div>
+          <div id="alert-event-detail" class="alert-info-detail">
+            Verificando critérios
+          </div>
+        </div>
+
+        <div class="alert-info-box">
+          <div class="alert-info-label">JANELA HISTÓRICA</div>
+          <div id="alert-window" class="alert-info-value">—</div>
+          <div id="alert-window-detail" class="alert-info-detail">
+            Aplicável somente após evento confirmado
+          </div>
+        </div>
+
+        <div class="alert-info-box historical-box">
+          <div class="alert-info-label">HISTÓRICO SERRINHA → BARCELOS</div>
+          <div id="alert-history" class="alert-history-value">—</div>
+          <div id="alert-history-detail" class="alert-info-detail">
+            Carregando base histórica
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="metrics-grid">
+      <article class="metric-card">
+        <div class="metric-label">ÚLTIMAS 6 HORAS</div>
+        <div id="variation-6h" class="metric-value">—</div>
+        <div class="metric-description">variação do nível</div>
+      </article>
+
+      <article class="metric-card">
+        <div class="metric-label">ÚLTIMAS 24 HORAS</div>
+        <div id="variation-24h" class="metric-value">—</div>
+        <div class="metric-description">variação do nível</div>
+      </article>
+
+      <article class="metric-card">
+        <div class="metric-label">ÚLTIMOS 7 DIAS</div>
+        <div id="variation-7d" class="metric-value">—</div>
+        <div class="metric-description">variação acumulada</div>
+      </article>
+
+      <article class="metric-card">
+        <div class="metric-label">ESTAÇÃO</div>
+        <div class="station-value">14480002</div>
+        <div class="metric-description">ANA • Barcelos</div>
+      </article>
+    </section>
+
+    <section class="upstream-section">
+      <div class="upstream-header">
+        <div>
+          <div class="section-label">RIO NEGRO A MONTANTE</div>
+          <h2>Movimento do rio antes de Barcelos</h2>
+        </div>
+
+        <div class="upstream-note">Dados automáticos da ANA</div>
+      </div>
+
+      <div id="upstream-grid" class="upstream-grid">
+        <div class="upstream-loading">Carregando estações...</div>
+      </div>
+
+      <div class="propagation-card">
+        <div>
+          <div class="section-label">PROPAGAÇÃO</div>
+          <div id="propagation-title" class="propagation-title">
+            Analisando estações a montante
+          </div>
+          <div id="propagation-text" class="propagation-text">
+            Comparando Cucuí, Taracuá, Curicuriari, Serrinha e Barcelos.
+          </div>
+        </div>
+
+        <div id="propagation-icon" class="propagation-icon">→</div>
+      </div>
+    </section>
+
+    <section class="chart-card">
+      <div class="chart-header">
+        <div>
+          <div class="section-label">COMPORTAMENTO DO RIO</div>
+          <h2>Nível em Barcelos nos últimos 30 dias</h2>
+        </div>
+
+        <div class="chart-info">
+          <span id="records-count">—</span>
+          medições disponíveis
+        </div>
+      </div>
+
+      <div class="chart-container">
+        <canvas id="river-chart"></canvas>
+      </div>
+    </section>
+
+    <section class="chart-card annual-chart-card">
+      <div class="chart-header">
+        <div>
+          <div class="section-label">COMPARATIVO HISTÓRICO</div>
+          <h2>Barcelos ao longo dos anos</h2>
+          <div class="chart-subtitle">
+            Comparação diária dos níveis de 2023, 2024, 2025 e 2026
+          </div>
+        </div>
+
+        <div class="chart-info">
+          Estação <span>14480002</span>
+        </div>
+      </div>
+
+      <div class="same-day-panel">
+        <div class="same-day-header">
+          <div>
+            <div class="same-day-kicker">MESMA DATA NOS OUTROS ANOS</div>
+            <div id="same-day-title" class="same-day-title">
+              Comparando o nível atual
+            </div>
+          </div>
+
+          <div id="same-day-reference" class="same-day-reference">—</div>
+        </div>
+
+        <div id="same-day-grid" class="same-day-grid">
+          <div class="same-day-loading">
+            Calculando comparação histórica...
+          </div>
+        </div>
+
+        <div id="same-day-summary" class="same-day-summary">
+          Comparando a data mais recente disponível
+          com a mesma data dos anos anteriores.
+        </div>
+      </div>
+
+      <div id="annual-chart-status" class="annual-chart-status">
+        Carregando comparativo histórico...
+      </div>
+
+      <div class="chart-container annual-chart-container">
+        <canvas id="annual-chart"></canvas>
+      </div>
+
+      <div class="annual-chart-note">
+        2023 possui dados a partir de 24/09.
+        2026 representa o ano em andamento.
+        Interrupções nas linhas indicam períodos sem dados disponíveis.
+      </div>
+    </section>
+
+    <footer>
+      <div>
+        Fonte:
+        <strong>Agência Nacional de Águas e Saneamento Básico — ANA</strong>
+      </div>
+
+      <div>Atualização automática</div>
+    </footer>
+
+  </main>
+
+  <script src="js/dashboard.js?v=9"></script>
+  <script src="js/seasonal.js?v=3"></script>
+  <script src="js/partial-day.js?v=1"></script>
+  <script src="js/repiquete.js?v=2"></script>
+  <script src="js/ritmo.js?v=1"></script>
+  <script src="js/radar.js?v=4"></script>
+  <script src="js/pulso.js?v=4"></script>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const REFRESH_MS = 5 * 60 * 1000;
+
+      function signed(value) {
+        const n = Number(value);
+
+        if (!Number.isFinite(n)) {
+          return "—";
+        }
+
+        if (n > 0) {
+          return `+${Math.abs(n).toFixed(Number.isInteger(n) ? 0 : 1).replace(".", ",")} cm`;
+        }
+
+        if (n < 0) {
+          return `-${Math.abs(n).toFixed(Number.isInteger(n) ? 0 : 1).replace(".", ",")} cm`;
+        }
+
+        return "0 cm";
+      }
+
+      function variationClass(value) {
+        const n = Number(value);
+
+        if (!Number.isFinite(n) || n === 0) {
+          return "neutral";
+        }
+
+        return n > 0 ? "positive" : "negative";
+      }
+
+      function enhanceHeroStructure() {
+        const hero = document.querySelector(".hero-card");
+        const metrics = document.querySelector(".metrics-grid");
+
+        if (!hero || !metrics) {
+          return;
+        }
+
+        hero.classList.add("v2-hero");
+        metrics.classList.add("v2-metrics");
+
+        const stationCard = metrics.querySelector(".station-value")?.closest(".metric-card");
+
+        if (stationCard) {
+          stationCard.remove();
+        }
+
+        if (!document.getElementById("variation-72h")) {
+          const sevenDay = document.getElementById("variation-7d")?.closest(".metric-card");
+
+          const card = document.createElement("article");
+          card.className = "metric-card";
+          card.innerHTML = `
+            <div class="metric-label">ÚLTIMAS 72 HORAS</div>
+            <div id="variation-72h" class="metric-value">—</div>
+            <div class="metric-description">variação acumulada</div>
+          `;
+
+          if (sevenDay) {
+            metrics.insertBefore(card, sevenDay);
+          } else {
+            metrics.appendChild(card);
+          }
+        }
+
+        if (!hero.contains(metrics)) {
+          hero.appendChild(metrics);
+        }
+
+        const anaUpdate = document.getElementById("ana-update-time");
+        const collectorUpdate = document.getElementById("collector-update-time");
+
+        if (
+          anaUpdate &&
+          collectorUpdate &&
+          !document.querySelector(".v2-update-details")
+        ) {
+          const details = document.createElement("details");
+          details.className = "v2-update-details";
+          details.innerHTML = "<summary>Detalhes da atualização</summary>";
+
+          anaUpdate.parentNode.insertBefore(details, anaUpdate);
+          details.appendChild(anaUpdate);
+          details.appendChild(collectorUpdate);
+        }
+      }
+
+      async function loadLatestV2() {
+        try {
+          const response = await fetch(
+            `data/latest.json?v=${Date.now()}`,
+            { cache: "no-store" }
+          );
+
+          if (!response.ok) {
+            return;
+          }
+
+          const data = await response.json();
+
+          const v72 = document.getElementById("variation-72h");
+
+          if (v72) {
+            v72.textContent = signed(data.variacao_72h_cm);
+            v72.className = `metric-value ${variationClass(data.variacao_72h_cm)}`;
+          }
+
+          const trend = document.getElementById("trend-text");
+          const v6 = Number(data.variacao_6h_cm);
+
+          if (trend && Number.isFinite(v6)) {
+            if (v6 === 0) {
+              trend.textContent = "Estável";
+            } else if (Math.abs(v6) <= 2) {
+              trend.textContent = v6 > 0 ? "Leve alta" : "Leve queda";
+            }
+          }
+        } catch (error) {
+          console.debug("V2: não foi possível atualizar o resumo visual.", error);
+        }
+      }
+
+      function nextTriggerText(data) {
+        const level = Number(data?.nivel ?? 0);
+        const criteria = data?.criterios || {};
+
+        if (level <= 0) {
+          return "Aguardando um sinal consistente de alta nas estações a montante.";
+        }
+
+        if (level === 1) {
+          return (
+            `Confirmar alta sustentada em Serrinha. O detector usa como referência ` +
+            `alta de +${Number(criteria.alta_confirmacao_24h_cm ?? 3).toFixed(0)} cm/24 h.`
+          );
+        }
+
+        if (level === 2) {
+          return "Aguardar persistência da reversão observada em Barcelos nos próximos checkpoints.";
+        }
+
+        if (level === 3) {
+          return (
+            `Aguardar o critério de confirmação: ${Number(criteria.confirmacoes ?? 3)} ` +
+            `verificações consecutivas separadas por ${Number(criteria.intervalo_confirmacoes_h ?? 6)} h.`
+          );
+        }
+
+        return "Movimento confirmado pelo critério atual do detector.";
+      }
+
+      function enhanceRepiqueteDOM() {
+        const card = document.getElementById("repiquete-card");
+
+        if (!card) {
+          return;
+        }
+
+        const messageCard = card.querySelector(".repiquete-message-card");
+
+        if (messageCard && !document.querySelector(".v2-next-trigger")) {
+          const box = document.createElement("div");
+          box.className = "v2-next-trigger";
+          box.innerHTML = `
+            <div class="v2-next-trigger-label">PRÓXIMO GATILHO</div>
+            <div id="v2-next-trigger-text" class="v2-next-trigger-text">Calculando...</div>
+            <div id="v2-history-inline" class="v2-history-inline"></div>
+          `;
+          messageCard.appendChild(box);
+        }
+      }
+
+      async function loadRepiqueteV2() {
+        try {
+          const response = await fetch(
+            `data/repiquete.json?v=${Date.now()}`,
+            { cache: "no-store" }
+          );
+
+          if (!response.ok) {
+            return;
+          }
+
+          const data = await response.json();
+
+          enhanceRepiqueteDOM();
+
+          const next = document.getElementById("v2-next-trigger-text");
+
+          if (next) {
+            next.textContent = nextTriggerText(data);
+          }
+
+          const checkpoints = data?.ultimos_checkpoints_barcelos || [];
+
+          if (checkpoints.length >= 2) {
+            const current = checkpoints[checkpoints.length - 1];
+            const previous = checkpoints[checkpoints.length - 2];
+            const current6 = Number(current?.variacao_6h_cm);
+            const previous6 = Number(previous?.variacao_6h_cm);
+            const status = document.getElementById("ritmo-status");
+            const detail = document.getElementById("ritmo-status-detail");
+
+            if (
+              status &&
+              detail &&
+              Number.isFinite(current6) &&
+              Number.isFinite(previous6) &&
+              current6 < 0 &&
+              previous6 > 0
+            ) {
+              status.textContent = "VIROU PARA QUEDA";
+              detail.textContent = "O último bloco passou de alta para queda.";
+            }
+          }
+
+          setTimeout(copyHiddenHistory, 100);
+        } catch (error) {
+          console.debug("V2: não foi possível atualizar o detector visual.", error);
+        }
+      }
+
+      function copyHiddenHistory() {
+        const target = document.getElementById("v2-history-inline");
+
+        if (!target) {
+          return;
+        }
+
+        const eventStatus = document.getElementById("alert-event-status")?.textContent?.trim();
+        const history = document.getElementById("alert-history")?.textContent?.trim();
+        const historyDetail = document.getElementById("alert-history-detail")?.textContent?.trim();
+
+        const pieces = [];
+
+        if (eventStatus && eventStatus !== "—") {
+          pieces.push(`Serrinha: ${eventStatus.toLowerCase()}`);
+        }
+
+        if (history && history !== "—") {
+          pieces.push(`Histórico Serrinha → Barcelos: ${history}`);
+        }
+
+        if (historyDetail && historyDetail !== "—") {
+          pieces.push(historyDetail);
+        }
+
+        target.textContent = pieces.join(" • ");
+        target.hidden = pieces.length === 0;
+      }
+
+      function setupHistoryTabs() {
+        if (document.querySelector(".v2-history-tabs")) {
+          return;
+        }
+
+        const riverCanvas = document.getElementById("river-chart");
+        const thirty = riverCanvas?.closest(".chart-card");
+        const seasonal = document.getElementById("seasonal-card");
+        const annual = document.querySelector(".annual-chart-card");
+
+        if (!thirty || !seasonal || !annual) {
+          return;
+        }
+
+        const heading = document.createElement("div");
+        heading.className = "v2-history-heading";
+        heading.innerHTML = `
+          <div class="section-label">HISTÓRICO DE BARCELOS</div>
+          <h2>Escolha a leitura histórica</h2>
+        `;
+
+        const tabs = document.createElement("div");
+        tabs.className = "v2-history-tabs";
+        tabs.setAttribute("role", "tablist");
+
+        const items = [
+          { key: "30d", label: "30 dias", panel: thirty },
+          { key: "seasonal", label: "Sazonal", panel: seasonal },
+          { key: "annual", label: "Anos", panel: annual }
+        ];
+
+        items.forEach((item, index) => {
+          item.panel.classList.add("v2-history-panel");
+          item.panel.dataset.v2History = item.key;
+          item.panel.hidden = index !== 0;
+
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = `v2-history-tab${index === 0 ? " active" : ""}`;
+          button.textContent = item.label;
+          button.dataset.target = item.key;
+          button.setAttribute("role", "tab");
+          button.setAttribute("aria-selected", index === 0 ? "true" : "false");
+
+          button.addEventListener("click", () => {
+            items.forEach((candidate) => {
+              candidate.panel.hidden = candidate.key !== item.key;
+            });
+
+            tabs.querySelectorAll(".v2-history-tab").forEach((tab) => {
+              const active = tab.dataset.target === item.key;
+              tab.classList.toggle("active", active);
+              tab.setAttribute("aria-selected", active ? "true" : "false");
+            });
+
+            requestAnimationFrame(() => {
+              try {
+                const canvas = item.panel.querySelector("canvas");
+                if (canvas && window.Chart?.getChart) {
+                  window.Chart.getChart(canvas)?.resize();
+                }
+              } catch (_) {}
+            });
+          });
+
+          tabs.appendChild(button);
+        });
+
+        thirty.parentNode.insertBefore(heading, thirty);
+        thirty.parentNode.insertBefore(tabs, thirty);
+
+        const seasonalLabel = seasonal.querySelector(".seasonal-stat-card .seasonal-mini-label");
+
+        if (seasonalLabel && seasonalLabel.textContent.trim() === "NÍVEL DO DIA") {
+          seasonalLabel.textContent = "MEDIANA DIÁRIA • PARCIAL";
+        }
+      }
+
+      function applyV2() {
+        enhanceHeroStructure();
+        enhanceRepiqueteDOM();
+        setupHistoryTabs();
+        copyHiddenHistory();
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        applyV2();
+
+        setTimeout(applyV2, 250);
+        setTimeout(applyV2, 900);
+        setTimeout(applyV2, 1800);
+
+        loadLatestV2();
+        loadRepiqueteV2();
+
+        setInterval(loadLatestV2, REFRESH_MS);
+        setInterval(loadRepiqueteV2, REFRESH_MS);
+
+        const observer = new MutationObserver(() => {
+          applyV2();
+        });
+
+        observer.observe(document.body, {
+          childList: true,
+          subtree: true
+        });
+
+        setTimeout(() => {
+          observer.disconnect();
+        }, 5000);
+      });
+    })();
+  </script>
+
+</body>
+</html>

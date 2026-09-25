@@ -1,5 +1,5 @@
 {
-  "gerado_em_utc": "2026-09-25T12:49:55.931680+00:00",
+  "gerado_em_utc": "2026-09-25T13:20:03.676878+00:00",
   "timezone": "America/Manaus",
   "nivel": 2,
   "status": "possivel_reversao",
@@ -126,17 +126,17 @@
       "variacao_72h_cm": 7.0,
       "variacao_7d_cm": 33.0,
       "tendencia": "estavel",
-      "data_medicao_manaus": "2026-09-25 07:45:00"
+      "data_medicao_manaus": "2026-09-25 08:45:00"
     },
     "serrinha": {
       "nome": "Serrinha",
       "nivel_m": 6.55,
       "variacao_6h_cm": 0.0,
-      "variacao_24h_cm": 0.0,
+      "variacao_24h_cm": 1.0,
       "variacao_72h_cm": 4.0,
       "variacao_7d_cm": 12.0,
       "tendencia": "estavel",
-      "data_medicao_manaus": "2026-09-25 07:30:00"
+      "data_medicao_manaus": "2026-09-25 08:30:00"
     },
     "barcelos": {
       "nome": "Barcelos",
@@ -146,7 +146,7 @@
       "variacao_72h_cm": -4.0,
       "variacao_7d_cm": -26.0,
       "tendencia": "subindo",
-      "data_medicao_manaus": "2026-09-25 08:00:00"
+      "data_medicao_manaus": "2026-09-25 09:00:00"
     }
   },
   "aviso": "Detector experimental de mudança de tendência. 'Possível reversão' e 'repiquete em formação' não são confirmações. O estado confirmado exige persistência da alta em Barcelos e descreve um movimento já observado, não uma previsão."

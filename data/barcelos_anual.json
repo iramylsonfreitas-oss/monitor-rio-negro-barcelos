@@ -1,0 +1,6563 @@
+{
+  "estacao": "14480002",
+  "nome": "Barcelos",
+  "unidade": "m",
+  "agregacao": "mediana diária dos níveis horários",
+  "gerado_em_utc": "2026-09-25T00:33:16.568201+00:00",
+  "anos": [
+    "2023",
+    "2024",
+    "2025",
+    "2026"
+  ],
+  "resumo": {
+    "2023": {
+      "dias_disponiveis": 99,
+      "primeira_data": "2023-09-24",
+      "ultima_data": "2023-12-31",
+      "nivel_min_m": 1.71,
+      "nivel_max_m": 3.34
+    },
+    "2024": {
+      "dias_disponiveis": 366,
+      "primeira_data": "2024-01-01",
+      "ultima_data": "2024-12-31",
+      "nivel_min_m": 2.033,
+      "nivel_max_m": 8.36
+    },
+    "2025": {
+      "dias_disponiveis": 365,
+      "primeira_data": "2025-01-01",
+      "ultima_data": "2025-12-31",
+      "nivel_min_m": 3.25,
+      "nivel_max_m": 9.72
+    },
+    "2026": {
+      "dias_disponiveis": 255,
+      "primeira_data": "2026-01-01",
+      "ultima_data": "2026-09-24",
+      "nivel_min_m": 2.96,
+      "nivel_max_m": 9.401
+    }
+  },
+  "series": {
+    "2023": [
+      {
+        "data": "2023-09-24",
+        "dia_mes": "09-24",
+        "nivel_m": 2.78,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2023-09-25",
+        "dia_mes": "09-25",
+        "nivel_m": 2.76,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2023-09-26",
+        "dia_mes": "09-26",
+        "nivel_m": 2.75,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2023-09-27",
+        "dia_mes": "09-27",
+        "nivel_m": 2.74,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2023-09-28",
+        "dia_mes": "09-28",
+        "nivel_m": 2.72,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2023-09-29",
+        "dia_mes": "09-29",
+        "nivel_m": 2.7,
+        "amostras_horarias": 22
+      },
+      {
+        "data": "2023-09-30",
+        "dia_mes": "09-30",
+        "nivel_m": 2.66,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2023-10-01",
+        "dia_mes": "10-01",
+        "nivel_m": 2.61,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2023-10-02",
+        "dia_mes": "10-02",
+        "nivel_m": 2.57,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2023-10-03",
+        "dia_mes": "10-03",
+        "nivel_m": 2.52,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2023-10-04",
+        "dia_mes": "10-04",
+        "nivel_m": 2.5,
+        "amostras_horarias": 3
+      },
+      {
+        "data": "2023-10-05",
+        "dia_mes": "10-05",
+        "nivel_m": 2.52,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-10-06",
+        "dia_mes": "10-06",
+        "nivel_m": 2.48,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-10-07",
+        "dia_mes": "10-07",
+        "nivel_m": 2.44,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-10-08",
+        "dia_mes": "10-08",
+        "nivel_m": 2.4,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-10-09",
+        "dia_mes": "10-09",
+        "nivel_m": 2.37,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-10-10",
+        "dia_mes": "10-10",
+        "nivel_m": 2.32,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-10-11",
+        "dia_mes": "10-11",
+        "nivel_m": 2.27,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-10-12",
+        "dia_mes": "10-12",
+        "nivel_m": 2.2,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-10-13",
+        "dia_mes": "10-13",
+        "nivel_m": 2.14,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-10-14",
+        "dia_mes": "10-14",
+        "nivel_m": 2.08,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2023-10-15",
+        "dia_mes": "10-15",
+        "nivel_m": 2.02,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-10-16",
+        "dia_mes": "10-16",
+        "nivel_m": 1.97,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-10-17",
+        "dia_mes": "10-17",
+        "nivel_m": 1.92,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-10-18",
+        "dia_mes": "10-18",
+        "nivel_m": 1.86,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-10-19",
+        "dia_mes": "10-19",
+        "nivel_m": 1.81,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-10-20",
+        "dia_mes": "10-20",
+        "nivel_m": 1.76,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-10-21",
+        "dia_mes": "10-21",
+        "nivel_m": 1.73,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-10-22",
+        "dia_mes": "10-22",
+        "nivel_m": 1.74,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-10-23",
+        "dia_mes": "10-23",
+        "nivel_m": 1.75,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-10-24",
+        "dia_mes": "10-24",
+        "nivel_m": 1.78,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-10-25",
+        "dia_mes": "10-25",
+        "nivel_m": 1.8,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-10-26",
+        "dia_mes": "10-26",
+        "nivel_m": 1.84,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-10-27",
+        "dia_mes": "10-27",
+        "nivel_m": 1.88,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-10-28",
+        "dia_mes": "10-28",
+        "nivel_m": 1.91,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-10-29",
+        "dia_mes": "10-29",
+        "nivel_m": 1.94,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-10-30",
+        "dia_mes": "10-30",
+        "nivel_m": 1.98,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-10-31",
+        "dia_mes": "10-31",
+        "nivel_m": 2.02,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-11-01",
+        "dia_mes": "11-01",
+        "nivel_m": 2.06,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-11-02",
+        "dia_mes": "11-02",
+        "nivel_m": 2.09,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-11-03",
+        "dia_mes": "11-03",
+        "nivel_m": 2.12,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-11-04",
+        "dia_mes": "11-04",
+        "nivel_m": 2.12,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-11-05",
+        "dia_mes": "11-05",
+        "nivel_m": 2.12,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-11-06",
+        "dia_mes": "11-06",
+        "nivel_m": 2.12,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-11-07",
+        "dia_mes": "11-07",
+        "nivel_m": 2.08,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-11-08",
+        "dia_mes": "11-08",
+        "nivel_m": 2.02,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-11-09",
+        "dia_mes": "11-09",
+        "nivel_m": 1.96,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-11-10",
+        "dia_mes": "11-10",
+        "nivel_m": 1.91,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-11-11",
+        "dia_mes": "11-11",
+        "nivel_m": 1.86,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-11-12",
+        "dia_mes": "11-12",
+        "nivel_m": 1.81,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-11-13",
+        "dia_mes": "11-13",
+        "nivel_m": 1.76,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-11-14",
+        "dia_mes": "11-14",
+        "nivel_m": 1.72,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-11-15",
+        "dia_mes": "11-15",
+        "nivel_m": 1.71,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-11-16",
+        "dia_mes": "11-16",
+        "nivel_m": 1.72,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-11-17",
+        "dia_mes": "11-17",
+        "nivel_m": 1.78,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-11-18",
+        "dia_mes": "11-18",
+        "nivel_m": 1.84,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-11-19",
+        "dia_mes": "11-19",
+        "nivel_m": 1.93,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-11-20",
+        "dia_mes": "11-20",
+        "nivel_m": 2.02,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2023-11-21",
+        "dia_mes": "11-21",
+        "nivel_m": 2.11,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-11-22",
+        "dia_mes": "11-22",
+        "nivel_m": 2.21,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-11-23",
+        "dia_mes": "11-23",
+        "nivel_m": 2.3,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-11-24",
+        "dia_mes": "11-24",
+        "nivel_m": 2.375,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2023-11-25",
+        "dia_mes": "11-25",
+        "nivel_m": 2.4,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-11-26",
+        "dia_mes": "11-26",
+        "nivel_m": 2.41,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-11-27",
+        "dia_mes": "11-27",
+        "nivel_m": 2.4,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-11-28",
+        "dia_mes": "11-28",
+        "nivel_m": 2.39,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-11-29",
+        "dia_mes": "11-29",
+        "nivel_m": 2.38,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-11-30",
+        "dia_mes": "11-30",
+        "nivel_m": 2.36,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-12-01",
+        "dia_mes": "12-01",
+        "nivel_m": 2.35,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-12-02",
+        "dia_mes": "12-02",
+        "nivel_m": 2.38,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-12-03",
+        "dia_mes": "12-03",
+        "nivel_m": 2.42,
+        "amostras_horarias": 1
+      },
+      {
+        "data": "2023-12-04",
+        "dia_mes": "12-04",
+        "nivel_m": 2.49,
+        "amostras_horarias": 13
+      },
+      {
+        "data": "2023-12-05",
+        "dia_mes": "12-05",
+        "nivel_m": 2.49,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2023-12-06",
+        "dia_mes": "12-06",
+        "nivel_m": 2.52,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2023-12-07",
+        "dia_mes": "12-07",
+        "nivel_m": 2.53,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2023-12-08",
+        "dia_mes": "12-08",
+        "nivel_m": 2.54,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2023-12-09",
+        "dia_mes": "12-09",
+        "nivel_m": 2.53,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2023-12-10",
+        "dia_mes": "12-10",
+        "nivel_m": 2.51,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2023-12-11",
+        "dia_mes": "12-11",
+        "nivel_m": 2.48,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2023-12-12",
+        "dia_mes": "12-12",
+        "nivel_m": 2.46,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2023-12-13",
+        "dia_mes": "12-13",
+        "nivel_m": 2.46,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2023-12-14",
+        "dia_mes": "12-14",
+        "nivel_m": 2.49,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2023-12-15",
+        "dia_mes": "12-15",
+        "nivel_m": 2.54,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2023-12-16",
+        "dia_mes": "12-16",
+        "nivel_m": 2.59,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2023-12-17",
+        "dia_mes": "12-17",
+        "nivel_m": 2.65,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2023-12-18",
+        "dia_mes": "12-18",
+        "nivel_m": 2.72,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2023-12-19",
+        "dia_mes": "12-19",
+        "nivel_m": 2.79,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2023-12-20",
+        "dia_mes": "12-20",
+        "nivel_m": 2.862,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2023-12-21",
+        "dia_mes": "12-21",
+        "nivel_m": 2.922,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2023-12-22",
+        "dia_mes": "12-22",
+        "nivel_m": 3.01,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2023-12-23",
+        "dia_mes": "12-23",
+        "nivel_m": 3.075,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2023-12-24",
+        "dia_mes": "12-24",
+        "nivel_m": 3.14,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2023-12-25",
+        "dia_mes": "12-25",
+        "nivel_m": 3.17,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2023-12-26",
+        "dia_mes": "12-26",
+        "nivel_m": 3.21,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2023-12-27",
+        "dia_mes": "12-27",
+        "nivel_m": 3.25,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2023-12-28",
+        "dia_mes": "12-28",
+        "nivel_m": 3.28,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2023-12-29",
+        "dia_mes": "12-29",
+        "nivel_m": 3.32,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2023-12-30",
+        "dia_mes": "12-30",
+        "nivel_m": 3.328,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2023-12-31",
+        "dia_mes": "12-31",
+        "nivel_m": 3.34,
+        "amostras_horarias": 24
+      }
+    ],
+    "2024": [
+      {
+        "data": "2024-01-01",
+        "dia_mes": "01-01",
+        "nivel_m": 3.34,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-01-02",
+        "dia_mes": "01-02",
+        "nivel_m": 3.34,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-01-03",
+        "dia_mes": "01-03",
+        "nivel_m": 3.36,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-01-04",
+        "dia_mes": "01-04",
+        "nivel_m": 3.39,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-01-05",
+        "dia_mes": "01-05",
+        "nivel_m": 3.42,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-01-06",
+        "dia_mes": "01-06",
+        "nivel_m": 3.46,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-01-07",
+        "dia_mes": "01-07",
+        "nivel_m": 3.5,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-01-08",
+        "dia_mes": "01-08",
+        "nivel_m": 3.52,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-01-09",
+        "dia_mes": "01-09",
+        "nivel_m": 3.52,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-01-10",
+        "dia_mes": "01-10",
+        "nivel_m": 3.51,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-01-11",
+        "dia_mes": "01-11",
+        "nivel_m": 3.49,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-01-12",
+        "dia_mes": "01-12",
+        "nivel_m": 3.455,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-01-13",
+        "dia_mes": "01-13",
+        "nivel_m": 3.4,
+        "amostras_horarias": 23
+      },
+      {
+        "data": "2024-01-14",
+        "dia_mes": "01-14",
+        "nivel_m": 3.37,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-01-15",
+        "dia_mes": "01-15",
+        "nivel_m": 3.285,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-01-16",
+        "dia_mes": "01-16",
+        "nivel_m": 3.22,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-01-17",
+        "dia_mes": "01-17",
+        "nivel_m": 3.167,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-01-18",
+        "dia_mes": "01-18",
+        "nivel_m": 3.13,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-01-19",
+        "dia_mes": "01-19",
+        "nivel_m": 3.16,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-01-20",
+        "dia_mes": "01-20",
+        "nivel_m": 3.16,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-01-21",
+        "dia_mes": "01-21",
+        "nivel_m": 3.16,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-01-22",
+        "dia_mes": "01-22",
+        "nivel_m": 3.16,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-01-23",
+        "dia_mes": "01-23",
+        "nivel_m": 3.14,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-01-24",
+        "dia_mes": "01-24",
+        "nivel_m": 3.12,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-01-25",
+        "dia_mes": "01-25",
+        "nivel_m": 3.09,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-01-26",
+        "dia_mes": "01-26",
+        "nivel_m": 3.07,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-01-27",
+        "dia_mes": "01-27",
+        "nivel_m": 3.047,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-01-28",
+        "dia_mes": "01-28",
+        "nivel_m": 3.03,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-01-29",
+        "dia_mes": "01-29",
+        "nivel_m": 3.02,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-01-30",
+        "dia_mes": "01-30",
+        "nivel_m": 3.02,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-01-31",
+        "dia_mes": "01-31",
+        "nivel_m": 3.0,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-02-01",
+        "dia_mes": "02-01",
+        "nivel_m": 2.98,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-02-02",
+        "dia_mes": "02-02",
+        "nivel_m": 2.96,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-02-03",
+        "dia_mes": "02-03",
+        "nivel_m": 2.93,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-02-04",
+        "dia_mes": "02-04",
+        "nivel_m": 2.88,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-02-05",
+        "dia_mes": "02-05",
+        "nivel_m": 2.83,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-02-06",
+        "dia_mes": "02-06",
+        "nivel_m": 2.78,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-02-07",
+        "dia_mes": "02-07",
+        "nivel_m": 2.73,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-02-08",
+        "dia_mes": "02-08",
+        "nivel_m": 2.67,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-02-09",
+        "dia_mes": "02-09",
+        "nivel_m": 2.612,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-02-10",
+        "dia_mes": "02-10",
+        "nivel_m": 2.558,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-02-11",
+        "dia_mes": "02-11",
+        "nivel_m": 2.51,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-02-12",
+        "dia_mes": "02-12",
+        "nivel_m": 2.48,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-02-13",
+        "dia_mes": "02-13",
+        "nivel_m": 2.462,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-02-14",
+        "dia_mes": "02-14",
+        "nivel_m": 2.48,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-02-15",
+        "dia_mes": "02-15",
+        "nivel_m": 2.493,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-02-16",
+        "dia_mes": "02-16",
+        "nivel_m": 2.51,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-02-17",
+        "dia_mes": "02-17",
+        "nivel_m": 2.51,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-02-18",
+        "dia_mes": "02-18",
+        "nivel_m": 2.52,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-02-19",
+        "dia_mes": "02-19",
+        "nivel_m": 2.55,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-02-20",
+        "dia_mes": "02-20",
+        "nivel_m": 2.6,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-02-21",
+        "dia_mes": "02-21",
+        "nivel_m": 2.66,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-02-22",
+        "dia_mes": "02-22",
+        "nivel_m": 2.72,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-02-23",
+        "dia_mes": "02-23",
+        "nivel_m": 2.78,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-02-24",
+        "dia_mes": "02-24",
+        "nivel_m": 2.825,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-02-25",
+        "dia_mes": "02-25",
+        "nivel_m": 2.85,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-02-26",
+        "dia_mes": "02-26",
+        "nivel_m": 2.975,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-02-27",
+        "dia_mes": "02-27",
+        "nivel_m": 2.97,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-02-28",
+        "dia_mes": "02-28",
+        "nivel_m": 2.93,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-02-29",
+        "dia_mes": "02-29",
+        "nivel_m": 2.885,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-03-01",
+        "dia_mes": "03-01",
+        "nivel_m": 2.84,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-03-02",
+        "dia_mes": "03-02",
+        "nivel_m": 2.84,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-03-03",
+        "dia_mes": "03-03",
+        "nivel_m": 2.8,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-03-04",
+        "dia_mes": "03-04",
+        "nivel_m": 2.71,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-03-05",
+        "dia_mes": "03-05",
+        "nivel_m": 2.62,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-03-06",
+        "dia_mes": "03-06",
+        "nivel_m": 2.545,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-03-07",
+        "dia_mes": "03-07",
+        "nivel_m": 2.49,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-03-08",
+        "dia_mes": "03-08",
+        "nivel_m": 2.44,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-03-09",
+        "dia_mes": "03-09",
+        "nivel_m": 2.42,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-03-10",
+        "dia_mes": "03-10",
+        "nivel_m": 2.362,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-03-11",
+        "dia_mes": "03-11",
+        "nivel_m": 2.36,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-03-12",
+        "dia_mes": "03-12",
+        "nivel_m": 2.36,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-03-13",
+        "dia_mes": "03-13",
+        "nivel_m": 2.38,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-03-14",
+        "dia_mes": "03-14",
+        "nivel_m": 2.39,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-03-15",
+        "dia_mes": "03-15",
+        "nivel_m": 2.41,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-03-16",
+        "dia_mes": "03-16",
+        "nivel_m": 2.44,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-03-17",
+        "dia_mes": "03-17",
+        "nivel_m": 2.47,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-03-18",
+        "dia_mes": "03-18",
+        "nivel_m": 2.47,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-03-19",
+        "dia_mes": "03-19",
+        "nivel_m": 2.46,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-03-20",
+        "dia_mes": "03-20",
+        "nivel_m": 2.48,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-03-21",
+        "dia_mes": "03-21",
+        "nivel_m": 2.53,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-03-22",
+        "dia_mes": "03-22",
+        "nivel_m": 2.57,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-03-23",
+        "dia_mes": "03-23",
+        "nivel_m": 2.62,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-03-24",
+        "dia_mes": "03-24",
+        "nivel_m": 2.69,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-03-25",
+        "dia_mes": "03-25",
+        "nivel_m": 2.735,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-03-26",
+        "dia_mes": "03-26",
+        "nivel_m": 2.77,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-03-27",
+        "dia_mes": "03-27",
+        "nivel_m": 2.795,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-03-28",
+        "dia_mes": "03-28",
+        "nivel_m": 2.855,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-03-29",
+        "dia_mes": "03-29",
+        "nivel_m": 2.9,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-03-30",
+        "dia_mes": "03-30",
+        "nivel_m": 2.94,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-03-31",
+        "dia_mes": "03-31",
+        "nivel_m": 2.98,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-04-01",
+        "dia_mes": "04-01",
+        "nivel_m": 3.06,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-04-02",
+        "dia_mes": "04-02",
+        "nivel_m": 3.08,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-04-03",
+        "dia_mes": "04-03",
+        "nivel_m": 3.11,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-04-04",
+        "dia_mes": "04-04",
+        "nivel_m": 3.15,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-04-05",
+        "dia_mes": "04-05",
+        "nivel_m": 3.178,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-04-06",
+        "dia_mes": "04-06",
+        "nivel_m": 3.21,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-04-07",
+        "dia_mes": "04-07",
+        "nivel_m": 3.26,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-04-08",
+        "dia_mes": "04-08",
+        "nivel_m": 3.32,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-04-09",
+        "dia_mes": "04-09",
+        "nivel_m": 3.39,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-04-10",
+        "dia_mes": "04-10",
+        "nivel_m": 3.468,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-04-11",
+        "dia_mes": "04-11",
+        "nivel_m": 3.565,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-04-12",
+        "dia_mes": "04-12",
+        "nivel_m": 3.67,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-04-13",
+        "dia_mes": "04-13",
+        "nivel_m": 3.803,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-04-14",
+        "dia_mes": "04-14",
+        "nivel_m": 3.9,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-04-15",
+        "dia_mes": "04-15",
+        "nivel_m": 3.99,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-04-16",
+        "dia_mes": "04-16",
+        "nivel_m": 4.145,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-04-17",
+        "dia_mes": "04-17",
+        "nivel_m": 4.215,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-04-18",
+        "dia_mes": "04-18",
+        "nivel_m": 4.26,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-04-19",
+        "dia_mes": "04-19",
+        "nivel_m": 4.325,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-04-20",
+        "dia_mes": "04-20",
+        "nivel_m": 4.35,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-04-21",
+        "dia_mes": "04-21",
+        "nivel_m": 4.36,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-04-22",
+        "dia_mes": "04-22",
+        "nivel_m": 4.365,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-04-23",
+        "dia_mes": "04-23",
+        "nivel_m": 4.38,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-04-24",
+        "dia_mes": "04-24",
+        "nivel_m": 4.387,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-04-25",
+        "dia_mes": "04-25",
+        "nivel_m": 4.44,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-04-26",
+        "dia_mes": "04-26",
+        "nivel_m": 4.473,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-04-27",
+        "dia_mes": "04-27",
+        "nivel_m": 4.5,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-04-28",
+        "dia_mes": "04-28",
+        "nivel_m": 4.54,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-04-29",
+        "dia_mes": "04-29",
+        "nivel_m": 4.59,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-04-30",
+        "dia_mes": "04-30",
+        "nivel_m": 4.665,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-05-01",
+        "dia_mes": "05-01",
+        "nivel_m": 4.72,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-05-02",
+        "dia_mes": "05-02",
+        "nivel_m": 4.758,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-05-03",
+        "dia_mes": "05-03",
+        "nivel_m": 4.812,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-05-04",
+        "dia_mes": "05-04",
+        "nivel_m": 4.83,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-05-05",
+        "dia_mes": "05-05",
+        "nivel_m": 4.859,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-05-06",
+        "dia_mes": "05-06",
+        "nivel_m": 4.938,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-05-07",
+        "dia_mes": "05-07",
+        "nivel_m": 4.966,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-05-08",
+        "dia_mes": "05-08",
+        "nivel_m": 4.995,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-05-09",
+        "dia_mes": "05-09",
+        "nivel_m": 5.024,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-05-10",
+        "dia_mes": "05-10",
+        "nivel_m": 5.053,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-05-11",
+        "dia_mes": "05-11",
+        "nivel_m": 5.101,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-05-12",
+        "dia_mes": "05-12",
+        "nivel_m": 5.158,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-05-13",
+        "dia_mes": "05-13",
+        "nivel_m": 5.199,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-05-14",
+        "dia_mes": "05-14",
+        "nivel_m": 5.258,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-05-15",
+        "dia_mes": "05-15",
+        "nivel_m": 5.317,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-05-16",
+        "dia_mes": "05-16",
+        "nivel_m": 5.444,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-05-17",
+        "dia_mes": "05-17",
+        "nivel_m": 5.525,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-05-18",
+        "dia_mes": "05-18",
+        "nivel_m": 5.601,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-05-19",
+        "dia_mes": "05-19",
+        "nivel_m": 5.697,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-05-20",
+        "dia_mes": "05-20",
+        "nivel_m": 5.801,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-05-21",
+        "dia_mes": "05-21",
+        "nivel_m": 5.877,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-05-22",
+        "dia_mes": "05-22",
+        "nivel_m": 5.941,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-05-23",
+        "dia_mes": "05-23",
+        "nivel_m": 6.025,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-05-24",
+        "dia_mes": "05-24",
+        "nivel_m": 6.097,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-05-25",
+        "dia_mes": "05-25",
+        "nivel_m": 6.186,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-05-26",
+        "dia_mes": "05-26",
+        "nivel_m": 6.255,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-05-27",
+        "dia_mes": "05-27",
+        "nivel_m": 6.403,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-05-28",
+        "dia_mes": "05-28",
+        "nivel_m": 6.532,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-05-29",
+        "dia_mes": "05-29",
+        "nivel_m": 6.671,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-05-30",
+        "dia_mes": "05-30",
+        "nivel_m": 6.758,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-05-31",
+        "dia_mes": "05-31",
+        "nivel_m": 6.844,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-06-01",
+        "dia_mes": "06-01",
+        "nivel_m": 6.928,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-06-02",
+        "dia_mes": "06-02",
+        "nivel_m": 7.016,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-06-03",
+        "dia_mes": "06-03",
+        "nivel_m": 7.1,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-06-04",
+        "dia_mes": "06-04",
+        "nivel_m": 7.181,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-06-05",
+        "dia_mes": "06-05",
+        "nivel_m": 7.263,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-06-06",
+        "dia_mes": "06-06",
+        "nivel_m": 7.332,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-06-07",
+        "dia_mes": "06-07",
+        "nivel_m": 7.401,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-06-08",
+        "dia_mes": "06-08",
+        "nivel_m": 7.462,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-06-09",
+        "dia_mes": "06-09",
+        "nivel_m": 7.518,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-06-10",
+        "dia_mes": "06-10",
+        "nivel_m": 7.582,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-06-11",
+        "dia_mes": "06-11",
+        "nivel_m": 7.631,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-06-12",
+        "dia_mes": "06-12",
+        "nivel_m": 7.685,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-06-13",
+        "dia_mes": "06-13",
+        "nivel_m": 7.752,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-06-14",
+        "dia_mes": "06-14",
+        "nivel_m": 7.813,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-06-15",
+        "dia_mes": "06-15",
+        "nivel_m": 7.871,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-06-16",
+        "dia_mes": "06-16",
+        "nivel_m": 7.925,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-06-17",
+        "dia_mes": "06-17",
+        "nivel_m": 7.976,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-06-18",
+        "dia_mes": "06-18",
+        "nivel_m": 8.018,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-06-19",
+        "dia_mes": "06-19",
+        "nivel_m": 8.067,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-06-20",
+        "dia_mes": "06-20",
+        "nivel_m": 8.116,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-06-21",
+        "dia_mes": "06-21",
+        "nivel_m": 8.165,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-06-22",
+        "dia_mes": "06-22",
+        "nivel_m": 8.206,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-06-23",
+        "dia_mes": "06-23",
+        "nivel_m": 8.252,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-06-24",
+        "dia_mes": "06-24",
+        "nivel_m": 8.281,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-06-25",
+        "dia_mes": "06-25",
+        "nivel_m": 8.3,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-06-26",
+        "dia_mes": "06-26",
+        "nivel_m": 8.32,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-06-27",
+        "dia_mes": "06-27",
+        "nivel_m": 8.33,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-06-28",
+        "dia_mes": "06-28",
+        "nivel_m": 8.34,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-06-29",
+        "dia_mes": "06-29",
+        "nivel_m": 8.35,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-06-30",
+        "dia_mes": "06-30",
+        "nivel_m": 8.35,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-07-01",
+        "dia_mes": "07-01",
+        "nivel_m": 8.35,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-07-02",
+        "dia_mes": "07-02",
+        "nivel_m": 8.36,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-07-03",
+        "dia_mes": "07-03",
+        "nivel_m": 8.36,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-07-04",
+        "dia_mes": "07-04",
+        "nivel_m": 8.352,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-07-05",
+        "dia_mes": "07-05",
+        "nivel_m": 8.34,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-07-06",
+        "dia_mes": "07-06",
+        "nivel_m": 8.31,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-07-07",
+        "dia_mes": "07-07",
+        "nivel_m": 8.28,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-07-08",
+        "dia_mes": "07-08",
+        "nivel_m": 8.253,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-07-09",
+        "dia_mes": "07-09",
+        "nivel_m": 8.22,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-07-10",
+        "dia_mes": "07-10",
+        "nivel_m": 8.18,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-07-11",
+        "dia_mes": "07-11",
+        "nivel_m": 8.137,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-07-12",
+        "dia_mes": "07-12",
+        "nivel_m": 8.1,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-07-13",
+        "dia_mes": "07-13",
+        "nivel_m": 8.05,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-07-14",
+        "dia_mes": "07-14",
+        "nivel_m": 8.01,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-07-15",
+        "dia_mes": "07-15",
+        "nivel_m": 7.96,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-07-16",
+        "dia_mes": "07-16",
+        "nivel_m": 7.92,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-07-17",
+        "dia_mes": "07-17",
+        "nivel_m": 7.87,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-07-18",
+        "dia_mes": "07-18",
+        "nivel_m": 7.82,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-07-19",
+        "dia_mes": "07-19",
+        "nivel_m": 7.79,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-07-20",
+        "dia_mes": "07-20",
+        "nivel_m": 7.748,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-07-21",
+        "dia_mes": "07-21",
+        "nivel_m": 7.73,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-07-22",
+        "dia_mes": "07-22",
+        "nivel_m": 7.7,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-07-23",
+        "dia_mes": "07-23",
+        "nivel_m": 7.66,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-07-24",
+        "dia_mes": "07-24",
+        "nivel_m": 7.61,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-07-25",
+        "dia_mes": "07-25",
+        "nivel_m": 7.57,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-07-26",
+        "dia_mes": "07-26",
+        "nivel_m": 7.525,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-07-27",
+        "dia_mes": "07-27",
+        "nivel_m": 7.48,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-07-28",
+        "dia_mes": "07-28",
+        "nivel_m": 7.43,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-07-29",
+        "dia_mes": "07-29",
+        "nivel_m": 7.38,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-07-30",
+        "dia_mes": "07-30",
+        "nivel_m": 7.335,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-07-31",
+        "dia_mes": "07-31",
+        "nivel_m": 7.29,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-08-01",
+        "dia_mes": "08-01",
+        "nivel_m": 7.24,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-08-02",
+        "dia_mes": "08-02",
+        "nivel_m": 7.2,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-08-03",
+        "dia_mes": "08-03",
+        "nivel_m": 7.155,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-08-04",
+        "dia_mes": "08-04",
+        "nivel_m": 7.11,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-08-05",
+        "dia_mes": "08-05",
+        "nivel_m": 7.06,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-08-06",
+        "dia_mes": "08-06",
+        "nivel_m": 7.01,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-08-07",
+        "dia_mes": "08-07",
+        "nivel_m": 6.957,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-08-08",
+        "dia_mes": "08-08",
+        "nivel_m": 6.905,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-08-09",
+        "dia_mes": "08-09",
+        "nivel_m": 6.85,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-08-10",
+        "dia_mes": "08-10",
+        "nivel_m": 6.797,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-08-11",
+        "dia_mes": "08-11",
+        "nivel_m": 6.77,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-08-12",
+        "dia_mes": "08-12",
+        "nivel_m": 6.72,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-08-13",
+        "dia_mes": "08-13",
+        "nivel_m": 6.68,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-08-14",
+        "dia_mes": "08-14",
+        "nivel_m": 6.62,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-08-15",
+        "dia_mes": "08-15",
+        "nivel_m": 6.55,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-08-16",
+        "dia_mes": "08-16",
+        "nivel_m": 6.48,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-08-17",
+        "dia_mes": "08-17",
+        "nivel_m": 6.405,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-08-18",
+        "dia_mes": "08-18",
+        "nivel_m": 6.33,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-08-19",
+        "dia_mes": "08-19",
+        "nivel_m": 6.245,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-08-20",
+        "dia_mes": "08-20",
+        "nivel_m": 6.16,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-08-21",
+        "dia_mes": "08-21",
+        "nivel_m": 6.07,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-08-22",
+        "dia_mes": "08-22",
+        "nivel_m": 5.985,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-08-23",
+        "dia_mes": "08-23",
+        "nivel_m": 5.895,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-08-24",
+        "dia_mes": "08-24",
+        "nivel_m": 5.805,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-08-25",
+        "dia_mes": "08-25",
+        "nivel_m": 5.71,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-08-26",
+        "dia_mes": "08-26",
+        "nivel_m": 5.605,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-08-27",
+        "dia_mes": "08-27",
+        "nivel_m": 5.5,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-08-28",
+        "dia_mes": "08-28",
+        "nivel_m": 5.39,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-08-29",
+        "dia_mes": "08-29",
+        "nivel_m": 5.275,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-08-30",
+        "dia_mes": "08-30",
+        "nivel_m": 5.155,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-08-31",
+        "dia_mes": "08-31",
+        "nivel_m": 5.03,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-09-01",
+        "dia_mes": "09-01",
+        "nivel_m": 4.905,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-09-02",
+        "dia_mes": "09-02",
+        "nivel_m": 4.78,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-09-03",
+        "dia_mes": "09-03",
+        "nivel_m": 4.66,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-09-04",
+        "dia_mes": "09-04",
+        "nivel_m": 4.547,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-09-05",
+        "dia_mes": "09-05",
+        "nivel_m": 4.435,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-09-06",
+        "dia_mes": "09-06",
+        "nivel_m": 4.338,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-09-07",
+        "dia_mes": "09-07",
+        "nivel_m": 4.25,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-09-08",
+        "dia_mes": "09-08",
+        "nivel_m": 4.16,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-09-09",
+        "dia_mes": "09-09",
+        "nivel_m": 4.08,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-09-10",
+        "dia_mes": "09-10",
+        "nivel_m": 4.0,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-09-11",
+        "dia_mes": "09-11",
+        "nivel_m": 3.925,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-09-12",
+        "dia_mes": "09-12",
+        "nivel_m": 3.85,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-09-13",
+        "dia_mes": "09-13",
+        "nivel_m": 3.775,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-09-14",
+        "dia_mes": "09-14",
+        "nivel_m": 3.725,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-09-15",
+        "dia_mes": "09-15",
+        "nivel_m": 3.65,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-09-16",
+        "dia_mes": "09-16",
+        "nivel_m": 3.57,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-09-17",
+        "dia_mes": "09-17",
+        "nivel_m": 3.5,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-09-18",
+        "dia_mes": "09-18",
+        "nivel_m": 3.43,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-09-19",
+        "dia_mes": "09-19",
+        "nivel_m": 3.35,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-09-20",
+        "dia_mes": "09-20",
+        "nivel_m": 3.285,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-09-21",
+        "dia_mes": "09-21",
+        "nivel_m": 3.21,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-09-22",
+        "dia_mes": "09-22",
+        "nivel_m": 3.13,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-09-23",
+        "dia_mes": "09-23",
+        "nivel_m": 3.053,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-09-24",
+        "dia_mes": "09-24",
+        "nivel_m": 2.978,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-09-25",
+        "dia_mes": "09-25",
+        "nivel_m": 2.905,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-09-26",
+        "dia_mes": "09-26",
+        "nivel_m": 2.825,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-09-27",
+        "dia_mes": "09-27",
+        "nivel_m": 2.76,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-09-28",
+        "dia_mes": "09-28",
+        "nivel_m": 2.7,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-09-29",
+        "dia_mes": "09-29",
+        "nivel_m": 2.63,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-09-30",
+        "dia_mes": "09-30",
+        "nivel_m": 2.572,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-10-01",
+        "dia_mes": "10-01",
+        "nivel_m": 2.502,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-10-02",
+        "dia_mes": "10-02",
+        "nivel_m": 2.461,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-10-03",
+        "dia_mes": "10-03",
+        "nivel_m": 2.449,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-10-04",
+        "dia_mes": "10-04",
+        "nivel_m": 2.487,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-10-05",
+        "dia_mes": "10-05",
+        "nivel_m": 2.583,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-10-06",
+        "dia_mes": "10-06",
+        "nivel_m": 2.694,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-10-07",
+        "dia_mes": "10-07",
+        "nivel_m": 2.788,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-10-08",
+        "dia_mes": "10-08",
+        "nivel_m": 2.876,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-10-09",
+        "dia_mes": "10-09",
+        "nivel_m": 2.94,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-10-10",
+        "dia_mes": "10-10",
+        "nivel_m": 2.988,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-10-11",
+        "dia_mes": "10-11",
+        "nivel_m": 3.006,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-10-12",
+        "dia_mes": "10-12",
+        "nivel_m": 3.005,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-10-13",
+        "dia_mes": "10-13",
+        "nivel_m": 2.983,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-10-14",
+        "dia_mes": "10-14",
+        "nivel_m": 2.952,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-10-15",
+        "dia_mes": "10-15",
+        "nivel_m": 2.9,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-10-16",
+        "dia_mes": "10-16",
+        "nivel_m": 2.858,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-10-17",
+        "dia_mes": "10-17",
+        "nivel_m": 2.797,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-10-18",
+        "dia_mes": "10-18",
+        "nivel_m": 2.731,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-10-19",
+        "dia_mes": "10-19",
+        "nivel_m": 2.654,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-10-20",
+        "dia_mes": "10-20",
+        "nivel_m": 2.577,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-10-21",
+        "dia_mes": "10-21",
+        "nivel_m": 2.511,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-10-22",
+        "dia_mes": "10-22",
+        "nivel_m": 2.446,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-10-23",
+        "dia_mes": "10-23",
+        "nivel_m": 2.383,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-10-24",
+        "dia_mes": "10-24",
+        "nivel_m": 2.321,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-10-25",
+        "dia_mes": "10-25",
+        "nivel_m": 2.274,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-10-26",
+        "dia_mes": "10-26",
+        "nivel_m": 2.233,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-10-27",
+        "dia_mes": "10-27",
+        "nivel_m": 2.181,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-10-28",
+        "dia_mes": "10-28",
+        "nivel_m": 2.127,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-10-29",
+        "dia_mes": "10-29",
+        "nivel_m": 2.083,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-10-30",
+        "dia_mes": "10-30",
+        "nivel_m": 2.047,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-10-31",
+        "dia_mes": "10-31",
+        "nivel_m": 2.035,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-11-01",
+        "dia_mes": "11-01",
+        "nivel_m": 2.033,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-11-02",
+        "dia_mes": "11-02",
+        "nivel_m": 2.042,
+        "amostras_horarias": 23
+      },
+      {
+        "data": "2024-11-03",
+        "dia_mes": "11-03",
+        "nivel_m": 2.06,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-11-04",
+        "dia_mes": "11-04",
+        "nivel_m": 2.078,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-11-05",
+        "dia_mes": "11-05",
+        "nivel_m": 2.097,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-11-06",
+        "dia_mes": "11-06",
+        "nivel_m": 2.126,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-11-07",
+        "dia_mes": "11-07",
+        "nivel_m": 2.145,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-11-08",
+        "dia_mes": "11-08",
+        "nivel_m": 2.153,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-11-09",
+        "dia_mes": "11-09",
+        "nivel_m": 2.156,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-11-10",
+        "dia_mes": "11-10",
+        "nivel_m": 2.189,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-11-11",
+        "dia_mes": "11-11",
+        "nivel_m": 2.198,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-11-12",
+        "dia_mes": "11-12",
+        "nivel_m": 2.216,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-11-13",
+        "dia_mes": "11-13",
+        "nivel_m": 2.205,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-11-14",
+        "dia_mes": "11-14",
+        "nivel_m": 2.203,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-11-15",
+        "dia_mes": "11-15",
+        "nivel_m": 2.202,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-11-16",
+        "dia_mes": "11-16",
+        "nivel_m": 2.183,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-11-17",
+        "dia_mes": "11-17",
+        "nivel_m": 2.16,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-11-18",
+        "dia_mes": "11-18",
+        "nivel_m": 2.13,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-11-19",
+        "dia_mes": "11-19",
+        "nivel_m": 2.13,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-11-20",
+        "dia_mes": "11-20",
+        "nivel_m": 2.17,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-11-21",
+        "dia_mes": "11-21",
+        "nivel_m": 2.175,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-11-22",
+        "dia_mes": "11-22",
+        "nivel_m": 2.203,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-11-23",
+        "dia_mes": "11-23",
+        "nivel_m": 2.24,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-11-24",
+        "dia_mes": "11-24",
+        "nivel_m": 2.28,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-11-25",
+        "dia_mes": "11-25",
+        "nivel_m": 2.33,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-11-26",
+        "dia_mes": "11-26",
+        "nivel_m": 2.38,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-11-27",
+        "dia_mes": "11-27",
+        "nivel_m": 2.435,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-11-28",
+        "dia_mes": "11-28",
+        "nivel_m": 2.49,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-11-29",
+        "dia_mes": "11-29",
+        "nivel_m": 2.53,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-11-30",
+        "dia_mes": "11-30",
+        "nivel_m": 2.56,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-12-01",
+        "dia_mes": "12-01",
+        "nivel_m": 2.58,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-12-02",
+        "dia_mes": "12-02",
+        "nivel_m": 2.59,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-12-03",
+        "dia_mes": "12-03",
+        "nivel_m": 2.59,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-12-04",
+        "dia_mes": "12-04",
+        "nivel_m": 2.58,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-12-05",
+        "dia_mes": "12-05",
+        "nivel_m": 2.56,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-12-06",
+        "dia_mes": "12-06",
+        "nivel_m": 2.522,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-12-07",
+        "dia_mes": "12-07",
+        "nivel_m": 2.49,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-12-08",
+        "dia_mes": "12-08",
+        "nivel_m": 2.438,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-12-09",
+        "dia_mes": "12-09",
+        "nivel_m": 2.39,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-12-10",
+        "dia_mes": "12-10",
+        "nivel_m": 2.348,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-12-11",
+        "dia_mes": "12-11",
+        "nivel_m": 2.32,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-12-12",
+        "dia_mes": "12-12",
+        "nivel_m": 2.32,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-12-13",
+        "dia_mes": "12-13",
+        "nivel_m": 2.3,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-12-14",
+        "dia_mes": "12-14",
+        "nivel_m": 2.29,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-12-15",
+        "dia_mes": "12-15",
+        "nivel_m": 2.3,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-12-16",
+        "dia_mes": "12-16",
+        "nivel_m": 2.3,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-12-17",
+        "dia_mes": "12-17",
+        "nivel_m": 2.3,
+        "amostras_horarias": 23
+      },
+      {
+        "data": "2024-12-18",
+        "dia_mes": "12-18",
+        "nivel_m": 2.36,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-12-19",
+        "dia_mes": "12-19",
+        "nivel_m": 2.39,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-12-20",
+        "dia_mes": "12-20",
+        "nivel_m": 2.44,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-12-21",
+        "dia_mes": "12-21",
+        "nivel_m": 2.49,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-12-22",
+        "dia_mes": "12-22",
+        "nivel_m": 2.51,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-12-23",
+        "dia_mes": "12-23",
+        "nivel_m": 2.53,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-12-24",
+        "dia_mes": "12-24",
+        "nivel_m": 2.6,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-12-25",
+        "dia_mes": "12-25",
+        "nivel_m": 2.67,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-12-26",
+        "dia_mes": "12-26",
+        "nivel_m": 2.7,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-12-27",
+        "dia_mes": "12-27",
+        "nivel_m": 2.785,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-12-28",
+        "dia_mes": "12-28",
+        "nivel_m": 2.89,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-12-29",
+        "dia_mes": "12-29",
+        "nivel_m": 2.99,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-12-30",
+        "dia_mes": "12-30",
+        "nivel_m": 3.093,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2024-12-31",
+        "dia_mes": "12-31",
+        "nivel_m": 3.215,
+        "amostras_horarias": 24
+      }
+    ],
+    "2025": [
+      {
+        "data": "2025-01-01",
+        "dia_mes": "01-01",
+        "nivel_m": 3.333,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-01-02",
+        "dia_mes": "01-02",
+        "nivel_m": 3.46,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-01-03",
+        "dia_mes": "01-03",
+        "nivel_m": 3.57,
+        "amostras_horarias": 23
+      },
+      {
+        "data": "2025-01-04",
+        "dia_mes": "01-04",
+        "nivel_m": 3.71,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-01-05",
+        "dia_mes": "01-05",
+        "nivel_m": 3.825,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-01-06",
+        "dia_mes": "01-06",
+        "nivel_m": 3.94,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-01-07",
+        "dia_mes": "01-07",
+        "nivel_m": 4.025,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-01-08",
+        "dia_mes": "01-08",
+        "nivel_m": 4.103,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-01-09",
+        "dia_mes": "01-09",
+        "nivel_m": 4.18,
+        "amostras_horarias": 23
+      },
+      {
+        "data": "2025-01-10",
+        "dia_mes": "01-10",
+        "nivel_m": 4.255,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-01-11",
+        "dia_mes": "01-11",
+        "nivel_m": 4.33,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-01-12",
+        "dia_mes": "01-12",
+        "nivel_m": 4.4,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-01-13",
+        "dia_mes": "01-13",
+        "nivel_m": 4.47,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-01-14",
+        "dia_mes": "01-14",
+        "nivel_m": 4.52,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-01-15",
+        "dia_mes": "01-15",
+        "nivel_m": 4.56,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-01-16",
+        "dia_mes": "01-16",
+        "nivel_m": 4.58,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-01-17",
+        "dia_mes": "01-17",
+        "nivel_m": 4.59,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-01-18",
+        "dia_mes": "01-18",
+        "nivel_m": 4.59,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-01-19",
+        "dia_mes": "01-19",
+        "nivel_m": 4.582,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-01-20",
+        "dia_mes": "01-20",
+        "nivel_m": 4.56,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-01-21",
+        "dia_mes": "01-21",
+        "nivel_m": 4.53,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-01-22",
+        "dia_mes": "01-22",
+        "nivel_m": 4.49,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-01-23",
+        "dia_mes": "01-23",
+        "nivel_m": 4.42,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-01-24",
+        "dia_mes": "01-24",
+        "nivel_m": 4.385,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-01-25",
+        "dia_mes": "01-25",
+        "nivel_m": 4.293,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-01-26",
+        "dia_mes": "01-26",
+        "nivel_m": 4.182,
+        "amostras_horarias": 22
+      },
+      {
+        "data": "2025-01-27",
+        "dia_mes": "01-27",
+        "nivel_m": 4.062,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-01-28",
+        "dia_mes": "01-28",
+        "nivel_m": 3.905,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-01-29",
+        "dia_mes": "01-29",
+        "nivel_m": 3.755,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-01-30",
+        "dia_mes": "01-30",
+        "nivel_m": 3.63,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-01-31",
+        "dia_mes": "01-31",
+        "nivel_m": 3.51,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-02-01",
+        "dia_mes": "02-01",
+        "nivel_m": 3.397,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-02-02",
+        "dia_mes": "02-02",
+        "nivel_m": 3.315,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-02-03",
+        "dia_mes": "02-03",
+        "nivel_m": 3.263,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-02-04",
+        "dia_mes": "02-04",
+        "nivel_m": 3.25,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-02-05",
+        "dia_mes": "02-05",
+        "nivel_m": 3.26,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-02-06",
+        "dia_mes": "02-06",
+        "nivel_m": 3.303,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-02-07",
+        "dia_mes": "02-07",
+        "nivel_m": 3.345,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-02-08",
+        "dia_mes": "02-08",
+        "nivel_m": 3.4,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-02-09",
+        "dia_mes": "02-09",
+        "nivel_m": 3.47,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-02-10",
+        "dia_mes": "02-10",
+        "nivel_m": 3.545,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-02-11",
+        "dia_mes": "02-11",
+        "nivel_m": 3.625,
+        "amostras_horarias": 23
+      },
+      {
+        "data": "2025-02-12",
+        "dia_mes": "02-12",
+        "nivel_m": 3.71,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-02-13",
+        "dia_mes": "02-13",
+        "nivel_m": 3.82,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-02-14",
+        "dia_mes": "02-14",
+        "nivel_m": 3.953,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-02-15",
+        "dia_mes": "02-15",
+        "nivel_m": 4.09,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-02-16",
+        "dia_mes": "02-16",
+        "nivel_m": 4.188,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-02-17",
+        "dia_mes": "02-17",
+        "nivel_m": 4.268,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-02-18",
+        "dia_mes": "02-18",
+        "nivel_m": 4.338,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-02-19",
+        "dia_mes": "02-19",
+        "nivel_m": 4.43,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-02-20",
+        "dia_mes": "02-20",
+        "nivel_m": 4.51,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-02-21",
+        "dia_mes": "02-21",
+        "nivel_m": 4.59,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-02-22",
+        "dia_mes": "02-22",
+        "nivel_m": 4.682,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-02-23",
+        "dia_mes": "02-23",
+        "nivel_m": 4.775,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-02-24",
+        "dia_mes": "02-24",
+        "nivel_m": 4.855,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-02-25",
+        "dia_mes": "02-25",
+        "nivel_m": 4.925,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-02-26",
+        "dia_mes": "02-26",
+        "nivel_m": 4.98,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-02-27",
+        "dia_mes": "02-27",
+        "nivel_m": 5.02,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-02-28",
+        "dia_mes": "02-28",
+        "nivel_m": 5.06,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-03-01",
+        "dia_mes": "03-01",
+        "nivel_m": 5.09,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-03-02",
+        "dia_mes": "03-02",
+        "nivel_m": 5.12,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-03-03",
+        "dia_mes": "03-03",
+        "nivel_m": 5.15,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-03-04",
+        "dia_mes": "03-04",
+        "nivel_m": 5.2,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-03-05",
+        "dia_mes": "03-05",
+        "nivel_m": 5.22,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-03-06",
+        "dia_mes": "03-06",
+        "nivel_m": 5.235,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-03-07",
+        "dia_mes": "03-07",
+        "nivel_m": 5.25,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-03-08",
+        "dia_mes": "03-08",
+        "nivel_m": 5.277,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-03-09",
+        "dia_mes": "03-09",
+        "nivel_m": 5.27,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-03-10",
+        "dia_mes": "03-10",
+        "nivel_m": 5.242,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-03-11",
+        "dia_mes": "03-11",
+        "nivel_m": 5.22,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-03-12",
+        "dia_mes": "03-12",
+        "nivel_m": 5.19,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-03-13",
+        "dia_mes": "03-13",
+        "nivel_m": 5.14,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-03-14",
+        "dia_mes": "03-14",
+        "nivel_m": 5.1,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-03-15",
+        "dia_mes": "03-15",
+        "nivel_m": 5.053,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-03-16",
+        "dia_mes": "03-16",
+        "nivel_m": 4.99,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-03-17",
+        "dia_mes": "03-17",
+        "nivel_m": 4.93,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-03-18",
+        "dia_mes": "03-18",
+        "nivel_m": 4.895,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-03-19",
+        "dia_mes": "03-19",
+        "nivel_m": 4.87,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-03-20",
+        "dia_mes": "03-20",
+        "nivel_m": 4.87,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-03-21",
+        "dia_mes": "03-21",
+        "nivel_m": 4.87,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-03-22",
+        "dia_mes": "03-22",
+        "nivel_m": 4.88,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-03-23",
+        "dia_mes": "03-23",
+        "nivel_m": 4.92,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-03-24",
+        "dia_mes": "03-24",
+        "nivel_m": 4.94,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-03-25",
+        "dia_mes": "03-25",
+        "nivel_m": 4.96,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-03-26",
+        "dia_mes": "03-26",
+        "nivel_m": 4.97,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-03-27",
+        "dia_mes": "03-27",
+        "nivel_m": 4.982,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-03-28",
+        "dia_mes": "03-28",
+        "nivel_m": 5.0,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-03-29",
+        "dia_mes": "03-29",
+        "nivel_m": 5.0,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-03-30",
+        "dia_mes": "03-30",
+        "nivel_m": 5.01,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-03-31",
+        "dia_mes": "03-31",
+        "nivel_m": 5.02,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-04-01",
+        "dia_mes": "04-01",
+        "nivel_m": 5.025,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-04-02",
+        "dia_mes": "04-02",
+        "nivel_m": 5.03,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-04-03",
+        "dia_mes": "04-03",
+        "nivel_m": 5.04,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-04-04",
+        "dia_mes": "04-04",
+        "nivel_m": 5.05,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-04-05",
+        "dia_mes": "04-05",
+        "nivel_m": 5.08,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-04-06",
+        "dia_mes": "04-06",
+        "nivel_m": 5.09,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-04-07",
+        "dia_mes": "04-07",
+        "nivel_m": 5.12,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-04-08",
+        "dia_mes": "04-08",
+        "nivel_m": 5.16,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-04-09",
+        "dia_mes": "04-09",
+        "nivel_m": 5.21,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-04-10",
+        "dia_mes": "04-10",
+        "nivel_m": 5.28,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-04-11",
+        "dia_mes": "04-11",
+        "nivel_m": 5.385,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-04-12",
+        "dia_mes": "04-12",
+        "nivel_m": 5.47,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-04-13",
+        "dia_mes": "04-13",
+        "nivel_m": 5.57,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-04-14",
+        "dia_mes": "04-14",
+        "nivel_m": 5.66,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-04-15",
+        "dia_mes": "04-15",
+        "nivel_m": 5.762,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-04-16",
+        "dia_mes": "04-16",
+        "nivel_m": 5.87,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-04-17",
+        "dia_mes": "04-17",
+        "nivel_m": 5.96,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-04-18",
+        "dia_mes": "04-18",
+        "nivel_m": 6.075,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-04-19",
+        "dia_mes": "04-19",
+        "nivel_m": 6.203,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-04-20",
+        "dia_mes": "04-20",
+        "nivel_m": 6.383,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-04-21",
+        "dia_mes": "04-21",
+        "nivel_m": 6.492,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-04-22",
+        "dia_mes": "04-22",
+        "nivel_m": 6.595,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-04-23",
+        "dia_mes": "04-23",
+        "nivel_m": 6.695,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-04-24",
+        "dia_mes": "04-24",
+        "nivel_m": 6.79,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-04-25",
+        "dia_mes": "04-25",
+        "nivel_m": 6.87,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-04-26",
+        "dia_mes": "04-26",
+        "nivel_m": 6.96,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-04-27",
+        "dia_mes": "04-27",
+        "nivel_m": 7.03,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-04-28",
+        "dia_mes": "04-28",
+        "nivel_m": 7.09,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-04-29",
+        "dia_mes": "04-29",
+        "nivel_m": 7.15,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-04-30",
+        "dia_mes": "04-30",
+        "nivel_m": 7.24,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-05-01",
+        "dia_mes": "05-01",
+        "nivel_m": 7.28,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-05-02",
+        "dia_mes": "05-02",
+        "nivel_m": 7.31,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-05-03",
+        "dia_mes": "05-03",
+        "nivel_m": 7.34,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-05-04",
+        "dia_mes": "05-04",
+        "nivel_m": 7.37,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-05-05",
+        "dia_mes": "05-05",
+        "nivel_m": 7.39,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-05-06",
+        "dia_mes": "05-06",
+        "nivel_m": 7.41,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-05-07",
+        "dia_mes": "05-07",
+        "nivel_m": 7.43,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-05-08",
+        "dia_mes": "05-08",
+        "nivel_m": 7.45,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-05-09",
+        "dia_mes": "05-09",
+        "nivel_m": 7.46,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-05-10",
+        "dia_mes": "05-10",
+        "nivel_m": 7.482,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-05-11",
+        "dia_mes": "05-11",
+        "nivel_m": 7.52,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-05-12",
+        "dia_mes": "05-12",
+        "nivel_m": 7.53,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-05-13",
+        "dia_mes": "05-13",
+        "nivel_m": 7.55,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-05-14",
+        "dia_mes": "05-14",
+        "nivel_m": 7.61,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-05-15",
+        "dia_mes": "05-15",
+        "nivel_m": 7.63,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-05-16",
+        "dia_mes": "05-16",
+        "nivel_m": 7.66,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-05-17",
+        "dia_mes": "05-17",
+        "nivel_m": 7.68,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-05-18",
+        "dia_mes": "05-18",
+        "nivel_m": 7.73,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-05-19",
+        "dia_mes": "05-19",
+        "nivel_m": 7.78,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-05-20",
+        "dia_mes": "05-20",
+        "nivel_m": 7.807,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-05-21",
+        "dia_mes": "05-21",
+        "nivel_m": 7.83,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-05-22",
+        "dia_mes": "05-22",
+        "nivel_m": 7.86,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-05-23",
+        "dia_mes": "05-23",
+        "nivel_m": 7.88,
+        "amostras_horarias": 7
+      },
+      {
+        "data": "2025-05-24",
+        "dia_mes": "05-24",
+        "nivel_m": 7.955,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-05-25",
+        "dia_mes": "05-25",
+        "nivel_m": 8.0,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-05-26",
+        "dia_mes": "05-26",
+        "nivel_m": 8.03,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-05-27",
+        "dia_mes": "05-27",
+        "nivel_m": 8.055,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-05-28",
+        "dia_mes": "05-28",
+        "nivel_m": 8.11,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-05-29",
+        "dia_mes": "05-29",
+        "nivel_m": 8.15,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-05-30",
+        "dia_mes": "05-30",
+        "nivel_m": 8.19,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-05-31",
+        "dia_mes": "05-31",
+        "nivel_m": 8.25,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-06-01",
+        "dia_mes": "06-01",
+        "nivel_m": 8.29,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-06-02",
+        "dia_mes": "06-02",
+        "nivel_m": 8.33,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-06-03",
+        "dia_mes": "06-03",
+        "nivel_m": 8.37,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-06-04",
+        "dia_mes": "06-04",
+        "nivel_m": 8.41,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-06-05",
+        "dia_mes": "06-05",
+        "nivel_m": 8.47,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-06-06",
+        "dia_mes": "06-06",
+        "nivel_m": 8.515,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-06-07",
+        "dia_mes": "06-07",
+        "nivel_m": 8.57,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-06-08",
+        "dia_mes": "06-08",
+        "nivel_m": 8.625,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-06-09",
+        "dia_mes": "06-09",
+        "nivel_m": 8.685,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-06-10",
+        "dia_mes": "06-10",
+        "nivel_m": 8.735,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-06-11",
+        "dia_mes": "06-11",
+        "nivel_m": 8.795,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-06-12",
+        "dia_mes": "06-12",
+        "nivel_m": 8.865,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-06-13",
+        "dia_mes": "06-13",
+        "nivel_m": 8.92,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-06-14",
+        "dia_mes": "06-14",
+        "nivel_m": 8.98,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-06-15",
+        "dia_mes": "06-15",
+        "nivel_m": 9.055,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-06-16",
+        "dia_mes": "06-16",
+        "nivel_m": 9.12,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-06-17",
+        "dia_mes": "06-17",
+        "nivel_m": 9.175,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-06-18",
+        "dia_mes": "06-18",
+        "nivel_m": 9.235,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-06-19",
+        "dia_mes": "06-19",
+        "nivel_m": 9.3,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-06-20",
+        "dia_mes": "06-20",
+        "nivel_m": 9.345,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-06-21",
+        "dia_mes": "06-21",
+        "nivel_m": 9.405,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-06-22",
+        "dia_mes": "06-22",
+        "nivel_m": 9.46,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-06-23",
+        "dia_mes": "06-23",
+        "nivel_m": 9.495,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-06-24",
+        "dia_mes": "06-24",
+        "nivel_m": 9.52,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-06-25",
+        "dia_mes": "06-25",
+        "nivel_m": 9.57,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-06-26",
+        "dia_mes": "06-26",
+        "nivel_m": 9.61,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-06-27",
+        "dia_mes": "06-27",
+        "nivel_m": 9.635,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-06-28",
+        "dia_mes": "06-28",
+        "nivel_m": 9.655,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-06-29",
+        "dia_mes": "06-29",
+        "nivel_m": 9.675,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-06-30",
+        "dia_mes": "06-30",
+        "nivel_m": 9.695,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-07-01",
+        "dia_mes": "07-01",
+        "nivel_m": 9.7,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-07-02",
+        "dia_mes": "07-02",
+        "nivel_m": 9.71,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-07-03",
+        "dia_mes": "07-03",
+        "nivel_m": 9.71,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-07-04",
+        "dia_mes": "07-04",
+        "nivel_m": 9.71,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-07-05",
+        "dia_mes": "07-05",
+        "nivel_m": 9.71,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-07-06",
+        "dia_mes": "07-06",
+        "nivel_m": 9.71,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-07-07",
+        "dia_mes": "07-07",
+        "nivel_m": 9.72,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-07-08",
+        "dia_mes": "07-08",
+        "nivel_m": 9.71,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-07-09",
+        "dia_mes": "07-09",
+        "nivel_m": 9.705,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-07-10",
+        "dia_mes": "07-10",
+        "nivel_m": 9.72,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-07-11",
+        "dia_mes": "07-11",
+        "nivel_m": 9.72,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-07-12",
+        "dia_mes": "07-12",
+        "nivel_m": 9.72,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-07-13",
+        "dia_mes": "07-13",
+        "nivel_m": 9.715,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-07-14",
+        "dia_mes": "07-14",
+        "nivel_m": 9.695,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-07-15",
+        "dia_mes": "07-15",
+        "nivel_m": 9.68,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-07-16",
+        "dia_mes": "07-16",
+        "nivel_m": 9.675,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-07-17",
+        "dia_mes": "07-17",
+        "nivel_m": 9.67,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-07-18",
+        "dia_mes": "07-18",
+        "nivel_m": 9.66,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-07-19",
+        "dia_mes": "07-19",
+        "nivel_m": 9.66,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-07-20",
+        "dia_mes": "07-20",
+        "nivel_m": 9.655,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-07-21",
+        "dia_mes": "07-21",
+        "nivel_m": 9.64,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-07-22",
+        "dia_mes": "07-22",
+        "nivel_m": 9.63,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-07-23",
+        "dia_mes": "07-23",
+        "nivel_m": 9.62,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-07-24",
+        "dia_mes": "07-24",
+        "nivel_m": 9.62,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-07-25",
+        "dia_mes": "07-25",
+        "nivel_m": 9.62,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-07-26",
+        "dia_mes": "07-26",
+        "nivel_m": 9.62,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-07-27",
+        "dia_mes": "07-27",
+        "nivel_m": 9.62,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-07-28",
+        "dia_mes": "07-28",
+        "nivel_m": 9.62,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-07-29",
+        "dia_mes": "07-29",
+        "nivel_m": 9.61,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-07-30",
+        "dia_mes": "07-30",
+        "nivel_m": 9.6,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-07-31",
+        "dia_mes": "07-31",
+        "nivel_m": 9.6,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-08-01",
+        "dia_mes": "08-01",
+        "nivel_m": 9.585,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-08-02",
+        "dia_mes": "08-02",
+        "nivel_m": 9.565,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-08-03",
+        "dia_mes": "08-03",
+        "nivel_m": 9.545,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-08-04",
+        "dia_mes": "08-04",
+        "nivel_m": 9.52,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-08-05",
+        "dia_mes": "08-05",
+        "nivel_m": 9.48,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-08-06",
+        "dia_mes": "08-06",
+        "nivel_m": 9.445,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-08-07",
+        "dia_mes": "08-07",
+        "nivel_m": 9.395,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-08-08",
+        "dia_mes": "08-08",
+        "nivel_m": 9.38,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-08-09",
+        "dia_mes": "08-09",
+        "nivel_m": 9.38,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-08-10",
+        "dia_mes": "08-10",
+        "nivel_m": 9.38,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-08-11",
+        "dia_mes": "08-11",
+        "nivel_m": 9.345,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-08-12",
+        "dia_mes": "08-12",
+        "nivel_m": 9.235,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-08-13",
+        "dia_mes": "08-13",
+        "nivel_m": 9.105,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-08-14",
+        "dia_mes": "08-14",
+        "nivel_m": 9.035,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-08-15",
+        "dia_mes": "08-15",
+        "nivel_m": 8.965,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-08-16",
+        "dia_mes": "08-16",
+        "nivel_m": 8.905,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-08-17",
+        "dia_mes": "08-17",
+        "nivel_m": 8.825,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-08-18",
+        "dia_mes": "08-18",
+        "nivel_m": 8.73,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-08-19",
+        "dia_mes": "08-19",
+        "nivel_m": 8.64,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-08-20",
+        "dia_mes": "08-20",
+        "nivel_m": 8.56,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-08-21",
+        "dia_mes": "08-21",
+        "nivel_m": 8.48,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-08-22",
+        "dia_mes": "08-22",
+        "nivel_m": 8.39,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-08-23",
+        "dia_mes": "08-23",
+        "nivel_m": 8.31,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-08-24",
+        "dia_mes": "08-24",
+        "nivel_m": 8.23,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-08-25",
+        "dia_mes": "08-25",
+        "nivel_m": 8.14,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-08-26",
+        "dia_mes": "08-26",
+        "nivel_m": 8.06,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-08-27",
+        "dia_mes": "08-27",
+        "nivel_m": 7.985,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-08-28",
+        "dia_mes": "08-28",
+        "nivel_m": 7.89,
+        "amostras_horarias": 14
+      },
+      {
+        "data": "2025-08-29",
+        "dia_mes": "08-29",
+        "nivel_m": 7.828,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-08-30",
+        "dia_mes": "08-30",
+        "nivel_m": 7.74,
+        "amostras_horarias": 19
+      },
+      {
+        "data": "2025-08-31",
+        "dia_mes": "08-31",
+        "nivel_m": 7.655,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-09-01",
+        "dia_mes": "09-01",
+        "nivel_m": 7.555,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-09-02",
+        "dia_mes": "09-02",
+        "nivel_m": 7.44,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-09-03",
+        "dia_mes": "09-03",
+        "nivel_m": 7.325,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-09-04",
+        "dia_mes": "09-04",
+        "nivel_m": 7.225,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-09-05",
+        "dia_mes": "09-05",
+        "nivel_m": 7.125,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-09-06",
+        "dia_mes": "09-06",
+        "nivel_m": 7.005,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-09-07",
+        "dia_mes": "09-07",
+        "nivel_m": 6.865,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-09-08",
+        "dia_mes": "09-08",
+        "nivel_m": 6.78,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2025-09-09",
+        "dia_mes": "09-09",
+        "nivel_m": 6.703,
+        "amostras_horarias": 16
+      },
+      {
+        "data": "2025-09-10",
+        "dia_mes": "09-10",
+        "nivel_m": 6.623,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-09-11",
+        "dia_mes": "09-11",
+        "nivel_m": 6.537,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-09-12",
+        "dia_mes": "09-12",
+        "nivel_m": 6.45,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-09-13",
+        "dia_mes": "09-13",
+        "nivel_m": 6.38,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-09-14",
+        "dia_mes": "09-14",
+        "nivel_m": 6.31,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-09-15",
+        "dia_mes": "09-15",
+        "nivel_m": 6.25,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-09-16",
+        "dia_mes": "09-16",
+        "nivel_m": 6.19,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-09-17",
+        "dia_mes": "09-17",
+        "nivel_m": 6.125,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-09-18",
+        "dia_mes": "09-18",
+        "nivel_m": 6.06,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-09-19",
+        "dia_mes": "09-19",
+        "nivel_m": 6.0,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-09-20",
+        "dia_mes": "09-20",
+        "nivel_m": 5.94,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-09-21",
+        "dia_mes": "09-21",
+        "nivel_m": 5.88,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-09-22",
+        "dia_mes": "09-22",
+        "nivel_m": 5.82,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-09-23",
+        "dia_mes": "09-23",
+        "nivel_m": 5.765,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-09-24",
+        "dia_mes": "09-24",
+        "nivel_m": 5.71,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-09-25",
+        "dia_mes": "09-25",
+        "nivel_m": 5.652,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-09-26",
+        "dia_mes": "09-26",
+        "nivel_m": 5.59,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-09-27",
+        "dia_mes": "09-27",
+        "nivel_m": 5.52,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-09-28",
+        "dia_mes": "09-28",
+        "nivel_m": 5.44,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-09-29",
+        "dia_mes": "09-29",
+        "nivel_m": 5.37,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-09-30",
+        "dia_mes": "09-30",
+        "nivel_m": 5.285,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-10-01",
+        "dia_mes": "10-01",
+        "nivel_m": 5.195,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-10-02",
+        "dia_mes": "10-02",
+        "nivel_m": 5.09,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-10-03",
+        "dia_mes": "10-03",
+        "nivel_m": 4.982,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-10-04",
+        "dia_mes": "10-04",
+        "nivel_m": 4.87,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-10-05",
+        "dia_mes": "10-05",
+        "nivel_m": 4.768,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-10-06",
+        "dia_mes": "10-06",
+        "nivel_m": 4.66,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-10-07",
+        "dia_mes": "10-07",
+        "nivel_m": 4.56,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-10-08",
+        "dia_mes": "10-08",
+        "nivel_m": 4.47,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-10-09",
+        "dia_mes": "10-09",
+        "nivel_m": 4.4,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-10-10",
+        "dia_mes": "10-10",
+        "nivel_m": 4.34,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-10-11",
+        "dia_mes": "10-11",
+        "nivel_m": 4.255,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-10-12",
+        "dia_mes": "10-12",
+        "nivel_m": 4.17,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-10-13",
+        "dia_mes": "10-13",
+        "nivel_m": 4.11,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-10-14",
+        "dia_mes": "10-14",
+        "nivel_m": 4.06,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-10-15",
+        "dia_mes": "10-15",
+        "nivel_m": 4.03,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-10-16",
+        "dia_mes": "10-16",
+        "nivel_m": 4.005,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-10-17",
+        "dia_mes": "10-17",
+        "nivel_m": 3.99,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-10-18",
+        "dia_mes": "10-18",
+        "nivel_m": 3.99,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-10-19",
+        "dia_mes": "10-19",
+        "nivel_m": 3.99,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-10-20",
+        "dia_mes": "10-20",
+        "nivel_m": 4.02,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-10-21",
+        "dia_mes": "10-21",
+        "nivel_m": 4.01,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-10-22",
+        "dia_mes": "10-22",
+        "nivel_m": 4.0,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-10-23",
+        "dia_mes": "10-23",
+        "nivel_m": 3.99,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-10-24",
+        "dia_mes": "10-24",
+        "nivel_m": 3.98,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-10-25",
+        "dia_mes": "10-25",
+        "nivel_m": 3.96,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-10-26",
+        "dia_mes": "10-26",
+        "nivel_m": 3.94,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-10-27",
+        "dia_mes": "10-27",
+        "nivel_m": 3.92,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-10-28",
+        "dia_mes": "10-28",
+        "nivel_m": 3.91,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-10-29",
+        "dia_mes": "10-29",
+        "nivel_m": 3.91,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-10-30",
+        "dia_mes": "10-30",
+        "nivel_m": 3.93,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-10-31",
+        "dia_mes": "10-31",
+        "nivel_m": 3.94,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-11-01",
+        "dia_mes": "11-01",
+        "nivel_m": 3.95,
+        "amostras_horarias": 23
+      },
+      {
+        "data": "2025-11-02",
+        "dia_mes": "11-02",
+        "nivel_m": 3.955,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-11-03",
+        "dia_mes": "11-03",
+        "nivel_m": 3.95,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-11-04",
+        "dia_mes": "11-04",
+        "nivel_m": 3.94,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-11-05",
+        "dia_mes": "11-05",
+        "nivel_m": 3.93,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-11-06",
+        "dia_mes": "11-06",
+        "nivel_m": 3.92,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-11-07",
+        "dia_mes": "11-07",
+        "nivel_m": 3.91,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-11-08",
+        "dia_mes": "11-08",
+        "nivel_m": 3.88,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-11-09",
+        "dia_mes": "11-09",
+        "nivel_m": 3.843,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-11-10",
+        "dia_mes": "11-10",
+        "nivel_m": 3.8,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-11-11",
+        "dia_mes": "11-11",
+        "nivel_m": 3.79,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-11-12",
+        "dia_mes": "11-12",
+        "nivel_m": 3.77,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-11-13",
+        "dia_mes": "11-13",
+        "nivel_m": 3.74,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-11-14",
+        "dia_mes": "11-14",
+        "nivel_m": 3.7,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-11-15",
+        "dia_mes": "11-15",
+        "nivel_m": 3.66,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-11-16",
+        "dia_mes": "11-16",
+        "nivel_m": 3.62,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-11-17",
+        "dia_mes": "11-17",
+        "nivel_m": 3.58,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-11-18",
+        "dia_mes": "11-18",
+        "nivel_m": 3.54,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-11-19",
+        "dia_mes": "11-19",
+        "nivel_m": 3.5,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-11-20",
+        "dia_mes": "11-20",
+        "nivel_m": 3.52,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-11-21",
+        "dia_mes": "11-21",
+        "nivel_m": 3.53,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-11-22",
+        "dia_mes": "11-22",
+        "nivel_m": 3.55,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-11-23",
+        "dia_mes": "11-23",
+        "nivel_m": 3.598,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-11-24",
+        "dia_mes": "11-24",
+        "nivel_m": 3.63,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-11-25",
+        "dia_mes": "11-25",
+        "nivel_m": 3.67,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-11-26",
+        "dia_mes": "11-26",
+        "nivel_m": 3.7,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-11-27",
+        "dia_mes": "11-27",
+        "nivel_m": 3.73,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-11-28",
+        "dia_mes": "11-28",
+        "nivel_m": 3.75,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-11-29",
+        "dia_mes": "11-29",
+        "nivel_m": 3.79,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-11-30",
+        "dia_mes": "11-30",
+        "nivel_m": 3.84,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-12-01",
+        "dia_mes": "12-01",
+        "nivel_m": 3.87,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-12-02",
+        "dia_mes": "12-02",
+        "nivel_m": 3.9,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-12-03",
+        "dia_mes": "12-03",
+        "nivel_m": 3.95,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-12-04",
+        "dia_mes": "12-04",
+        "nivel_m": 3.973,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-12-05",
+        "dia_mes": "12-05",
+        "nivel_m": 4.0,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-12-06",
+        "dia_mes": "12-06",
+        "nivel_m": 4.03,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-12-07",
+        "dia_mes": "12-07",
+        "nivel_m": 4.04,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-12-08",
+        "dia_mes": "12-08",
+        "nivel_m": 4.07,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-12-09",
+        "dia_mes": "12-09",
+        "nivel_m": 4.07,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-12-10",
+        "dia_mes": "12-10",
+        "nivel_m": 4.07,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-12-11",
+        "dia_mes": "12-11",
+        "nivel_m": 4.05,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-12-12",
+        "dia_mes": "12-12",
+        "nivel_m": 4.02,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-12-13",
+        "dia_mes": "12-13",
+        "nivel_m": 3.99,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-12-14",
+        "dia_mes": "12-14",
+        "nivel_m": 3.953,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-12-15",
+        "dia_mes": "12-15",
+        "nivel_m": 3.92,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-12-16",
+        "dia_mes": "12-16",
+        "nivel_m": 3.89,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-12-17",
+        "dia_mes": "12-17",
+        "nivel_m": 3.85,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-12-18",
+        "dia_mes": "12-18",
+        "nivel_m": 3.795,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-12-19",
+        "dia_mes": "12-19",
+        "nivel_m": 3.73,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-12-20",
+        "dia_mes": "12-20",
+        "nivel_m": 3.665,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-12-21",
+        "dia_mes": "12-21",
+        "nivel_m": 3.59,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-12-22",
+        "dia_mes": "12-22",
+        "nivel_m": 3.52,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-12-23",
+        "dia_mes": "12-23",
+        "nivel_m": 3.445,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-12-24",
+        "dia_mes": "12-24",
+        "nivel_m": 3.405,
+        "amostras_horarias": 22
+      },
+      {
+        "data": "2025-12-25",
+        "dia_mes": "12-25",
+        "nivel_m": 3.37,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-12-26",
+        "dia_mes": "12-26",
+        "nivel_m": 3.34,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-12-27",
+        "dia_mes": "12-27",
+        "nivel_m": 3.31,
+        "amostras_horarias": 22
+      },
+      {
+        "data": "2025-12-28",
+        "dia_mes": "12-28",
+        "nivel_m": 3.297,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-12-29",
+        "dia_mes": "12-29",
+        "nivel_m": 3.28,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-12-30",
+        "dia_mes": "12-30",
+        "nivel_m": 3.28,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2025-12-31",
+        "dia_mes": "12-31",
+        "nivel_m": 3.27,
+        "amostras_horarias": 24
+      }
+    ],
+    "2026": [
+      {
+        "data": "2026-01-01",
+        "dia_mes": "01-01",
+        "nivel_m": 3.25,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-01-02",
+        "dia_mes": "01-02",
+        "nivel_m": 3.22,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-01-03",
+        "dia_mes": "01-03",
+        "nivel_m": 3.185,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-01-04",
+        "dia_mes": "01-04",
+        "nivel_m": 3.15,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-01-05",
+        "dia_mes": "01-05",
+        "nivel_m": 3.12,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-01-06",
+        "dia_mes": "01-06",
+        "nivel_m": 3.09,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-01-07",
+        "dia_mes": "01-07",
+        "nivel_m": 3.08,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-01-08",
+        "dia_mes": "01-08",
+        "nivel_m": 3.05,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-01-09",
+        "dia_mes": "01-09",
+        "nivel_m": 3.04,
+        "amostras_horarias": 7
+      },
+      {
+        "data": "2026-01-10",
+        "dia_mes": "01-10",
+        "nivel_m": 2.998,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-01-11",
+        "dia_mes": "01-11",
+        "nivel_m": 2.982,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-01-12",
+        "dia_mes": "01-12",
+        "nivel_m": 2.96,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-01-13",
+        "dia_mes": "01-13",
+        "nivel_m": 2.963,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-01-14",
+        "dia_mes": "01-14",
+        "nivel_m": 2.966,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-01-15",
+        "dia_mes": "01-15",
+        "nivel_m": 2.979,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-01-16",
+        "dia_mes": "01-16",
+        "nivel_m": 3.022,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-01-17",
+        "dia_mes": "01-17",
+        "nivel_m": 3.096,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-01-18",
+        "dia_mes": "01-18",
+        "nivel_m": 3.204,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-01-19",
+        "dia_mes": "01-19",
+        "nivel_m": 3.312,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-01-20",
+        "dia_mes": "01-20",
+        "nivel_m": 3.405,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-01-21",
+        "dia_mes": "01-21",
+        "nivel_m": 3.488,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-01-22",
+        "dia_mes": "01-22",
+        "nivel_m": 3.587,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-01-23",
+        "dia_mes": "01-23",
+        "nivel_m": 3.684,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-01-24",
+        "dia_mes": "01-24",
+        "nivel_m": 3.768,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-01-25",
+        "dia_mes": "01-25",
+        "nivel_m": 3.875,
+        "amostras_horarias": 18
+      },
+      {
+        "data": "2026-01-26",
+        "dia_mes": "01-26",
+        "nivel_m": 3.95,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-01-27",
+        "dia_mes": "01-27",
+        "nivel_m": 4.05,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-01-28",
+        "dia_mes": "01-28",
+        "nivel_m": 4.117,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-01-29",
+        "dia_mes": "01-29",
+        "nivel_m": 4.19,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-01-30",
+        "dia_mes": "01-30",
+        "nivel_m": 4.283,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-01-31",
+        "dia_mes": "01-31",
+        "nivel_m": 4.38,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-02-01",
+        "dia_mes": "02-01",
+        "nivel_m": 4.482,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-02-02",
+        "dia_mes": "02-02",
+        "nivel_m": 4.543,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-02-03",
+        "dia_mes": "02-03",
+        "nivel_m": 4.59,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-02-04",
+        "dia_mes": "02-04",
+        "nivel_m": 4.62,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-02-05",
+        "dia_mes": "02-05",
+        "nivel_m": 4.65,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-02-06",
+        "dia_mes": "02-06",
+        "nivel_m": 4.678,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-02-07",
+        "dia_mes": "02-07",
+        "nivel_m": 4.697,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-02-08",
+        "dia_mes": "02-08",
+        "nivel_m": 4.7,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-02-09",
+        "dia_mes": "02-09",
+        "nivel_m": 4.7,
+        "amostras_horarias": 4
+      },
+      {
+        "data": "2026-02-10",
+        "dia_mes": "02-10",
+        "nivel_m": 4.7,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-02-11",
+        "dia_mes": "02-11",
+        "nivel_m": 4.67,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-02-12",
+        "dia_mes": "02-12",
+        "nivel_m": 4.635,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-02-13",
+        "dia_mes": "02-13",
+        "nivel_m": 4.605,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-02-14",
+        "dia_mes": "02-14",
+        "nivel_m": 4.585,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-02-15",
+        "dia_mes": "02-15",
+        "nivel_m": 4.565,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-02-16",
+        "dia_mes": "02-16",
+        "nivel_m": 4.555,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-02-17",
+        "dia_mes": "02-17",
+        "nivel_m": 4.515,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-02-18",
+        "dia_mes": "02-18",
+        "nivel_m": 4.41,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-02-19",
+        "dia_mes": "02-19",
+        "nivel_m": 4.295,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-02-20",
+        "dia_mes": "02-20",
+        "nivel_m": 4.165,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-02-21",
+        "dia_mes": "02-21",
+        "nivel_m": 4.075,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-02-22",
+        "dia_mes": "02-22",
+        "nivel_m": 4.005,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-02-23",
+        "dia_mes": "02-23",
+        "nivel_m": 3.925,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-02-24",
+        "dia_mes": "02-24",
+        "nivel_m": 3.87,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-02-25",
+        "dia_mes": "02-25",
+        "nivel_m": 3.825,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-02-26",
+        "dia_mes": "02-26",
+        "nivel_m": 3.795,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-02-27",
+        "dia_mes": "02-27",
+        "nivel_m": 3.775,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-02-28",
+        "dia_mes": "02-28",
+        "nivel_m": 3.76,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-03-01",
+        "dia_mes": "03-01",
+        "nivel_m": 3.69,
+        "amostras_horarias": 15
+      },
+      {
+        "data": "2026-03-02",
+        "dia_mes": "03-02",
+        "nivel_m": 3.68,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-03-03",
+        "dia_mes": "03-03",
+        "nivel_m": 3.67,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-03-04",
+        "dia_mes": "03-04",
+        "nivel_m": 3.645,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-03-05",
+        "dia_mes": "03-05",
+        "nivel_m": 3.618,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-03-06",
+        "dia_mes": "03-06",
+        "nivel_m": 3.587,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-03-07",
+        "dia_mes": "03-07",
+        "nivel_m": 3.56,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-03-08",
+        "dia_mes": "03-08",
+        "nivel_m": 3.525,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-03-09",
+        "dia_mes": "03-09",
+        "nivel_m": 3.472,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-03-10",
+        "dia_mes": "03-10",
+        "nivel_m": 3.422,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-03-11",
+        "dia_mes": "03-11",
+        "nivel_m": 3.388,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-03-12",
+        "dia_mes": "03-12",
+        "nivel_m": 3.349,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-03-13",
+        "dia_mes": "03-13",
+        "nivel_m": 3.314,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-03-14",
+        "dia_mes": "03-14",
+        "nivel_m": 3.27,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-03-15",
+        "dia_mes": "03-15",
+        "nivel_m": 3.196,
+        "amostras_horarias": 20
+      },
+      {
+        "data": "2026-03-16",
+        "dia_mes": "03-16",
+        "nivel_m": 3.07,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-03-17",
+        "dia_mes": "03-17",
+        "nivel_m": 3.05,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-03-18",
+        "dia_mes": "03-18",
+        "nivel_m": 3.04,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-03-19",
+        "dia_mes": "03-19",
+        "nivel_m": 3.18,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-03-20",
+        "dia_mes": "03-20",
+        "nivel_m": 3.2,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-03-21",
+        "dia_mes": "03-21",
+        "nivel_m": 3.22,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-03-22",
+        "dia_mes": "03-22",
+        "nivel_m": 3.25,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-03-23",
+        "dia_mes": "03-23",
+        "nivel_m": 3.28,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-03-24",
+        "dia_mes": "03-24",
+        "nivel_m": 3.3,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-03-25",
+        "dia_mes": "03-25",
+        "nivel_m": 3.33,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-03-26",
+        "dia_mes": "03-26",
+        "nivel_m": 3.38,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-03-27",
+        "dia_mes": "03-27",
+        "nivel_m": 3.42,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-03-28",
+        "dia_mes": "03-28",
+        "nivel_m": 3.44,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-03-29",
+        "dia_mes": "03-29",
+        "nivel_m": 3.45,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-03-30",
+        "dia_mes": "03-30",
+        "nivel_m": 3.47,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-03-31",
+        "dia_mes": "03-31",
+        "nivel_m": 3.49,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-04-01",
+        "dia_mes": "04-01",
+        "nivel_m": 3.5,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-04-02",
+        "dia_mes": "04-02",
+        "nivel_m": 3.54,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-04-03",
+        "dia_mes": "04-03",
+        "nivel_m": 3.56,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-04-04",
+        "dia_mes": "04-04",
+        "nivel_m": 3.59,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-04-05",
+        "dia_mes": "04-05",
+        "nivel_m": 3.68,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-04-06",
+        "dia_mes": "04-06",
+        "nivel_m": 3.76,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-04-07",
+        "dia_mes": "04-07",
+        "nivel_m": 3.875,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-04-08",
+        "dia_mes": "04-08",
+        "nivel_m": 4.008,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-04-09",
+        "dia_mes": "04-09",
+        "nivel_m": 4.1,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-04-10",
+        "dia_mes": "04-10",
+        "nivel_m": 4.207,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-04-11",
+        "dia_mes": "04-11",
+        "nivel_m": 4.295,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-04-12",
+        "dia_mes": "04-12",
+        "nivel_m": 4.37,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-04-13",
+        "dia_mes": "04-13",
+        "nivel_m": 4.455,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-04-14",
+        "dia_mes": "04-14",
+        "nivel_m": 4.625,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-04-15",
+        "dia_mes": "04-15",
+        "nivel_m": 4.685,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-04-16",
+        "dia_mes": "04-16",
+        "nivel_m": 4.755,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-04-17",
+        "dia_mes": "04-17",
+        "nivel_m": 4.8,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-04-18",
+        "dia_mes": "04-18",
+        "nivel_m": 4.86,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-04-19",
+        "dia_mes": "04-19",
+        "nivel_m": 4.92,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-04-20",
+        "dia_mes": "04-20",
+        "nivel_m": 4.988,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-04-21",
+        "dia_mes": "04-21",
+        "nivel_m": 5.03,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-04-22",
+        "dia_mes": "04-22",
+        "nivel_m": 5.07,
+        "amostras_horarias": 23
+      },
+      {
+        "data": "2026-04-23",
+        "dia_mes": "04-23",
+        "nivel_m": 5.147,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-04-24",
+        "dia_mes": "04-24",
+        "nivel_m": 5.205,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-04-25",
+        "dia_mes": "04-25",
+        "nivel_m": 5.275,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-04-26",
+        "dia_mes": "04-26",
+        "nivel_m": 5.35,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-04-27",
+        "dia_mes": "04-27",
+        "nivel_m": 5.39,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-04-28",
+        "dia_mes": "04-28",
+        "nivel_m": 5.435,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-04-29",
+        "dia_mes": "04-29",
+        "nivel_m": 5.48,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-04-30",
+        "dia_mes": "04-30",
+        "nivel_m": 5.52,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-05-01",
+        "dia_mes": "05-01",
+        "nivel_m": 5.57,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-05-02",
+        "dia_mes": "05-02",
+        "nivel_m": 5.62,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-05-03",
+        "dia_mes": "05-03",
+        "nivel_m": 5.66,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-05-04",
+        "dia_mes": "05-04",
+        "nivel_m": 5.76,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-05-05",
+        "dia_mes": "05-05",
+        "nivel_m": 5.81,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-05-06",
+        "dia_mes": "05-06",
+        "nivel_m": 5.85,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-05-07",
+        "dia_mes": "05-07",
+        "nivel_m": 5.86,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-05-08",
+        "dia_mes": "05-08",
+        "nivel_m": 5.88,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-05-09",
+        "dia_mes": "05-09",
+        "nivel_m": 5.897,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-05-10",
+        "dia_mes": "05-10",
+        "nivel_m": 5.92,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-05-11",
+        "dia_mes": "05-11",
+        "nivel_m": 5.94,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-05-12",
+        "dia_mes": "05-12",
+        "nivel_m": 6.02,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-05-13",
+        "dia_mes": "05-13",
+        "nivel_m": 6.088,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-05-14",
+        "dia_mes": "05-14",
+        "nivel_m": 6.147,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-05-15",
+        "dia_mes": "05-15",
+        "nivel_m": 6.235,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-05-16",
+        "dia_mes": "05-16",
+        "nivel_m": 6.31,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-05-17",
+        "dia_mes": "05-17",
+        "nivel_m": 6.38,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-05-18",
+        "dia_mes": "05-18",
+        "nivel_m": 6.455,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-05-19",
+        "dia_mes": "05-19",
+        "nivel_m": 6.52,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-05-20",
+        "dia_mes": "05-20",
+        "nivel_m": 6.605,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-05-21",
+        "dia_mes": "05-21",
+        "nivel_m": 6.74,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-05-22",
+        "dia_mes": "05-22",
+        "nivel_m": 6.838,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-05-23",
+        "dia_mes": "05-23",
+        "nivel_m": 6.973,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-05-24",
+        "dia_mes": "05-24",
+        "nivel_m": 7.08,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-05-25",
+        "dia_mes": "05-25",
+        "nivel_m": 7.22,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-05-26",
+        "dia_mes": "05-26",
+        "nivel_m": 7.38,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-05-27",
+        "dia_mes": "05-27",
+        "nivel_m": 7.5,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-05-28",
+        "dia_mes": "05-28",
+        "nivel_m": 7.57,
+        "amostras_horarias": 7
+      },
+      {
+        "data": "2026-05-29",
+        "dia_mes": "05-29",
+        "nivel_m": 7.71,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-05-30",
+        "dia_mes": "05-30",
+        "nivel_m": 7.81,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-05-31",
+        "dia_mes": "05-31",
+        "nivel_m": 7.94,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-06-01",
+        "dia_mes": "06-01",
+        "nivel_m": 8.07,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-06-02",
+        "dia_mes": "06-02",
+        "nivel_m": 8.134,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-06-03",
+        "dia_mes": "06-03",
+        "nivel_m": 8.239,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-06-04",
+        "dia_mes": "06-04",
+        "nivel_m": 8.357,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-06-05",
+        "dia_mes": "06-05",
+        "nivel_m": 8.471,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-06-06",
+        "dia_mes": "06-06",
+        "nivel_m": 8.555,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-06-07",
+        "dia_mes": "06-07",
+        "nivel_m": 8.639,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-06-08",
+        "dia_mes": "06-08",
+        "nivel_m": 8.729,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-06-09",
+        "dia_mes": "06-09",
+        "nivel_m": 8.828,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-06-10",
+        "dia_mes": "06-10",
+        "nivel_m": 8.921,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-06-11",
+        "dia_mes": "06-11",
+        "nivel_m": 8.986,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-06-12",
+        "dia_mes": "06-12",
+        "nivel_m": 9.055,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-06-13",
+        "dia_mes": "06-13",
+        "nivel_m": 9.114,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-06-14",
+        "dia_mes": "06-14",
+        "nivel_m": 9.173,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-06-15",
+        "dia_mes": "06-15",
+        "nivel_m": 9.227,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-06-16",
+        "dia_mes": "06-16",
+        "nivel_m": 9.276,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-06-17",
+        "dia_mes": "06-17",
+        "nivel_m": 9.31,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-06-18",
+        "dia_mes": "06-18",
+        "nivel_m": 9.339,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-06-19",
+        "dia_mes": "06-19",
+        "nivel_m": 9.368,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-06-20",
+        "dia_mes": "06-20",
+        "nivel_m": 9.387,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-06-21",
+        "dia_mes": "06-21",
+        "nivel_m": 9.401,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-06-22",
+        "dia_mes": "06-22",
+        "nivel_m": 9.4,
+        "amostras_horarias": 15
+      },
+      {
+        "data": "2026-06-23",
+        "dia_mes": "06-23",
+        "nivel_m": 9.4,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-06-24",
+        "dia_mes": "06-24",
+        "nivel_m": 9.4,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-06-25",
+        "dia_mes": "06-25",
+        "nivel_m": 9.39,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-06-26",
+        "dia_mes": "06-26",
+        "nivel_m": 9.383,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-06-27",
+        "dia_mes": "06-27",
+        "nivel_m": 9.38,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-06-28",
+        "dia_mes": "06-28",
+        "nivel_m": 9.4,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-06-29",
+        "dia_mes": "06-29",
+        "nivel_m": 9.39,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-06-30",
+        "dia_mes": "06-30",
+        "nivel_m": 9.4,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-07-01",
+        "dia_mes": "07-01",
+        "nivel_m": 9.39,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-07-02",
+        "dia_mes": "07-02",
+        "nivel_m": 9.37,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-07-03",
+        "dia_mes": "07-03",
+        "nivel_m": 9.35,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-07-04",
+        "dia_mes": "07-04",
+        "nivel_m": 9.352,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-07-05",
+        "dia_mes": "07-05",
+        "nivel_m": 9.34,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-07-06",
+        "dia_mes": "07-06",
+        "nivel_m": 9.32,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-07-07",
+        "dia_mes": "07-07",
+        "nivel_m": 9.31,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-07-08",
+        "dia_mes": "07-08",
+        "nivel_m": 9.29,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-07-09",
+        "dia_mes": "07-09",
+        "nivel_m": 9.27,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-07-10",
+        "dia_mes": "07-10",
+        "nivel_m": 9.255,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-07-11",
+        "dia_mes": "07-11",
+        "nivel_m": 9.25,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-07-12",
+        "dia_mes": "07-12",
+        "nivel_m": 9.225,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-07-13",
+        "dia_mes": "07-13",
+        "nivel_m": 9.2,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-07-14",
+        "dia_mes": "07-14",
+        "nivel_m": 9.18,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-07-15",
+        "dia_mes": "07-15",
+        "nivel_m": 9.16,
+        "amostras_horarias": 20
+      },
+      {
+        "data": "2026-07-16",
+        "dia_mes": "07-16",
+        "nivel_m": 9.13,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-07-17",
+        "dia_mes": "07-17",
+        "nivel_m": 9.09,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-07-18",
+        "dia_mes": "07-18",
+        "nivel_m": 9.05,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-07-19",
+        "dia_mes": "07-19",
+        "nivel_m": 9.02,
+        "amostras_horarias": 7
+      },
+      {
+        "data": "2026-08-01",
+        "dia_mes": "08-01",
+        "nivel_m": 8.175,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-08-02",
+        "dia_mes": "08-02",
+        "nivel_m": 8.075,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-08-03",
+        "dia_mes": "08-03",
+        "nivel_m": 7.975,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-08-04",
+        "dia_mes": "08-04",
+        "nivel_m": 7.875,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-08-05",
+        "dia_mes": "08-05",
+        "nivel_m": 7.775,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-08-06",
+        "dia_mes": "08-06",
+        "nivel_m": 7.675,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-08-07",
+        "dia_mes": "08-07",
+        "nivel_m": 7.57,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-08-08",
+        "dia_mes": "08-08",
+        "nivel_m": 7.45,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-08-09",
+        "dia_mes": "08-09",
+        "nivel_m": 7.33,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-08-10",
+        "dia_mes": "08-10",
+        "nivel_m": 7.21,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-08-11",
+        "dia_mes": "08-11",
+        "nivel_m": 7.09,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-08-12",
+        "dia_mes": "08-12",
+        "nivel_m": 6.95,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-08-13",
+        "dia_mes": "08-13",
+        "nivel_m": 6.815,
+        "amostras_horarias": 12
+      },
+      {
+        "data": "2026-08-14",
+        "dia_mes": "08-14",
+        "nivel_m": 6.705,
+        "amostras_horarias": 2
+      },
+      {
+        "data": "2026-08-15",
+        "dia_mes": "08-15",
+        "nivel_m": 6.55,
+        "amostras_horarias": 12
+      },
+      {
+        "data": "2026-08-16",
+        "dia_mes": "08-16",
+        "nivel_m": 6.495,
+        "amostras_horarias": 8
+      },
+      {
+        "data": "2026-08-17",
+        "dia_mes": "08-17",
+        "nivel_m": 6.305,
+        "amostras_horarias": 13
+      },
+      {
+        "data": "2026-08-18",
+        "dia_mes": "08-18",
+        "nivel_m": 6.21,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-08-19",
+        "dia_mes": "08-19",
+        "nivel_m": 6.08,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-08-20",
+        "dia_mes": "08-20",
+        "nivel_m": 5.953,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-08-21",
+        "dia_mes": "08-21",
+        "nivel_m": 5.825,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-08-22",
+        "dia_mes": "08-22",
+        "nivel_m": 5.723,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-08-23",
+        "dia_mes": "08-23",
+        "nivel_m": 5.637,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-08-24",
+        "dia_mes": "08-24",
+        "nivel_m": 5.512,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-08-25",
+        "dia_mes": "08-25",
+        "nivel_m": 5.395,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-08-26",
+        "dia_mes": "08-26",
+        "nivel_m": 5.29,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-08-27",
+        "dia_mes": "08-27",
+        "nivel_m": 5.2,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-08-28",
+        "dia_mes": "08-28",
+        "nivel_m": 5.117,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-08-29",
+        "dia_mes": "08-29",
+        "nivel_m": 5.045,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-08-30",
+        "dia_mes": "08-30",
+        "nivel_m": 4.988,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-08-31",
+        "dia_mes": "08-31",
+        "nivel_m": 4.94,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-09-01",
+        "dia_mes": "09-01",
+        "nivel_m": 4.9,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-09-02",
+        "dia_mes": "09-02",
+        "nivel_m": 4.87,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-09-03",
+        "dia_mes": "09-03",
+        "nivel_m": 4.845,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-09-04",
+        "dia_mes": "09-04",
+        "nivel_m": 4.82,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-09-05",
+        "dia_mes": "09-05",
+        "nivel_m": 4.8,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-09-06",
+        "dia_mes": "09-06",
+        "nivel_m": 4.78,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-09-07",
+        "dia_mes": "09-07",
+        "nivel_m": 4.75,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-09-08",
+        "dia_mes": "09-08",
+        "nivel_m": 4.73,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-09-09",
+        "dia_mes": "09-09",
+        "nivel_m": 4.7,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-09-10",
+        "dia_mes": "09-10",
+        "nivel_m": 4.665,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-09-11",
+        "dia_mes": "09-11",
+        "nivel_m": 4.63,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-09-12",
+        "dia_mes": "09-12",
+        "nivel_m": 4.58,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-09-13",
+        "dia_mes": "09-13",
+        "nivel_m": 4.51,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-09-14",
+        "dia_mes": "09-14",
+        "nivel_m": 4.44,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-09-15",
+        "dia_mes": "09-15",
+        "nivel_m": 4.36,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-09-16",
+        "dia_mes": "09-16",
+        "nivel_m": 4.29,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-09-17",
+        "dia_mes": "09-17",
+        "nivel_m": 4.217,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-09-18",
+        "dia_mes": "09-18",
+        "nivel_m": 4.15,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-09-19",
+        "dia_mes": "09-19",
+        "nivel_m": 4.085,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-09-20",
+        "dia_mes": "09-20",
+        "nivel_m": 4.022,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-09-21",
+        "dia_mes": "09-21",
+        "nivel_m": 3.98,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-09-22",
+        "dia_mes": "09-22",
+        "nivel_m": 3.94,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-09-23",
+        "dia_mes": "09-23",
+        "nivel_m": 3.91,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-09-24",
+        "dia_mes": "09-24",
+        "nivel_m": 3.9,
+        "amostras_horarias": 21
+      }
+    ]
+  }
+}

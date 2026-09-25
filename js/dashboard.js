@@ -1858,6 +1858,380 @@ function annualDatasetStyle(
 }
 
 
+/* =========================
+   MESMA DATA NOS OUTROS ANOS
+========================= */
+
+function formatSameDayDate(
+  value
+) {
+
+  if (!value) {
+    return "—";
+  }
+
+  const parts =
+    value.split("-");
+
+  if (
+    parts.length !== 3
+  ) {
+    return value;
+  }
+
+  const monthNames = [
+    "janeiro",
+    "fevereiro",
+    "março",
+    "abril",
+    "maio",
+    "junho",
+    "julho",
+    "agosto",
+    "setembro",
+    "outubro",
+    "novembro",
+    "dezembro"
+  ];
+
+  const month =
+    Number(
+      parts[1]
+    );
+
+  const day =
+    Number(
+      parts[2]
+    );
+
+  if (
+    month < 1 ||
+    month > 12
+  ) {
+    return value;
+  }
+
+  return (
+    `${day} de ` +
+    `${monthNames[month - 1]}`
+  );
+}
+
+
+function sameDayDifferenceInfo(
+  differenceCm
+) {
+
+  const rounded =
+    Math.round(
+      differenceCm
+    );
+
+  if (
+    Math.abs(
+      rounded
+    ) < 1
+  ) {
+
+    return {
+      css:
+        "same",
+
+      text:
+        "mesmo nível"
+    };
+  }
+
+  if (
+    rounded > 0
+  ) {
+
+    return {
+      css:
+        "above",
+
+      text:
+        `${rounded} cm acima`
+    };
+  }
+
+  return {
+    css:
+      "below",
+
+    text:
+      `${Math.abs(
+        rounded
+      )} cm abaixo`
+  };
+}
+
+
+function renderSameDayComparison(
+  data,
+  years,
+  latestYear
+) {
+
+  const title =
+    document.getElementById(
+      "same-day-title"
+    );
+
+  const reference =
+    document.getElementById(
+      "same-day-reference"
+    );
+
+  const grid =
+    document.getElementById(
+      "same-day-grid"
+    );
+
+  const summary =
+    document.getElementById(
+      "same-day-summary"
+    );
+
+  if (
+    !grid
+  ) {
+    return;
+  }
+
+  const latestSeries =
+    (
+      data.series &&
+      data.series[
+        latestYear
+      ]
+    ) || [];
+
+  if (
+    !latestSeries.length
+  ) {
+
+    grid.innerHTML = `
+      <div class="same-day-loading">
+        Não há dados suficientes para a comparação.
+      </div>
+    `;
+
+    return;
+  }
+
+  const referencePoint =
+    latestSeries[
+      latestSeries.length - 1
+    ];
+
+  const referenceKey =
+    referencePoint.dia_mes;
+
+  const referenceLevel =
+    Number(
+      referencePoint.nivel_m
+    );
+
+  const referenceDateText =
+    formatSameDayDate(
+      referencePoint.data
+    );
+
+  if (title) {
+
+    title.textContent =
+      `Nível em ${referenceDateText}`;
+  }
+
+  if (reference) {
+
+    reference.textContent =
+      `Mediana diária • ${latestYear}`;
+  }
+
+  const comparisonParts =
+    [];
+
+  const cards =
+    [...years]
+      .sort(
+        (
+          a,
+          b
+        ) =>
+          Number(b) -
+          Number(a)
+      )
+      .map(
+        year => {
+
+          const points =
+            (
+              data.series &&
+              data.series[
+                year
+              ]
+            ) || [];
+
+          const point =
+            points.find(
+              item =>
+                item.dia_mes ===
+                referenceKey
+            );
+
+          if (!point) {
+
+            return `
+              <article
+                class="
+                  same-day-card
+                  unavailable
+                "
+              >
+
+                <div class="same-day-year">
+                  ${year}
+                </div>
+
+                <div class="same-day-level">
+                  —
+                </div>
+
+                <div class="same-day-difference">
+                  sem dado nesta data
+                </div>
+
+              </article>
+            `;
+          }
+
+          const level =
+            Number(
+              point.nivel_m
+            );
+
+          if (
+            year === latestYear
+          ) {
+
+            return `
+              <article
+                class="
+                  same-day-card
+                  current
+                "
+              >
+
+                <div class="same-day-year">
+                  ${year}
+                </div>
+
+                <div class="same-day-level">
+                  ${formatLevel(
+                    level
+                  )} m
+                </div>
+
+                <div
+                  class="
+                    same-day-difference
+                    reference
+                  "
+                >
+                  ano de referência
+                </div>
+
+              </article>
+            `;
+          }
+
+          const differenceCm =
+            (
+              referenceLevel -
+              level
+            ) * 100;
+
+          const difference =
+            sameDayDifferenceInfo(
+              differenceCm
+            );
+
+          comparisonParts.push(
+            `${year}: ${difference.text}`
+          );
+
+          return `
+            <article
+              class="
+                same-day-card
+                ${difference.css}
+              "
+            >
+
+              <div class="same-day-year">
+                ${year}
+              </div>
+
+              <div class="same-day-level">
+                ${formatLevel(
+                  level
+                )} m
+              </div>
+
+              <div
+                class="
+                  same-day-difference
+                  ${difference.css}
+                "
+              >
+                ${latestYear}
+                ${difference.text}
+              </div>
+
+            </article>
+          `;
+        }
+      )
+      .join("");
+
+  grid.innerHTML =
+    cards;
+
+  if (summary) {
+
+    if (
+      comparisonParts.length
+    ) {
+
+      summary.textContent =
+        (
+          `Em ${referenceDateText}, ` +
+          `${latestYear} está ` +
+          comparisonParts
+            .map(
+              item =>
+                item.replace(
+                  ": ",
+                  " "
+                )
+            )
+            .join(" • ")
+        );
+
+    } else {
+
+      summary.textContent =
+        (
+          "Não há anos anteriores com dados " +
+          "disponíveis para esta mesma data."
+        );
+    }
+  }
+}
+
+
 function renderAnnualChart(data) {
 
   const canvas =
@@ -1911,6 +2285,12 @@ function renderAnnualChart(data) {
     years[
       years.length - 1
     ];
+
+  renderSameDayComparison(
+    data,
+    years,
+    latestYear
+  );
 
   const datasets =
     years.map(
@@ -2287,6 +2667,20 @@ function renderAnnualUnavailable() {
     status.textContent =
       "Comparativo histórico temporariamente indisponível.";
   }
+
+  const sameDayGrid =
+    document.getElementById(
+      "same-day-grid"
+    );
+
+  if (sameDayGrid) {
+
+    sameDayGrid.innerHTML = `
+      <div class="same-day-loading">
+        Comparação da mesma data indisponível.
+      </div>
+    `;
+  }
 }
 
 
@@ -2323,215 +2717,4 @@ async function fetchJson(
 
 /* =========================
    CARREGAR ALERTA
-========================= */
-
-async function loadAlert(
-  cacheKey
-) {
-
-  try {
-
-    const alertData =
-      await fetchJson(
-        ALERT_URL,
-        cacheKey
-      );
-
-    renderAlert(
-      alertData
-    );
-
-  } catch (error) {
-
-    console.error(
-      "Erro no alerta:",
-      error
-    );
-
-    renderAlertUnavailable();
-  }
-}
-
-
-/* =========================
-   CARREGAR COMPARATIVO ANUAL
-========================= */
-
-async function loadAnnual(
-  cacheKey
-) {
-
-  try {
-
-    const annualData =
-      await fetchJson(
-        ANNUAL_URL,
-        cacheKey
-      );
-
-    renderAnnualChart(
-      annualData
-    );
-
-  } catch (error) {
-
-    console.error(
-      "Erro no comparativo anual:",
-      error
-    );
-
-    renderAnnualUnavailable();
-  }
-}
-
-
-/* =========================
-   CARREGAMENTO PRINCIPAL
-========================= */
-
-async function loadData() {
-
-  const cacheKey =
-    Date.now();
-
-  try {
-
-    const [
-      latest,
-      series,
-      stations
-    ] =
-      await Promise.all([
-        fetchJson(
-          LATEST_URL,
-          cacheKey
-        ),
-
-        fetchJson(
-          SERIES_URL,
-          cacheKey
-        ),
-
-        fetchJson(
-          STATIONS_URL,
-          cacheKey
-        )
-      ]);
-
-    latestData =
-      latest;
-
-    latestLoadedAt =
-      Date.now();
-
-    updateDashboard(
-      latest
-    );
-
-    renderStations(
-      stations
-    );
-
-    updatePropagation(
-      stations
-    );
-
-    createChart(
-      series
-    );
-
-  } catch (error) {
-
-    console.error(
-      error
-    );
-
-    const statusText =
-      document.getElementById(
-        "status-text"
-      );
-
-    const statusTime =
-      document.getElementById(
-        "last-update"
-      );
-
-    const dot =
-      document.getElementById(
-        "status-dot"
-      );
-
-    statusText.textContent =
-      "Erro ao carregar dados";
-
-    statusTime.textContent =
-      "Tente novamente em instantes";
-
-    dot.classList.remove(
-      "ok"
-    );
-
-    dot.classList.add(
-      "warning"
-    );
-
-    const upstream =
-      document.getElementById(
-        "upstream-grid"
-      );
-
-    if (upstream) {
-
-      upstream.innerHTML = `
-        <div class="upstream-loading">
-          Não foi possível carregar
-          as estações neste momento.
-        </div>
-      `;
-    }
-  }
-
-  await Promise.all([
-    loadAlert(
-      cacheKey
-    ),
-
-    loadAnnual(
-      cacheKey
-    )
-  ]);
-}
-
-
-/* =========================
-   INICIALIZAÇÃO
-========================= */
-
-document.addEventListener(
-  "DOMContentLoaded",
-  () => {
-
-    loadData();
-
-    /*
-      Busca novos arquivos no GitHub
-      a cada 5 minutos.
-    */
-
-    setInterval(
-      loadData,
-      5 * 60 * 1000
-    );
-
-    /*
-      Atualiza somente o texto
-      "Atualizado há..."
-      a cada minuto.
-    */
-
-    setInterval(
-      updateLiveStatus,
-      60 * 1000
-    );
-  }
-);
+================

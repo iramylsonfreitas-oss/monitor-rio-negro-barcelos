@@ -1,0 +1,271 @@
+{
+  "metodologia": {
+    "descricao": "Backtest do detector atual de repiquete de Barcelos. A lógica espelha os critérios usados pelo detector em produção.",
+    "observacao_importante": "A queda prévia é avaliada no primeiro checkpoint que já possui alta mínima de 24 h. Esta é a mesma lógica do detector atual e será avaliada antes de qualquer alteração metodológica.",
+    "queda_previa_7d_cm": -10.0,
+    "queda_previa_72h_cm": -3.0,
+    "alta_confirmacao_24h_cm": 3.0,
+    "confirmacoes": 3,
+    "intervalo_confirmacoes_h": 6,
+    "criterio_encerramento_24h_cm": 1.0,
+    "confirmacoes_encerramento": 4,
+    "momento_real_da_confirmacao": "O evento só é considerado conhecido pelo sistema no terceiro checkpoint. Por isso o arquivo separa inicio_sinal de confirmado_em."
+  },
+  "resumo": {
+    "periodo_inicio_manaus": "2023-09-24 00:00:00",
+    "periodo_fim_manaus": "2026-09-25 06:00:00",
+    "checkpoints_analisados": 3544,
+    "ocorrencias_primeiro_limiar": 7,
+    "eventos_confirmados": 6,
+    "eventos_encerrados": 6,
+    "eventos_ativos_no_fim": 0,
+    "eventos_por_ano": {
+      "2024": 2,
+      "2025": 3,
+      "2026": 1
+    },
+    "atraso_confirmacao_h": 12,
+    "duracao_mediana_confirmada_h": 222.0,
+    "ganho_maximo_mediano_desde_confirmacao_cm": 36.7,
+    "ganho_mediano_24h_apos_confirmacao_cm": 0.8,
+    "ganho_mediano_48h_apos_confirmacao_cm": 4.5,
+    "ganho_mediano_72h_apos_confirmacao_cm": 7.5,
+    "variacao_maxima_24h_mediana_cm": 7.9
+  },
+  "eventos": [
+    {
+      "evento": 1,
+      "inicio_sinal_manaus": "2024-01-19 06:00:00",
+      "confirmado_em_manaus": "2024-01-19 18:00:00",
+      "atraso_confirmacao_h": 12.0,
+      "fim_manaus": "2024-01-21 00:00:00",
+      "ativo_no_fim_da_serie": false,
+      "duracao_confirmada_h": 30.0,
+      "nivel_inicio_m": 3.16,
+      "nivel_confirmacao_m": 3.16,
+      "nivel_pico_m": 3.17,
+      "pico_em_manaus": "2024-01-20 12:00:00",
+      "queda_72h_no_inicio_cm": -7.0,
+      "queda_7d_no_inicio_cm": -31.0,
+      "variacao_24h_no_inicio_cm": 3.0,
+      "variacao_maxima_24h_cm": 4.0,
+      "ganho_maximo_desde_sinal_cm": 0.5,
+      "ganho_maximo_desde_confirmacao_cm": 0.5,
+      "ganho_24h_apos_confirmacao_cm": 0.0,
+      "ganho_48h_apos_confirmacao_cm": 0.0,
+      "ganho_72h_apos_confirmacao_cm": -1.0,
+      "confirmacoes_inicio": [
+        {
+          "hora_manaus": "2024-01-19 06:00:00",
+          "nivel_m": 3.16,
+          "variacao_24h_cm": 3.0
+        },
+        {
+          "hora_manaus": "2024-01-19 12:00:00",
+          "nivel_m": 3.16,
+          "variacao_24h_cm": 3.0
+        },
+        {
+          "hora_manaus": "2024-01-19 18:00:00",
+          "nivel_m": 3.16,
+          "variacao_24h_cm": 4.0
+        }
+      ]
+    },
+    {
+      "evento": 2,
+      "inicio_sinal_manaus": "2024-10-04 12:00:00",
+      "confirmado_em_manaus": "2024-10-05 00:00:00",
+      "atraso_confirmacao_h": 12.0,
+      "fim_manaus": "2024-10-13 00:00:00",
+      "ativo_no_fim_da_serie": false,
+      "duracao_confirmada_h": 192.0,
+      "nivel_inicio_m": 2.49,
+      "nivel_confirmacao_m": 2.54,
+      "nivel_pico_m": 3.01,
+      "pico_em_manaus": "2024-10-12 00:00:00",
+      "queda_72h_no_inicio_cm": -1.4,
+      "queda_7d_no_inicio_cm": -27.2,
+      "variacao_24h_no_inicio_cm": 3.9,
+      "variacao_maxima_24h_cm": 10.8,
+      "ganho_maximo_desde_sinal_cm": 52.3,
+      "ganho_maximo_desde_confirmacao_cm": 47.4,
+      "ganho_24h_apos_confirmacao_cm": 10.8,
+      "ganho_48h_apos_confirmacao_cm": 20.7,
+      "ganho_72h_apos_confirmacao_cm": 30.5,
+      "confirmacoes_inicio": [
+        {
+          "hora_manaus": "2024-10-04 12:00:00",
+          "nivel_m": 2.49,
+          "variacao_24h_cm": 3.9
+        },
+        {
+          "hora_manaus": "2024-10-04 18:00:00",
+          "nivel_m": 2.52,
+          "variacao_24h_cm": 6.8
+        },
+        {
+          "hora_manaus": "2024-10-05 00:00:00",
+          "nivel_m": 2.54,
+          "variacao_24h_cm": 8.4
+        }
+      ]
+    },
+    {
+      "evento": 3,
+      "inicio_sinal_manaus": "2025-02-06 12:00:00",
+      "confirmado_em_manaus": "2025-02-07 00:00:00",
+      "atraso_confirmacao_h": 12.0,
+      "fim_manaus": "2025-03-09 18:00:00",
+      "ativo_no_fim_da_serie": false,
+      "duracao_confirmada_h": 738.0,
+      "nivel_inicio_m": 3.31,
+      "nivel_confirmacao_m": 3.32,
+      "nivel_pico_m": 5.28,
+      "pico_em_manaus": "2025-03-08 12:00:00",
+      "queda_72h_no_inicio_cm": 5.0,
+      "queda_7d_no_inicio_cm": -32.0,
+      "variacao_24h_no_inicio_cm": 5.0,
+      "variacao_maxima_24h_cm": 18.0,
+      "ganho_maximo_desde_sinal_cm": 197.0,
+      "ganho_maximo_desde_confirmacao_cm": 196.0,
+      "ganho_24h_apos_confirmacao_cm": 5.0,
+      "ganho_48h_apos_confirmacao_cm": 12.0,
+      "ganho_72h_apos_confirmacao_cm": 19.0,
+      "confirmacoes_inicio": [
+        {
+          "hora_manaus": "2025-02-06 12:00:00",
+          "nivel_m": 3.31,
+          "variacao_24h_cm": 5.0
+        },
+        {
+          "hora_manaus": "2025-02-06 18:00:00",
+          "nivel_m": 3.32,
+          "variacao_24h_cm": 5.0
+        },
+        {
+          "hora_manaus": "2025-02-07 00:00:00",
+          "nivel_m": 3.32,
+          "variacao_24h_cm": 4.0
+        }
+      ]
+    },
+    {
+      "evento": 4,
+      "inicio_sinal_manaus": "2025-10-19 18:00:00",
+      "confirmado_em_manaus": "2025-10-20 06:00:00",
+      "atraso_confirmacao_h": 12.0,
+      "fim_manaus": "2025-10-21 12:00:00",
+      "ativo_no_fim_da_serie": false,
+      "duracao_confirmada_h": 30.0,
+      "nivel_inicio_m": 4.02,
+      "nivel_confirmacao_m": 4.02,
+      "nivel_pico_m": 4.02,
+      "pico_em_manaus": "2025-10-19 18:00:00",
+      "queda_72h_no_inicio_cm": 2.0,
+      "queda_7d_no_inicio_cm": -14.0,
+      "variacao_24h_no_inicio_cm": 3.0,
+      "variacao_maxima_24h_cm": 3.0,
+      "ganho_maximo_desde_sinal_cm": 0.0,
+      "ganho_maximo_desde_confirmacao_cm": 0.0,
+      "ganho_24h_apos_confirmacao_cm": -1.0,
+      "ganho_48h_apos_confirmacao_cm": -2.0,
+      "ganho_72h_apos_confirmacao_cm": -3.0,
+      "confirmacoes_inicio": [
+        {
+          "hora_manaus": "2025-10-19 18:00:00",
+          "nivel_m": 4.02,
+          "variacao_24h_cm": 3.0
+        },
+        {
+          "hora_manaus": "2025-10-20 00:00:00",
+          "nivel_m": 4.02,
+          "variacao_24h_cm": 3.0
+        },
+        {
+          "hora_manaus": "2025-10-20 06:00:00",
+          "nivel_m": 4.02,
+          "variacao_24h_cm": 3.0
+        }
+      ]
+    },
+    {
+      "evento": 5,
+      "inicio_sinal_manaus": "2025-11-20 18:00:00",
+      "confirmado_em_manaus": "2025-11-21 06:00:00",
+      "atraso_confirmacao_h": 12.0,
+      "fim_manaus": "2025-12-10 00:00:00",
+      "ativo_no_fim_da_serie": false,
+      "duracao_confirmada_h": 450.0,
+      "nivel_inicio_m": 3.52,
+      "nivel_confirmacao_m": 3.53,
+      "nivel_pico_m": 4.08,
+      "pico_em_manaus": "2025-12-09 12:00:00",
+      "queda_72h_no_inicio_cm": -4.0,
+      "queda_7d_no_inicio_cm": -21.0,
+      "variacao_24h_no_inicio_cm": 3.0,
+      "variacao_maxima_24h_cm": 5.0,
+      "ganho_maximo_desde_sinal_cm": 56.0,
+      "ganho_maximo_desde_confirmacao_cm": 55.0,
+      "ganho_24h_apos_confirmacao_cm": 1.0,
+      "ganho_48h_apos_confirmacao_cm": 6.0,
+      "ganho_72h_apos_confirmacao_cm": 9.0,
+      "confirmacoes_inicio": [
+        {
+          "hora_manaus": "2025-11-20 18:00:00",
+          "nivel_m": 3.52,
+          "variacao_24h_cm": 3.0
+        },
+        {
+          "hora_manaus": "2025-11-21 00:00:00",
+          "nivel_m": 3.52,
+          "variacao_24h_cm": 3.0
+        },
+        {
+          "hora_manaus": "2025-11-21 06:00:00",
+          "nivel_m": 3.53,
+          "variacao_24h_cm": 4.0
+        }
+      ]
+    },
+    {
+      "evento": 6,
+      "inicio_sinal_manaus": "2026-03-19 06:00:00",
+      "confirmado_em_manaus": "2026-03-19 18:00:00",
+      "atraso_confirmacao_h": 12.0,
+      "fim_manaus": "2026-03-30 06:00:00",
+      "ativo_no_fim_da_serie": false,
+      "duracao_confirmada_h": 252.0,
+      "nivel_inicio_m": 3.14,
+      "nivel_confirmacao_m": 3.19,
+      "nivel_pico_m": 3.45,
+      "pico_em_manaus": "2026-03-29 00:00:00",
+      "queda_72h_no_inicio_cm": 5.3,
+      "queda_7d_no_inicio_cm": -21.5,
+      "variacao_24h_no_inicio_cm": 10.0,
+      "variacao_maxima_24h_cm": 15.0,
+      "ganho_maximo_desde_sinal_cm": 31.0,
+      "ganho_maximo_desde_confirmacao_cm": 26.0,
+      "ganho_24h_apos_confirmacao_cm": 0.5,
+      "ganho_48h_apos_confirmacao_cm": 3.0,
+      "ganho_72h_apos_confirmacao_cm": 6.0,
+      "confirmacoes_inicio": [
+        {
+          "hora_manaus": "2026-03-19 06:00:00",
+          "nivel_m": 3.14,
+          "variacao_24h_cm": 10.0
+        },
+        {
+          "hora_manaus": "2026-03-19 12:00:00",
+          "nivel_m": 3.18,
+          "variacao_24h_cm": 13.0
+        },
+        {
+          "hora_manaus": "2026-03-19 18:00:00",
+          "nivel_m": 3.19,
+          "variacao_24h_cm": 15.0
+        }
+      ]
+    }
+  ]
+}

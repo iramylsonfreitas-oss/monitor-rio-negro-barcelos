@@ -44,6 +44,11 @@ jobs:
           python collector/alerta.py
 
 
+      - name: Detectar repiquete
+        run: |
+          python collector/repiquete.py
+
+
       - name: Conferir dados atuais
         run: |
           echo "======================================"
@@ -332,12 +337,177 @@ jobs:
           PY
 
 
+      - name: Conferir detector de repiquete
+        run: |
+          echo "======================================"
+          echo "DETECTOR DE REPIQUETE"
+          echo "======================================"
+
+          if [ ! -f data/repiquete.json ]; then
+            echo "ERRO:"
+            echo "data/repiquete.json não foi criado."
+            exit 1
+          fi
+
+          python - <<'PY'
+          import json
+
+          with open(
+              "data/repiquete.json",
+              encoding="utf-8"
+          ) as f:
+              data = json.load(f)
+
+          print(
+              "Nível:",
+              data.get(
+                  "nivel"
+              )
+          )
+
+          print(
+              "Status:",
+              data.get(
+                  "rotulo"
+              )
+          )
+
+          print(
+              "Título:",
+              data.get(
+                  "titulo"
+              )
+          )
+
+          print()
+
+          print(
+              "Mensagem:"
+          )
+
+          print(
+              data.get(
+                  "mensagem"
+              )
+          )
+
+          print()
+
+          print(
+              "Motivos:"
+          )
+
+          for motivo in (
+              data.get(
+                  "motivos"
+              )
+              or []
+          ):
+              print(
+                  "-",
+                  motivo
+              )
+
+          print()
+
+          contexto = (
+              data.get(
+                  "contexto_montante"
+              )
+              or {}
+          )
+
+          print(
+              "Sinal a montante:",
+              contexto.get(
+                  "sinal"
+              )
+          )
+
+          print(
+              "Estações positivas em 72 h:",
+              contexto.get(
+                  "estacoes_positivas_72h"
+              )
+          )
+
+          print(
+              "Evento confirmado em Serrinha:",
+              contexto.get(
+                  "evento_serrinha_confirmado"
+              )
+          )
+
+          print()
+
+          evento = (
+              data.get(
+                  "evento_barcelos"
+              )
+              or {}
+          )
+
+          print(
+              "Repiquete confirmado:",
+              evento.get(
+                  "confirmado"
+              )
+          )
+
+          print(
+              "Início:",
+              evento.get(
+                  "inicio_manaus"
+              )
+          )
+
+          print()
+
+          print(
+              "Últimos checkpoints de Barcelos:"
+          )
+
+          for sample in (
+              data.get(
+                  "ultimos_checkpoints_barcelos"
+              )
+              or []
+          ):
+
+              print(
+                  sample.get(
+                      "hora_manaus"
+                  ),
+                  "|",
+                  "6h:",
+                  sample.get(
+                      "variacao_6h_cm"
+                  ),
+                  "|",
+                  "24h:",
+                  sample.get(
+                      "variacao_24h_cm"
+                  ),
+                  "|",
+                  "72h:",
+                  sample.get(
+                      "variacao_72h_cm"
+                  ),
+                  "|",
+                  "7d:",
+                  sample.get(
+                      "variacao_7d_cm"
+                  )
+              )
+          PY
+
+
       - name: Descartar alteracao do historico nesta execucao
         run: |
           git restore data/history/hourly.csv || true
 
 
-      - name: Salvar dados em tempo real e alerta
+      - name: Salvar dados em tempo real, alerta e repiquete
         run: |
           git config user.name "rio-negro-bot"
           git config user.email "actions@github.com"
@@ -346,13 +516,14 @@ jobs:
           git add data/series_30d.json
           git add data/estacoes.json
           git add data/alerta.json
+          git add data/repiquete.json
 
           if git diff --cached --quiet; then
             echo "Nenhuma alteração para salvar."
             exit 0
           fi
 
-          git commit -m "Atualiza dados ANA e alerta"
+          git commit -m "Atualiza dados ANA, alerta e repiquete"
 
           git pull --rebase origin main
 

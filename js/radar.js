@@ -26,13 +26,21 @@
   // ========================================================
 
   function installStyles() {
-    if (document.getElementById("river-radar-styles")) {
+    if (
+      document.getElementById(
+        "river-radar-styles"
+      )
+    ) {
       return;
     }
 
-    const style = document.createElement("style");
+    const style =
+      document.createElement(
+        "style"
+      );
 
-    style.id = "river-radar-styles";
+    style.id =
+      "river-radar-styles";
 
     style.textContent = `
       .river-radar-section {
@@ -45,9 +53,12 @@
             rgba(8, 26, 45, 0.98),
             rgba(10, 38, 61, 0.96)
           );
-        border: 1px solid rgba(255,255,255,0.08);
+        border:
+          1px solid
+          rgba(255,255,255,0.08);
         box-shadow:
-          0 18px 45px rgba(0,0,0,0.18);
+          0 18px 45px
+          rgba(0,0,0,0.18);
         overflow: hidden;
         position: relative;
       }
@@ -82,7 +93,8 @@
         font-size: 11px;
         font-weight: 800;
         letter-spacing: 0.16em;
-        color: rgba(255,255,255,0.55);
+        color:
+          rgba(255,255,255,0.55);
         margin-bottom: 7px;
       }
 
@@ -97,7 +109,8 @@
       .river-radar-subtitle {
         margin-top: 8px;
         max-width: 640px;
-        color: rgba(255,255,255,0.62);
+        color:
+          rgba(255,255,255,0.62);
         font-size: 13px;
         line-height: 1.5;
       }
@@ -109,8 +122,10 @@
         gap: 7px;
         padding: 8px 11px;
         border-radius: 999px;
-        background: rgba(255,255,255,0.07);
-        color: rgba(255,255,255,0.72);
+        background:
+          rgba(255,255,255,0.07);
+        color:
+          rgba(255,255,255,0.72);
         font-size: 11px;
         font-weight: 700;
         white-space: nowrap;
@@ -121,16 +136,22 @@
         height: 7px;
         border-radius: 50%;
         background: #5bd18b;
-        box-shadow: 0 0 0 5px rgba(91,209,139,0.10);
+        box-shadow:
+          0 0 0 5px
+          rgba(91,209,139,0.10);
       }
 
       .river-radar-summary {
         margin-top: 22px;
         padding: 16px 18px;
         border-radius: 16px;
-        background: rgba(255,255,255,0.055);
-        border: 1px solid rgba(255,255,255,0.07);
-        color: rgba(255,255,255,0.86);
+        background:
+          rgba(255,255,255,0.055);
+        border:
+          1px solid
+          rgba(255,255,255,0.07);
+        color:
+          rgba(255,255,255,0.86);
         font-size: 14px;
         line-height: 1.55;
         position: relative;
@@ -141,12 +162,57 @@
         color: #ffffff;
       }
 
+      .river-radar-direction {
+        margin-top: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        color:
+          rgba(255,255,255,0.43);
+        font-size: 9px;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        position: relative;
+        z-index: 2;
+      }
+
+      .river-radar-direction-arrow {
+        width: 78px;
+        height: 1px;
+        position: relative;
+        background:
+          rgba(100,190,222,0.44);
+      }
+
+      .river-radar-direction-arrow::after {
+        content: "";
+        position: absolute;
+        right: -1px;
+        top: -3px;
+        width: 6px;
+        height: 6px;
+        border-top:
+          1px solid
+          rgba(100,190,222,0.70);
+        border-right:
+          1px solid
+          rgba(100,190,222,0.70);
+        transform:
+          rotate(45deg);
+      }
+
       .river-radar-track {
         position: relative;
         display: grid;
-        grid-template-columns: repeat(5, minmax(0, 1fr));
+        grid-template-columns:
+          repeat(
+            5,
+            minmax(0, 1fr)
+          );
         gap: 12px;
-        margin-top: 30px;
+        margin-top: 8px;
         padding-top: 18px;
         z-index: 1;
       }
@@ -174,7 +240,8 @@
         top: 28px;
         display: flex;
         justify-content: space-around;
-        color: rgba(255,255,255,0.30);
+        color:
+          rgba(255,255,255,0.30);
         font-size: 14px;
         pointer-events: none;
       }
@@ -199,44 +266,85 @@
         height: 18px;
         border-radius: 50%;
         background: #718090;
-        border: 4px solid #102b43;
+        border:
+          4px solid #102b43;
         box-shadow:
-          0 0 0 3px rgba(255,255,255,0.10);
+          0 0 0 3px
+          rgba(255,255,255,0.10);
       }
 
-      .river-radar-station.up .river-radar-node {
+      .river-radar-station.up
+      .river-radar-node {
         background: #4dd58a;
         box-shadow:
-          0 0 0 3px rgba(77,213,138,0.15),
-          0 0 18px rgba(77,213,138,0.30);
+          0 0 0 3px
+          rgba(77,213,138,0.15),
+          0 0 18px
+          rgba(77,213,138,0.30);
       }
 
-      .river-radar-station.down .river-radar-node {
+      .river-radar-station.down
+      .river-radar-node {
         background: #ef6b72;
         box-shadow:
-          0 0 0 3px rgba(239,107,114,0.14),
-          0 0 18px rgba(239,107,114,0.20);
+          0 0 0 3px
+          rgba(239,107,114,0.14),
+          0 0 18px
+          rgba(239,107,114,0.20);
       }
 
-      .river-radar-station.stable .river-radar-node {
+      .river-radar-station.stable
+      .river-radar-node {
         background: #eab85a;
         box-shadow:
-          0 0 0 3px rgba(234,184,90,0.14),
-          0 0 18px rgba(234,184,90,0.20);
+          0 0 0 3px
+          rgba(234,184,90,0.14),
+          0 0 18px
+          rgba(234,184,90,0.20);
       }
 
       .river-radar-card {
         margin-top: 9px;
         padding: 15px 10px 13px;
-        min-height: 154px;
+        min-height: 177px;
         border-radius: 16px;
-        background: rgba(255,255,255,0.045);
-        border: 1px solid rgba(255,255,255,0.065);
+        background:
+          rgba(255,255,255,0.045);
+        border:
+          1px solid
+          rgba(255,255,255,0.065);
+        position: relative;
       }
 
-      .river-radar-station.barcelos .river-radar-card {
-        background: rgba(74,164,214,0.10);
-        border-color: rgba(91,183,231,0.22);
+      .river-radar-station.barcelos
+      .river-radar-card {
+        background:
+          rgba(74,164,214,0.10);
+        border-color:
+          rgba(91,183,231,0.30);
+        box-shadow:
+          inset 0 0 0 1px
+          rgba(91,183,231,0.04);
+      }
+
+      .river-radar-destination {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 8px;
+        padding: 4px 7px;
+        border-radius: 999px;
+        background:
+          rgba(74,164,214,0.18);
+        border:
+          1px solid
+          rgba(91,183,231,0.25);
+        color:
+          rgba(190,230,250,0.90);
+        font-size: 8px;
+        font-weight: 800;
+        letter-spacing: 0.10em;
+        text-transform: uppercase;
       }
 
       .river-radar-name {
@@ -248,13 +356,28 @@
 
       .river-radar-code {
         margin-top: 3px;
-        color: rgba(255,255,255,0.36);
+        color:
+          rgba(255,255,255,0.36);
         font-size: 9px;
         font-weight: 600;
       }
 
+      .river-radar-time {
+        margin-top: 6px;
+        color:
+          rgba(255,255,255,0.48);
+        font-size: 9px;
+        font-weight: 600;
+      }
+
+      .river-radar-time strong {
+        color:
+          rgba(255,255,255,0.73);
+        font-weight: 700;
+      }
+
       .river-radar-main-value {
-        margin-top: 15px;
+        margin-top: 13px;
         font-size: 23px;
         line-height: 1;
         font-weight: 800;
@@ -264,7 +387,8 @@
 
       .river-radar-main-label {
         margin-top: 5px;
-        color: rgba(255,255,255,0.45);
+        color:
+          rgba(255,255,255,0.45);
         font-size: 9px;
         font-weight: 700;
         letter-spacing: 0.06em;
@@ -276,7 +400,8 @@
         justify-content: center;
         gap: 8px;
         margin-top: 12px;
-        color: rgba(255,255,255,0.62);
+        color:
+          rgba(255,255,255,0.62);
         font-size: 10px;
       }
 
@@ -291,8 +416,10 @@
         margin-top: 10px;
         padding: 5px 8px;
         border-radius: 999px;
-        background: rgba(255,255,255,0.06);
-        color: rgba(255,255,255,0.72);
+        background:
+          rgba(255,255,255,0.06);
+        color:
+          rgba(255,255,255,0.72);
         font-size: 9px;
         font-weight: 700;
         text-transform: uppercase;
@@ -302,27 +429,35 @@
       .river-radar-footer {
         margin-top: 20px;
         padding-top: 16px;
-        border-top: 1px solid rgba(255,255,255,0.07);
+        border-top:
+          1px solid
+          rgba(255,255,255,0.07);
         display: flex;
         justify-content: space-between;
         gap: 20px;
-        color: rgba(255,255,255,0.44);
+        color:
+          rgba(255,255,255,0.44);
         font-size: 10px;
         line-height: 1.45;
       }
 
       .river-radar-footer strong {
-        color: rgba(255,255,255,0.65);
+        color:
+          rgba(255,255,255,0.65);
       }
 
       .river-radar-loading {
-        padding: 36px 10px 20px;
+        padding:
+          36px 10px 20px;
         text-align: center;
-        color: rgba(255,255,255,0.55);
+        color:
+          rgba(255,255,255,0.55);
         font-size: 13px;
       }
 
-      @media (max-width: 760px) {
+
+      @media
+      (max-width: 760px) {
 
         .river-radar-section {
           padding: 22px 16px;
@@ -341,9 +476,20 @@
           font-size: 21px;
         }
 
+        .river-radar-direction {
+          justify-content: flex-start;
+          margin:
+            22px 0 11px 8px;
+          gap: 7px;
+        }
+
+        .river-radar-direction-arrow {
+          width: 34px;
+        }
+
         .river-radar-track {
           display: block;
-          margin-top: 24px;
+          margin-top: 0;
           padding-top: 0;
           padding-left: 4px;
         }
@@ -363,7 +509,8 @@
 
         .river-radar-station {
           display: grid;
-          grid-template-columns: 32px minmax(0, 1fr);
+          grid-template-columns:
+            32px minmax(0, 1fr);
           gap: 10px;
           text-align: left;
           margin-bottom: 11px;
@@ -372,8 +519,10 @@
         .river-radar-node-wrap {
           height: 100%;
           min-height: 100px;
-          justify-content: flex-start;
-          align-items: flex-start;
+          justify-content:
+            flex-start;
+          align-items:
+            flex-start;
           padding-top: 18px;
           z-index: 2;
         }
@@ -388,13 +537,18 @@
           padding: 14px 15px;
         }
 
+        .river-radar-destination {
+          margin-bottom: 7px;
+        }
+
         .river-radar-main-value {
           margin-top: 11px;
           font-size: 22px;
         }
 
         .river-radar-mini {
-          justify-content: flex-start;
+          justify-content:
+            flex-start;
           flex-wrap: wrap;
         }
 
@@ -402,13 +556,16 @@
           display: block;
         }
 
-        .river-radar-footer > div + div {
+        .river-radar-footer
+        > div + div {
           margin-top: 7px;
         }
       }
     `;
 
-    document.head.appendChild(style);
+    document.head.appendChild(
+      style
+    );
   }
 
 
@@ -417,22 +574,32 @@
   // ========================================================
 
   function number(value) {
-    const parsed = Number(value);
+    const parsed =
+      Number(value);
 
-    return Number.isFinite(parsed)
+    return Number.isFinite(
+      parsed
+    )
       ? parsed
       : null;
   }
 
 
-  function formatSigned(value, decimals = 0) {
-    const n = number(value);
+  function formatSigned(
+    value,
+    decimals = 0
+  ) {
+    const n =
+      number(value);
 
     if (n === null) {
       return "—";
     }
 
-    const formatted = n.toFixed(decimals);
+    const formatted =
+      n.toFixed(
+        decimals
+      );
 
     if (n > 0) {
       return `+${formatted} cm`;
@@ -442,23 +609,44 @@
   }
 
 
-  function formatLevel(value) {
-    const n = number(value);
-
-    if (n === null) {
+  function formatMeasurementTime(
+    value
+  ) {
+    if (
+      !value ||
+      typeof value !== "string"
+    ) {
       return "—";
     }
 
-    return `${n.toFixed(2)} m`;
+    const parts =
+      value.trim().split(" ");
+
+    if (parts.length < 2) {
+      return value;
+    }
+
+    const time =
+      parts[1].slice(
+        0,
+        5
+      );
+
+    return time || "—";
   }
 
 
-  function getDirection(station) {
-    const variation72 = number(
-      station.variacao_72h_cm
-    );
+  function getDirection(
+    station
+  ) {
+    const variation72 =
+      number(
+        station.variacao_72h_cm
+      );
 
-    if (variation72 === null) {
+    if (
+      variation72 === null
+    ) {
       return {
         css: "stable",
         label: "sem leitura",
@@ -466,7 +654,9 @@
       };
     }
 
-    if (variation72 >= 2) {
+    if (
+      variation72 >= 2
+    ) {
       return {
         css: "up",
         label: "alta em 72 h",
@@ -474,7 +664,9 @@
       };
     }
 
-    if (variation72 <= -2) {
+    if (
+      variation72 <= -2
+    ) {
       return {
         css: "down",
         label: "queda em 72 h",
@@ -490,11 +682,20 @@
   }
 
 
-  function stationMap(data) {
+  function stationMap(
+    data
+  ) {
     const map = {};
 
-    for (const station of data.estacoes || []) {
-      map[String(station.estacao)] = station;
+    for (
+      const station
+      of data.estacoes || []
+    ) {
+      map[
+        String(
+          station.estacao
+        )
+      ] = station;
     }
 
     return map;
@@ -505,43 +706,56 @@
   // LEITURA AUTOMÁTICA DO CORREDOR
   // ========================================================
 
-  function buildSummary(stations) {
+  function buildSummary(
+    stations
+  ) {
     const positive = [];
-    const negative = [];
-    const stable = [];
 
-    for (const code of STATION_ORDER) {
-      const station = stations[code];
+    for (
+      const code
+      of STATION_ORDER
+    ) {
+      const station =
+        stations[code];
 
       if (!station) {
         continue;
       }
 
-      const variation72 = number(
-        station.variacao_72h_cm
-      );
+      const variation72 =
+        number(
+          station
+            .variacao_72h_cm
+        );
 
-      if (variation72 === null) {
-        continue;
-      }
-
-      if (variation72 >= 2) {
-        positive.push(station.nome);
-      } else if (variation72 <= -2) {
-        negative.push(station.nome);
-      } else {
-        stable.push(station.nome);
+      if (
+        variation72 !== null &&
+        variation72 >= 2
+      ) {
+        positive.push(
+          station.nome
+        );
       }
     }
 
-    const barcelos = stations["14480002"];
-    const barcelos6 = barcelos
-      ? number(barcelos.variacao_6h_cm)
-      : null;
+    const barcelos =
+      stations[
+        "14480002"
+      ];
+
+    const barcelos6 =
+      barcelos
+        ? number(
+            barcelos
+              .variacao_6h_cm
+          )
+        : null;
 
     let mainText = "";
 
-    if (positive.length) {
+    if (
+      positive.length
+    ) {
       mainText =
         `Alta acumulada em 72 h aparece em ` +
         `<strong>${positive.join(" e ")}</strong>.`;
@@ -553,17 +767,26 @@
 
     if (
       barcelos &&
-      number(barcelos.variacao_72h_cm) !== null
+      number(
+        barcelos
+          .variacao_72h_cm
+      ) !== null
     ) {
-      const b72 = number(
-        barcelos.variacao_72h_cm
-      );
+      const b72 =
+        number(
+          barcelos
+            .variacao_72h_cm
+        );
 
-      if (b72 <= -2) {
+      if (
+        b72 <= -2
+      ) {
         mainText +=
           ` Barcelos ainda registra ` +
           `<strong>${formatSigned(b72, 0)} em 72 h</strong>.`;
-      } else if (b72 >= 2) {
+      } else if (
+        b72 >= 2
+      ) {
         mainText +=
           ` Barcelos já registra ` +
           `<strong>${formatSigned(b72, 0)} em 72 h</strong>.`;
@@ -591,43 +814,116 @@
   // ESTAÇÃO
   // ========================================================
 
-  function stationHTML(code, station) {
+  function stationHTML(
+    code,
+    station
+  ) {
     if (!station) {
       return `
-        <div class="river-radar-station stable">
-          <div class="river-radar-node-wrap">
-            <div class="river-radar-node"></div>
+        <div
+          class="
+            river-radar-station
+            stable
+          "
+        >
+
+          <div
+            class="
+              river-radar-node-wrap
+            "
+          >
+            <div
+              class="
+                river-radar-node
+              "
+            ></div>
           </div>
 
-          <div class="river-radar-card">
-            <div class="river-radar-name">
+          <div
+            class="
+              river-radar-card
+            "
+          >
+
+            <div
+              class="
+                river-radar-name
+              "
+            >
               ${STATION_LABELS[code]}
             </div>
 
-            <div class="river-radar-code">
-              ${code}
+            <div
+              class="
+                river-radar-code
+              "
+            >
+              ANA ${code}
             </div>
 
-            <div class="river-radar-main-value">
+            <div
+              class="
+                river-radar-time
+              "
+            >
+              Leitura:
+              <strong>—</strong>
+            </div>
+
+            <div
+              class="
+                river-radar-main-value
+              "
+            >
               —
             </div>
 
-            <div class="river-radar-main-label">
+            <div
+              class="
+                river-radar-main-label
+              "
+            >
               sem dados
             </div>
+
           </div>
+
         </div>
       `;
     }
 
-    const direction = getDirection(
-      station
-    );
+    const direction =
+      getDirection(
+        station
+      );
+
+    const isBarcelos =
+      code ===
+      "14480002";
 
     const specialClass =
-      code === "14480002"
+      isBarcelos
         ? " barcelos"
         : "";
+
+    const destinationBadge =
+      isBarcelos
+        ? `
+          <div
+            class="
+              river-radar-destination
+            "
+          >
+            DESTINO
+          </div>
+        `
+        : "";
+
+    const measurementTime =
+      formatMeasurementTime(
+        station
+          .data_medicao_manaus
+      );
 
     return `
       <div
@@ -638,36 +934,87 @@
         "
       >
 
-        <div class="river-radar-node-wrap">
-          <div class="river-radar-node"></div>
+        <div
+          class="
+            river-radar-node-wrap
+          "
+        >
+          <div
+            class="
+              river-radar-node
+            "
+          ></div>
         </div>
 
-        <div class="river-radar-card">
+        <div
+          class="
+            river-radar-card
+          "
+        >
 
-          <div class="river-radar-name">
-            ${station.nome || STATION_LABELS[code]}
+          ${destinationBadge}
+
+          <div
+            class="
+              river-radar-name
+            "
+          >
+            ${
+              station.nome ||
+              STATION_LABELS[code]
+            }
           </div>
 
-          <div class="river-radar-code">
+          <div
+            class="
+              river-radar-code
+            "
+          >
             ANA ${code}
           </div>
 
-          <div class="river-radar-main-value">
+          <div
+            class="
+              river-radar-time
+            "
+          >
+            Leitura:
+            <strong>
+              ${measurementTime}
+            </strong>
+          </div>
+
+          <div
+            class="
+              river-radar-main-value
+            "
+          >
             ${formatSigned(
-              station.variacao_72h_cm,
+              station
+                .variacao_72h_cm,
               0
             )}
           </div>
 
-          <div class="river-radar-main-label">
+          <div
+            class="
+              river-radar-main-label
+            "
+          >
             variação em 72 h
           </div>
 
-          <div class="river-radar-mini">
+          <div
+            class="
+              river-radar-mini
+            "
+          >
+
             <span>
               6 h:
               ${formatSigned(
-                station.variacao_6h_cm,
+                station
+                  .variacao_6h_cm,
                 0
               )}
             </span>
@@ -675,13 +1022,19 @@
             <span>
               24 h:
               ${formatSigned(
-                station.variacao_24h_cm,
+                station
+                  .variacao_24h_cm,
                 0
               )}
             </span>
+
           </div>
 
-          <div class="river-radar-status">
+          <div
+            class="
+              river-radar-status
+            "
+          >
             ${direction.icon}
             ${direction.label}
           </div>
@@ -698,36 +1051,57 @@
   // ========================================================
 
   function createSection() {
-    let section = document.getElementById(
-      "river-radar-section"
-    );
+    let section =
+      document.getElementById(
+        "river-radar-section"
+      );
 
     if (section) {
       return section;
     }
 
-    section = document.createElement(
-      "section"
-    );
+    section =
+      document.createElement(
+        "section"
+      );
 
-    section.id = "river-radar-section";
+    section.id =
+      "river-radar-section";
+
     section.className =
       "river-radar-section";
 
     section.innerHTML = `
-      <div class="river-radar-header">
+      <div
+        class="
+          river-radar-header
+        "
+      >
 
         <div>
 
-          <div class="river-radar-kicker">
+          <div
+            class="
+              river-radar-kicker
+            "
+          >
             RADAR DO RIO NEGRO
           </div>
 
-          <h2 class="river-radar-title">
-            Onde o movimento está acontecendo
+          <h2
+            class="
+              river-radar-title
+            "
+          >
+            Onde o movimento
+            está acontecendo
           </h2>
 
-          <div class="river-radar-subtitle">
+          <div
+            class="
+              river-radar-subtitle
+            "
+          >
             Leitura conjunta das cinco estações,
             de montante para jusante, usando
             principalmente a variação acumulada
@@ -736,10 +1110,17 @@
 
         </div>
 
-        <div class="river-radar-live">
+
+        <div
+          class="
+            river-radar-live
+          "
+        >
 
           <span
-            class="river-radar-live-dot"
+            class="
+              river-radar-live-dot
+            "
           ></span>
 
           DADOS ANA
@@ -748,34 +1129,82 @@
 
       </div>
 
-      <div
-        id="river-radar-summary"
-        class="river-radar-summary"
-      >
-        Analisando o corredor do Rio Negro...
-      </div>
 
       <div
-        id="river-radar-content"
-        class="river-radar-loading"
+        id="
+          river-radar-summary
+        "
+        class="
+          river-radar-summary
+        "
+      >
+        Analisando o corredor
+        do Rio Negro...
+      </div>
+
+
+      <div
+        class="
+          river-radar-direction
+        "
+      >
+
+        <span>
+          MONTANTE
+        </span>
+
+        <span
+          class="
+            river-radar-direction-arrow
+          "
+        ></span>
+
+        <span>
+          JUSANTE
+        </span>
+
+      </div>
+
+
+      <div
+        id="
+          river-radar-content
+        "
+        class="
+          river-radar-loading
+        "
       >
         Carregando estações...
       </div>
 
-      <div class="river-radar-footer">
+
+      <div
+        class="
+          river-radar-footer
+        "
+      >
 
         <div>
-          <strong>Leitura:</strong>
+          <strong>
+            Leitura:
+          </strong>
+
           verde = alta em 72 h •
+
           vermelho = queda em 72 h •
+
           amarelo = estabilidade
         </div>
 
         <div>
-          Os níveis absolutos são referências
-          locais de cada estação e
-          <strong>não devem ser comparados
-          diretamente entre si.</strong>
+          Os níveis absolutos são
+          referências locais de cada
+          estação e
+
+          <strong>
+            não devem ser comparados
+            diretamente entre si.
+          </strong>
         </div>
 
       </div>
@@ -786,11 +1215,14 @@
         ".upstream-section"
       );
 
-    if (upstreamSection) {
-      upstreamSection.insertAdjacentElement(
-        "afterend",
-        section
-      );
+    if (
+      upstreamSection
+    ) {
+      upstreamSection
+        .insertAdjacentElement(
+          "afterend",
+          section
+        );
     } else {
       const dashboard =
         document.querySelector(
@@ -812,10 +1244,13 @@
   // RENDER
   // ========================================================
 
-  function render(data) {
-    const stations = stationMap(
-      data
-    );
+  function render(
+    data
+  ) {
+    const stations =
+      stationMap(
+        data
+      );
 
     const summary =
       document.getElementById(
@@ -827,7 +1262,10 @@
         "river-radar-content"
       );
 
-    if (!summary || !content) {
+    if (
+      !summary ||
+      !content
+    ) {
       return;
     }
 
@@ -840,22 +1278,32 @@
       "river-radar-track";
 
     content.innerHTML = `
-      <div class="river-radar-line"></div>
+      <div
+        class="
+          river-radar-line
+        "
+      ></div>
 
-      <div class="river-radar-flow">
+      <div
+        class="
+          river-radar-flow
+        "
+      >
         <span>›</span>
         <span>›</span>
         <span>›</span>
         <span>›</span>
       </div>
 
-      ${STATION_ORDER.map(
-        (code) =>
-          stationHTML(
-            code,
-            stations[code]
-          )
-      ).join("")}
+      ${
+        STATION_ORDER.map(
+          (code) =>
+            stationHTML(
+              code,
+              stations[code]
+            )
+        ).join("")
+      }
     `;
   }
 
@@ -866,20 +1314,24 @@
 
   async function loadRadar() {
     try {
-      const response = await fetch(
-        `${DATA_URL}?t=${Date.now()}`,
-        {
-          cache: "no-store"
-        }
-      );
+      const response =
+        await fetch(
+          `${DATA_URL}?t=${Date.now()}`,
+          {
+            cache: "no-store"
+          }
+        );
 
-      if (!response.ok) {
+      if (
+        !response.ok
+      ) {
         throw new Error(
           `HTTP ${response.status}`
         );
       }
 
-      const data = await response.json();
+      const data =
+        await response.json();
 
       render(
         data
@@ -936,7 +1388,8 @@
 
 
   if (
-    document.readyState === "loading"
+    document.readyState ===
+    "loading"
   ) {
     document.addEventListener(
       "DOMContentLoaded",

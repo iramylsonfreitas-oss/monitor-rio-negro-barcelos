@@ -3,6 +3,10 @@ import time
 import ana
 
 
+# ==========================================================
+# CONFIGURAÇÃO DE RETENTATIVAS
+# ==========================================================
+
 MAX_TENTATIVAS = 3
 
 ESPERAS_SEGUNDOS = [
@@ -11,6 +15,10 @@ ESPERAS_SEGUNDOS = [
 ]
 
 
+# ==========================================================
+# IDENTIFICA ERROS TRANSITÓRIOS
+# ==========================================================
+
 def erro_transitorio(error):
 
     text = str(
@@ -18,18 +26,54 @@ def erro_transitorio(error):
     ).lower()
 
     sinais_transitorios = [
+
+        # ----------------------------------------------
+        # Respostas HTTP temporárias
+        # ----------------------------------------------
+
         "http 401",
         "unauthorized",
         "http 429",
         "http 502",
         "http 503",
         "http 504",
+
+        # ----------------------------------------------
+        # Timeout
+        # ----------------------------------------------
+
         "timed out",
         "timeout",
+
+        # ----------------------------------------------
+        # Serviço temporariamente indisponível
+        # ----------------------------------------------
+
         "temporarily unavailable",
         "service unavailable",
+
+        # ----------------------------------------------
+        # Falhas de conexão
+        # ----------------------------------------------
+
         "connection reset",
         "remote end closed connection",
+        "connection refused",
+
+        # ----------------------------------------------
+        # Falhas de rede
+        # ----------------------------------------------
+
+        "network is unreachable",
+        "[errno 101]",
+        "no route to host",
+
+        # ----------------------------------------------
+        # Falhas temporárias de DNS
+        # ----------------------------------------------
+
+        "temporary failure in name resolution",
+        "name or service not known",
     ]
 
     return any(
@@ -37,6 +81,10 @@ def erro_transitorio(error):
         for sinal in sinais_transitorios
     )
 
+
+# ==========================================================
+# EXECUÇÃO RESILIENTE
+# ==========================================================
 
 def main():
 
@@ -93,6 +141,7 @@ def main():
             ):
 
                 print()
+
                 print(
                     "Erro não considerado "
                     "transitório."
@@ -103,9 +152,20 @@ def main():
                     "para diagnóstico."
                 )
 
+                print()
+
+                print(
+                    "Erro detectado:"
+                )
+
+                print(
+                    str(error)[:500]
+                )
+
                 raise
 
             print()
+
             print(
                 "Falha temporária na consulta "
                 "à ANA."
@@ -125,6 +185,7 @@ def main():
             ):
 
                 print()
+
                 print(
                     "Todas as tentativas "
                     "foram utilizadas."
@@ -144,6 +205,7 @@ def main():
             )
 
             print()
+
             print(
                 "O processo inteiro será "
                 "repetido."

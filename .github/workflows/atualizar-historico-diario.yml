@@ -55,6 +55,11 @@ jobs:
           python collector/comparativo_anual.py
 
 
+      - name: Executar backtest do detector de repiquete
+        run: |
+          python collector/repiquete_historico.py
+
+
       - name: Conferir historico
         run: |
           echo "======================================"
@@ -239,6 +244,168 @@ jobs:
           PY
 
 
+      - name: Conferir backtest do repiquete
+        run: |
+          echo "======================================"
+          echo "BACKTEST DO REPIQUETE"
+          echo "======================================"
+
+          if [ ! -f data/repiquete_backtest.json ]; then
+            echo "ERRO:"
+            echo "data/repiquete_backtest.json não foi criado."
+            exit 1
+          fi
+
+          python - <<'PY'
+          import json
+
+          with open(
+              "data/repiquete_backtest.json",
+              encoding="utf-8"
+          ) as f:
+              data = json.load(f)
+
+          resumo = (
+              data.get("resumo")
+              or {}
+          )
+
+          print(
+              "Período:",
+              resumo.get(
+                  "periodo_inicio_manaus"
+              ),
+              "até",
+              resumo.get(
+                  "periodo_fim_manaus"
+              )
+          )
+
+          print(
+              "Checkpoints analisados:",
+              resumo.get(
+                  "checkpoints_analisados"
+              )
+          )
+
+          print(
+              "Ocorrências do primeiro limiar:",
+              resumo.get(
+                  "ocorrencias_primeiro_limiar"
+              )
+          )
+
+          print(
+              "Eventos confirmados:",
+              resumo.get(
+                  "eventos_confirmados"
+              )
+          )
+
+          print(
+              "Eventos encerrados:",
+              resumo.get(
+                  "eventos_encerrados"
+              )
+          )
+
+          print(
+              "Eventos ativos no fim:",
+              resumo.get(
+                  "eventos_ativos_no_fim"
+              )
+          )
+
+          print(
+              "Eventos por ano:",
+              resumo.get(
+                  "eventos_por_ano"
+              )
+          )
+
+          print(
+              "Atraso da confirmação:",
+              resumo.get(
+                  "atraso_confirmacao_h"
+              ),
+              "h"
+          )
+
+          print(
+              "Ganho mediano 24 h:",
+              resumo.get(
+                  "ganho_mediano_24h_apos_confirmacao_cm"
+              ),
+              "cm"
+          )
+
+          print(
+              "Ganho mediano 48 h:",
+              resumo.get(
+                  "ganho_mediano_48h_apos_confirmacao_cm"
+              ),
+              "cm"
+          )
+
+          print(
+              "Ganho mediano 72 h:",
+              resumo.get(
+                  "ganho_mediano_72h_apos_confirmacao_cm"
+              ),
+              "cm"
+          )
+
+          print()
+          print("EVENTOS:")
+
+          for event in data.get(
+              "eventos",
+              []
+          ):
+
+              print()
+              print(
+                  "Evento",
+                  event.get(
+                      "evento"
+                  )
+              )
+
+              print(
+                  "Sinal:",
+                  event.get(
+                      "inicio_sinal_manaus"
+                  )
+              )
+
+              print(
+                  "Confirmado:",
+                  event.get(
+                      "confirmado_em_manaus"
+                  )
+              )
+
+              print(
+                  "Pico:",
+                  event.get(
+                      "nivel_pico_m"
+                  ),
+                  "m em",
+                  event.get(
+                      "pico_em_manaus"
+                  )
+              )
+
+              print(
+                  "Ganho máximo após confirmação:",
+                  event.get(
+                      "ganho_maximo_desde_confirmacao_cm"
+                  ),
+                  "cm"
+              )
+          PY
+
+
       - name: Mostrar situacao atual
         run: |
           echo "======================================"
@@ -325,6 +492,7 @@ jobs:
           git add data/eventos_propagacao_v2.json
           git add data/propagacao.json
           git add data/barcelos_anual.json
+          git add data/repiquete_backtest.json
 
           if git diff --cached --quiet; then
             echo "Nenhuma alteração para salvar."

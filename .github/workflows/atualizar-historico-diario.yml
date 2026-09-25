@@ -50,6 +50,11 @@ jobs:
           python collector/propagacao.py
 
 
+      - name: Gerar comparativo anual de Barcelos
+        run: |
+          python collector/comparativo_anual.py
+
+
       - name: Conferir historico
         run: |
           echo "======================================"
@@ -73,6 +78,94 @@ jobs:
           echo
           echo "Últimas 10 linhas:"
           tail -n 10 data/history/hourly.csv
+
+
+      - name: Conferir comparativo anual
+        run: |
+          echo "======================================"
+          echo "COMPARATIVO ANUAL DE BARCELOS"
+          echo "======================================"
+
+          if [ ! -f data/barcelos_anual.json ]; then
+            echo "ERRO:"
+            echo "data/barcelos_anual.json não foi criado."
+            exit 1
+          fi
+
+          python - <<'PY'
+          import json
+
+          with open(
+              "data/barcelos_anual.json",
+              encoding="utf-8"
+          ) as f:
+              data = json.load(f)
+
+          print(
+              "Estação:",
+              data.get("estacao")
+          )
+
+          print(
+              "Anos disponíveis:",
+              ", ".join(
+                  data.get(
+                      "anos",
+                      []
+                  )
+              )
+          )
+
+          resumo = (
+              data.get(
+                  "resumo"
+              )
+              or {}
+          )
+
+          for ano, info in (
+              resumo.items()
+          ):
+
+              print()
+              print(
+                  ano
+              )
+
+              print(
+                  "Dias disponíveis:",
+                  info.get(
+                      "dias_disponiveis"
+                  )
+              )
+
+              print(
+                  "Período:",
+                  info.get(
+                      "primeira_data"
+                  ),
+                  "até",
+                  info.get(
+                      "ultima_data"
+                  )
+              )
+
+              print(
+                  "Mínimo:",
+                  info.get(
+                      "nivel_min_m"
+                  ),
+                  "m"
+              )
+
+              print(
+                  "Máximo:",
+                  info.get(
+                      "nivel_max_m"
+                  ),
+                  "m"
+              )
+          PY
 
 
       - name: Conferir eventos V2
@@ -231,6 +324,7 @@ jobs:
 
           git add data/eventos_propagacao_v2.json
           git add data/propagacao.json
+          git add data/barcelos_anual.json
 
           if git diff --cached --quiet; then
             echo "Nenhuma alteração para salvar."

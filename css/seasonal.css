@@ -92,6 +92,21 @@
 }
 
 
+/* =========================
+   PERCENTIL
+========================= */
+
+.seasonal-percentile-box {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  flex-shrink: 0;
+}
+
+
 .seasonal-percentile {
   min-width: 54px;
 
@@ -117,8 +132,25 @@
 }
 
 
+.seasonal-percentile-note {
+  margin-top: 5px;
+
+  color: #738da3;
+
+  font-size: 7px;
+
+  font-weight: 650;
+
+  line-height: 1.2;
+
+  text-align: center;
+
+  white-space: nowrap;
+}
+
+
 /* =========================
-   ESCALA
+   ESCALA SAZONAL
 ========================= */
 
 .seasonal-gauge {
@@ -126,24 +158,53 @@
 }
 
 
+/*
+  IMPORTANTE:
+  As colunas abaixo representam exatamente
+  os intervalos percentuais do indicador:
+
+  0–10   = Muito baixo
+  10–25  = Baixo
+  25–75  = Típico
+  75–90  = Alto
+  90–100 = Muito alto
+*/
+
 .seasonal-gauge-scale {
   display: grid;
 
   grid-template-columns:
-    repeat(5, 1fr);
+    10fr
+    15fr
+    50fr
+    15fr
+    10fr;
+
+  align-items: end;
 
   margin-bottom: 7px;
 }
 
 
 .seasonal-gauge-scale span {
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: center;
+
+  min-width: 0;
+
+  padding:
+    0 2px;
+
   color: #8fa7bc;
 
   font-size: 8px;
 
   font-weight: 600;
 
-  line-height: 1.2;
+  line-height: 1.15;
 
   text-align: center;
 }
@@ -154,6 +215,8 @@
 
   height: 11px;
 
+  overflow: visible;
+
   border:
     1px solid
     rgba(255, 255, 255, 0.08);
@@ -163,6 +226,7 @@
   background:
     linear-gradient(
       90deg,
+
       rgba(70, 130, 180, 0.55) 0%,
       rgba(70, 130, 180, 0.55) 10%,
 
@@ -291,6 +355,8 @@
   font-size: 10px;
 
   font-weight: 600;
+
+  line-height: 1.4;
 }
 
 
@@ -387,7 +453,8 @@
 
 
   .seasonal-stat-card {
-    padding: 12px 10px;
+    padding:
+      12px 10px;
   }
 
 
@@ -403,6 +470,13 @@
       6px 8px;
 
     font-size: 13px;
+  }
+
+
+  .seasonal-percentile-note {
+    margin-top: 4px;
+
+    font-size: 6.5px;
   }
 
 
@@ -422,7 +496,12 @@
 
 
   .seasonal-gauge-scale span {
+    padding:
+      0 1px;
+
     font-size: 7px;
+
+    line-height: 1.1;
   }
 
 
@@ -473,12 +552,25 @@
 
 
   .seasonal-stat-card {
-    padding: 11px 9px;
+    padding:
+      11px 9px;
   }
 
 
   .seasonal-position-label {
     font-size: 17px;
+  }
+
+
+  .seasonal-percentile {
+    min-width: 46px;
+
+    font-size: 12px;
+  }
+
+
+  .seasonal-percentile-note {
+    font-size: 6px;
   }
 
 

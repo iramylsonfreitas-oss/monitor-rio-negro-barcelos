@@ -1,0 +1,891 @@
+/* =========================================================
+   DETECTOR DE REPIQUETE
+========================================================= */
+
+
+/* =========================
+   CARD PRINCIPAL
+========================= */
+
+.repiquete-card {
+  margin-top: 18px;
+  padding: 20px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.08);
+
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.025),
+      rgba(255, 255, 255, 0.01)
+    ),
+    var(--panel);
+
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+/* =========================
+   CORES POR NÍVEL
+========================= */
+
+.repiquete-level-0 {
+  border-color:
+    rgba(150, 170, 185, 0.16);
+}
+
+
+.repiquete-level-1 {
+  border-color:
+    rgba(245, 196, 81, 0.26);
+}
+
+
+.repiquete-level-2 {
+  border-color:
+    rgba(255, 166, 76, 0.38);
+
+  box-shadow:
+    0 0 0 1px
+    rgba(255, 166, 76, 0.04);
+}
+
+
+.repiquete-level-3 {
+  border-color:
+    rgba(255, 116, 76, 0.45);
+
+  box-shadow:
+    0 0 22px
+    rgba(255, 116, 76, 0.05);
+}
+
+
+.repiquete-level-4 {
+  border-color:
+    rgba(255, 84, 84, 0.55);
+
+  box-shadow:
+    0 0 28px
+    rgba(255, 84, 84, 0.08);
+}
+
+
+/* =========================
+   CABEÇALHO
+========================= */
+
+.repiquete-header {
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+
+  gap: 18px;
+
+  margin-bottom: 20px;
+}
+
+
+.repiquete-header h2 {
+  margin:
+    5px 0 0;
+
+  color: #f4f8fb;
+
+  font-size: 22px;
+
+  line-height: 1.2;
+}
+
+
+.repiquete-subtitle {
+  margin-top: 6px;
+
+  max-width: 620px;
+
+  color: var(--muted);
+
+  font-size: 11px;
+
+  line-height: 1.45;
+}
+
+
+/* =========================
+   BADGE
+========================= */
+
+.repiquete-badge {
+  flex-shrink: 0;
+
+  padding:
+    8px 11px;
+
+  border-radius: 10px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.12);
+
+  background:
+    rgba(255, 255, 255, 0.04);
+
+  color: #d8e3ec;
+
+  font-size: 10px;
+
+  font-weight: 800;
+
+  letter-spacing: 0.04em;
+
+  text-align: center;
+}
+
+
+.repiquete-level-0
+.repiquete-badge {
+  color: #a9bbc9;
+}
+
+
+.repiquete-level-1
+.repiquete-badge {
+  border-color:
+    rgba(245, 196, 81, 0.32);
+
+  background:
+    rgba(245, 196, 81, 0.08);
+
+  color: #f5c451;
+}
+
+
+.repiquete-level-2
+.repiquete-badge {
+  border-color:
+    rgba(255, 166, 76, 0.36);
+
+  background:
+    rgba(255, 166, 76, 0.09);
+
+  color: #ffad58;
+}
+
+
+.repiquete-level-3
+.repiquete-badge {
+  border-color:
+    rgba(255, 116, 76, 0.42);
+
+  background:
+    rgba(255, 116, 76, 0.10);
+
+  color: #ff855c;
+}
+
+
+.repiquete-level-4
+.repiquete-badge {
+  border-color:
+    rgba(255, 84, 84, 0.48);
+
+  background:
+    rgba(255, 84, 84, 0.11);
+
+  color: #ff6b6b;
+}
+
+
+/* =========================
+   PROGRESSO 0 → 4
+========================= */
+
+.repiquete-progress {
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      5,
+      minmax(0, 1fr)
+    );
+
+  gap: 4px;
+
+  margin-bottom: 20px;
+
+  padding:
+    15px 8px 12px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.07);
+
+  border-radius: 14px;
+
+  background:
+    rgba(3, 15, 27, 0.34);
+}
+
+
+.repiquete-progress::before {
+  content: "";
+
+  position: absolute;
+
+  top: 28px;
+
+  left: 10%;
+
+  right: 10%;
+
+  height: 2px;
+
+  background:
+    rgba(255, 255, 255, 0.07);
+}
+
+
+.repiquete-stage {
+  position: relative;
+
+  z-index: 1;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  min-width: 0;
+
+  text-align: center;
+}
+
+
+.repiquete-stage-dot {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  width: 28px;
+
+  height: 28px;
+
+  border:
+    2px solid
+    rgba(255, 255, 255, 0.10);
+
+  border-radius: 50%;
+
+  background: #0a1b29;
+
+  color: #71899d;
+
+  font-size: 10px;
+
+  font-weight: 800;
+
+  transition:
+    all 0.25s ease;
+}
+
+
+.repiquete-stage-label {
+  margin-top: 8px;
+
+  max-width: 100px;
+
+  color: #71899d;
+
+  font-size: 8px;
+
+  font-weight: 650;
+
+  line-height: 1.25;
+
+  transition:
+    color 0.25s ease;
+}
+
+
+/* =========================
+   ESTÁGIOS JÁ ALCANÇADOS
+========================= */
+
+.repiquete-stage.reached
+.repiquete-stage-dot {
+  border-color:
+    rgba(88, 214, 255, 0.34);
+
+  background:
+    rgba(88, 214, 255, 0.10);
+
+  color: #7edfff;
+}
+
+
+.repiquete-stage.reached
+.repiquete-stage-label {
+  color: #9bb2c5;
+}
+
+
+/* =========================
+   ESTÁGIO ATIVO
+========================= */
+
+.repiquete-stage.active
+.repiquete-stage-dot {
+  transform:
+    scale(1.12);
+
+  border-color:
+    #ffffff;
+
+  background:
+    #ffffff;
+
+  color:
+    #071522;
+
+  box-shadow:
+    0 0 0 4px
+    rgba(88, 214, 255, 0.10);
+}
+
+
+.repiquete-stage.active
+.repiquete-stage-label {
+  color: #f4f8fb;
+
+  font-weight: 800;
+}
+
+
+/* Cores específicas do estágio ativo */
+
+.repiquete-level-1
+.repiquete-stage.active
+.repiquete-stage-dot {
+  box-shadow:
+    0 0 0 4px
+    rgba(245, 196, 81, 0.15);
+}
+
+
+.repiquete-level-2
+.repiquete-stage.active
+.repiquete-stage-dot {
+  box-shadow:
+    0 0 0 4px
+    rgba(255, 166, 76, 0.18);
+}
+
+
+.repiquete-level-3
+.repiquete-stage.active
+.repiquete-stage-dot {
+  box-shadow:
+    0 0 0 4px
+    rgba(255, 116, 76, 0.20);
+}
+
+
+.repiquete-level-4
+.repiquete-stage.active
+.repiquete-stage-dot {
+  box-shadow:
+    0 0 0 4px
+    rgba(255, 84, 84, 0.22);
+}
+
+
+/* =========================
+   CONTEÚDO PRINCIPAL
+========================= */
+
+.repiquete-main-grid {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.55fr)
+    minmax(280px, 0.85fr);
+
+  gap: 12px;
+
+  margin-bottom: 12px;
+}
+
+
+/* =========================
+   MENSAGEM
+========================= */
+
+.repiquete-message-card {
+  padding: 17px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.07);
+
+  border-radius: 15px;
+
+  background:
+    rgba(255, 255, 255, 0.022);
+}
+
+
+.repiquete-title {
+  color: #f4f8fb;
+
+  font-size: 19px;
+
+  font-weight: 800;
+
+  line-height: 1.25;
+}
+
+
+.repiquete-message {
+  margin-top: 8px;
+
+  color: #a9bbc9;
+
+  font-size: 11px;
+
+  line-height: 1.55;
+}
+
+
+/* =========================
+   MOTIVOS
+========================= */
+
+.repiquete-reasons {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 6px;
+
+  margin-top: 14px;
+}
+
+
+.repiquete-reason {
+  padding:
+    6px 8px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.07);
+
+  border-radius: 8px;
+
+  background:
+    rgba(255, 255, 255, 0.025);
+
+  color: #90a6b8;
+
+  font-size: 9px;
+
+  font-weight: 600;
+
+  line-height: 1.3;
+}
+
+
+/* =========================
+   MÉTRICAS
+========================= */
+
+.repiquete-metrics {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(0, 1fr)
+    );
+
+  gap: 8px;
+}
+
+
+.repiquete-metric {
+  padding: 14px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.07);
+
+  border-radius: 13px;
+
+  background:
+    rgba(4, 18, 31, 0.40);
+}
+
+
+.repiquete-metric-label {
+  color: var(--muted);
+
+  font-size: 8px;
+
+  font-weight: 800;
+
+  letter-spacing: 0.07em;
+}
+
+
+.repiquete-metric-value {
+  margin-top: 8px;
+
+  color: #dce6ed;
+
+  font-size: 21px;
+
+  font-weight: 800;
+
+  line-height: 1;
+}
+
+
+.repiquete-metric-value.positive {
+  color: #58d6ff;
+}
+
+
+.repiquete-metric-value.negative {
+  color: #f5c451;
+}
+
+
+.repiquete-metric-value.neutral {
+  color: #b6c5d1;
+}
+
+
+/* =========================
+   CONTEXTO
+========================= */
+
+.repiquete-context-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      3,
+      minmax(0, 1fr)
+    );
+
+  gap: 8px;
+}
+
+
+.repiquete-context-card {
+  padding: 14px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.07);
+
+  border-radius: 13px;
+
+  background:
+    rgba(255, 255, 255, 0.018);
+}
+
+
+.repiquete-context-label {
+  color: var(--muted);
+
+  font-size: 8px;
+
+  font-weight: 800;
+
+  letter-spacing: 0.07em;
+}
+
+
+.repiquete-context-value {
+  margin-top: 7px;
+
+  color: #f4f8fb;
+
+  font-size: 15px;
+
+  font-weight: 800;
+
+  line-height: 1.2;
+}
+
+
+.repiquete-context-detail {
+  margin-top: 6px;
+
+  color: #829aad;
+
+  font-size: 9px;
+
+  line-height: 1.4;
+}
+
+
+/* =========================
+   NOTA METODOLÓGICA
+========================= */
+
+.repiquete-note {
+  margin-top: 13px;
+
+  padding-top: 12px;
+
+  border-top:
+    1px solid
+    rgba(255, 255, 255, 0.07);
+
+  color: #70889b;
+
+  font-size: 9px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================
+   LOADING
+========================= */
+
+.repiquete-loading {
+  opacity: 0.78;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (
+  max-width: 900px
+) {
+
+  .repiquete-main-grid {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .repiquete-context-grid {
+    grid-template-columns:
+      repeat(
+        3,
+        minmax(0, 1fr)
+      );
+  }
+
+}
+
+
+/* =========================
+   CELULAR
+========================= */
+
+@media (
+  max-width: 560px
+) {
+
+  .repiquete-card {
+    margin-top: 14px;
+
+    padding: 14px;
+  }
+
+
+  .repiquete-header {
+    gap: 10px;
+
+    margin-bottom: 15px;
+  }
+
+
+  .repiquete-header h2 {
+    font-size: 18px;
+  }
+
+
+  .repiquete-subtitle {
+    font-size: 9px;
+  }
+
+
+  .repiquete-badge {
+    padding:
+      6px 8px;
+
+    font-size: 8px;
+  }
+
+
+  .repiquete-progress {
+    padding:
+      13px 3px 10px;
+  }
+
+
+  .repiquete-progress::before {
+    top: 26px;
+
+    left: 10%;
+
+    right: 10%;
+  }
+
+
+  .repiquete-stage-dot {
+    width: 25px;
+
+    height: 25px;
+
+    font-size: 9px;
+  }
+
+
+  .repiquete-stage-label {
+    margin-top: 7px;
+
+    font-size: 6.5px;
+
+    line-height: 1.2;
+  }
+
+
+  .repiquete-main-grid {
+    gap: 8px;
+  }
+
+
+  .repiquete-message-card {
+    padding: 13px;
+  }
+
+
+  .repiquete-title {
+    font-size: 17px;
+  }
+
+
+  .repiquete-message {
+    font-size: 10px;
+  }
+
+
+  .repiquete-reasons {
+    gap: 5px;
+
+    margin-top: 11px;
+  }
+
+
+  .repiquete-reason {
+    padding:
+      5px 7px;
+
+    font-size: 8px;
+  }
+
+
+  .repiquete-metrics {
+    gap: 7px;
+  }
+
+
+  .repiquete-metric {
+    padding: 11px 9px;
+  }
+
+
+  .repiquete-metric-label {
+    font-size: 7px;
+  }
+
+
+  .repiquete-metric-value {
+    font-size: 18px;
+  }
+
+
+  .repiquete-context-grid {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .repiquete-context-card {
+    padding: 11px;
+  }
+
+
+  .repiquete-context-value {
+    font-size: 14px;
+  }
+
+
+  .repiquete-context-detail {
+    font-size: 8px;
+  }
+
+
+  .repiquete-note {
+    font-size: 8px;
+  }
+
+}
+
+
+/* =========================
+   CELULARES MENORES
+========================= */
+
+@media (
+  max-width: 390px
+) {
+
+  .repiquete-card {
+    padding: 12px;
+  }
+
+
+  .repiquete-header h2 {
+    font-size: 17px;
+  }
+
+
+  .repiquete-badge {
+    max-width: 110px;
+
+    line-height: 1.15;
+  }
+
+
+  .repiquete-stage-label {
+    font-size: 6px;
+  }
+
+
+  .repiquete-metric-value {
+    font-size: 17px;
+  }
+
+}

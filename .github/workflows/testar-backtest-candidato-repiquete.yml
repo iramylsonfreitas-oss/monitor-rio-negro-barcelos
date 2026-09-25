@@ -1,0 +1,295 @@
+name: Testar Backtest Candidato Repiquete
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: teste-backtest-candidato-repiquete
+  cancel-in-progress: false
+
+jobs:
+  testar:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Baixar projeto
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+
+      - name: Executar backtest candidato
+        run: |
+          python collector/repiquete_backtest_candidato.py
+
+
+      - name: Conferir resultado
+        run: |
+          echo "======================================"
+          echo "BACKTEST DO DETECTOR CANDIDATO"
+          echo "======================================"
+
+          if [ ! -f data/repiquete_backtest_candidato.json ]; then
+            echo "ERRO:"
+            echo "data/repiquete_backtest_candidato.json nao foi criado."
+            exit 1
+          fi
+
+          python - <<'PY'
+          import json
+
+          with open(
+              "data/repiquete_backtest_candidato.json",
+              encoding="utf-8"
+          ) as f:
+              data = json.load(f)
+
+          metodologia = (
+              data.get("metodologia")
+              or {}
+          )
+
+          periodo = (
+              data.get("periodo")
+              or {}
+          )
+
+          resumo = (
+              data.get("resumo")
+              or {}
+          )
+
+          print(
+              "Ganho liquido minimo:",
+              metodologia.get(
+                  "ganho_liquido_minimo_confirmacao_cm"
+              ),
+              "cm"
+          )
+
+          print(
+              "Periodo:",
+              periodo.get(
+                  "inicio_manaus"
+              ),
+              "a",
+              periodo.get(
+                  "fim_manaus"
+              )
+          )
+
+          print(
+              "Checkpoints analisados:",
+              periodo.get(
+                  "checkpoints_analisados"
+              )
+          )
+
+          print()
+          print(
+              "RESUMO"
+          )
+
+          print(
+              "Janelas base avaliadas:",
+              resumo.get(
+                  "janelas_base_avaliadas"
+              )
+          )
+
+          print(
+              "Janelas rejeitadas pelo ganho liquido:",
+              resumo.get(
+                  "janelas_rejeitadas_por_ganho_liquido"
+              )
+          )
+
+          print(
+              "Eventos confirmados:",
+              resumo.get(
+                  "eventos_confirmados"
+              )
+          )
+
+          print(
+              "Eventos encerrados:",
+              resumo.get(
+                  "eventos_encerrados"
+              )
+          )
+
+          print(
+              "Eventos ativos no fim:",
+              resumo.get(
+                  "eventos_ativos_no_fim"
+              )
+          )
+
+          print(
+              "Eventos por ano:",
+              resumo.get(
+                  "eventos_por_ano"
+              )
+          )
+
+          print(
+              "Mediana duracao:",
+              resumo.get(
+                  "mediana_duracao_confirmada_h"
+              ),
+              "h"
+          )
+
+          print(
+              "Mediana ganho maximo:",
+              resumo.get(
+                  "mediana_ganho_maximo_apos_confirmacao_cm"
+              ),
+              "cm"
+          )
+
+          print(
+              "Mediana +24 h:",
+              resumo.get(
+                  "mediana_ganho_24h_apos_confirmacao_cm"
+              ),
+              "cm"
+          )
+
+          print(
+              "Mediana +48 h:",
+              resumo.get(
+                  "mediana_ganho_48h_apos_confirmacao_cm"
+              ),
+              "cm"
+          )
+
+          print(
+              "Mediana +72 h:",
+              resumo.get(
+                  "mediana_ganho_72h_apos_confirmacao_cm"
+              ),
+              "cm"
+          )
+
+          print()
+          print(
+              "EVENTOS CONFIRMADOS"
+          )
+
+          for event in data.get(
+              "eventos",
+              []
+          ):
+
+              print()
+              print(
+                  "Evento:",
+                  event.get(
+                      "evento"
+                  )
+              )
+
+              print(
+                  "Sinal:",
+                  event.get(
+                      "inicio_sinal_manaus"
+                  )
+              )
+
+              print(
+                  "Confirmado:",
+                  event.get(
+                      "confirmado_em_manaus"
+                  )
+              )
+
+              print(
+                  "Ganho na confirmacao:",
+                  event.get(
+                      "ganho_liquido_na_confirmacao_cm"
+                  ),
+                  "cm"
+              )
+
+              print(
+                  "Ganho maximo apos confirmacao:",
+                  event.get(
+                      "ganho_maximo_desde_confirmacao_cm"
+                  ),
+                  "cm"
+              )
+
+              print(
+                  "+24 h:",
+                  event.get(
+                      "ganho_24h_apos_confirmacao_cm"
+                  ),
+                  "cm"
+              )
+
+              print(
+                  "+48 h:",
+                  event.get(
+                      "ganho_48h_apos_confirmacao_cm"
+                  ),
+                  "cm"
+              )
+
+              print(
+                  "+72 h:",
+                  event.get(
+                      "ganho_72h_apos_confirmacao_cm"
+                  ),
+                  "cm"
+              )
+
+          print()
+          print(
+              "JANELAS REJEITADAS PELO NOVO CRITERIO"
+          )
+
+          for item in data.get(
+              "janelas_rejeitadas_por_ganho_liquido",
+              []
+          ):
+
+              print(
+                  (
+                      f"{item.get('inicio_sinal_manaus')}"
+                      f" -> "
+                      f"{item.get('avaliado_em_manaus')}"
+                      f" | ganho="
+                      f"{item.get('ganho_liquido_cm')} cm"
+                  )
+              )
+          PY
+
+
+      - name: Salvar resultado
+        run: |
+          git config user.name "rio-negro-bot"
+          git config user.email "actions@github.com"
+
+          git add data/repiquete_backtest_candidato.json
+
+          if git diff --cached --quiet; then
+            echo "Nenhuma alteracao para salvar."
+            exit 0
+          fi
+
+          git commit -m "Atualiza backtest do detector candidato de repiquete"
+
+          git pull --rebase origin main
+
+          git push origin main

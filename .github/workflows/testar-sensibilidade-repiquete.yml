@@ -1,0 +1,142 @@
+name: Testar Sensibilidade Repiquete
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sensibilidade-repiquete
+  cancel-in-progress: false
+
+jobs:
+  testar:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Baixar projeto
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+
+      - name: Executar teste de sensibilidade
+        run: |
+          python collector/repiquete_sensibilidade.py
+
+
+      - name: Conferir resultado
+        run: |
+          echo "======================================"
+          echo "SENSIBILIDADE DO DETECTOR"
+          echo "======================================"
+
+          if [ ! -f data/repiquete_sensibilidade.json ]; then
+            echo "ERRO:"
+            echo "data/repiquete_sensibilidade.json não foi criado."
+            exit 1
+          fi
+
+          python - <<'PY'
+          import json
+
+          with open(
+              "data/repiquete_sensibilidade.json",
+              encoding="utf-8"
+          ) as f:
+              data = json.load(f)
+
+          metodologia = (
+              data.get("metodologia")
+              or {}
+          )
+
+          print(
+              "Período:",
+              metodologia.get(
+                  "periodo_inicio_manaus"
+              ),
+              "até",
+              metodologia.get(
+                  "periodo_fim_manaus"
+              )
+          )
+
+          print(
+              "Checkpoints:",
+              metodologia.get(
+                  "checkpoints_analisados"
+              )
+          )
+
+          print()
+          print(
+              "CONFIGURAÇÕES TESTADAS"
+          )
+          print()
+
+          for item in data.get(
+              "configuracoes",
+              []
+          ):
+
+              atual = (
+                  " <-- ATUAL"
+                  if item.get(
+                      "configuracao_atual"
+                  )
+                  else ""
+              )
+
+              print(
+                  (
+                      f"{item.get('id')}"
+                      f" | eventos="
+                      f"{item.get('eventos_confirmados')}"
+                      f" | ganho mediano máximo="
+                      f"{item.get('ganho_maximo_mediano_apos_confirmacao_cm')}"
+                      f" cm"
+                      f" | 24h="
+                      f"{item.get('ganho_mediano_24h_cm')}"
+                      f" cm"
+                      f" | 48h="
+                      f"{item.get('ganho_mediano_48h_cm')}"
+                      f" cm"
+                      f" | 72h="
+                      f"{item.get('ganho_mediano_72h_cm')}"
+                      f" cm"
+                      f" | fracos<=2cm="
+                      f"{item.get('eventos_com_ganho_maximo_ate_2cm')}"
+                      f" | 72h<=0="
+                      f"{item.get('eventos_com_ganho_72h_nao_positivo')}"
+                      f"{atual}"
+                  )
+              )
+          PY
+
+
+      - name: Salvar resultado
+        run: |
+          git config user.name "rio-negro-bot"
+          git config user.email "actions@github.com"
+
+          git add data/repiquete_sensibilidade.json
+
+          if git diff --cached --quiet; then
+            echo "Nenhuma alteração para salvar."
+            exit 0
+          fi
+
+          git commit -m "Atualiza teste de sensibilidade do repiquete"
+
+          git pull --rebase origin main
+
+          git push origin main

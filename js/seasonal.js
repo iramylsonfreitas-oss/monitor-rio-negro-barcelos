@@ -31,59 +31,24 @@ function seasonalDayIndex(dayMonth) {
 
 function seasonalCircularDistance(a, b) {
   const diff = Math.abs(a - b);
-
-  return Math.min(
-    diff,
-    366 - diff
-  );
+  return Math.min(diff, 366 - diff);
 }
 
 function seasonalCalendar() {
   const keys = [];
   const labels = [];
 
-  const cursor = new Date(
-    Date.UTC(
-      2024,
-      0,
-      1
-    )
-  );
-
-  const end = new Date(
-    Date.UTC(
-      2024,
-      11,
-      31
-    )
-  );
+  const cursor = new Date(Date.UTC(2024, 0, 1));
+  const end = new Date(Date.UTC(2024, 11, 31));
 
   while (cursor <= end) {
-    const month = String(
-      cursor.getUTCMonth() + 1
-    ).padStart(
-      2,
-      "0"
-    );
+    const month = String(cursor.getUTCMonth() + 1).padStart(2, "0");
+    const day = String(cursor.getUTCDate()).padStart(2, "0");
 
-    const day = String(
-      cursor.getUTCDate()
-    ).padStart(
-      2,
-      "0"
-    );
+    keys.push(`${month}-${day}`);
+    labels.push(`${day}/${month}`);
 
-    keys.push(
-      `${month}-${day}`
-    );
-
-    labels.push(
-      `${day}/${month}`
-    );
-
-    cursor.setUTCDate(
-      cursor.getUTCDate() + 1
-    );
+    cursor.setUTCDate(cursor.getUTCDate() + 1);
   }
 
   return {
@@ -95,10 +60,7 @@ function seasonalCalendar() {
 function seasonalFormatLevel(value) {
   return Number(value)
     .toFixed(2)
-    .replace(
-      ".",
-      ","
-    );
+    .replace(".", ",");
 }
 
 function seasonalFormatDate(dateText) {
@@ -106,8 +68,7 @@ function seasonalFormatDate(dateText) {
     return "—";
   }
 
-  const [, month, day] =
-    dateText.split("-");
+  const [, month, day] = dateText.split("-");
 
   const months = [
     "janeiro",
@@ -127,6 +88,40 @@ function seasonalFormatDate(dateText) {
   return (
     `${Number(day)} de ` +
     `${months[Number(month) - 1] || month}`
+  );
+}
+
+function seasonalManausTodayKey() {
+  const parts = new Intl.DateTimeFormat(
+    "en-CA",
+    {
+      timeZone: "America/Manaus",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit"
+    }
+  ).formatToParts(new Date());
+
+  const map = Object.fromEntries(
+    parts.map(
+      part => [
+        part.type,
+        part.value
+      ]
+    )
+  );
+
+  return (
+    `${map.year}-` +
+    `${map.month}-` +
+    `${map.day}`
+  );
+}
+
+function seasonalIsPartialPoint(point) {
+  return Boolean(
+    point?.data &&
+    point.data === seasonalManausTodayKey()
   );
 }
 
@@ -286,11 +281,6 @@ function seasonalBuildReference(
   };
 }
 
-
-/* =========================
-   MARCADOR HOJE
-========================= */
-
 const seasonalTodayLinePlugin = {
   id:
     "seasonalTodayLine",
@@ -442,11 +432,6 @@ const seasonalTodayLinePlugin = {
   }
 };
 
-
-/* =========================
-   CRIAÇÃO DO PAINEL
-========================= */
-
 function seasonalInsertPanel() {
   if (
     document.getElementById(
@@ -492,7 +477,6 @@ function seasonalInsertPanel() {
 
           </div>
 
-
           <div
             class="chart-info"
             id="seasonal-reference-years"
@@ -504,7 +488,6 @@ function seasonalInsertPanel() {
 
 
         <div class="seasonal-summary-grid">
-
 
           <div class="seasonal-gauge-card">
 
@@ -663,7 +646,9 @@ function seasonalInsertPanel() {
           Os valores de dias vizinhos são utilizados
           para suavizar a comparação e não representam
           anos independentes. Não se trata de uma
-          climatologia de longo prazo.
+          climatologia de longo prazo. Quando a data
+          exibida é o dia corrente, a mediana diária
+          ainda é parcial e pode mudar ao longo do dia.
 
         </div>
 
@@ -671,11 +656,6 @@ function seasonalInsertPanel() {
     `
   );
 }
-
-
-/* =========================
-   RESUMO DO DIA
-========================= */
 
 function seasonalRenderSummary(
   data,
@@ -726,6 +706,11 @@ function seasonalRenderSummary(
     seasonalQuantile(
       values,
       0.50
+    );
+
+  const partial =
+    seasonalIsPartialPoint(
+      currentPoint
     );
 
   const less =
@@ -800,8 +785,13 @@ function seasonalRenderSummary(
   document.getElementById(
     "seasonal-current-date"
   ).textContent =
-    seasonalFormatDate(
-      currentPoint.data
+    (
+      `${seasonalFormatDate(
+        currentPoint.data
+      )}` +
+      `${partial
+        ? " • dia parcial"
+        : ""}`
     );
 
   document.getElementById(
@@ -864,23 +854,23 @@ function seasonalRenderSummary(
     (
       `${seasonalFormatDate(
         currentPoint.data
-      )} • base ${refYearsText} • ` +
-      `janela móvel ±7 dias • ` +
-      `${values.length} valores diários`
+      )}` +
+      `${partial
+        ? " • dia parcial"
+        : ""}` +
+      ` • base ${refYearsText}` +
+      ` • janela móvel ±7 dias` +
+      ` • ${values.length} valores diários`
     );
 
   return {
     currentPoint,
     percentile,
     median,
-    values
+    values,
+    partial
   };
 }
-
-
-/* =========================
-   GRÁFICO
-========================= */
 
 function seasonalRenderChart(
   data,
@@ -1336,11 +1326,6 @@ function seasonalRenderChart(
     );
 }
 
-
-/* =========================
-   INICIALIZAÇÃO
-========================= */
-
 async function seasonalInit() {
   seasonalInsertPanel();
 
@@ -1466,7 +1451,6 @@ async function seasonalInit() {
       );
   }
 }
-
 
 document.addEventListener(
   "DOMContentLoaded",

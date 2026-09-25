@@ -2,8 +2,10 @@ const LATEST_URL = "data/latest.json";
 const SERIES_URL = "data/series_30d.json";
 const STATIONS_URL = "data/estacoes.json";
 const ALERT_URL = "data/alerta.json";
+const ANNUAL_URL = "data/barcelos_anual.json";
 
 let riverChart = null;
+let annualChart = null;
 
 let latestData = null;
 let latestLoadedAt = null;
@@ -46,17 +48,11 @@ function formatVariation(value) {
       : Math.abs(number).toFixed(1);
 
   if (number > 0) {
-
-    return (
-      `+${formatted} cm`
-    );
+    return `+${formatted} cm`;
   }
 
   if (number < 0) {
-
-    return (
-      `-${formatted} cm`
-    );
+    return `-${formatted} cm`;
   }
 
   return "0 cm";
@@ -75,7 +71,6 @@ function formatNumber(
       Number(value)
     )
   ) {
-
     return "—";
   }
 
@@ -88,7 +83,6 @@ function formatNumber(
 function formatDateTime(value) {
 
   if (!value) {
-
     return "—";
   }
 
@@ -98,7 +92,6 @@ function formatDateTime(value) {
   if (
     parts.length < 2
   ) {
-
     return value;
   }
 
@@ -114,7 +107,6 @@ function formatDateTime(value) {
   if (
     date.length !== 3
   ) {
-
     return value;
   }
 
@@ -128,7 +120,6 @@ function formatDateTime(value) {
 function formatShortDateTime(value) {
 
   if (!value) {
-
     return "—";
   }
 
@@ -138,7 +129,6 @@ function formatShortDateTime(value) {
   if (
     parts.length < 2
   ) {
-
     return value;
   }
 
@@ -154,7 +144,6 @@ function formatShortDateTime(value) {
   if (
     date.length !== 3
   ) {
-
     return value;
   }
 
@@ -167,7 +156,6 @@ function formatShortDateTime(value) {
 function formatAnaUpdate(value) {
 
   if (!value) {
-
     return "—";
   }
 
@@ -177,7 +165,6 @@ function formatAnaUpdate(value) {
   if (
     parts.length < 2
   ) {
-
     return value;
   }
 
@@ -193,7 +180,6 @@ function formatAnaUpdate(value) {
   if (
     date.length !== 3
   ) {
-
     return value;
   }
 
@@ -210,18 +196,8 @@ function formatAnaUpdate(value) {
 function formatUtcToManaus(value) {
 
   if (!value) {
-
     return "—";
   }
-
-
-  /*
-    O Python grava microssegundos.
-
-    Alguns navegadores trabalham melhor
-    quando limitamos a fração de segundo
-    a 3 casas.
-  */
 
   const normalized =
     String(value).replace(
@@ -229,22 +205,18 @@ function formatUtcToManaus(value) {
       "$1"
     );
 
-
   const date =
     new Date(
       normalized
     );
-
 
   if (
     Number.isNaN(
       date.getTime()
     )
   ) {
-
     return value;
   }
-
 
   const parts =
     new Intl.DateTimeFormat(
@@ -275,19 +247,15 @@ function formatUtcToManaus(value) {
       date
     );
 
-
   const map =
     Object.fromEntries(
-
       parts.map(
         part => [
           part.type,
           part.value
         ]
       )
-
     );
-
 
   return (
     `${map.day}/${map.month}/${map.year} ` +
@@ -299,7 +267,6 @@ function formatUtcToManaus(value) {
 function formatChartLabel(value) {
 
   if (!value) {
-
     return "";
   }
 
@@ -309,7 +276,6 @@ function formatChartLabel(value) {
   if (
     parts.length < 2
   ) {
-
     return value;
   }
 
@@ -325,7 +291,6 @@ function formatChartLabel(value) {
   if (
     date.length !== 3
   ) {
-
     return value;
   }
 
@@ -342,14 +307,12 @@ function variationClass(value) {
     value === undefined ||
     Number(value) === 0
   ) {
-
     return "neutral";
   }
 
   if (
     Number(value) > 0
   ) {
-
     return "positive";
   }
 
@@ -370,7 +333,6 @@ function trendInfo(trend) {
     };
   }
 
-
   if (
     trend === "descendo"
   ) {
@@ -382,7 +344,6 @@ function trendInfo(trend) {
     };
   }
 
-
   if (
     trend === "estavel"
   ) {
@@ -393,7 +354,6 @@ function trendInfo(trend) {
       css: "stable"
     };
   }
-
 
   return {
     icon: "—",
@@ -410,43 +370,33 @@ function trendInfo(trend) {
 function getCurrentAgeMinutes() {
 
   if (!latestData) {
-
     return null;
   }
-
 
   const baseAge =
     Number(
       latestData.idade_dado_min
     );
 
-
   if (
     !Number.isFinite(
       baseAge
     )
   ) {
-
     return null;
   }
 
-
   if (!latestLoadedAt) {
-
     return baseAge;
   }
 
-
   const elapsedMinutes =
     Math.floor(
-
       (
         Date.now() -
         latestLoadedAt
       ) / 60000
-
     );
-
 
   return (
     baseAge +
@@ -461,36 +411,27 @@ function ageText(minutes) {
     minutes === null ||
     minutes === undefined
   ) {
-
-    return (
-      "Horário indisponível"
-    );
+    return "Horário indisponível";
   }
-
 
   const value =
     Number(minutes);
 
-
   if (
     value < 60
   ) {
-
     return (
       `Atualizado há ${value} min`
     );
   }
-
 
   const hours =
     Math.floor(
       value / 60
     );
 
-
   const remainingMinutes =
     value % 60;
-
 
   if (
     hours < 24
@@ -499,12 +440,10 @@ function ageText(minutes) {
     if (
       remainingMinutes === 0
     ) {
-
       return (
         `Atualizado há ${hours} h`
       );
     }
-
 
     return (
       `Atualizado há ${hours} h ` +
@@ -512,12 +451,10 @@ function ageText(minutes) {
     );
   }
 
-
   const days =
     Math.floor(
       hours / 24
     );
-
 
   return (
     `Atualizado há ${days} dia(s)`
@@ -532,50 +469,41 @@ function ageText(minutes) {
 function updateLiveStatus() {
 
   if (!latestData) {
-
     return;
   }
-
 
   const dot =
     document.getElementById(
       "status-dot"
     );
 
-
   const text =
     document.getElementById(
       "status-text"
     );
-
 
   const time =
     document.getElementById(
       "last-update"
     );
 
-
   const currentAge =
     getCurrentAgeMinutes();
-
 
   const stale =
     currentAge !== null &&
     currentAge > 180;
-
 
   dot.classList.remove(
     "ok",
     "warning"
   );
 
-
   if (stale) {
 
     dot.classList.add(
       "warning"
     );
-
 
     text.textContent =
       "Dado desatualizado";
@@ -586,11 +514,9 @@ function updateLiveStatus() {
       "ok"
     );
 
-
     text.textContent =
       "Dados atualizados";
   }
-
 
   time.textContent =
     ageText(
@@ -610,47 +536,38 @@ function updateTrend(data) {
       "trend-icon"
     );
 
-
   const text =
     document.getElementById(
       "trend-text"
     );
-
 
   icon.classList.remove(
     "up",
     "down"
   );
 
-
   const info =
     trendInfo(
       data.tendencia
     );
 
-
   icon.textContent =
     info.icon;
-
 
   text.textContent =
     info.label;
 
-
   if (
     info.css === "up"
   ) {
-
     icon.classList.add(
       "up"
     );
   }
 
-
   if (
     info.css === "down"
   ) {
-
     icon.classList.add(
       "down"
     );
@@ -667,136 +584,99 @@ function updateDashboard(data) {
   document.getElementById(
     "level"
   ).textContent =
-
     formatLevel(
       data.nivel_m
     );
 
-
   document.getElementById(
     "measurement-time"
   ).textContent =
-
     "Última medição ANA: " +
-
     formatDateTime(
-
       data.data_medicao_manaus ||
       data.data_medicao
-
     );
-
 
   document.getElementById(
     "ana-update-time"
   ).textContent =
-
     "ANA atualizou o registro: " +
-
     formatAnaUpdate(
-
       data.data_atualizacao_manaus ||
       data.data_atualizacao_ana
-
     );
-
 
   const collectorTime =
     document.getElementById(
       "collector-update-time"
     );
 
-
   if (collectorTime) {
 
     collectorTime.textContent =
-
       "Nosso sistema consultou a ANA: " +
-
       formatUtcToManaus(
         data.coletado_em_utc
       );
   }
-
 
   const variation6h =
     document.getElementById(
       "variation-6h"
     );
 
-
   const variation24h =
     document.getElementById(
       "variation-24h"
     );
-
 
   const variation7d =
     document.getElementById(
       "variation-7d"
     );
 
-
   variation6h.textContent =
-
     formatVariation(
       data.variacao_6h_cm
     );
-
 
   variation24h.textContent =
-
     formatVariation(
       data.variacao_24h_cm
     );
 
-
   variation7d.textContent =
-
     formatVariation(
       data.variacao_7d_cm
     );
 
-
   variation6h.className =
-
     "metric-value " +
-
     variationClass(
       data.variacao_6h_cm
     );
 
-
   variation24h.className =
-
     "metric-value " +
-
     variationClass(
       data.variacao_24h_cm
     );
 
-
   variation7d.className =
-
     "metric-value " +
-
     variationClass(
       data.variacao_7d_cm
     );
-
 
   document.getElementById(
     "records-count"
   ).textContent =
-
     data.registros_30d ??
     "—";
-
 
   updateTrend(
     data
   );
-
 
   updateLiveStatus();
 }
@@ -813,78 +693,65 @@ function renderAlert(data) {
       "alert-card"
     );
 
-
   const badge =
     document.getElementById(
       "alert-badge"
     );
-
 
   const icon =
     document.getElementById(
       "alert-icon"
     );
 
-
   const title =
     document.getElementById(
       "alert-title"
     );
-
 
   const message =
     document.getElementById(
       "alert-message"
     );
 
-
   const reasons =
     document.getElementById(
       "alert-reasons"
     );
-
 
   const eventStatus =
     document.getElementById(
       "alert-event-status"
     );
 
-
   const eventDetail =
     document.getElementById(
       "alert-event-detail"
     );
-
 
   const windowValue =
     document.getElementById(
       "alert-window"
     );
 
-
   const windowDetail =
     document.getElementById(
       "alert-window-detail"
     );
-
 
   const historyValue =
     document.getElementById(
       "alert-history"
     );
 
-
   const historyDetail =
     document.getElementById(
       "alert-history-detail"
     );
 
-
   const level =
     Number(
       data.nivel ?? 0
     );
-
 
   card.classList.remove(
     "loading",
@@ -893,26 +760,21 @@ function renderAlert(data) {
     "level-2"
   );
 
-
   card.classList.add(
     `level-${level}`
   );
-
 
   badge.textContent =
     data.rotulo ||
     "SEM INFORMAÇÃO";
 
-
   title.textContent =
     data.titulo ||
     "Situação indisponível";
 
-
   message.textContent =
     data.mensagem ||
     "Não foi possível interpretar o alerta atual.";
-
 
   if (
     level === 0
@@ -941,24 +803,19 @@ function renderAlert(data) {
       "•";
   }
 
-
   const motivos =
     data.motivos || [];
-
 
   if (
     motivos.length
   ) {
 
     reasons.innerHTML =
-
       motivos.map(
         motivo => `
-
           <div class="alert-reason">
             ${motivo}
           </div>
-
         `
       ).join("");
 
@@ -968,10 +825,8 @@ function renderAlert(data) {
       "";
   }
 
-
   const evento =
     data.evento_serrinha || {};
-
 
   if (
     evento.confirmado
@@ -980,37 +835,27 @@ function renderAlert(data) {
     eventStatus.textContent =
       "CONFIRMADO";
 
-
     eventDetail.textContent =
-
       evento.inicio_manaus
-
         ? (
             "Início detectado: " +
-
             formatDateTime(
               evento.inicio_manaus
             )
           )
-
-        : (
-            "Evento ativo"
-          );
+        : "Evento ativo";
 
   } else {
 
     eventStatus.textContent =
       "NÃO CONFIRMADO";
 
-
     eventDetail.textContent =
       "Aguardando alta ≥ +3 cm/24 h sustentada";
   }
 
-
   const janela =
     data.janela_historica || {};
-
 
   if (
     janela.aplicavel
@@ -1022,13 +867,11 @@ function renderAlert(data) {
         2
       );
 
-
     const fim =
       formatNumber(
         janela.fim_dias,
         2
       );
-
 
     const mediana =
       formatNumber(
@@ -1036,10 +879,8 @@ function renderAlert(data) {
         2
       );
 
-
     windowValue.textContent =
       `${inicio}–${fim} dias`;
-
 
     if (
       janela.inicio_janela_manaus &&
@@ -1047,10 +888,8 @@ function renderAlert(data) {
     ) {
 
       windowDetail.textContent =
-
         (
           `Mediana histórica: ${mediana} dias. ` +
-
           `Janela: ${formatDateTime(
             janela.inicio_janela_manaus
           )} até ${formatDateTime(
@@ -1061,11 +900,7 @@ function renderAlert(data) {
     } else {
 
       windowDetail.textContent =
-
-        (
-          `Mediana histórica: ` +
-          `${mediana} dias`
-        );
+        `Mediana histórica: ${mediana} dias`;
     }
 
   } else {
@@ -1073,20 +908,16 @@ function renderAlert(data) {
     windowValue.textContent =
       "NÃO APLICÁVEL";
 
-
     windowDetail.textContent =
-
       (
         "Só é calculada após um evento " +
         "confirmado em Serrinha"
       );
   }
 
-
   const historico =
     data.historico_serrinha_barcelos ||
     {};
-
 
   if (
     historico.disponivel
@@ -1096,11 +927,9 @@ function renderAlert(data) {
       historico.eventos_serrinha ??
       0;
 
-
     const correspondentes =
       historico.eventos_correspondentes ??
       0;
-
 
     const mediana =
       formatNumber(
@@ -1108,13 +937,11 @@ function renderAlert(data) {
         2
       );
 
-
     const q25 =
       formatNumber(
         historico.q25_dias,
         2
       );
-
 
     const q75 =
       formatNumber(
@@ -1122,13 +949,10 @@ function renderAlert(data) {
         2
       );
 
-
     historyValue.textContent =
       `${correspondentes} de ${total} eventos`;
 
-
     historyDetail.textContent =
-
       (
         `Mediana ${mediana} dias • ` +
         `faixa central ${q25}–${q75} dias`
@@ -1138,7 +962,6 @@ function renderAlert(data) {
 
     historyValue.textContent =
       "INDISPONÍVEL";
-
 
     historyDetail.textContent =
       "Estatística histórica não encontrada";
@@ -1157,30 +980,25 @@ function renderAlertUnavailable() {
       "alert-card"
     );
 
-
   const badge =
     document.getElementById(
       "alert-badge"
     );
-
 
   const icon =
     document.getElementById(
       "alert-icon"
     );
 
-
   const title =
     document.getElementById(
       "alert-title"
     );
 
-
   const message =
     document.getElementById(
       "alert-message"
     );
-
 
   card.classList.remove(
     "level-0",
@@ -1188,26 +1006,20 @@ function renderAlertUnavailable() {
     "level-2"
   );
 
-
   card.classList.add(
     "loading"
   );
 
-
   badge.textContent =
     "INDISPONÍVEL";
-
 
   icon.textContent =
     "?";
 
-
   title.textContent =
     "Alerta temporariamente indisponível";
 
-
   message.textContent =
-
     (
       "Os dados hidrológicos continuam sendo exibidos, " +
       "mas o motor de alerta não pôde ser carregado."
@@ -1225,7 +1037,6 @@ function createVariationBlock(
 ) {
 
   return `
-
     <div class="upstream-variation">
 
       <div class="upstream-variation-label">
@@ -1242,7 +1053,6 @@ function createVariationBlock(
       </div>
 
     </div>
-
   `;
 }
 
@@ -1254,58 +1064,42 @@ function renderStations(data) {
       "upstream-grid"
     );
 
-
   const stations =
     data.estacoes || [];
-
 
   if (
     !stations.length
   ) {
 
     container.innerHTML = `
-
       <div class="upstream-loading">
         Nenhuma estação disponível.
       </div>
-
     `;
-
 
     return;
   }
 
-
   const cards =
-
     stations.map(
       station => {
-
 
         const trend =
           trendInfo(
             station.tendencia
           );
 
-
         const barcelosClass =
-
           station.estacao ===
           "14480002"
-
             ? "barcelos"
-
             : "";
 
-
         const measurement =
-
           station.data_medicao_manaus ||
           station.data_medicao;
 
-
         return `
-
           <article
             class="
               upstream-card
@@ -1322,7 +1116,6 @@ function renderStations(data) {
               ANA ${station.estacao}
             </div>
 
-
             <div class="upstream-level">
 
               ${formatLevel(
@@ -1332,7 +1125,6 @@ function renderStations(data) {
               <span>m</span>
 
             </div>
-
 
             <div
               class="
@@ -1350,7 +1142,6 @@ function renderStations(data) {
               </span>
 
             </div>
-
 
             <div class="upstream-variations">
 
@@ -1376,7 +1167,6 @@ function renderStations(data) {
 
             </div>
 
-
             <div class="upstream-time">
 
               Medição:
@@ -1388,12 +1178,10 @@ function renderStations(data) {
             </div>
 
           </article>
-
         `;
       }
     )
     .join("");
-
 
   container.innerHTML =
     cards;
@@ -1411,204 +1199,154 @@ function updatePropagation(data) {
       "propagation-title"
     );
 
-
   const text =
     document.getElementById(
       "propagation-text"
     );
-
 
   const icon =
     document.getElementById(
       "propagation-icon"
     );
 
-
   const stations =
     data.estacoes || [];
 
-
   const byCode =
     Object.fromEntries(
-
       stations.map(
         station => [
-
           station.estacao,
           station
-
         ]
       )
-
     );
-
 
   const cucui =
     byCode["14110000"];
 
-
   const taracua =
     byCode["14280001"];
-
 
   const curicuriari =
     byCode["14330000"];
 
-
   const serrinha =
     byCode["14420000"];
 
-
   const barcelos =
     byCode["14480002"];
-
 
   icon.classList.remove(
     "upstream-rise"
   );
 
-
   if (
     serrinha &&
     barcelos &&
-
     Number(
       serrinha.variacao_24h_cm
     ) > 0 &&
-
     Number(
       barcelos.variacao_24h_cm
     ) <= 0
   ) {
 
-
     title.textContent =
-
       (
         "Mudança de comportamento " +
         "próxima de Barcelos"
       );
 
-
     let message =
-
       `Serrinha registra ` +
-
       `${formatVariation(
         serrinha.variacao_24h_cm
       )} em 24 h e ` +
-
       `${formatVariation(
         serrinha.variacao_72h_cm
       )} em 72 h, enquanto Barcelos ` +
-
       `registra ${formatVariation(
         barcelos.variacao_24h_cm
       )} em 24 h e ` +
-
       `${formatVariation(
         barcelos.variacao_72h_cm
       )} em 72 h.`;
 
-
     if (
       curicuriari &&
-
       Number(
         curicuriari.variacao_72h_cm
       ) > 0
     ) {
 
-
       message +=
-
         (
           ` Curicuriari também acumula ` +
-
           `${formatVariation(
             curicuriari.variacao_72h_cm
           )} em 72 h.`
         );
     }
 
-
     message +=
-
       (
         " O painel registra essa diferença " +
         "para acompanhamento. Ainda não " +
         "confirma repiquete."
       );
 
-
     text.textContent =
       message;
 
-
     icon.textContent =
       "↑";
-
 
     icon.classList.add(
       "upstream-rise"
     );
 
-
     return;
   }
-
 
   if (
     serrinha &&
     barcelos &&
-
     Number(
       serrinha.variacao_24h_cm
     ) > 0 &&
-
     Number(
       barcelos.variacao_24h_cm
     ) > 0
   ) {
 
-
     title.textContent =
-
       (
         "Alta observada em " +
         "Serrinha e Barcelos"
       );
 
-
     text.textContent =
-
       (
         `Serrinha registra ` +
-
         `${formatVariation(
           serrinha.variacao_24h_cm
         )} em 24 h e Barcelos ` +
-
         `${formatVariation(
           barcelos.variacao_24h_cm
         )}. O movimento já aparece ` +
-
         `nas duas estações.`
       );
 
-
     icon.textContent =
       "↑";
-
 
     icon.classList.add(
       "upstream-rise"
     );
 
-
     return;
   }
-
 
   const upstream =
     [
@@ -1618,110 +1356,81 @@ function updatePropagation(data) {
       serrinha
     ].filter(Boolean);
 
-
   const rising72h =
-
     upstream.filter(
       station =>
-
         Number(
           station.variacao_72h_cm
         ) > 0
     );
 
-
   if (
     rising72h.length >= 2 &&
     barcelos &&
-
     Number(
       barcelos.variacao_72h_cm
     ) < 0
   ) {
 
-
     title.textContent =
-
       (
         "Alta ainda concentrada " +
         "a montante"
       );
 
-
     text.textContent =
-
       (
         `${rising72h.length} das 4 estações ` +
-
         `a montante acumulam alta nas últimas ` +
-
         `72 h, enquanto Barcelos registra ` +
-
         `${formatVariation(
           barcelos.variacao_72h_cm
         )} no mesmo período. O comportamento ` +
-
         `será acompanhado nas próximas atualizações.`
       );
 
-
     icon.textContent =
       "↑";
-
 
     icon.classList.add(
       "upstream-rise"
     );
 
-
     return;
   }
-
 
   if (
     rising72h.length === 0
   ) {
 
-
     title.textContent =
-
       (
         "Sem alta consistente " +
         "a montante"
       );
 
-
     text.textContent =
-
       (
         "As quatro estações a montante " +
         "não apresentam alta acumulada " +
         "nas últimas 72 horas."
       );
 
-
     icon.textContent =
       "↓";
-
 
     return;
   }
 
-
   title.textContent =
     "Comportamento misto a montante";
 
-
   text.textContent =
-
     (
       "As estações apresentam movimentos diferentes. " +
-
       "O sistema continuará comparando as variações " +
-
       "de 6 h, 24 h, 72 h e 7 dias."
     );
-
 
   icon.textContent =
     "→";
@@ -1741,19 +1450,15 @@ function downsampleSeries(
     series.length <=
     maxPoints
   ) {
-
     return series;
   }
-
 
   const step =
     series.length /
     maxPoints;
 
-
   const reduced =
     [];
-
 
   for (
     let i = 0;
@@ -1761,49 +1466,41 @@ function downsampleSeries(
     i++
   ) {
 
-
     const index =
       Math.floor(
         i * step
       );
-
 
     reduced.push(
       series[index]
     );
   }
 
-
   const last =
     series[
       series.length - 1
     ];
-
 
   const reducedLast =
     reduced[
       reduced.length - 1
     ];
 
-
   if (
     reducedLast.data_medicao !==
     last.data_medicao
   ) {
-
-
     reduced.push(
       last
     );
   }
-
 
   return reduced;
 }
 
 
 /* =========================
-   GRÁFICO DE BARCELOS
+   GRÁFICO DE 30 DIAS
 ========================= */
 
 function createChart(series) {
@@ -1813,127 +1510,513 @@ function createChart(series) {
       "river-chart"
     );
 
-
   if (!canvas) {
-
     return;
   }
-
 
   const reduced =
     downsampleSeries(
       series
     );
 
-
   const labels =
-
     reduced.map(
       item =>
-
         formatChartLabel(
-
           item.data_medicao_manaus ||
           item.data_medicao
-
         )
     );
 
-
   const values =
-
     reduced.map(
       item =>
-
         Number(
           item.nivel_m
         )
     );
 
-
   if (
     riverChart
   ) {
-
     riverChart.destroy();
   }
 
-
   riverChart =
-
     new Chart(
-
       canvas,
-
       {
 
         type:
           "line",
-
 
         data: {
 
           labels,
 
           datasets: [
-
             {
-
               label:
                 "Nível do Rio Negro",
-
 
               data:
                 values,
 
-
               borderColor:
                 "#43a5ff",
-
 
               backgroundColor:
                 "rgba(67,165,255,0.10)",
 
-
               borderWidth:
                 2,
-
 
               pointRadius:
                 0,
 
-
               pointHoverRadius:
                 4,
-
 
               tension:
                 0.22,
 
-
               fill:
                 true
-
             }
-
           ]
-
         },
-
 
         options: {
 
           responsive:
             true,
 
-
           maintainAspectRatio:
             false,
-
 
           animation:
             false,
 
+          interaction: {
+            mode:
+              "index",
+
+            intersect:
+              false
+          },
+
+          plugins: {
+
+            legend: {
+              display:
+                false
+            },
+
+            tooltip: {
+
+              callbacks: {
+
+                label:
+                  function(
+                    context
+                  ) {
+
+                    return (
+                      "Nível: " +
+                      context.parsed.y
+                        .toFixed(2)
+                        .replace(
+                          ".",
+                          ","
+                        ) +
+                      " m"
+                    );
+                  }
+              }
+            }
+          },
+
+          scales: {
+
+            x: {
+
+              grid: {
+                display:
+                  false
+              },
+
+              ticks: {
+
+                color:
+                  "#8fa7bc",
+
+                maxTicksLimit:
+                  8,
+
+                maxRotation:
+                  0,
+
+                autoSkip:
+                  true
+              },
+
+              border: {
+                color:
+                  "rgba(255,255,255,0.08)"
+              }
+            },
+
+            y: {
+
+              beginAtZero:
+                false,
+
+              grid: {
+                color:
+                  "rgba(255,255,255,0.055)"
+              },
+
+              ticks: {
+
+                color:
+                  "#8fa7bc",
+
+                callback:
+                  function(
+                    value
+                  ) {
+
+                    return (
+                      Number(value)
+                        .toFixed(2)
+                        .replace(
+                          ".",
+                          ","
+                        ) +
+                      " m"
+                    );
+                  }
+              },
+
+              border: {
+                display:
+                  false
+              }
+            }
+          }
+        }
+      }
+    );
+}
+
+
+/* =========================
+   COMPARATIVO ANUAL
+========================= */
+
+function buildAnnualCalendar() {
+
+  const labels =
+    [];
+
+  const keys =
+    [];
+
+  const start =
+    new Date(
+      Date.UTC(
+        2024,
+        0,
+        1
+      )
+    );
+
+  const end =
+    new Date(
+      Date.UTC(
+        2024,
+        11,
+        31
+      )
+    );
+
+  const cursor =
+    new Date(start);
+
+  while (
+    cursor <= end
+  ) {
+
+    const month =
+      String(
+        cursor.getUTCMonth() + 1
+      ).padStart(
+        2,
+        "0"
+      );
+
+    const day =
+      String(
+        cursor.getUTCDate()
+      ).padStart(
+        2,
+        "0"
+      );
+
+    keys.push(
+      `${month}-${day}`
+    );
+
+    labels.push(
+      `${day}/${month}`
+    );
+
+    cursor.setUTCDate(
+      cursor.getUTCDate() + 1
+    );
+  }
+
+  return {
+    labels,
+    keys
+  };
+}
+
+
+function annualDatasetStyle(
+  year,
+  latestYear
+) {
+
+  if (
+    year === latestYear
+  ) {
+
+    return {
+      borderColor:
+        "#58d6ff",
+
+      backgroundColor:
+        "rgba(88,214,255,0.08)",
+
+      borderWidth:
+        3,
+
+      pointRadius:
+        0,
+
+      pointHoverRadius:
+        5
+    };
+  }
+
+  const styles = {
+
+    "2025": {
+      borderColor:
+        "#43a5ff",
+
+      backgroundColor:
+        "transparent"
+    },
+
+    "2024": {
+      borderColor:
+        "#f5c451",
+
+      backgroundColor:
+        "transparent"
+    },
+
+    "2023": {
+      borderColor:
+        "rgba(190,205,220,0.55)",
+
+      backgroundColor:
+        "transparent"
+    }
+  };
+
+  return {
+    borderColor:
+      styles[year]?.borderColor ||
+      "rgba(255,255,255,0.45)",
+
+    backgroundColor:
+      styles[year]?.backgroundColor ||
+      "transparent",
+
+    borderWidth:
+      1.8,
+
+    pointRadius:
+      0,
+
+    pointHoverRadius:
+      4
+  };
+}
+
+
+function renderAnnualChart(data) {
+
+  const canvas =
+    document.getElementById(
+      "annual-chart"
+    );
+
+  const status =
+    document.getElementById(
+      "annual-chart-status"
+    );
+
+  if (
+    !canvas
+  ) {
+    return;
+  }
+
+  const years =
+    (
+      data.anos ||
+      Object.keys(
+        data.series || {}
+      )
+    )
+      .map(
+        String
+      )
+      .sort();
+
+  if (
+    !years.length
+  ) {
+
+    if (status) {
+
+      status.textContent =
+        "Nenhum ano disponível para comparação.";
+    }
+
+    return;
+  }
+
+  const {
+    labels,
+    keys
+  } =
+    buildAnnualCalendar();
+
+  const latestYear =
+    years[
+      years.length - 1
+    ];
+
+  const datasets =
+    years.map(
+      year => {
+
+        const points =
+          (
+            data.series &&
+            data.series[year]
+          ) || [];
+
+        const byDay =
+          Object.fromEntries(
+            points.map(
+              point => [
+                point.dia_mes,
+                Number(
+                  point.nivel_m
+                )
+              ]
+            )
+          );
+
+        const values =
+          keys.map(
+            key =>
+              Object.prototype.hasOwnProperty.call(
+                byDay,
+                key
+              )
+                ? byDay[key]
+                : null
+          );
+
+        const style =
+          annualDatasetStyle(
+            year,
+            latestYear
+          );
+
+        return {
+
+          label:
+            year,
+
+          data:
+            values,
+
+          borderColor:
+            style.borderColor,
+
+          backgroundColor:
+            style.backgroundColor,
+
+          borderWidth:
+            style.borderWidth,
+
+          pointRadius:
+            style.pointRadius,
+
+          pointHoverRadius:
+            style.pointHoverRadius,
+
+          tension:
+            0.18,
+
+          spanGaps:
+            false,
+
+          fill:
+            false
+        };
+      }
+    );
+
+  if (
+    annualChart
+  ) {
+    annualChart.destroy();
+  }
+
+  annualChart =
+    new Chart(
+      canvas,
+      {
+
+        type:
+          "line",
+
+        data: {
+
+          labels,
+
+          datasets
+        },
+
+        options: {
+
+          responsive:
+            true,
+
+          maintainAspectRatio:
+            false,
+
+          animation:
+            false,
 
           interaction: {
 
@@ -1942,156 +2025,268 @@ function createChart(series) {
 
             intersect:
               false
-
           },
-
 
           plugins: {
 
             legend: {
 
               display:
-                false
+                true,
 
+              position:
+                "top",
+
+              align:
+                "start",
+
+              labels: {
+
+                color:
+                  "#d6e1eb",
+
+                usePointStyle:
+                  true,
+
+                pointStyle:
+                  "line",
+
+                boxWidth:
+                  28,
+
+                boxHeight:
+                  4,
+
+                padding:
+                  18,
+
+                font: {
+                  size:
+                    11,
+
+                  weight:
+                    "600"
+                }
+              }
             },
-
 
             tooltip: {
 
+              filter:
+                function(
+                  tooltipItem
+                ) {
+
+                  return (
+                    tooltipItem.raw !==
+                    null
+                  );
+                },
+
               callbacks: {
 
-                label:
+                title:
+                  function(
+                    items
+                  ) {
 
+                    if (
+                      !items.length
+                    ) {
+                      return "";
+                    }
+
+                    return (
+                      items[0].label
+                    );
+                  },
+
+                label:
                   function(
                     context
                   ) {
 
+                    if (
+                      context.raw ===
+                      null
+                    ) {
+                      return "";
+                    }
 
                     return (
-
-                      "Nível: " +
-
-                      context.parsed.y
+                      `${context.dataset.label}: ` +
+                      `${Number(
+                        context.raw
+                      )
                         .toFixed(2)
                         .replace(
                           ".",
                           ","
-                        ) +
-
-                      " m"
-
+                        )} m`
                     );
                   }
-
               }
-
             }
-
           },
-
 
           scales: {
 
             x: {
 
               grid: {
-
                 display:
                   false
-
               },
 
+              border: {
+                color:
+                  "rgba(255,255,255,0.08)"
+              },
 
               ticks: {
 
                 color:
                   "#8fa7bc",
 
-
-                maxTicksLimit:
-                  8,
-
-
                 maxRotation:
                   0,
 
-
                 autoSkip:
-                  true
+                  false,
 
-              },
+                callback:
+                  function(
+                    value,
+                    index
+                  ) {
 
+                    const key =
+                      keys[index];
 
-              border: {
+                    const monthlyLabels = {
+                      "01-01": "JAN",
+                      "02-01": "FEV",
+                      "03-01": "MAR",
+                      "04-01": "ABR",
+                      "05-01": "MAI",
+                      "06-01": "JUN",
+                      "07-01": "JUL",
+                      "08-01": "AGO",
+                      "09-01": "SET",
+                      "10-01": "OUT",
+                      "11-01": "NOV",
+                      "12-01": "DEZ"
+                    };
 
-                color:
-                  "rgba(255,255,255,0.08)"
-
+                    return (
+                      monthlyLabels[key] ||
+                      ""
+                    );
+                  }
               }
-
             },
-
 
             y: {
 
               beginAtZero:
                 false,
 
-
               grid: {
-
                 color:
                   "rgba(255,255,255,0.055)"
-
               },
 
+              border: {
+                display:
+                  false
+              },
 
               ticks: {
 
                 color:
                   "#8fa7bc",
 
-
                 callback:
-
                   function(
                     value
                   ) {
 
-
                     return (
-
                       Number(value)
-                        .toFixed(2)
+                        .toFixed(1)
                         .replace(
                           ".",
                           ","
                         ) +
-
                       " m"
-
                     );
                   }
-
               },
 
-
-              border: {
+              title: {
 
                 display:
-                  false
+                  true,
 
+                text:
+                  "Nível do rio (m)",
+
+                color:
+                  "#8fa7bc",
+
+                font: {
+                  size:
+                    11
+                }
               }
-
             }
-
           }
-
         }
-
       }
-
     );
+
+  if (status) {
+
+    const resumo =
+      data.resumo || {};
+
+    const latestInfo =
+      resumo[
+        latestYear
+      ];
+
+    if (
+      latestInfo
+    ) {
+
+      status.textContent =
+        (
+          `${years.length} anos disponíveis • ` +
+          `${latestYear}: ` +
+          `${latestInfo.dias_disponiveis} dias de dados`
+        );
+
+    } else {
+
+      status.textContent =
+        `${years.length} anos disponíveis`;
+    }
+  }
+}
+
+
+function renderAnnualUnavailable() {
+
+  const status =
+    document.getElementById(
+      "annual-chart-status"
+    );
+
+  if (status) {
+
+    status.textContent =
+      "Comparativo histórico temporariamente indisponível.";
+  }
 }
 
 
@@ -2104,33 +2299,23 @@ async function fetchJson(
   cacheKey
 ) {
 
-
   const response =
-
     await fetch(
-
       `${url}?v=${cacheKey}`,
-
       {
-
         cache:
           "no-store"
-
       }
-
     );
-
 
   if (
     !response.ok
   ) {
 
-
     throw new Error(
       `Erro ao carregar ${url}`
     );
   }
-
 
   return response.json();
 }
@@ -2144,35 +2329,58 @@ async function loadAlert(
   cacheKey
 ) {
 
-
   try {
 
-
     const alertData =
-
       await fetchJson(
         ALERT_URL,
         cacheKey
       );
 
-
     renderAlert(
       alertData
     );
 
-  }
-
-
-  catch (error) {
-
+  } catch (error) {
 
     console.error(
       "Erro no alerta:",
       error
     );
 
-
     renderAlertUnavailable();
+  }
+}
+
+
+/* =========================
+   CARREGAR COMPARATIVO ANUAL
+========================= */
+
+async function loadAnnual(
+  cacheKey
+) {
+
+  try {
+
+    const annualData =
+      await fetchJson(
+        ANNUAL_URL,
+        cacheKey
+      );
+
+    renderAnnualChart(
+      annualData
+    );
+
+  } catch (error) {
+
+    console.error(
+      "Erro no comparativo anual:",
+      error
+    );
+
+    renderAnnualUnavailable();
   }
 }
 
@@ -2183,22 +2391,17 @@ async function loadAlert(
 
 async function loadData() {
 
+  const cacheKey =
+    Date.now();
 
   try {
-
-
-    const cacheKey =
-      Date.now();
-
 
     const [
       latest,
       series,
       stations
     ] =
-
       await Promise.all([
-
         fetchJson(
           LATEST_URL,
           cacheKey
@@ -2213,113 +2416,90 @@ async function loadData() {
           STATIONS_URL,
           cacheKey
         )
-
       ]);
-
 
     latestData =
       latest;
 
-
     latestLoadedAt =
       Date.now();
-
 
     updateDashboard(
       latest
     );
 
-
     renderStations(
       stations
     );
-
 
     updatePropagation(
       stations
     );
 
-
     createChart(
       series
     );
 
-
-    await loadAlert(
-      cacheKey
-    );
-
-  }
-
-
-  catch (error) {
-
+  } catch (error) {
 
     console.error(
       error
     );
-
 
     const statusText =
       document.getElementById(
         "status-text"
       );
 
-
     const statusTime =
       document.getElementById(
         "last-update"
       );
-
 
     const dot =
       document.getElementById(
         "status-dot"
       );
 
-
     statusText.textContent =
       "Erro ao carregar dados";
 
-
     statusTime.textContent =
       "Tente novamente em instantes";
-
 
     dot.classList.remove(
       "ok"
     );
 
-
     dot.classList.add(
       "warning"
     );
-
 
     const upstream =
       document.getElementById(
         "upstream-grid"
       );
 
-
     if (upstream) {
 
-
       upstream.innerHTML = `
-
         <div class="upstream-loading">
-
           Não foi possível carregar
           as estações neste momento.
-
         </div>
-
       `;
     }
-
-
-    renderAlertUnavailable();
   }
+
+  await Promise.all([
+    loadAlert(
+      cacheKey
+    ),
+
+    loadAnnual(
+      cacheKey
+    )
+  ]);
 }
 
 
@@ -2328,14 +2508,10 @@ async function loadData() {
 ========================= */
 
 document.addEventListener(
-
   "DOMContentLoaded",
-
   () => {
 
-
     loadData();
-
 
     /*
       Busca novos arquivos no GitHub
@@ -2347,7 +2523,6 @@ document.addEventListener(
       5 * 60 * 1000
     );
 
-
     /*
       Atualiza somente o texto
       "Atualizado há..."
@@ -2358,7 +2533,5 @@ document.addEventListener(
       updateLiveStatus,
       60 * 1000
     );
-
   }
-
 );

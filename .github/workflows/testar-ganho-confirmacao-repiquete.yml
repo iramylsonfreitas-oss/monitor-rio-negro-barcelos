@@ -1,0 +1,215 @@
+name: Testar Ganho Confirmacao Repiquete
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: teste-ganho-confirmacao-repiquete
+  cancel-in-progress: false
+
+jobs:
+  testar:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Baixar projeto
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+
+      - name: Executar teste de ganho na confirmacao
+        run: |
+          python collector/repiquete_teste_ganho_confirmacao.py
+
+
+      - name: Conferir resultado
+        run: |
+          echo "======================================"
+          echo "TESTE DE GANHO NA CONFIRMACAO"
+          echo "======================================"
+
+          if [ ! -f data/repiquete_teste_ganho_confirmacao.json ]; then
+            echo "ERRO:"
+            echo "data/repiquete_teste_ganho_confirmacao.json nao foi criado."
+            exit 1
+          fi
+
+          python - <<'PY'
+          import json
+
+          with open(
+              "data/repiquete_teste_ganho_confirmacao.json",
+              encoding="utf-8"
+          ) as f:
+              data = json.load(f)
+
+          metodologia = (
+              data.get("metodologia")
+              or {}
+          )
+
+          print(
+              "Configuracao base:",
+              metodologia.get(
+                  "configuracao_base"
+              )
+          )
+
+          print(
+              "Eventos analisados:",
+              metodologia.get(
+                  "eventos_analisados"
+              )
+          )
+
+          print()
+          print(
+              "EVENTOS"
+          )
+
+          for event in data.get(
+              "eventos",
+              []
+          ):
+
+              print(
+                  (
+                      f"Evento {event.get('evento')}"
+                      f" | ganho na confirmacao="
+                      f"{event.get('ganho_liquido_na_confirmacao_cm')} cm"
+                      f" | "
+                      f"{event.get('classificacao_retrospectiva')}"
+                  )
+              )
+
+          print()
+          print(
+              "LIMIARES"
+          )
+
+          for result in data.get(
+              "resultados",
+              []
+          ):
+
+              print()
+              print(
+                  "Criterio:",
+                  result.get(
+                      "rotulo"
+                  )
+              )
+
+              print(
+                  "Eventos aceitos:",
+                  result.get(
+                      "eventos_aceitos"
+                  )
+              )
+
+              print(
+                  "Eventos rejeitados:",
+                  result.get(
+                      "eventos_rejeitados"
+                  )
+              )
+
+              print(
+                  "Fracos aceitos:",
+                  result.get(
+                      "eventos_fracos_aceitos"
+                  ),
+                  "/",
+                  result.get(
+                      "eventos_fracos_totais"
+                  )
+              )
+
+              print(
+                  "Continuidade preservada:",
+                  result.get(
+                      "eventos_com_continuidade_aceitos"
+                  ),
+                  "/",
+                  result.get(
+                      "eventos_com_continuidade_totais"
+                  )
+              )
+
+              print(
+                  "Elimina todos os fracos:",
+                  result.get(
+                      "elimina_todos_fracos"
+                  )
+              )
+
+              print(
+                  "Preserva todos com continuidade:",
+                  result.get(
+                      "preserva_todos_com_continuidade"
+                  )
+              )
+
+              print(
+                  "Separacao perfeita no historico:",
+                  result.get(
+                      "elimina_fracos_e_preserva_continuidade"
+                  )
+              )
+
+              rejeitados = (
+                  result.get(
+                      "rejeitados"
+                  )
+                  or []
+              )
+
+              if rejeitados:
+
+                  print(
+                      "Rejeitados:"
+                  )
+
+                  for event in rejeitados:
+
+                      print(
+                          (
+                              "  Evento "
+                              f"{event.get('evento')}"
+                              f" | ganho="
+                              f"{event.get('ganho_liquido_na_confirmacao_cm')} cm"
+                              f" | "
+                              f"{event.get('classificacao_retrospectiva')}"
+                          )
+                      )
+          PY
+
+
+      - name: Salvar resultado
+        run: |
+          git config user.name "rio-negro-bot"
+          git config user.email "actions@github.com"
+
+          git add data/repiquete_teste_ganho_confirmacao.json
+
+          if git diff --cached --quiet; then
+            echo "Nenhuma alteracao para salvar."
+            exit 0
+          fi
+
+          git commit -m "Atualiza teste de ganho na confirmacao do repiquete"
+
+          git pull --rebase origin main
+
+          git push origin main

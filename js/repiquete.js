@@ -26,8 +26,7 @@ function repiqueteFormatVariation(
     return (
       `+${Math.abs(n)
         .toFixed(1)
-        .replace(".",
-        ",")} cm`
+        .replace(".", ",")} cm`
     );
   }
 
@@ -35,8 +34,7 @@ function repiqueteFormatVariation(
     return (
       `-${Math.abs(n)
         .toFixed(1)
-        .replace(".",
-        ",")} cm`
+        .replace(".", ",")} cm`
     );
   }
 
@@ -71,6 +69,42 @@ function repiqueteFormatDateTime(
     `${parts[2]}/` +
     `${parts[1]} ` +
     `${timePart.slice(0, 5)}`
+  );
+}
+
+
+function repiqueteLocalizeReason(
+  value
+) {
+  return String(
+    value || ""
+  ).replace(
+    /([+-]?\d+)\.(\d+)/g,
+    "$1,$2"
+  );
+}
+
+
+function repiqueteUpstreamText(
+  count
+) {
+  if (count === 0) {
+    return (
+      "Nenhuma estação a montante " +
+      "com alta em 72 h"
+    );
+  }
+
+  if (count === 1) {
+    return (
+      "1 estação a montante " +
+      "com alta em 72 h"
+    );
+  }
+
+  return (
+    `${count} estações a montante ` +
+    `com alta em 72 h`
   );
 }
 
@@ -359,7 +393,7 @@ function repiqueteInsertPanel() {
           <div class="repiquete-context-card">
 
             <div class="repiquete-context-label">
-              ÚLTIMO CHECKPOINT
+              ÚLTIMO CHECKPOINT DO DETECTOR
             </div>
 
             <div
@@ -383,10 +417,14 @@ function repiqueteInsertPanel() {
 
         <div class="repiquete-note">
 
-          Este detector identifica mudança de tendência.
-          “Possível reversão” e “repiquete em formação”
-          não significam confirmação. O estado confirmado
-          exige persistência da alta observada em Barcelos
+          As métricas de Barcelos usam a leitura mais
+          recente da ANA. O checkpoint do detector usa
+          a série horária fechada nos horários 00, 06,
+          12 e 18 h; por isso os valores podem diferir
+          ligeiramente. “Possível reversão” e
+          “repiquete em formação” não significam
+          confirmação. O estado confirmado exige
+          persistência da alta observada em Barcelos
           e não representa previsão futura.
 
         </div>
@@ -626,7 +664,9 @@ function repiqueteRender(
             .map(
               reason => `
                 <div class="repiquete-reason">
-                  ${reason}
+                  ${repiqueteLocalizeReason(
+                    reason
+                  )}
                 </div>
               `
             )
@@ -670,9 +710,8 @@ function repiqueteRender(
       );
 
     upstreamDetail.textContent =
-      (
-        `${count} estação(ões) ` +
-        `a montante com alta em 72 h`
+      repiqueteUpstreamText(
+        count
       );
   }
 
@@ -734,6 +773,7 @@ function repiqueteRender(
   ) {
     checkpointDetail.textContent =
       (
+        `série horária • ` +
         `6 h: ` +
         `${repiqueteFormatVariation(
           latestCheckpoint

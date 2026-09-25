@@ -1,0 +1,423 @@
+{
+  "metodologia": {
+    "descricao": "Teste retrospectivo de um critério adicional de ganho líquido entre o primeiro sinal e o momento da confirmação do detector.",
+    "configuracao_base": "alta_3_conf_3",
+    "eventos_analisados": 6,
+    "limiares_testados": [
+      "> 0 cm",
+      "≥ 0,5 cm",
+      "≥ 1 cm",
+      "≥ 2 cm",
+      "≥ 3 cm"
+    ],
+    "informacao_disponivel_em_tempo_real": true,
+    "observacao": "O ganho líquido até a confirmação usa apenas níveis já observados entre o primeiro sinal e o checkpoint de confirmação. A classificação retrospectiva fraco/continuidade é utilizada somente para avaliar o desempenho histórico dos limiares."
+  },
+  "eventos": [
+    {
+      "evento": 1,
+      "inicio_sinal_manaus": "2024-01-19 06:00:00",
+      "confirmado_em_manaus": "2024-01-19 18:00:00",
+      "atraso_confirmacao_h": 12.0,
+      "ganho_liquido_na_confirmacao_cm": 0.0,
+      "classificacao_retrospectiva": "fraco_pos_evento"
+    },
+    {
+      "evento": 2,
+      "inicio_sinal_manaus": "2024-10-04 12:00:00",
+      "confirmado_em_manaus": "2024-10-05 00:00:00",
+      "atraso_confirmacao_h": 12.0,
+      "ganho_liquido_na_confirmacao_cm": 4.9,
+      "classificacao_retrospectiva": "continuidade_observada"
+    },
+    {
+      "evento": 3,
+      "inicio_sinal_manaus": "2025-02-06 12:00:00",
+      "confirmado_em_manaus": "2025-02-07 00:00:00",
+      "atraso_confirmacao_h": 12.0,
+      "ganho_liquido_na_confirmacao_cm": 1.0,
+      "classificacao_retrospectiva": "continuidade_observada"
+    },
+    {
+      "evento": 4,
+      "inicio_sinal_manaus": "2025-10-19 18:00:00",
+      "confirmado_em_manaus": "2025-10-20 06:00:00",
+      "atraso_confirmacao_h": 12.0,
+      "ganho_liquido_na_confirmacao_cm": 0.0,
+      "classificacao_retrospectiva": "fraco_pos_evento"
+    },
+    {
+      "evento": 5,
+      "inicio_sinal_manaus": "2025-11-20 18:00:00",
+      "confirmado_em_manaus": "2025-11-21 06:00:00",
+      "atraso_confirmacao_h": 12.0,
+      "ganho_liquido_na_confirmacao_cm": 1.0,
+      "classificacao_retrospectiva": "continuidade_observada"
+    },
+    {
+      "evento": 6,
+      "inicio_sinal_manaus": "2026-03-19 06:00:00",
+      "confirmado_em_manaus": "2026-03-19 18:00:00",
+      "atraso_confirmacao_h": 12.0,
+      "ganho_liquido_na_confirmacao_cm": 5.0,
+      "classificacao_retrospectiva": "continuidade_observada"
+    }
+  ],
+  "resultados": [
+    {
+      "id": "maior_que_0",
+      "rotulo": "> 0 cm",
+      "valor_cm": 0.0,
+      "operador": "gt",
+      "eventos_totais": 6,
+      "eventos_aceitos": 4,
+      "eventos_rejeitados": 2,
+      "eventos_fracos_totais": 2,
+      "eventos_fracos_aceitos": 0,
+      "eventos_fracos_rejeitados": 2,
+      "eventos_com_continuidade_totais": 4,
+      "eventos_com_continuidade_aceitos": 4,
+      "eventos_com_continuidade_rejeitados": 0,
+      "elimina_todos_fracos": true,
+      "preserva_todos_com_continuidade": true,
+      "elimina_fracos_e_preserva_continuidade": true,
+      "ganho_mediano_confirmacao_aceitos_cm": 3.0,
+      "aceitos": [
+        {
+          "evento": 2,
+          "inicio_sinal_manaus": "2024-10-04 12:00:00",
+          "confirmado_em_manaus": "2024-10-05 00:00:00",
+          "ganho_liquido_na_confirmacao_cm": 4.9,
+          "classificacao_retrospectiva": "continuidade_observada",
+          "passaria_novo_criterio": true
+        },
+        {
+          "evento": 3,
+          "inicio_sinal_manaus": "2025-02-06 12:00:00",
+          "confirmado_em_manaus": "2025-02-07 00:00:00",
+          "ganho_liquido_na_confirmacao_cm": 1.0,
+          "classificacao_retrospectiva": "continuidade_observada",
+          "passaria_novo_criterio": true
+        },
+        {
+          "evento": 5,
+          "inicio_sinal_manaus": "2025-11-20 18:00:00",
+          "confirmado_em_manaus": "2025-11-21 06:00:00",
+          "ganho_liquido_na_confirmacao_cm": 1.0,
+          "classificacao_retrospectiva": "continuidade_observada",
+          "passaria_novo_criterio": true
+        },
+        {
+          "evento": 6,
+          "inicio_sinal_manaus": "2026-03-19 06:00:00",
+          "confirmado_em_manaus": "2026-03-19 18:00:00",
+          "ganho_liquido_na_confirmacao_cm": 5.0,
+          "classificacao_retrospectiva": "continuidade_observada",
+          "passaria_novo_criterio": true
+        }
+      ],
+      "rejeitados": [
+        {
+          "evento": 1,
+          "inicio_sinal_manaus": "2024-01-19 06:00:00",
+          "confirmado_em_manaus": "2024-01-19 18:00:00",
+          "ganho_liquido_na_confirmacao_cm": 0.0,
+          "classificacao_retrospectiva": "fraco_pos_evento",
+          "passaria_novo_criterio": false
+        },
+        {
+          "evento": 4,
+          "inicio_sinal_manaus": "2025-10-19 18:00:00",
+          "confirmado_em_manaus": "2025-10-20 06:00:00",
+          "ganho_liquido_na_confirmacao_cm": 0.0,
+          "classificacao_retrospectiva": "fraco_pos_evento",
+          "passaria_novo_criterio": false
+        }
+      ]
+    },
+    {
+      "id": "minimo_0_5",
+      "rotulo": "≥ 0,5 cm",
+      "valor_cm": 0.5,
+      "operador": "ge",
+      "eventos_totais": 6,
+      "eventos_aceitos": 4,
+      "eventos_rejeitados": 2,
+      "eventos_fracos_totais": 2,
+      "eventos_fracos_aceitos": 0,
+      "eventos_fracos_rejeitados": 2,
+      "eventos_com_continuidade_totais": 4,
+      "eventos_com_continuidade_aceitos": 4,
+      "eventos_com_continuidade_rejeitados": 0,
+      "elimina_todos_fracos": true,
+      "preserva_todos_com_continuidade": true,
+      "elimina_fracos_e_preserva_continuidade": true,
+      "ganho_mediano_confirmacao_aceitos_cm": 3.0,
+      "aceitos": [
+        {
+          "evento": 2,
+          "inicio_sinal_manaus": "2024-10-04 12:00:00",
+          "confirmado_em_manaus": "2024-10-05 00:00:00",
+          "ganho_liquido_na_confirmacao_cm": 4.9,
+          "classificacao_retrospectiva": "continuidade_observada",
+          "passaria_novo_criterio": true
+        },
+        {
+          "evento": 3,
+          "inicio_sinal_manaus": "2025-02-06 12:00:00",
+          "confirmado_em_manaus": "2025-02-07 00:00:00",
+          "ganho_liquido_na_confirmacao_cm": 1.0,
+          "classificacao_retrospectiva": "continuidade_observada",
+          "passaria_novo_criterio": true
+        },
+        {
+          "evento": 5,
+          "inicio_sinal_manaus": "2025-11-20 18:00:00",
+          "confirmado_em_manaus": "2025-11-21 06:00:00",
+          "ganho_liquido_na_confirmacao_cm": 1.0,
+          "classificacao_retrospectiva": "continuidade_observada",
+          "passaria_novo_criterio": true
+        },
+        {
+          "evento": 6,
+          "inicio_sinal_manaus": "2026-03-19 06:00:00",
+          "confirmado_em_manaus": "2026-03-19 18:00:00",
+          "ganho_liquido_na_confirmacao_cm": 5.0,
+          "classificacao_retrospectiva": "continuidade_observada",
+          "passaria_novo_criterio": true
+        }
+      ],
+      "rejeitados": [
+        {
+          "evento": 1,
+          "inicio_sinal_manaus": "2024-01-19 06:00:00",
+          "confirmado_em_manaus": "2024-01-19 18:00:00",
+          "ganho_liquido_na_confirmacao_cm": 0.0,
+          "classificacao_retrospectiva": "fraco_pos_evento",
+          "passaria_novo_criterio": false
+        },
+        {
+          "evento": 4,
+          "inicio_sinal_manaus": "2025-10-19 18:00:00",
+          "confirmado_em_manaus": "2025-10-20 06:00:00",
+          "ganho_liquido_na_confirmacao_cm": 0.0,
+          "classificacao_retrospectiva": "fraco_pos_evento",
+          "passaria_novo_criterio": false
+        }
+      ]
+    },
+    {
+      "id": "minimo_1",
+      "rotulo": "≥ 1 cm",
+      "valor_cm": 1.0,
+      "operador": "ge",
+      "eventos_totais": 6,
+      "eventos_aceitos": 4,
+      "eventos_rejeitados": 2,
+      "eventos_fracos_totais": 2,
+      "eventos_fracos_aceitos": 0,
+      "eventos_fracos_rejeitados": 2,
+      "eventos_com_continuidade_totais": 4,
+      "eventos_com_continuidade_aceitos": 4,
+      "eventos_com_continuidade_rejeitados": 0,
+      "elimina_todos_fracos": true,
+      "preserva_todos_com_continuidade": true,
+      "elimina_fracos_e_preserva_continuidade": true,
+      "ganho_mediano_confirmacao_aceitos_cm": 3.0,
+      "aceitos": [
+        {
+          "evento": 2,
+          "inicio_sinal_manaus": "2024-10-04 12:00:00",
+          "confirmado_em_manaus": "2024-10-05 00:00:00",
+          "ganho_liquido_na_confirmacao_cm": 4.9,
+          "classificacao_retrospectiva": "continuidade_observada",
+          "passaria_novo_criterio": true
+        },
+        {
+          "evento": 3,
+          "inicio_sinal_manaus": "2025-02-06 12:00:00",
+          "confirmado_em_manaus": "2025-02-07 00:00:00",
+          "ganho_liquido_na_confirmacao_cm": 1.0,
+          "classificacao_retrospectiva": "continuidade_observada",
+          "passaria_novo_criterio": true
+        },
+        {
+          "evento": 5,
+          "inicio_sinal_manaus": "2025-11-20 18:00:00",
+          "confirmado_em_manaus": "2025-11-21 06:00:00",
+          "ganho_liquido_na_confirmacao_cm": 1.0,
+          "classificacao_retrospectiva": "continuidade_observada",
+          "passaria_novo_criterio": true
+        },
+        {
+          "evento": 6,
+          "inicio_sinal_manaus": "2026-03-19 06:00:00",
+          "confirmado_em_manaus": "2026-03-19 18:00:00",
+          "ganho_liquido_na_confirmacao_cm": 5.0,
+          "classificacao_retrospectiva": "continuidade_observada",
+          "passaria_novo_criterio": true
+        }
+      ],
+      "rejeitados": [
+        {
+          "evento": 1,
+          "inicio_sinal_manaus": "2024-01-19 06:00:00",
+          "confirmado_em_manaus": "2024-01-19 18:00:00",
+          "ganho_liquido_na_confirmacao_cm": 0.0,
+          "classificacao_retrospectiva": "fraco_pos_evento",
+          "passaria_novo_criterio": false
+        },
+        {
+          "evento": 4,
+          "inicio_sinal_manaus": "2025-10-19 18:00:00",
+          "confirmado_em_manaus": "2025-10-20 06:00:00",
+          "ganho_liquido_na_confirmacao_cm": 0.0,
+          "classificacao_retrospectiva": "fraco_pos_evento",
+          "passaria_novo_criterio": false
+        }
+      ]
+    },
+    {
+      "id": "minimo_2",
+      "rotulo": "≥ 2 cm",
+      "valor_cm": 2.0,
+      "operador": "ge",
+      "eventos_totais": 6,
+      "eventos_aceitos": 2,
+      "eventos_rejeitados": 4,
+      "eventos_fracos_totais": 2,
+      "eventos_fracos_aceitos": 0,
+      "eventos_fracos_rejeitados": 2,
+      "eventos_com_continuidade_totais": 4,
+      "eventos_com_continuidade_aceitos": 2,
+      "eventos_com_continuidade_rejeitados": 2,
+      "elimina_todos_fracos": true,
+      "preserva_todos_com_continuidade": false,
+      "elimina_fracos_e_preserva_continuidade": false,
+      "ganho_mediano_confirmacao_aceitos_cm": 5.0,
+      "aceitos": [
+        {
+          "evento": 2,
+          "inicio_sinal_manaus": "2024-10-04 12:00:00",
+          "confirmado_em_manaus": "2024-10-05 00:00:00",
+          "ganho_liquido_na_confirmacao_cm": 4.9,
+          "classificacao_retrospectiva": "continuidade_observada",
+          "passaria_novo_criterio": true
+        },
+        {
+          "evento": 6,
+          "inicio_sinal_manaus": "2026-03-19 06:00:00",
+          "confirmado_em_manaus": "2026-03-19 18:00:00",
+          "ganho_liquido_na_confirmacao_cm": 5.0,
+          "classificacao_retrospectiva": "continuidade_observada",
+          "passaria_novo_criterio": true
+        }
+      ],
+      "rejeitados": [
+        {
+          "evento": 1,
+          "inicio_sinal_manaus": "2024-01-19 06:00:00",
+          "confirmado_em_manaus": "2024-01-19 18:00:00",
+          "ganho_liquido_na_confirmacao_cm": 0.0,
+          "classificacao_retrospectiva": "fraco_pos_evento",
+          "passaria_novo_criterio": false
+        },
+        {
+          "evento": 3,
+          "inicio_sinal_manaus": "2025-02-06 12:00:00",
+          "confirmado_em_manaus": "2025-02-07 00:00:00",
+          "ganho_liquido_na_confirmacao_cm": 1.0,
+          "classificacao_retrospectiva": "continuidade_observada",
+          "passaria_novo_criterio": false
+        },
+        {
+          "evento": 4,
+          "inicio_sinal_manaus": "2025-10-19 18:00:00",
+          "confirmado_em_manaus": "2025-10-20 06:00:00",
+          "ganho_liquido_na_confirmacao_cm": 0.0,
+          "classificacao_retrospectiva": "fraco_pos_evento",
+          "passaria_novo_criterio": false
+        },
+        {
+          "evento": 5,
+          "inicio_sinal_manaus": "2025-11-20 18:00:00",
+          "confirmado_em_manaus": "2025-11-21 06:00:00",
+          "ganho_liquido_na_confirmacao_cm": 1.0,
+          "classificacao_retrospectiva": "continuidade_observada",
+          "passaria_novo_criterio": false
+        }
+      ]
+    },
+    {
+      "id": "minimo_3",
+      "rotulo": "≥ 3 cm",
+      "valor_cm": 3.0,
+      "operador": "ge",
+      "eventos_totais": 6,
+      "eventos_aceitos": 2,
+      "eventos_rejeitados": 4,
+      "eventos_fracos_totais": 2,
+      "eventos_fracos_aceitos": 0,
+      "eventos_fracos_rejeitados": 2,
+      "eventos_com_continuidade_totais": 4,
+      "eventos_com_continuidade_aceitos": 2,
+      "eventos_com_continuidade_rejeitados": 2,
+      "elimina_todos_fracos": true,
+      "preserva_todos_com_continuidade": false,
+      "elimina_fracos_e_preserva_continuidade": false,
+      "ganho_mediano_confirmacao_aceitos_cm": 5.0,
+      "aceitos": [
+        {
+          "evento": 2,
+          "inicio_sinal_manaus": "2024-10-04 12:00:00",
+          "confirmado_em_manaus": "2024-10-05 00:00:00",
+          "ganho_liquido_na_confirmacao_cm": 4.9,
+          "classificacao_retrospectiva": "continuidade_observada",
+          "passaria_novo_criterio": true
+        },
+        {
+          "evento": 6,
+          "inicio_sinal_manaus": "2026-03-19 06:00:00",
+          "confirmado_em_manaus": "2026-03-19 18:00:00",
+          "ganho_liquido_na_confirmacao_cm": 5.0,
+          "classificacao_retrospectiva": "continuidade_observada",
+          "passaria_novo_criterio": true
+        }
+      ],
+      "rejeitados": [
+        {
+          "evento": 1,
+          "inicio_sinal_manaus": "2024-01-19 06:00:00",
+          "confirmado_em_manaus": "2024-01-19 18:00:00",
+          "ganho_liquido_na_confirmacao_cm": 0.0,
+          "classificacao_retrospectiva": "fraco_pos_evento",
+          "passaria_novo_criterio": false
+        },
+        {
+          "evento": 3,
+          "inicio_sinal_manaus": "2025-02-06 12:00:00",
+          "confirmado_em_manaus": "2025-02-07 00:00:00",
+          "ganho_liquido_na_confirmacao_cm": 1.0,
+          "classificacao_retrospectiva": "continuidade_observada",
+          "passaria_novo_criterio": false
+        },
+        {
+          "evento": 4,
+          "inicio_sinal_manaus": "2025-10-19 18:00:00",
+          "confirmado_em_manaus": "2025-10-20 06:00:00",
+          "ganho_liquido_na_confirmacao_cm": 0.0,
+          "classificacao_retrospectiva": "fraco_pos_evento",
+          "passaria_novo_criterio": false
+        },
+        {
+          "evento": 5,
+          "inicio_sinal_manaus": "2025-11-20 18:00:00",
+          "confirmado_em_manaus": "2025-11-21 06:00:00",
+          "ganho_liquido_na_confirmacao_cm": 1.0,
+          "classificacao_retrospectiva": "continuidade_observada",
+          "passaria_novo_criterio": false
+        }
+      ]
+    }
+  ]
+}

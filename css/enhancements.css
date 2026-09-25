@@ -1,0 +1,346 @@
+/* =========================================================
+   MELHORIAS VISUAIS
+   Comparativo anual + layout mobile
+========================================================= */
+
+
+/* =========================
+   COMPARATIVO ANUAL
+========================= */
+
+.annual-chart-card {
+  margin-top: 20px;
+}
+
+
+.chart-subtitle {
+  margin-top: 8px;
+
+  max-width: 720px;
+
+  color: var(--muted);
+
+  font-size: 13px;
+
+  line-height: 1.5;
+}
+
+
+.annual-chart-status {
+  display: inline-flex;
+
+  align-items: center;
+
+  min-height: 30px;
+
+  margin-bottom: 14px;
+
+  padding:
+    7px 11px;
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius: 10px;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.025
+    );
+
+  color: var(--muted);
+
+  font-size: 11px;
+
+  font-weight: 600;
+}
+
+
+.annual-chart-container {
+  height: 390px;
+}
+
+
+.annual-chart-note {
+  margin-top: 14px;
+
+  padding-top: 12px;
+
+  border-top:
+    1px solid
+    var(--border);
+
+  color: var(--muted);
+
+  font-size: 11px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================
+   PEQUENO DESTAQUE VISUAL
+   DO COMPARATIVO
+========================= */
+
+.annual-chart-card {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(
+        88,
+        214,
+        255,
+        0.035
+      ),
+      rgba(
+        255,
+        255,
+        255,
+        0.01
+      )
+    ),
+    var(--panel);
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (
+  max-width: 900px
+) {
+
+  .annual-chart-container {
+    height: 350px;
+  }
+
+}
+
+
+/* =========================
+   CELULAR
+========================= */
+
+@media (
+  max-width: 560px
+) {
+
+  /*
+    Mantém as quatro métricas
+    em formato 2 x 2.
+  */
+
+  .metrics-grid {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0, 1fr)
+      );
+
+    gap: 9px;
+  }
+
+
+  .metric-card {
+    padding: 14px;
+  }
+
+
+  .metric-label {
+    font-size: 9px;
+
+    letter-spacing:
+      0.06em;
+  }
+
+
+  .metric-value {
+    font-size: 25px;
+  }
+
+
+  .station-value {
+    font-size: 19px;
+  }
+
+
+  .metric-description {
+    font-size: 10px;
+  }
+
+
+  /*
+    Card principal um pouco
+    mais compacto no celular.
+  */
+
+  .hero-card {
+    padding: 18px;
+  }
+
+
+  .measurement-time {
+    font-size: 12px;
+
+    line-height: 1.45;
+  }
+
+
+  .ana-update-time {
+    font-size: 11px;
+
+    line-height: 1.45;
+  }
+
+
+  /*
+    Alerta mais compacto.
+  */
+
+  .alert-card {
+    padding: 17px;
+  }
+
+
+  .alert-reasons {
+    gap: 6px;
+  }
+
+
+  .alert-reason {
+    width: 100%;
+
+    padding:
+      8px 9px;
+  }
+
+
+  /*
+    Estações a montante.
+  */
+
+  .upstream-card {
+    padding: 16px;
+  }
+
+
+  .upstream-level {
+    margin-top: 11px;
+
+    font-size: 32px;
+  }
+
+
+  /*
+    Gráficos.
+  */
+
+  .chart-card {
+    padding:
+      18px 12px;
+  }
+
+
+  .chart-header {
+    margin-bottom: 14px;
+  }
+
+
+  .chart-header h2 {
+    font-size: 21px;
+
+    line-height: 1.18;
+  }
+
+
+  .chart-subtitle {
+    margin-top: 7px;
+
+    font-size: 11px;
+
+    line-height: 1.45;
+  }
+
+
+  .annual-chart-card {
+    margin-top: 14px;
+  }
+
+
+  .annual-chart-status {
+    width: 100%;
+
+    margin-bottom: 10px;
+
+    font-size: 10px;
+
+    line-height: 1.4;
+  }
+
+
+  .annual-chart-container {
+    height: 320px;
+  }
+
+
+  .annual-chart-note {
+    margin-top: 10px;
+
+    font-size: 10px;
+  }
+
+}
+
+
+/* =========================
+   CELULARES MENORES
+========================= */
+
+@media (
+  max-width: 390px
+) {
+
+  /*
+    Mesmo em telas menores,
+    mantemos as métricas 2 x 2.
+  */
+
+  .metrics-grid {
+    grid-template-columns:
+      1fr 1fr;
+
+    gap: 8px;
+  }
+
+
+  .metric-card {
+    padding: 12px;
+  }
+
+
+  .metric-value {
+    font-size: 23px;
+  }
+
+
+  .station-value {
+    font-size: 17px;
+  }
+
+
+  .metric-description {
+    font-size: 9px;
+  }
+
+
+  .annual-chart-container {
+    height: 300px;
+  }
+
+}

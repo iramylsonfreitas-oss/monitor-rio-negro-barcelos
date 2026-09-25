@@ -1,0 +1,153 @@
+{
+  "gerado_em_utc": "2026-09-25T11:32:16.992307+00:00",
+  "timezone": "America/Manaus",
+  "nivel": 2,
+  "status": "possivel_reversao",
+  "rotulo": "POSSÍVEL REVERSÃO",
+  "titulo": "A queda de Barcelos perdeu força",
+  "mensagem": "Barcelos ainda não acumula alta em 24 horas, mas a variação das últimas 6 horas já ficou positiva após um período de vazante. O movimento precisa persistir antes de ser tratado como repiquete.",
+  "motivos": [
+    "Barcelos ainda acumula -26.0 cm em 7 dias.",
+    "Barcelos ainda acumula -4.0 cm em 72 h.",
+    "Nas últimas 6 h Barcelos subiu +1.0 cm.",
+    "Serrinha acumula +5.0 cm em 72 h.",
+    "Curicuriari acumula +8.0 cm em 72 h."
+  ],
+  "criterios": {
+    "queda_previa_7d_cm": -10.0,
+    "queda_previa_72h_cm": -3.0,
+    "alta_confirmacao_24h_cm": 3.0,
+    "confirmacoes": 3,
+    "intervalo_confirmacoes_h": 6,
+    "criterio_encerramento_24h_cm": 1.0,
+    "confirmacoes_encerramento": 4
+  },
+  "evento_barcelos": {
+    "confirmado": false,
+    "inicio_manaus": null,
+    "nivel_inicio_m": null,
+    "queda_72h_inicio_cm": null,
+    "queda_7d_inicio_cm": null,
+    "variacao_maxima_24h_cm": null,
+    "confirmacoes_inicio": []
+  },
+  "ultimos_checkpoints_barcelos": [
+    {
+      "hora_manaus": "2026-09-23 12:00:00",
+      "nivel_m": 3.91,
+      "variacao_6h_cm": -1.0,
+      "variacao_24h_cm": -3.0,
+      "variacao_72h_cm": -11.0,
+      "variacao_7d_cm": -38.0
+    },
+    {
+      "hora_manaus": "2026-09-23 18:00:00",
+      "nivel_m": 3.91,
+      "variacao_6h_cm": 0.0,
+      "variacao_24h_cm": -2.0,
+      "variacao_72h_cm": -10.0,
+      "variacao_7d_cm": -36.0
+    },
+    {
+      "hora_manaus": "2026-09-24 00:00:00",
+      "nivel_m": 3.9,
+      "variacao_6h_cm": -1.0,
+      "variacao_24h_cm": -2.0,
+      "variacao_72h_cm": -10.0,
+      "variacao_7d_cm": -35.0
+    },
+    {
+      "hora_manaus": "2026-09-24 06:00:00",
+      "nivel_m": 3.9,
+      "variacao_6h_cm": 0.0,
+      "variacao_24h_cm": -2.0,
+      "variacao_72h_cm": -8.0,
+      "variacao_7d_cm": -33.0
+    },
+    {
+      "hora_manaus": "2026-09-24 12:00:00",
+      "nivel_m": 3.89,
+      "variacao_6h_cm": -1.0,
+      "variacao_24h_cm": -2.0,
+      "variacao_72h_cm": -9.0,
+      "variacao_7d_cm": -32.5
+    },
+    {
+      "hora_manaus": "2026-09-24 18:00:00",
+      "nivel_m": 3.89,
+      "variacao_6h_cm": 0.0,
+      "variacao_24h_cm": -2.0,
+      "variacao_72h_cm": -8.0,
+      "variacao_7d_cm": -31.0
+    },
+    {
+      "hora_manaus": "2026-09-25 00:00:00",
+      "nivel_m": 3.89,
+      "variacao_6h_cm": 0.0,
+      "variacao_24h_cm": -1.0,
+      "variacao_72h_cm": -6.5,
+      "variacao_7d_cm": -29.0
+    },
+    {
+      "hora_manaus": "2026-09-25 06:00:00",
+      "nivel_m": 3.9,
+      "variacao_6h_cm": 1.5,
+      "variacao_24h_cm": 0.5,
+      "variacao_72h_cm": -4.5,
+      "variacao_7d_cm": -25.5
+    }
+  ],
+  "contexto_montante": {
+    "sinal": true,
+    "estacoes_positivas_72h": 2,
+    "evento_serrinha_confirmado": false,
+    "nivel_alerta_existente": 1,
+    "motivos": [
+      "Serrinha acumula +5.0 cm em 72 h.",
+      "Curicuriari acumula +8.0 cm em 72 h."
+    ]
+  },
+  "situacao_atual": {
+    "taracua": {
+      "nome": "Taracuá",
+      "nivel_m": 13.54,
+      "variacao_6h_cm": 2.0,
+      "variacao_24h_cm": -5.0,
+      "variacao_72h_cm": -11.0,
+      "variacao_7d_cm": 43.0,
+      "tendencia": "subindo",
+      "data_medicao_manaus": "2026-09-25 07:15:00"
+    },
+    "curicuriari": {
+      "nome": "Curicuriari",
+      "nivel_m": 9.8,
+      "variacao_6h_cm": 1.0,
+      "variacao_24h_cm": 1.0,
+      "variacao_72h_cm": 8.0,
+      "variacao_7d_cm": 35.0,
+      "tendencia": "subindo",
+      "data_medicao_manaus": "2026-09-25 06:45:00"
+    },
+    "serrinha": {
+      "nome": "Serrinha",
+      "nivel_m": 6.55,
+      "variacao_6h_cm": 0.0,
+      "variacao_24h_cm": 1.0,
+      "variacao_72h_cm": 5.0,
+      "variacao_7d_cm": 12.0,
+      "tendencia": "estavel",
+      "data_medicao_manaus": "2026-09-25 06:30:00"
+    },
+    "barcelos": {
+      "nome": "Barcelos",
+      "nivel_m": 3.9,
+      "variacao_6h_cm": 1.0,
+      "variacao_24h_cm": 0.0,
+      "variacao_72h_cm": -4.0,
+      "variacao_7d_cm": -26.0,
+      "tendencia": "subindo",
+      "data_medicao_manaus": "2026-09-25 07:00:00"
+    }
+  },
+  "aviso": "Detector experimental de mudança de tendência. 'Possível reversão' e 'repiquete em formação' não são confirmações. O estado confirmado exige persistência da alta em Barcelos e descreve um movimento já observado, não uma previsão."
+}

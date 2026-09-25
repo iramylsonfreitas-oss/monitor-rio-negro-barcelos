@@ -1,0 +1,1274 @@
+{
+  "metodologia": {
+    "descricao": "Comparação retrospectiva dos eventos detectados pela configuração atual do detector de repiquete.",
+    "configuracao_analisada": "alta_3_conf_3",
+    "alta_minima_24h_cm": 3.0,
+    "confirmacoes_consecutivas": 3,
+    "eventos_analisados": 6,
+    "horizontes_apos_primeiro_sinal_h": [
+      6,
+      12,
+      18,
+      24,
+      48,
+      72,
+      96,
+      168
+    ],
+    "observacao_importante": "A separação entre evento fraco e evento com continuidade usa o que aconteceu depois do sinal e serve somente para estudo retrospectivo. Essas informações futuras não podem ser usadas diretamente pelo detector em operação."
+  },
+  "resumo_grupos": [
+    {
+      "classificacao": "fraco_pos_evento",
+      "eventos": 2,
+      "mediana_ganho_desde_sinal_12h_cm": 0.0,
+      "mediana_ganho_desde_sinal_24h_cm": -0.5,
+      "mediana_ganho_desde_sinal_48h_cm": -1.0,
+      "mediana_ganho_desde_sinal_72h_cm": -1.0,
+      "mediana_ganho_desde_sinal_96h_cm": -3.0,
+      "mediana_ganho_desde_sinal_7d_cm": -9.0,
+      "mediana_blocos_6h_positivos_primeiras_24h": 0.0,
+      "mediana_blocos_6h_positivos_primeiras_48h": 0.5,
+      "mediana_max_variacao_24h_primeiras_24h_cm": 3.5
+    },
+    {
+      "classificacao": "continuidade_observada",
+      "eventos": 4,
+      "mediana_ganho_desde_sinal_12h_cm": 3.0,
+      "mediana_ganho_desde_sinal_24h_cm": 4.5,
+      "mediana_ganho_desde_sinal_48h_cm": 8.0,
+      "mediana_ganho_desde_sinal_72h_cm": 13.0,
+      "mediana_ganho_desde_sinal_96h_cm": 18.0,
+      "mediana_ganho_desde_sinal_7d_cm": 37.0,
+      "mediana_blocos_6h_positivos_primeiras_24h": 2.5,
+      "mediana_blocos_6h_positivos_primeiras_48h": 6.0,
+      "mediana_max_variacao_24h_primeiras_24h_cm": 7.4
+    }
+  ],
+  "eventos": [
+    {
+      "evento": 1,
+      "inicio_sinal_manaus": "2024-01-19 06:00:00",
+      "confirmado_em_manaus": "2024-01-19 18:00:00",
+      "atraso_confirmacao_h": 12.0,
+      "checkpoint_inicio": {
+        "nivel_m": 3.16,
+        "variacao_6h_cm": 4.0,
+        "variacao_24h_cm": 3.0,
+        "variacao_72h_cm": -7.0,
+        "variacao_7d_cm": -31.0
+      },
+      "checkpoint_confirmacao": {
+        "nivel_m": 3.16,
+        "variacao_6h_cm": 0.0,
+        "variacao_24h_cm": 4.0,
+        "variacao_72h_cm": -4.0,
+        "variacao_7d_cm": -28.0
+      },
+      "trajetoria": {
+        "nivel_inicial_m": 3.16,
+        "pontos": [
+          {
+            "horas_apos_sinal": 6,
+            "data_manaus": "2024-01-19 12:00:00",
+            "nivel_m": 3.16,
+            "ganho_desde_sinal_cm": 0.0,
+            "taxa_media_desde_sinal_cm_h": 0.0,
+            "checkpoint": {
+              "nivel_m": 3.16,
+              "variacao_6h_cm": 0.0,
+              "variacao_24h_cm": 3.0,
+              "variacao_72h_cm": -6.0,
+              "variacao_7d_cm": -29.0
+            }
+          },
+          {
+            "horas_apos_sinal": 12,
+            "data_manaus": "2024-01-19 18:00:00",
+            "nivel_m": 3.16,
+            "ganho_desde_sinal_cm": 0.0,
+            "taxa_media_desde_sinal_cm_h": 0.0,
+            "checkpoint": {
+              "nivel_m": 3.16,
+              "variacao_6h_cm": 0.0,
+              "variacao_24h_cm": 4.0,
+              "variacao_72h_cm": -4.0,
+              "variacao_7d_cm": -28.0
+            }
+          },
+          {
+            "horas_apos_sinal": 18,
+            "data_manaus": "2024-01-20 00:00:00",
+            "nivel_m": 3.16,
+            "ganho_desde_sinal_cm": 0.0,
+            "taxa_media_desde_sinal_cm_h": 0.0,
+            "checkpoint": {
+              "nivel_m": 3.16,
+              "variacao_6h_cm": 0.0,
+              "variacao_24h_cm": 4.0,
+              "variacao_72h_cm": -2.0,
+              "variacao_7d_cm": -26.0
+            }
+          },
+          {
+            "horas_apos_sinal": 24,
+            "data_manaus": "2024-01-20 06:00:00",
+            "nivel_m": 3.16,
+            "ganho_desde_sinal_cm": 0.0,
+            "taxa_media_desde_sinal_cm_h": 0.0,
+            "checkpoint": {
+              "nivel_m": 3.16,
+              "variacao_6h_cm": 0.0,
+              "variacao_24h_cm": 0.0,
+              "variacao_72h_cm": -1.0,
+              "variacao_7d_cm": -25.0
+            }
+          },
+          {
+            "horas_apos_sinal": 48,
+            "data_manaus": "2024-01-21 06:00:00",
+            "nivel_m": 3.16,
+            "ganho_desde_sinal_cm": 0.0,
+            "taxa_media_desde_sinal_cm_h": 0.0,
+            "checkpoint": {
+              "nivel_m": 3.16,
+              "variacao_6h_cm": 0.0,
+              "variacao_24h_cm": 0.0,
+              "variacao_72h_cm": 3.0,
+              "variacao_7d_cm": -22.0
+            }
+          },
+          {
+            "horas_apos_sinal": 72,
+            "data_manaus": "2024-01-22 06:00:00",
+            "nivel_m": 3.16,
+            "ganho_desde_sinal_cm": 0.0,
+            "taxa_media_desde_sinal_cm_h": 0.0,
+            "checkpoint": {
+              "nivel_m": 3.16,
+              "variacao_6h_cm": 0.0,
+              "variacao_24h_cm": 0.0,
+              "variacao_72h_cm": 0.0,
+              "variacao_7d_cm": -14.0
+            }
+          },
+          {
+            "horas_apos_sinal": 96,
+            "data_manaus": "2024-01-23 06:00:00",
+            "nivel_m": 3.14,
+            "ganho_desde_sinal_cm": -2.0,
+            "taxa_media_desde_sinal_cm_h": -0.021,
+            "checkpoint": {
+              "nivel_m": 3.14,
+              "variacao_6h_cm": -1.0,
+              "variacao_24h_cm": -2.0,
+              "variacao_72h_cm": -2.0,
+              "variacao_7d_cm": -9.0
+            }
+          },
+          {
+            "horas_apos_sinal": 168,
+            "data_manaus": "2024-01-26 06:00:00",
+            "nivel_m": 3.07,
+            "ganho_desde_sinal_cm": -9.0,
+            "taxa_media_desde_sinal_cm_h": -0.054,
+            "checkpoint": {
+              "nivel_m": 3.07,
+              "variacao_6h_cm": 0.0,
+              "variacao_24h_cm": -2.0,
+              "variacao_72h_cm": -7.0,
+              "variacao_7d_cm": -9.0
+            }
+          }
+        ]
+      },
+      "persistencia_24h": {
+        "horizonte_h": 24,
+        "blocos_disponiveis": 4,
+        "blocos_positivos": 0,
+        "blocos_neutros": 4,
+        "blocos_negativos": 0,
+        "soma_variacoes_6h_cm": 0.0,
+        "media_variacoes_6h_cm": 0.0
+      },
+      "persistencia_48h": {
+        "horizonte_h": 48,
+        "blocos_disponiveis": 8,
+        "blocos_positivos": 1,
+        "blocos_neutros": 6,
+        "blocos_negativos": 1,
+        "soma_variacoes_6h_cm": 0.0,
+        "media_variacoes_6h_cm": 0.0
+      },
+      "persistencia_72h": {
+        "horizonte_h": 72,
+        "blocos_disponiveis": 12,
+        "blocos_positivos": 2,
+        "blocos_neutros": 8,
+        "blocos_negativos": 2,
+        "soma_variacoes_6h_cm": 0.0,
+        "media_variacoes_6h_cm": 0.0
+      },
+      "perfil_variacao_24h_primeiras_24h": {
+        "pontos": [
+          {
+            "horas_apos_sinal": 0,
+            "variacao_24h_cm": 3.0
+          },
+          {
+            "horas_apos_sinal": 6,
+            "variacao_24h_cm": 3.0
+          },
+          {
+            "horas_apos_sinal": 12,
+            "variacao_24h_cm": 4.0
+          },
+          {
+            "horas_apos_sinal": 18,
+            "variacao_24h_cm": 4.0
+          },
+          {
+            "horas_apos_sinal": 24,
+            "variacao_24h_cm": 0.0
+          }
+        ],
+        "minimo_cm": 0.0,
+        "maximo_cm": 4.0,
+        "ultimo_cm": 0.0
+      },
+      "resultado_pos_evento": {
+        "ganho_maximo_apos_confirmacao_cm": 0.5,
+        "ganho_24h_apos_confirmacao_cm": 0.0,
+        "ganho_48h_apos_confirmacao_cm": 0.0,
+        "ganho_72h_apos_confirmacao_cm": -1.0,
+        "duracao_confirmada_h": 30.0
+      },
+      "marcador_retrospectivo": {
+        "classificacao": "fraco_pos_evento",
+        "ganho_maximo_ate_2cm": true,
+        "ganho_72h_nao_positivo": true,
+        "observacao": "Marcador retrospectivo usado apenas para estudo. Não deve ser usado diretamente em decisão em tempo real."
+      }
+    },
+    {
+      "evento": 2,
+      "inicio_sinal_manaus": "2024-10-04 12:00:00",
+      "confirmado_em_manaus": "2024-10-05 00:00:00",
+      "atraso_confirmacao_h": 12.0,
+      "checkpoint_inicio": {
+        "nivel_m": 2.49,
+        "variacao_6h_cm": 2.5,
+        "variacao_24h_cm": 3.9,
+        "variacao_72h_cm": -1.4,
+        "variacao_7d_cm": -27.2
+      },
+      "checkpoint_confirmacao": {
+        "nivel_m": 2.54,
+        "variacao_6h_cm": 2.0,
+        "variacao_24h_cm": 8.4,
+        "variacao_72h_cm": 6.6,
+        "variacao_7d_cm": -19.3
+      },
+      "trajetoria": {
+        "nivel_inicial_m": 2.49,
+        "pontos": [
+          {
+            "horas_apos_sinal": 6,
+            "data_manaus": "2024-10-04 18:00:00",
+            "nivel_m": 2.52,
+            "ganho_desde_sinal_cm": 2.9,
+            "taxa_media_desde_sinal_cm_h": 0.483,
+            "checkpoint": {
+              "nivel_m": 2.52,
+              "variacao_6h_cm": 2.9,
+              "variacao_24h_cm": 6.8,
+              "variacao_72h_cm": 3.0,
+              "variacao_7d_cm": -23.3
+            }
+          },
+          {
+            "horas_apos_sinal": 12,
+            "data_manaus": "2024-10-05 00:00:00",
+            "nivel_m": 2.54,
+            "ganho_desde_sinal_cm": 4.9,
+            "taxa_media_desde_sinal_cm_h": 0.408,
+            "checkpoint": {
+              "nivel_m": 2.54,
+              "variacao_6h_cm": 2.0,
+              "variacao_24h_cm": 8.4,
+              "variacao_72h_cm": 6.6,
+              "variacao_7d_cm": -19.3
+            }
+          },
+          {
+            "horas_apos_sinal": 18,
+            "data_manaus": "2024-10-05 06:00:00",
+            "nivel_m": 2.56,
+            "ganho_desde_sinal_cm": 7.3,
+            "taxa_media_desde_sinal_cm_h": 0.406,
+            "checkpoint": {
+              "nivel_m": 2.56,
+              "variacao_6h_cm": 2.4,
+              "variacao_24h_cm": 9.8,
+              "variacao_72h_cm": 9.0,
+              "variacao_7d_cm": -14.9
+            }
+          },
+          {
+            "horas_apos_sinal": 24,
+            "data_manaus": "2024-10-05 12:00:00",
+            "nivel_m": 2.59,
+            "ganho_desde_sinal_cm": 9.8,
+            "taxa_media_desde_sinal_cm_h": 0.408,
+            "checkpoint": {
+              "nivel_m": 2.59,
+              "variacao_6h_cm": 2.5,
+              "variacao_24h_cm": 9.8,
+              "variacao_72h_cm": 12.5,
+              "variacao_7d_cm": -11.4
+            }
+          },
+          {
+            "horas_apos_sinal": 48,
+            "data_manaus": "2024-10-06 12:00:00",
+            "nivel_m": 2.69,
+            "ganho_desde_sinal_cm": 20.6,
+            "taxa_media_desde_sinal_cm_h": 0.429,
+            "checkpoint": {
+              "nivel_m": 2.69,
+              "variacao_6h_cm": 2.9,
+              "variacao_24h_cm": 10.8,
+              "variacao_72h_cm": 24.5,
+              "variacao_7d_cm": 7.4
+            }
+          },
+          {
+            "horas_apos_sinal": 72,
+            "data_manaus": "2024-10-07 12:00:00",
+            "nivel_m": 2.79,
+            "ganho_desde_sinal_cm": 30.5,
+            "taxa_media_desde_sinal_cm_h": 0.424,
+            "checkpoint": {
+              "nivel_m": 2.79,
+              "variacao_6h_cm": 3.0,
+              "variacao_24h_cm": 9.9,
+              "variacao_72h_cm": 30.5,
+              "variacao_7d_cm": 21.8
+            }
+          },
+          {
+            "horas_apos_sinal": 96,
+            "data_manaus": "2024-10-08 12:00:00",
+            "nivel_m": 2.88,
+            "ganho_desde_sinal_cm": 39.3,
+            "taxa_media_desde_sinal_cm_h": 0.409,
+            "checkpoint": {
+              "nivel_m": 2.88,
+              "variacao_6h_cm": 1.9,
+              "variacao_24h_cm": 8.8,
+              "variacao_72h_cm": 29.5,
+              "variacao_7d_cm": 37.9
+            }
+          },
+          {
+            "horas_apos_sinal": 168,
+            "data_manaus": "2024-10-11 12:00:00",
+            "nivel_m": 3.01,
+            "ganho_desde_sinal_cm": 51.8,
+            "taxa_media_desde_sinal_cm_h": 0.308,
+            "checkpoint": {
+              "nivel_m": 3.01,
+              "variacao_6h_cm": -0.1,
+              "variacao_24h_cm": 1.8,
+              "variacao_72h_cm": 12.5,
+              "variacao_7d_cm": 51.8
+            }
+          }
+        ]
+      },
+      "persistencia_24h": {
+        "horizonte_h": 24,
+        "blocos_disponiveis": 4,
+        "blocos_positivos": 4,
+        "blocos_neutros": 0,
+        "blocos_negativos": 0,
+        "soma_variacoes_6h_cm": 9.8,
+        "media_variacoes_6h_cm": 2.45
+      },
+      "persistencia_48h": {
+        "horizonte_h": 48,
+        "blocos_disponiveis": 8,
+        "blocos_positivos": 8,
+        "blocos_neutros": 0,
+        "blocos_negativos": 0,
+        "soma_variacoes_6h_cm": 20.6,
+        "media_variacoes_6h_cm": 2.57
+      },
+      "persistencia_72h": {
+        "horizonte_h": 72,
+        "blocos_disponiveis": 12,
+        "blocos_positivos": 12,
+        "blocos_neutros": 0,
+        "blocos_negativos": 0,
+        "soma_variacoes_6h_cm": 30.5,
+        "media_variacoes_6h_cm": 2.54
+      },
+      "perfil_variacao_24h_primeiras_24h": {
+        "pontos": [
+          {
+            "horas_apos_sinal": 0,
+            "variacao_24h_cm": 3.9
+          },
+          {
+            "horas_apos_sinal": 6,
+            "variacao_24h_cm": 6.8
+          },
+          {
+            "horas_apos_sinal": 12,
+            "variacao_24h_cm": 8.4
+          },
+          {
+            "horas_apos_sinal": 18,
+            "variacao_24h_cm": 9.8
+          },
+          {
+            "horas_apos_sinal": 24,
+            "variacao_24h_cm": 9.8
+          }
+        ],
+        "minimo_cm": 3.9,
+        "maximo_cm": 9.8,
+        "ultimo_cm": 9.8
+      },
+      "resultado_pos_evento": {
+        "ganho_maximo_apos_confirmacao_cm": 47.4,
+        "ganho_24h_apos_confirmacao_cm": 10.8,
+        "ganho_48h_apos_confirmacao_cm": 20.7,
+        "ganho_72h_apos_confirmacao_cm": 30.5,
+        "duracao_confirmada_h": 192.0
+      },
+      "marcador_retrospectivo": {
+        "classificacao": "continuidade_observada",
+        "ganho_maximo_ate_2cm": false,
+        "ganho_72h_nao_positivo": false,
+        "observacao": "Marcador retrospectivo usado apenas para estudo. Não deve ser usado diretamente em decisão em tempo real."
+      }
+    },
+    {
+      "evento": 3,
+      "inicio_sinal_manaus": "2025-02-06 12:00:00",
+      "confirmado_em_manaus": "2025-02-07 00:00:00",
+      "atraso_confirmacao_h": 12.0,
+      "checkpoint_inicio": {
+        "nivel_m": 3.31,
+        "variacao_6h_cm": 2.5,
+        "variacao_24h_cm": 5.0,
+        "variacao_72h_cm": 5.0,
+        "variacao_7d_cm": -32.0
+      },
+      "checkpoint_confirmacao": {
+        "nivel_m": 3.32,
+        "variacao_6h_cm": 0.0,
+        "variacao_24h_cm": 4.0,
+        "variacao_72h_cm": 7.0,
+        "variacao_7d_cm": -24.0
+      },
+      "trajetoria": {
+        "nivel_inicial_m": 3.31,
+        "pontos": [
+          {
+            "horas_apos_sinal": 6,
+            "data_manaus": "2025-02-06 18:00:00",
+            "nivel_m": 3.32,
+            "ganho_desde_sinal_cm": 1.0,
+            "taxa_media_desde_sinal_cm_h": 0.167,
+            "checkpoint": {
+              "nivel_m": 3.32,
+              "variacao_6h_cm": 1.0,
+              "variacao_24h_cm": 5.0,
+              "variacao_72h_cm": 7.0,
+              "variacao_7d_cm": -28.0
+            }
+          },
+          {
+            "horas_apos_sinal": 12,
+            "data_manaus": "2025-02-07 00:00:00",
+            "nivel_m": 3.32,
+            "ganho_desde_sinal_cm": 1.0,
+            "taxa_media_desde_sinal_cm_h": 0.083,
+            "checkpoint": {
+              "nivel_m": 3.32,
+              "variacao_6h_cm": 0.0,
+              "variacao_24h_cm": 4.0,
+              "variacao_72h_cm": 7.0,
+              "variacao_7d_cm": -24.0
+            }
+          },
+          {
+            "horas_apos_sinal": 18,
+            "data_manaus": "2025-02-07 06:00:00",
+            "nivel_m": 3.33,
+            "ganho_desde_sinal_cm": 2.0,
+            "taxa_media_desde_sinal_cm_h": 0.111,
+            "checkpoint": {
+              "nivel_m": 3.33,
+              "variacao_6h_cm": 1.0,
+              "variacao_24h_cm": 4.5,
+              "variacao_72h_cm": 8.0,
+              "variacao_7d_cm": -20.0
+            }
+          },
+          {
+            "horas_apos_sinal": 24,
+            "data_manaus": "2025-02-07 12:00:00",
+            "nivel_m": 3.35,
+            "ganho_desde_sinal_cm": 4.0,
+            "taxa_media_desde_sinal_cm_h": 0.167,
+            "checkpoint": {
+              "nivel_m": 3.35,
+              "variacao_6h_cm": 2.0,
+              "variacao_24h_cm": 4.0,
+              "variacao_72h_cm": 8.5,
+              "variacao_7d_cm": -16.0
+            }
+          },
+          {
+            "horas_apos_sinal": 48,
+            "data_manaus": "2025-02-08 12:00:00",
+            "nivel_m": 3.4,
+            "ganho_desde_sinal_cm": 9.0,
+            "taxa_media_desde_sinal_cm_h": 0.188,
+            "checkpoint": {
+              "nivel_m": 3.4,
+              "variacao_6h_cm": 1.0,
+              "variacao_24h_cm": 5.0,
+              "variacao_72h_cm": 14.0,
+              "variacao_7d_cm": 0.5
+            }
+          },
+          {
+            "horas_apos_sinal": 72,
+            "data_manaus": "2025-02-09 12:00:00",
+            "nivel_m": 3.47,
+            "ganho_desde_sinal_cm": 16.0,
+            "taxa_media_desde_sinal_cm_h": 0.222,
+            "checkpoint": {
+              "nivel_m": 3.47,
+              "variacao_6h_cm": 1.0,
+              "variacao_24h_cm": 7.0,
+              "variacao_72h_cm": 16.0,
+              "variacao_7d_cm": 16.0
+            }
+          },
+          {
+            "horas_apos_sinal": 96,
+            "data_manaus": "2025-02-10 12:00:00",
+            "nivel_m": 3.55,
+            "ganho_desde_sinal_cm": 24.0,
+            "taxa_media_desde_sinal_cm_h": 0.25,
+            "checkpoint": {
+              "nivel_m": 3.55,
+              "variacao_6h_cm": 3.0,
+              "variacao_24h_cm": 8.0,
+              "variacao_72h_cm": 20.0,
+              "variacao_7d_cm": 29.0
+            }
+          },
+          {
+            "horas_apos_sinal": 168,
+            "data_manaus": "2025-02-13 12:00:00",
+            "nivel_m": 3.82,
+            "ganho_desde_sinal_cm": 51.0,
+            "taxa_media_desde_sinal_cm_h": 0.304,
+            "checkpoint": {
+              "nivel_m": 3.82,
+              "variacao_6h_cm": 5.0,
+              "variacao_24h_cm": 11.0,
+              "variacao_72h_cm": 27.0,
+              "variacao_7d_cm": 51.0
+            }
+          }
+        ]
+      },
+      "persistencia_24h": {
+        "horizonte_h": 24,
+        "blocos_disponiveis": 4,
+        "blocos_positivos": 3,
+        "blocos_neutros": 1,
+        "blocos_negativos": 0,
+        "soma_variacoes_6h_cm": 4.0,
+        "media_variacoes_6h_cm": 1.0
+      },
+      "persistencia_48h": {
+        "horizonte_h": 48,
+        "blocos_disponiveis": 8,
+        "blocos_positivos": 7,
+        "blocos_neutros": 1,
+        "blocos_negativos": 0,
+        "soma_variacoes_6h_cm": 9.0,
+        "media_variacoes_6h_cm": 1.12
+      },
+      "persistencia_72h": {
+        "horizonte_h": 72,
+        "blocos_disponiveis": 12,
+        "blocos_positivos": 11,
+        "blocos_neutros": 1,
+        "blocos_negativos": 0,
+        "soma_variacoes_6h_cm": 16.0,
+        "media_variacoes_6h_cm": 1.33
+      },
+      "perfil_variacao_24h_primeiras_24h": {
+        "pontos": [
+          {
+            "horas_apos_sinal": 0,
+            "variacao_24h_cm": 5.0
+          },
+          {
+            "horas_apos_sinal": 6,
+            "variacao_24h_cm": 5.0
+          },
+          {
+            "horas_apos_sinal": 12,
+            "variacao_24h_cm": 4.0
+          },
+          {
+            "horas_apos_sinal": 18,
+            "variacao_24h_cm": 4.5
+          },
+          {
+            "horas_apos_sinal": 24,
+            "variacao_24h_cm": 4.0
+          }
+        ],
+        "minimo_cm": 4.0,
+        "maximo_cm": 5.0,
+        "ultimo_cm": 4.0
+      },
+      "resultado_pos_evento": {
+        "ganho_maximo_apos_confirmacao_cm": 196.0,
+        "ganho_24h_apos_confirmacao_cm": 5.0,
+        "ganho_48h_apos_confirmacao_cm": 12.0,
+        "ganho_72h_apos_confirmacao_cm": 19.0,
+        "duracao_confirmada_h": 738.0
+      },
+      "marcador_retrospectivo": {
+        "classificacao": "continuidade_observada",
+        "ganho_maximo_ate_2cm": false,
+        "ganho_72h_nao_positivo": false,
+        "observacao": "Marcador retrospectivo usado apenas para estudo. Não deve ser usado diretamente em decisão em tempo real."
+      }
+    },
+    {
+      "evento": 4,
+      "inicio_sinal_manaus": "2025-10-19 18:00:00",
+      "confirmado_em_manaus": "2025-10-20 06:00:00",
+      "atraso_confirmacao_h": 12.0,
+      "checkpoint_inicio": {
+        "nivel_m": 4.02,
+        "variacao_6h_cm": 3.0,
+        "variacao_24h_cm": 3.0,
+        "variacao_72h_cm": 2.0,
+        "variacao_7d_cm": -14.0
+      },
+      "checkpoint_confirmacao": {
+        "nivel_m": 4.02,
+        "variacao_6h_cm": 0.0,
+        "variacao_24h_cm": 3.0,
+        "variacao_72h_cm": 3.0,
+        "variacao_7d_cm": -10.0
+      },
+      "trajetoria": {
+        "nivel_inicial_m": 4.02,
+        "pontos": [
+          {
+            "horas_apos_sinal": 6,
+            "data_manaus": "2025-10-20 00:00:00",
+            "nivel_m": 4.02,
+            "ganho_desde_sinal_cm": 0.0,
+            "taxa_media_desde_sinal_cm_h": 0.0,
+            "checkpoint": {
+              "nivel_m": 4.02,
+              "variacao_6h_cm": 0.0,
+              "variacao_24h_cm": 3.0,
+              "variacao_72h_cm": 2.5,
+              "variacao_7d_cm": -12.0
+            }
+          },
+          {
+            "horas_apos_sinal": 12,
+            "data_manaus": "2025-10-20 06:00:00",
+            "nivel_m": 4.02,
+            "ganho_desde_sinal_cm": 0.0,
+            "taxa_media_desde_sinal_cm_h": 0.0,
+            "checkpoint": {
+              "nivel_m": 4.02,
+              "variacao_6h_cm": 0.0,
+              "variacao_24h_cm": 3.0,
+              "variacao_72h_cm": 3.0,
+              "variacao_7d_cm": -10.0
+            }
+          },
+          {
+            "horas_apos_sinal": 18,
+            "data_manaus": "2025-10-20 12:00:00",
+            "nivel_m": 4.02,
+            "ganho_desde_sinal_cm": 0.0,
+            "taxa_media_desde_sinal_cm_h": 0.0,
+            "checkpoint": {
+              "nivel_m": 4.02,
+              "variacao_6h_cm": 0.0,
+              "variacao_24h_cm": 3.0,
+              "variacao_72h_cm": 3.0,
+              "variacao_7d_cm": -9.0
+            }
+          },
+          {
+            "horas_apos_sinal": 24,
+            "data_manaus": "2025-10-20 18:00:00",
+            "nivel_m": 4.01,
+            "ganho_desde_sinal_cm": -1.0,
+            "taxa_media_desde_sinal_cm_h": -0.042,
+            "checkpoint": {
+              "nivel_m": 4.01,
+              "variacao_6h_cm": -1.0,
+              "variacao_24h_cm": -1.0,
+              "variacao_72h_cm": 2.0,
+              "variacao_7d_cm": -8.5
+            }
+          },
+          {
+            "horas_apos_sinal": 48,
+            "data_manaus": "2025-10-21 18:00:00",
+            "nivel_m": 4.0,
+            "ganho_desde_sinal_cm": -2.0,
+            "taxa_media_desde_sinal_cm_h": -0.042,
+            "checkpoint": {
+              "nivel_m": 4.0,
+              "variacao_6h_cm": -1.0,
+              "variacao_24h_cm": -1.0,
+              "variacao_72h_cm": 1.0,
+              "variacao_7d_cm": -5.0
+            }
+          },
+          {
+            "horas_apos_sinal": 72,
+            "data_manaus": "2025-10-22 18:00:00",
+            "nivel_m": 4.0,
+            "ganho_desde_sinal_cm": -2.0,
+            "taxa_media_desde_sinal_cm_h": -0.028,
+            "checkpoint": {
+              "nivel_m": 4.0,
+              "variacao_6h_cm": 0.0,
+              "variacao_24h_cm": 0.0,
+              "variacao_72h_cm": -2.0,
+              "variacao_7d_cm": -2.0
+            }
+          },
+          {
+            "horas_apos_sinal": 96,
+            "data_manaus": "2025-10-23 18:00:00",
+            "nivel_m": 3.98,
+            "ganho_desde_sinal_cm": -4.0,
+            "taxa_media_desde_sinal_cm_h": -0.042,
+            "checkpoint": {
+              "nivel_m": 3.98,
+              "variacao_6h_cm": -1.0,
+              "variacao_24h_cm": -2.0,
+              "variacao_72h_cm": -3.0,
+              "variacao_7d_cm": -2.0
+            }
+          },
+          {
+            "horas_apos_sinal": 168,
+            "data_manaus": "2025-10-26 18:00:00",
+            "nivel_m": 3.93,
+            "ganho_desde_sinal_cm": -9.0,
+            "taxa_media_desde_sinal_cm_h": -0.054,
+            "checkpoint": {
+              "nivel_m": 3.93,
+              "variacao_6h_cm": -1.0,
+              "variacao_24h_cm": -3.0,
+              "variacao_72h_cm": -5.0,
+              "variacao_7d_cm": -9.0
+            }
+          }
+        ]
+      },
+      "persistencia_24h": {
+        "horizonte_h": 24,
+        "blocos_disponiveis": 4,
+        "blocos_positivos": 0,
+        "blocos_neutros": 3,
+        "blocos_negativos": 1,
+        "soma_variacoes_6h_cm": -1.0,
+        "media_variacoes_6h_cm": -0.25
+      },
+      "persistencia_48h": {
+        "horizonte_h": 48,
+        "blocos_disponiveis": 8,
+        "blocos_positivos": 0,
+        "blocos_neutros": 6,
+        "blocos_negativos": 2,
+        "soma_variacoes_6h_cm": -2.0,
+        "media_variacoes_6h_cm": -0.25
+      },
+      "persistencia_72h": {
+        "horizonte_h": 72,
+        "blocos_disponiveis": 12,
+        "blocos_positivos": 0,
+        "blocos_neutros": 10,
+        "blocos_negativos": 2,
+        "soma_variacoes_6h_cm": -2.0,
+        "media_variacoes_6h_cm": -0.17
+      },
+      "perfil_variacao_24h_primeiras_24h": {
+        "pontos": [
+          {
+            "horas_apos_sinal": 0,
+            "variacao_24h_cm": 3.0
+          },
+          {
+            "horas_apos_sinal": 6,
+            "variacao_24h_cm": 3.0
+          },
+          {
+            "horas_apos_sinal": 12,
+            "variacao_24h_cm": 3.0
+          },
+          {
+            "horas_apos_sinal": 18,
+            "variacao_24h_cm": 3.0
+          },
+          {
+            "horas_apos_sinal": 24,
+            "variacao_24h_cm": -1.0
+          }
+        ],
+        "minimo_cm": -1.0,
+        "maximo_cm": 3.0,
+        "ultimo_cm": -1.0
+      },
+      "resultado_pos_evento": {
+        "ganho_maximo_apos_confirmacao_cm": 0.0,
+        "ganho_24h_apos_confirmacao_cm": -1.0,
+        "ganho_48h_apos_confirmacao_cm": -2.0,
+        "ganho_72h_apos_confirmacao_cm": -3.0,
+        "duracao_confirmada_h": 30.0
+      },
+      "marcador_retrospectivo": {
+        "classificacao": "fraco_pos_evento",
+        "ganho_maximo_ate_2cm": true,
+        "ganho_72h_nao_positivo": true,
+        "observacao": "Marcador retrospectivo usado apenas para estudo. Não deve ser usado diretamente em decisão em tempo real."
+      }
+    },
+    {
+      "evento": 5,
+      "inicio_sinal_manaus": "2025-11-20 18:00:00",
+      "confirmado_em_manaus": "2025-11-21 06:00:00",
+      "atraso_confirmacao_h": 12.0,
+      "checkpoint_inicio": {
+        "nivel_m": 3.52,
+        "variacao_6h_cm": 0.0,
+        "variacao_24h_cm": 3.0,
+        "variacao_72h_cm": -4.0,
+        "variacao_7d_cm": -21.0
+      },
+      "checkpoint_confirmacao": {
+        "nivel_m": 3.53,
+        "variacao_6h_cm": 1.0,
+        "variacao_24h_cm": 4.0,
+        "variacao_72h_cm": -1.0,
+        "variacao_7d_cm": -18.0
+      },
+      "trajetoria": {
+        "nivel_inicial_m": 3.52,
+        "pontos": [
+          {
+            "horas_apos_sinal": 6,
+            "data_manaus": "2025-11-21 00:00:00",
+            "nivel_m": 3.52,
+            "ganho_desde_sinal_cm": 0.0,
+            "taxa_media_desde_sinal_cm_h": 0.0,
+            "checkpoint": {
+              "nivel_m": 3.52,
+              "variacao_6h_cm": 0.0,
+              "variacao_24h_cm": 3.0,
+              "variacao_72h_cm": -4.0,
+              "variacao_7d_cm": -20.0
+            }
+          },
+          {
+            "horas_apos_sinal": 12,
+            "data_manaus": "2025-11-21 06:00:00",
+            "nivel_m": 3.53,
+            "ganho_desde_sinal_cm": 1.0,
+            "taxa_media_desde_sinal_cm_h": 0.083,
+            "checkpoint": {
+              "nivel_m": 3.53,
+              "variacao_6h_cm": 1.0,
+              "variacao_24h_cm": 4.0,
+              "variacao_72h_cm": -1.0,
+              "variacao_7d_cm": -18.0
+            }
+          },
+          {
+            "horas_apos_sinal": 18,
+            "data_manaus": "2025-11-21 12:00:00",
+            "nivel_m": 3.53,
+            "ganho_desde_sinal_cm": 1.0,
+            "taxa_media_desde_sinal_cm_h": 0.056,
+            "checkpoint": {
+              "nivel_m": 3.53,
+              "variacao_6h_cm": 0.0,
+              "variacao_24h_cm": 1.0,
+              "variacao_72h_cm": -1.0,
+              "variacao_7d_cm": -17.0
+            }
+          },
+          {
+            "horas_apos_sinal": 24,
+            "data_manaus": "2025-11-21 18:00:00",
+            "nivel_m": 3.54,
+            "ganho_desde_sinal_cm": 1.5,
+            "taxa_media_desde_sinal_cm_h": 0.062,
+            "checkpoint": {
+              "nivel_m": 3.54,
+              "variacao_6h_cm": 0.5,
+              "variacao_24h_cm": 1.5,
+              "variacao_72h_cm": 1.0,
+              "variacao_7d_cm": -15.5
+            }
+          },
+          {
+            "horas_apos_sinal": 48,
+            "data_manaus": "2025-11-22 18:00:00",
+            "nivel_m": 3.56,
+            "ganho_desde_sinal_cm": 3.5,
+            "taxa_media_desde_sinal_cm_h": 0.073,
+            "checkpoint": {
+              "nivel_m": 3.56,
+              "variacao_6h_cm": 0.5,
+              "variacao_24h_cm": 2.0,
+              "variacao_72h_cm": 6.5,
+              "variacao_7d_cm": -9.5
+            }
+          },
+          {
+            "horas_apos_sinal": 72,
+            "data_manaus": "2025-11-23 18:00:00",
+            "nivel_m": 3.6,
+            "ganho_desde_sinal_cm": 8.5,
+            "taxa_media_desde_sinal_cm_h": 0.118,
+            "checkpoint": {
+              "nivel_m": 3.6,
+              "variacao_6h_cm": 0.5,
+              "variacao_24h_cm": 5.0,
+              "variacao_72h_cm": 8.5,
+              "variacao_7d_cm": -0.5
+            }
+          },
+          {
+            "horas_apos_sinal": 96,
+            "data_manaus": "2025-11-24 18:00:00",
+            "nivel_m": 3.64,
+            "ganho_desde_sinal_cm": 12.0,
+            "taxa_media_desde_sinal_cm_h": 0.125,
+            "checkpoint": {
+              "nivel_m": 3.64,
+              "variacao_6h_cm": 1.0,
+              "variacao_24h_cm": 3.5,
+              "variacao_72h_cm": 10.5,
+              "variacao_7d_cm": 8.0
+            }
+          },
+          {
+            "horas_apos_sinal": 168,
+            "data_manaus": "2025-11-27 18:00:00",
+            "nivel_m": 3.73,
+            "ganho_desde_sinal_cm": 21.0,
+            "taxa_media_desde_sinal_cm_h": 0.125,
+            "checkpoint": {
+              "nivel_m": 3.73,
+              "variacao_6h_cm": 0.0,
+              "variacao_24h_cm": 2.0,
+              "variacao_72h_cm": 9.0,
+              "variacao_7d_cm": 21.0
+            }
+          }
+        ]
+      },
+      "persistencia_24h": {
+        "horizonte_h": 24,
+        "blocos_disponiveis": 4,
+        "blocos_positivos": 2,
+        "blocos_neutros": 2,
+        "blocos_negativos": 0,
+        "soma_variacoes_6h_cm": 1.5,
+        "media_variacoes_6h_cm": 0.38
+      },
+      "persistencia_48h": {
+        "horizonte_h": 48,
+        "blocos_disponiveis": 8,
+        "blocos_positivos": 5,
+        "blocos_neutros": 3,
+        "blocos_negativos": 0,
+        "soma_variacoes_6h_cm": 3.5,
+        "media_variacoes_6h_cm": 0.44
+      },
+      "persistencia_72h": {
+        "horizonte_h": 72,
+        "blocos_disponiveis": 12,
+        "blocos_positivos": 8,
+        "blocos_neutros": 4,
+        "blocos_negativos": 0,
+        "soma_variacoes_6h_cm": 8.5,
+        "media_variacoes_6h_cm": 0.71
+      },
+      "perfil_variacao_24h_primeiras_24h": {
+        "pontos": [
+          {
+            "horas_apos_sinal": 0,
+            "variacao_24h_cm": 3.0
+          },
+          {
+            "horas_apos_sinal": 6,
+            "variacao_24h_cm": 3.0
+          },
+          {
+            "horas_apos_sinal": 12,
+            "variacao_24h_cm": 4.0
+          },
+          {
+            "horas_apos_sinal": 18,
+            "variacao_24h_cm": 1.0
+          },
+          {
+            "horas_apos_sinal": 24,
+            "variacao_24h_cm": 1.5
+          }
+        ],
+        "minimo_cm": 1.0,
+        "maximo_cm": 4.0,
+        "ultimo_cm": 1.5
+      },
+      "resultado_pos_evento": {
+        "ganho_maximo_apos_confirmacao_cm": 55.0,
+        "ganho_24h_apos_confirmacao_cm": 1.0,
+        "ganho_48h_apos_confirmacao_cm": 6.0,
+        "ganho_72h_apos_confirmacao_cm": 9.0,
+        "duracao_confirmada_h": 450.0
+      },
+      "marcador_retrospectivo": {
+        "classificacao": "continuidade_observada",
+        "ganho_maximo_ate_2cm": false,
+        "ganho_72h_nao_positivo": false,
+        "observacao": "Marcador retrospectivo usado apenas para estudo. Não deve ser usado diretamente em decisão em tempo real."
+      }
+    },
+    {
+      "evento": 6,
+      "inicio_sinal_manaus": "2026-03-19 06:00:00",
+      "confirmado_em_manaus": "2026-03-19 18:00:00",
+      "atraso_confirmacao_h": 12.0,
+      "checkpoint_inicio": {
+        "nivel_m": 3.14,
+        "variacao_6h_cm": 10.0,
+        "variacao_24h_cm": 10.0,
+        "variacao_72h_cm": 5.3,
+        "variacao_7d_cm": -21.5
+      },
+      "checkpoint_confirmacao": {
+        "nivel_m": 3.19,
+        "variacao_6h_cm": 1.0,
+        "variacao_24h_cm": 15.0,
+        "variacao_72h_cm": 13.0,
+        "variacao_7d_cm": -16.3
+      },
+      "trajetoria": {
+        "nivel_inicial_m": 3.14,
+        "pontos": [
+          {
+            "horas_apos_sinal": 6,
+            "data_manaus": "2026-03-19 12:00:00",
+            "nivel_m": 3.18,
+            "ganho_desde_sinal_cm": 4.0,
+            "taxa_media_desde_sinal_cm_h": 0.667,
+            "checkpoint": {
+              "nivel_m": 3.18,
+              "variacao_6h_cm": 4.0,
+              "variacao_24h_cm": 13.0,
+              "variacao_72h_cm": 12.0,
+              "variacao_7d_cm": -16.9
+            }
+          },
+          {
+            "horas_apos_sinal": 12,
+            "data_manaus": "2026-03-19 18:00:00",
+            "nivel_m": 3.19,
+            "ganho_desde_sinal_cm": 5.0,
+            "taxa_media_desde_sinal_cm_h": 0.417,
+            "checkpoint": {
+              "nivel_m": 3.19,
+              "variacao_6h_cm": 1.0,
+              "variacao_24h_cm": 15.0,
+              "variacao_72h_cm": 13.0,
+              "variacao_7d_cm": -16.3
+            }
+          },
+          {
+            "horas_apos_sinal": 18,
+            "data_manaus": "2026-03-20 00:00:00",
+            "nivel_m": 3.19,
+            "ganho_desde_sinal_cm": 5.0,
+            "taxa_media_desde_sinal_cm_h": 0.278,
+            "checkpoint": {
+              "nivel_m": 3.19,
+              "variacao_6h_cm": 0.0,
+              "variacao_24h_cm": 15.0,
+              "variacao_72h_cm": 14.0,
+              "variacao_7d_cm": -13.7
+            }
+          },
+          {
+            "horas_apos_sinal": 24,
+            "data_manaus": "2026-03-20 06:00:00",
+            "nivel_m": 3.19,
+            "ganho_desde_sinal_cm": 5.0,
+            "taxa_media_desde_sinal_cm_h": 0.208,
+            "checkpoint": {
+              "nivel_m": 3.19,
+              "variacao_6h_cm": 0.0,
+              "variacao_24h_cm": 5.0,
+              "variacao_72h_cm": 14.0,
+              "variacao_7d_cm": -13.1
+            }
+          },
+          {
+            "horas_apos_sinal": 48,
+            "data_manaus": "2026-03-21 06:00:00",
+            "nivel_m": 3.21,
+            "ganho_desde_sinal_cm": 7.0,
+            "taxa_media_desde_sinal_cm_h": 0.146,
+            "checkpoint": {
+              "nivel_m": 3.21,
+              "variacao_6h_cm": 1.0,
+              "variacao_24h_cm": 2.0,
+              "variacao_72h_cm": 17.0,
+              "variacao_7d_cm": -6.6
+            }
+          },
+          {
+            "horas_apos_sinal": 72,
+            "data_manaus": "2026-03-22 06:00:00",
+            "nivel_m": 3.24,
+            "ganho_desde_sinal_cm": 10.0,
+            "taxa_media_desde_sinal_cm_h": 0.139,
+            "checkpoint": {
+              "nivel_m": 3.24,
+              "variacao_6h_cm": 1.0,
+              "variacao_24h_cm": 3.0,
+              "variacao_72h_cm": 10.0,
+              "variacao_7d_cm": null
+            }
+          },
+          {
+            "horas_apos_sinal": 96,
+            "data_manaus": "2026-03-23 06:00:00",
+            "nivel_m": 3.26,
+            "ganho_desde_sinal_cm": 12.0,
+            "taxa_media_desde_sinal_cm_h": 0.125,
+            "checkpoint": {
+              "nivel_m": 3.26,
+              "variacao_6h_cm": 1.0,
+              "variacao_24h_cm": 2.0,
+              "variacao_72h_cm": 7.0,
+              "variacao_7d_cm": 17.3
+            }
+          },
+          {
+            "horas_apos_sinal": 168,
+            "data_manaus": "2026-03-26 06:00:00",
+            "nivel_m": 3.37,
+            "ganho_desde_sinal_cm": 23.0,
+            "taxa_media_desde_sinal_cm_h": 0.137,
+            "checkpoint": {
+              "nivel_m": 3.37,
+              "variacao_6h_cm": 1.5,
+              "variacao_24h_cm": 4.0,
+              "variacao_72h_cm": 11.0,
+              "variacao_7d_cm": 23.0
+            }
+          }
+        ]
+      },
+      "persistencia_24h": {
+        "horizonte_h": 24,
+        "blocos_disponiveis": 4,
+        "blocos_positivos": 2,
+        "blocos_neutros": 2,
+        "blocos_negativos": 0,
+        "soma_variacoes_6h_cm": 5.0,
+        "media_variacoes_6h_cm": 1.25
+      },
+      "persistencia_48h": {
+        "horizonte_h": 48,
+        "blocos_disponiveis": 8,
+        "blocos_positivos": 5,
+        "blocos_neutros": 2,
+        "blocos_negativos": 1,
+        "soma_variacoes_6h_cm": 7.0,
+        "media_variacoes_6h_cm": 0.88
+      },
+      "persistencia_72h": {
+        "horizonte_h": 72,
+        "blocos_disponiveis": 12,
+        "blocos_positivos": 8,
+        "blocos_neutros": 2,
+        "blocos_negativos": 2,
+        "soma_variacoes_6h_cm": 10.0,
+        "media_variacoes_6h_cm": 0.83
+      },
+      "perfil_variacao_24h_primeiras_24h": {
+        "pontos": [
+          {
+            "horas_apos_sinal": 0,
+            "variacao_24h_cm": 10.0
+          },
+          {
+            "horas_apos_sinal": 6,
+            "variacao_24h_cm": 13.0
+          },
+          {
+            "horas_apos_sinal": 12,
+            "variacao_24h_cm": 15.0
+          },
+          {
+            "horas_apos_sinal": 18,
+            "variacao_24h_cm": 15.0
+          },
+          {
+            "horas_apos_sinal": 24,
+            "variacao_24h_cm": 5.0
+          }
+        ],
+        "minimo_cm": 5.0,
+        "maximo_cm": 15.0,
+        "ultimo_cm": 5.0
+      },
+      "resultado_pos_evento": {
+        "ganho_maximo_apos_confirmacao_cm": 26.0,
+        "ganho_24h_apos_confirmacao_cm": 0.5,
+        "ganho_48h_apos_confirmacao_cm": 3.0,
+        "ganho_72h_apos_confirmacao_cm": 6.0,
+        "duracao_confirmada_h": 252.0
+      },
+      "marcador_retrospectivo": {
+        "classificacao": "continuidade_observada",
+        "ganho_maximo_ate_2cm": false,
+        "ganho_72h_nao_positivo": false,
+        "observacao": "Marcador retrospectivo usado apenas para estudo. Não deve ser usado diretamente em decisão em tempo real."
+      }
+    }
+  ]
+}

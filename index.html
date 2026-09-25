@@ -29,7 +29,7 @@
 
   <link
     rel="stylesheet"
-    href="css/style.css?v=5"
+    href="css/style.css?v=6"
   >
 
   <script
@@ -461,7 +461,7 @@
     </section>
 
 
-    <!-- GRÁFICO DE BARCELOS -->
+    <!-- GRÁFICO DE 30 DIAS -->
 
     <section class="chart-card">
 
@@ -502,6 +502,65 @@
     </section>
 
 
+    <!-- COMPARATIVO ANUAL -->
+
+    <section class="chart-card annual-chart-card">
+
+      <div class="chart-header">
+
+        <div>
+
+          <div class="section-label">
+            COMPARATIVO HISTÓRICO
+          </div>
+
+          <h2>
+            Barcelos ao longo dos anos
+          </h2>
+
+          <div class="chart-subtitle">
+            Comparação diária dos níveis de 2023,
+            2024, 2025 e 2026
+          </div>
+
+        </div>
+
+
+        <div class="chart-info">
+
+          Estação
+          <span>
+            14480002
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div
+        id="annual-chart-status"
+        class="annual-chart-status"
+      >
+        Carregando comparativo histórico...
+      </div>
+
+
+      <div class="chart-container annual-chart-container">
+
+        <canvas id="annual-chart"></canvas>
+
+      </div>
+
+
+      <div class="annual-chart-note">
+        2023 possui dados a partir de 24/09.
+        2026 representa o ano em andamento.
+      </div>
+
+    </section>
+
+
     <!-- RODAPÉ -->
 
     <footer>
@@ -523,7 +582,7 @@
   </main>
 
 
-  <script src="js/dashboard.js?v=6"></script>
+  <script src="js/dashboard.js?v=7"></script>
 
 </body>
 

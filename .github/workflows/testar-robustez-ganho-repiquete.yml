@@ -1,0 +1,241 @@
+name: Testar Robustez Ganho Repiquete
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: teste-robustez-ganho-repiquete
+  cancel-in-progress: false
+
+jobs:
+  testar:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Baixar projeto
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+
+      - name: Executar teste de robustez
+        run: |
+          python collector/repiquete_robustez_ganho.py
+
+
+      - name: Conferir resultado
+        run: |
+          echo "======================================"
+          echo "ROBUSTEZ DO GANHO NA CONFIRMACAO"
+          echo "======================================"
+
+          if [ ! -f data/repiquete_robustez_ganho.json ]; then
+            echo "ERRO:"
+            echo "data/repiquete_robustez_ganho.json nao foi criado."
+            exit 1
+          fi
+
+          python - <<'PY'
+          import json
+
+          with open(
+              "data/repiquete_robustez_ganho.json",
+              encoding="utf-8"
+          ) as f:
+              data = json.load(f)
+
+          metodologia = (
+              data.get("metodologia")
+              or {}
+          )
+
+          resumo = (
+              data.get("resumo")
+              or {}
+          )
+
+          print(
+              "Configuracao base:",
+              metodologia.get(
+                  "configuracao_base"
+              )
+          )
+
+          print(
+              "Eventos analisados:",
+              metodologia.get(
+                  "eventos_analisados"
+              )
+          )
+
+          print(
+              "Configuracoes testadas:",
+              resumo.get(
+                  "configuracoes_testadas"
+              )
+          )
+
+          print(
+              "Configuracoes com separacao observada:",
+              resumo.get(
+                  "configuracoes_com_separacao_observada"
+              )
+          )
+
+          print()
+          print(
+              "CONFIGURACOES COM SEPARACAO OBSERVADA"
+          )
+
+          for result in data.get(
+              "resultados",
+              []
+          ):
+
+              if not result.get(
+                  "separacao_observada_no_historico"
+              ):
+                  continue
+
+              print()
+              print(
+                  "ID:",
+                  result.get(
+                      "id"
+                  )
+              )
+
+              print(
+                  "Criterio:",
+                  result.get(
+                      "criterio_ganho"
+                  )
+              )
+
+              print(
+                  "Margem:",
+                  result.get(
+                      "margem_estresse_cm"
+                  ),
+                  "cm"
+              )
+
+              print(
+                  "Espera maxima:",
+                  result.get(
+                      "espera_extra_maxima_h"
+                  ),
+                  "h"
+              )
+
+              print(
+                  "Fracos aceitos:",
+                  result.get(
+                      "eventos_fracos_aceitos"
+                  ),
+                  "/",
+                  result.get(
+                      "eventos_fracos_totais"
+                  )
+              )
+
+              print(
+                  "Continuidade preservada:",
+                  result.get(
+                      "eventos_continuidade_aceitos"
+                  ),
+                  "/",
+                  result.get(
+                      "eventos_continuidade_totais"
+                  )
+              )
+
+              print(
+                  "Mediana de espera extra:",
+                  result.get(
+                      "mediana_espera_extra_h"
+                  ),
+                  "h"
+              )
+
+              print(
+                  "Eventos aceitos:"
+              )
+
+              for event in (
+                  result.get(
+                      "aceitos"
+                  )
+                  or []
+              ):
+
+                  print(
+                      (
+                          "  Evento "
+                          f"{event.get('evento')}"
+                          f" | confirmou="
+                          f"{event.get('confirmado_em_manaus')}"
+                          f" | espera extra="
+                          f"{event.get('espera_extra_h')} h"
+                          f" | ganho observado="
+                          f"{event.get('ganho_observado_cm')} cm"
+                          f" | ganho ajustado="
+                          f"{event.get('ganho_ajustado_cm')} cm"
+                      )
+                  )
+
+          print()
+          print(
+              "TODAS AS CONFIGURACOES"
+          )
+
+          for result in data.get(
+              "resultados",
+              []
+          ):
+
+              print(
+                  (
+                      f"{result.get('id')}"
+                      f" | aceitos="
+                      f"{result.get('eventos_aceitos')}"
+                      f" | fracos="
+                      f"{result.get('eventos_fracos_aceitos')}"
+                      f" | continuidade="
+                      f"{result.get('eventos_continuidade_aceitos')}"
+                      f"/"
+                      f"{result.get('eventos_continuidade_totais')}"
+                      f" | separacao="
+                      f"{result.get('separacao_observada_no_historico')}"
+                  )
+              )
+          PY
+
+
+      - name: Salvar resultado
+        run: |
+          git config user.name "rio-negro-bot"
+          git config user.email "actions@github.com"
+
+          git add data/repiquete_robustez_ganho.json
+
+          if git diff --cached --quiet; then
+            echo "Nenhuma alteracao para salvar."
+            exit 0
+          fi
+
+          git commit -m "Atualiza teste de robustez do ganho do repiquete"
+
+          git pull --rebase origin main
+
+          git push origin main

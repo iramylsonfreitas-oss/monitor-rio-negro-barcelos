@@ -1,17 +1,12 @@
 {
-  "gerado_em_utc": "2026-09-25T04:19:10.283169+00:00",
+  "gerado_em_utc": "2026-09-25T04:46:03.116164+00:00",
   "timezone": "America/Manaus",
-  "nivel": 1,
-  "status": "observacao",
-  "rotulo": "EM OBSERVAÇÃO",
-  "titulo": "Mudança a montante em acompanhamento",
-  "mensagem": "Há sinais de elevação a montante, mas Serrinha ainda não atende ao critério de alta sustentada usado pelo detector histórico.",
-  "motivos": [
-    "Serrinha apresenta +1.0 cm em 24 h.",
-    "Serrinha acumula +5.0 cm em 72 h.",
-    "Curicuriari acumula +10.0 cm em 72 h.",
-    "Barcelos ainda acumula -7.0 cm em 72 h."
-  ],
+  "nivel": 0,
+  "status": "sem_sinal",
+  "rotulo": "SEM SINAL",
+  "titulo": "Sem sinal de alta confirmada a montante",
+  "mensagem": "Os critérios atuais não indicam um evento de alta confirmado em Serrinha.",
+  "motivos": [],
   "criterio_evento_serrinha": {
     "variacao_minima_24h_cm": 3.0,
     "confirmacoes": 3,
@@ -78,16 +73,7 @@
       "tendencia": "subindo",
       "data_medicao_manaus": "2026-09-24 23:45:00"
     },
-    "serrinha": {
-      "nome": "Serrinha",
-      "nivel_m": 6.55,
-      "variacao_6h_cm": 0.0,
-      "variacao_24h_cm": 1.0,
-      "variacao_72h_cm": 5.0,
-      "variacao_7d_cm": 12.0,
-      "tendencia": "estavel",
-      "data_medicao_manaus": "2026-09-24 23:30:00"
-    },
+    "serrinha": null,
     "barcelos": {
       "nome": "Barcelos",
       "nivel_m": 3.89,

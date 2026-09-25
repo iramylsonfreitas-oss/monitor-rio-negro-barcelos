@@ -1,5 +1,5 @@
 {
-  "gerado_em_utc": "2026-09-25T13:38:38.350312+00:00",
+  "gerado_em_utc": "2026-09-25T13:46:18.643036+00:00",
   "fonte": "ANA - HidroWebService",
   "timezone_exibicao": "America/Manaus",
   "estacoes": [
@@ -17,7 +17,7 @@
       "variacao_72h_cm": -21.0,
       "variacao_7d_cm": 2.0,
       "tendencia": "descendo",
-      "idade_dado_min": 23,
+      "idade_dado_min": 31,
       "dado_desatualizado": false,
       "status_cota": "0",
       "registros_30d": 2726,
@@ -37,7 +37,7 @@
       "variacao_72h_cm": -11.0,
       "variacao_7d_cm": 42.0,
       "tendencia": "subindo",
-      "idade_dado_min": 23,
+      "idade_dado_min": 31,
       "dado_desatualizado": false,
       "status_cota": "0",
       "registros_30d": 2730,
@@ -57,7 +57,7 @@
       "variacao_72h_cm": 7.0,
       "variacao_7d_cm": 33.0,
       "tendencia": "estavel",
-      "idade_dado_min": 53,
+      "idade_dado_min": 61,
       "dado_desatualizado": false,
       "status_cota": "0",
       "registros_30d": 2715,
@@ -77,7 +77,7 @@
       "variacao_72h_cm": 4.0,
       "variacao_7d_cm": 12.0,
       "tendencia": "estavel",
-      "idade_dado_min": 68,
+      "idade_dado_min": 76,
       "dado_desatualizado": false,
       "status_cota": "0",
       "registros_30d": 2723,
@@ -97,12 +97,12 @@
       "variacao_72h_cm": -4.0,
       "variacao_7d_cm": -26.0,
       "tendencia": "subindo",
-      "idade_dado_min": 38,
+      "idade_dado_min": 46,
       "dado_desatualizado": false,
       "status_cota": "0",
       "registros_30d": 2725,
       "fonte": "ANA - HidroWebService",
-      "coletado_em_utc": "2026-09-25T13:38:38.338227+00:00"
+      "coletado_em_utc": "2026-09-25T13:46:18.627554+00:00"
     }
   ]
 }

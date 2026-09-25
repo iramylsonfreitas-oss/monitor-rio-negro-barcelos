@@ -47,9 +47,7 @@
     }
 
     const style =
-      document.createElement(
-        "style"
-      );
+      document.createElement("style");
 
     style.id =
       "river-pulse-styles";
@@ -126,7 +124,10 @@
 
       .river-pulse-kicker {
         margin-bottom: 7px;
-        color: rgba(255,255,255,0.56);
+
+        color:
+          rgba(255,255,255,0.56);
+
         font-size: 11px;
         font-weight: 800;
         letter-spacing: 0.16em;
@@ -135,7 +136,9 @@
 
       .river-pulse-title {
         margin: 0;
+
         color: #ffffff;
+
         font-size: 26px;
         line-height: 1.15;
         letter-spacing: -0.025em;
@@ -145,7 +148,10 @@
       .river-pulse-subtitle {
         max-width: 720px;
         margin-top: 8px;
-        color: rgba(255,255,255,0.64);
+
+        color:
+          rgba(255,255,255,0.64);
+
         font-size: 13px;
         line-height: 1.5;
       }
@@ -155,10 +161,17 @@
         display: flex;
         flex: 0 0 auto;
         gap: 14px;
+
         padding: 10px 12px;
+
         border-radius: 16px;
-        background: rgba(255,255,255,0.035);
-        border: 1px solid rgba(255,255,255,0.06);
+
+        background:
+          rgba(255,255,255,0.035);
+
+        border:
+          1px solid
+          rgba(255,255,255,0.06);
       }
 
 
@@ -166,7 +179,10 @@
         display: flex;
         align-items: center;
         gap: 7px;
-        color: rgba(255,255,255,0.63);
+
+        color:
+          rgba(255,255,255,0.63);
+
         font-size: 9px;
         white-space: nowrap;
       }
@@ -175,8 +191,11 @@
       .river-pulse-legend-dot {
         width: 9px;
         height: 9px;
+
         border-radius: 50%;
-        box-shadow: 0 0 12px currentColor;
+
+        box-shadow:
+          0 0 12px currentColor;
       }
 
 
@@ -200,8 +219,12 @@
 
       .river-pulse-scroll-hint {
         display: none;
+
         margin-top: 14px;
-        color: rgba(255,255,255,0.42);
+
+        color:
+          rgba(255,255,255,0.42);
+
         font-size: 9px;
         letter-spacing: 0.08em;
         text-transform: uppercase;
@@ -209,9 +232,12 @@
 
 
       .river-pulse-corridor {
-        margin-top: 26px;
+        margin-top: 18px;
+
         overflow-x: auto;
+
         scrollbar-width: thin;
+
         scrollbar-color:
           rgba(87,181,220,0.35)
           transparent;
@@ -220,48 +246,70 @@
 
       .river-pulse-canvas {
         min-width: 760px;
+
+        padding:
+          0 8px;
+
+        box-sizing:
+          border-box;
       }
 
 
       .river-pulse-stations,
       .river-pulse-short-grid {
         display: grid;
+
         grid-template-columns:
           repeat(
             5,
             minmax(0, 1fr)
           );
+
         gap: 10px;
       }
 
 
       .river-pulse-station {
-        text-align: center;
         min-width: 0;
+
+        text-align: center;
       }
 
 
       .river-pulse-station-name {
         color: #ffffff;
+
         font-size: 13px;
         font-weight: 800;
+
+        white-space: nowrap;
       }
 
 
       .river-pulse-station-code {
         margin-top: 3px;
-        color: rgba(255,255,255,0.38);
+
+        color:
+          rgba(255,255,255,0.38);
+
         font-size: 9px;
         font-weight: 600;
       }
 
 
       .river-pulse-station-value {
-        margin-top: 8px;
+        margin-top: 7px;
+
         font-size: 22px;
         font-weight: 850;
         line-height: 1;
-        letter-spacing: -0.04em;
+
+        letter-spacing: -0.025em;
+
+        white-space: nowrap;
+
+        font-variant-numeric:
+          tabular-nums;
       }
 
 
@@ -281,15 +329,20 @@
 
 
       .river-pulse-station-value.unknown {
-        color: rgba(255,255,255,0.5);
+        color:
+          rgba(255,255,255,0.5);
       }
 
 
       .river-pulse-station-label {
-        margin-top: 5px;
-        color: rgba(255,255,255,0.47);
+        margin-top: 4px;
+
+        color:
+          rgba(255,255,255,0.47);
+
         font-size: 9px;
         font-weight: 700;
+
         text-transform: uppercase;
         letter-spacing: 0.07em;
       }
@@ -297,10 +350,15 @@
 
       .river-pulse-destination {
         display: inline-flex;
+
         margin-left: 5px;
+
         padding: 3px 6px;
+
         border-radius: 999px;
-        transform: translateY(-1px);
+
+        transform:
+          translateY(-1px);
 
         background:
           rgba(74,164,214,0.18);
@@ -319,30 +377,59 @@
 
 
       .river-pulse-svg-wrap {
-        margin-top: 4px;
         height: 210px;
+
+        margin-top: -4px;
+        margin-bottom: -10px;
       }
 
 
       .river-pulse-svg {
         width: 100%;
         height: 100%;
+
         display: block;
+
         overflow: visible;
       }
 
 
       .river-pulse-baseline {
-        stroke: rgba(255,255,255,0.28);
+        stroke:
+          rgba(255,255,255,0.25);
+
         stroke-width: 1.2;
-        stroke-dasharray: 7 7;
+
+        stroke-dasharray:
+          7 7;
+      }
+
+
+      .river-pulse-baseline-label {
+        fill:
+          rgba(255,255,255,0.34);
+
+        font-size: 11px;
+
+        font-family:
+          Inter,
+          system-ui,
+          sans-serif;
+
+        font-weight: 600;
+
+        letter-spacing: 0.04em;
       }
 
 
       .river-pulse-guide {
-        stroke: rgba(158,214,236,0.32);
+        stroke:
+          rgba(158,214,236,0.30);
+
         stroke-width: 1;
-        stroke-dasharray: 6 6;
+
+        stroke-dasharray:
+          6 6;
       }
 
 
@@ -353,19 +440,29 @@
 
       .river-pulse-path {
         fill: none;
+
         stroke-width: 5;
+
         stroke-linecap: round;
         stroke-linejoin: round;
-        filter: url(#riverPulseGlow);
+
+        filter:
+          url(#riverPulseGlow);
       }
 
 
       .river-pulse-flow-path {
         fill: none;
-        stroke: rgba(233,248,255,0.72);
+
+        stroke:
+          rgba(233,248,255,0.72);
+
         stroke-width: 2.2;
+
         stroke-linecap: round;
-        stroke-dasharray: 24 1150;
+
+        stroke-dasharray:
+          24 1150;
 
         animation:
           riverPulseTravel
@@ -387,13 +484,17 @@
 
 
       .river-pulse-marker-ring {
-        fill: rgba(7,34,54,0.96);
+        fill:
+          rgba(7,34,54,0.96);
+
         stroke-width: 3;
       }
 
 
       .river-pulse-marker-core {
-        stroke: rgba(255,255,255,0.2);
+        stroke:
+          rgba(255,255,255,0.2);
+
         stroke-width: 1;
       }
 
@@ -405,9 +506,13 @@
 
       .river-pulse-short-card {
         justify-self: center;
+
         min-width: 106px;
+
         padding: 9px 11px;
+
         border-radius: 12px;
+
         text-align: left;
 
         background:
@@ -422,11 +527,15 @@
 
         font-size: 9px;
         line-height: 1.7;
+
+        font-variant-numeric:
+          tabular-nums;
       }
 
 
       .river-pulse-short-card strong {
-        color: rgba(255,255,255,0.82);
+        color:
+          rgba(255,255,255,0.82);
       }
 
 
@@ -449,15 +558,18 @@
 
 
       .river-pulse-direction {
-        margin: 22px auto 0;
+        margin:
+          20px auto 0;
 
         display: flex;
+
         align-items: center;
         justify-content: center;
 
         gap: 10px;
 
-        color: rgba(255,255,255,0.43);
+        color:
+          rgba(255,255,255,0.43);
 
         font-size: 9px;
         font-weight: 800;
@@ -468,6 +580,7 @@
       .river-pulse-direction-line {
         width: 190px;
         height: 1px;
+
         position: relative;
 
         background:
@@ -479,6 +592,7 @@
         content: "";
 
         position: absolute;
+
         right: -1px;
         top: -4px;
 
@@ -499,7 +613,7 @@
 
 
       .river-pulse-insight {
-        margin-top: 20px;
+        margin-top: 18px;
 
         display: grid;
 
@@ -525,6 +639,7 @@
 
       .river-pulse-insight-title {
         color: #ffffff;
+
         font-size: 14px;
         font-weight: 800;
       }
@@ -532,7 +647,10 @@
 
       .river-pulse-insight-text {
         margin-top: 5px;
-        color: rgba(255,255,255,0.62);
+
+        color:
+          rgba(255,255,255,0.62);
+
         font-size: 11px;
         line-height: 1.45;
       }
@@ -560,8 +678,15 @@
       }
 
 
+      .river-pulse-note strong {
+        color:
+          rgba(255,255,255,0.62);
+      }
+
+
       .river-pulse-loading {
-        padding: 52px 10px;
+        padding:
+          52px 10px;
 
         text-align: center;
 
@@ -575,7 +700,9 @@
       @media (max-width: 760px) {
 
         .river-pulse-section {
-          padding: 22px 16px;
+          padding:
+            22px 16px;
+
           border-radius: 20px;
         }
 
@@ -592,8 +719,11 @@
 
         .river-pulse-legend {
           margin-top: 14px;
+
           width: fit-content;
+
           max-width: 100%;
+
           flex-wrap: wrap;
         }
 
@@ -604,22 +734,30 @@
 
 
         .river-pulse-corridor {
-          margin-top: 12px;
+          margin-top: 10px;
         }
 
 
         .river-pulse-canvas {
-          min-width: 720px;
+          min-width: 740px;
+
+          padding:
+            0 12px;
         }
 
 
         .river-pulse-svg-wrap {
           height: 190px;
+
+          margin-top: -3px;
+          margin-bottom: -8px;
         }
 
 
         .river-pulse-insight {
-          grid-template-columns: 1fr;
+          grid-template-columns:
+            1fr;
+
           gap: 12px;
         }
 
@@ -627,7 +765,8 @@
         .river-pulse-note {
           max-width: none;
 
-          padding: 12px 0 0;
+          padding:
+            12px 0 0;
 
           border-left: 0;
 
@@ -638,7 +777,8 @@
       }
 
 
-      @media (prefers-reduced-motion: reduce) {
+      @media
+      (prefers-reduced-motion: reduce) {
 
         .river-pulse-flow-path {
           animation: none;
@@ -681,14 +821,25 @@
       return "—";
     }
 
-    const text =
-      n.toFixed(
-        decimals
-      );
+    const absolute =
+      Math.abs(n)
+        .toFixed(
+          decimals
+        );
 
-    return n > 0
-      ? `+${text} cm`
-      : `${text} cm`;
+    if (
+      n > 0
+    ) {
+      return `+${absolute} cm`;
+    }
+
+    if (
+      n < 0
+    ) {
+      return `−${absolute} cm`;
+    }
+
+    return `${absolute} cm`;
   }
 
 
@@ -827,11 +978,16 @@
 
         return {
           code,
+
           x:
             X_POSITIONS[index],
+
           y,
+
           value,
+
           state,
+
           color:
             stateColor(
               state
@@ -858,7 +1014,7 @@
       );
     }
 
-    let d =
+    let path =
       `M ${points[0].x} ` +
       `${points[0].y}`;
 
@@ -924,18 +1080,18 @@
         ) /
         6;
 
-      d +=
+      path +=
         ` C ${cp1x} ${cp1y}, ` +
         `${cp2x} ${cp2y}, ` +
         `${p2.x} ${p2.y}`;
     }
 
-    return d;
+    return path;
   }
 
 
   // ========================================================
-  // CARTÕES
+  // ESTAÇÕES
   // ========================================================
 
   function stationHeaderHTML(
@@ -970,14 +1126,20 @@
         : "";
 
     return `
-      <div class="river-pulse-station">
+      <div
+        class="river-pulse-station"
+      >
 
-        <div class="river-pulse-station-name">
+        <div
+          class="river-pulse-station-name"
+        >
           ${name}
           ${destination}
         </div>
 
-        <div class="river-pulse-station-code">
+        <div
+          class="river-pulse-station-code"
+        >
           ANA ${code}
         </div>
 
@@ -990,7 +1152,9 @@
           ${formatSigned(value)}
         </div>
 
-        <div class="river-pulse-station-label">
+        <div
+          class="river-pulse-station-label"
+        >
           em 72 h
         </div>
 
@@ -1004,24 +1168,15 @@
       number(value);
 
     if (
-      n === null
+      n === null ||
+      n === 0
     ) {
       return "stable";
     }
 
-    if (
-      n > 0
-    ) {
-      return "up";
-    }
-
-    if (
-      n < 0
-    ) {
-      return "down";
-    }
-
-    return "stable";
+    return n > 0
+      ? "up"
+      : "down";
   }
 
 
@@ -1030,7 +1185,9 @@
       !station
     ) {
       return `
-        <div class="river-pulse-short-card">
+        <div
+          class="river-pulse-short-card"
+        >
           <strong>6 h:</strong>
           —
           <br>
@@ -1041,7 +1198,9 @@
     }
 
     return `
-      <div class="river-pulse-short-card">
+      <div
+        class="river-pulse-short-card"
+      >
 
         <strong>
           6 h:
@@ -1103,731 +1262,4 @@
         stations[code];
 
       if (
-        !station
-      ) {
-        continue;
-      }
-
-      if (
-        stateFor(
-          station
-            .variacao_72h_cm
-        ) === "up"
-      ) {
-        positive.push(
-          station.nome ||
-          STATION_LABELS[code]
-        );
-      }
-    }
-
-
-    const barcelos =
-      stations[
-        "14480002"
-      ];
-
-
-    const b72 =
-      barcelos
-        ? number(
-            barcelos
-              .variacao_72h_cm
-          )
-        : null;
-
-
-    const b6 =
-      barcelos
-        ? number(
-            barcelos
-              .variacao_6h_cm
-          )
-        : null;
-
-
-    if (
-      positive.length
-    ) {
-      const title =
-        `Pulso positivo observado em ` +
-        `${positive.join(" e ")}`;
-
-      let text =
-        `A alta acumulada em 72 h ` +
-        `aparece nessas estações.`;
-
-      if (
-        b72 !== null &&
-        b72 <= -2
-      ) {
-        text +=
-          ` Barcelos ainda permanece ` +
-          `negativo no mesmo período ` +
-          `(${formatSigned(b72)}).`;
-
-      } else if (
-        b72 !== null &&
-        b72 >= 2
-      ) {
-        text +=
-          ` Barcelos também já apresenta ` +
-          `alta em 72 h ` +
-          `(${formatSigned(b72)}).`;
-      }
-
-      if (
-        b6 !== null &&
-        b6 > 0 &&
-        (
-          b72 === null ||
-          b72 < 2
-        )
-      ) {
-        text +=
-          ` Nas últimas 6 h, porém, ` +
-          `Barcelos mostra reação positiva ` +
-          `de ${formatSigned(b6)}.`;
-      }
-
-      return {
-        title,
-        text
-      };
-    }
-
-
-    return {
-      title:
-        "Nenhum pulso positivo relevante em 72 h",
-
-      text:
-        "A leitura atual não mostra estações " +
-        "com alta acumulada de pelo menos 2 cm " +
-        "nas últimas 72 horas."
-    };
-  }
-
-
-  // ========================================================
-  // SVG
-  // ========================================================
-
-  function svgHTML(points) {
-    const path =
-      smoothPath(
-        points
-      );
-
-
-    const areaPath =
-      `${path} ` +
-      `L ${
-        points[
-          points.length - 1
-        ].x
-      } ${BASELINE_Y} ` +
-      `L ${
-        points[0].x
-      } ${BASELINE_Y} Z`;
-
-
-    const stops =
-      points.map(
-        (point) => {
-
-          const offset =
-            (
-              point.x /
-              VIEW_W
-            ) *
-            100;
-
-          return `
-            <stop
-              offset="${offset.toFixed(1)}%"
-              stop-color="${point.color}"
-            />
-          `;
-        }
-      ).join("");
-
-
-    const guides =
-      points.map(
-        (point) => `
-          <line
-            class="river-pulse-guide"
-            x1="${point.x}"
-            y1="${
-              Math.min(
-                point.y,
-                BASELINE_Y
-              )
-            }"
-            x2="${point.x}"
-            y2="220"
-          />
-        `
-      ).join("");
-
-
-    const markers =
-      points.map(
-        (point) => `
-          <g>
-
-            <circle
-              class="river-pulse-marker-ring"
-              cx="${point.x}"
-              cy="${point.y}"
-              r="15"
-              stroke="${point.color}"
-            />
-
-            <circle
-              class="river-pulse-marker-core"
-              cx="${point.x}"
-              cy="${point.y}"
-              r="8"
-              fill="${point.color}"
-            />
-
-          </g>
-        `
-      ).join("");
-
-
-    return `
-      <svg
-        class="river-pulse-svg"
-        viewBox="0 0 ${VIEW_W} ${VIEW_H}"
-        role="img"
-        aria-label="Pulso do Rio Negro baseado na variação acumulada de 72 horas"
-      >
-
-        <defs>
-
-          <linearGradient
-            id="riverPulseLineGradient"
-            x1="0%"
-            y1="0%"
-            x2="100%"
-            y2="0%"
-          >
-            ${stops}
-          </linearGradient>
-
-
-          <linearGradient
-            id="riverPulseAreaGradient"
-            x1="0%"
-            y1="0%"
-            x2="0%"
-            y2="100%"
-          >
-
-            <stop
-              offset="0%"
-              stop-color="#5ce6ae"
-              stop-opacity="0.75"
-            />
-
-            <stop
-              offset="55%"
-              stop-color="#35a8dc"
-              stop-opacity="0.25"
-            />
-
-            <stop
-              offset="100%"
-              stop-color="#ff7078"
-              stop-opacity="0.45"
-            />
-
-          </linearGradient>
-
-
-          <filter
-            id="riverPulseGlow"
-            x="-20%"
-            y="-40%"
-            width="140%"
-            height="180%"
-          >
-
-            <feGaussianBlur
-              stdDeviation="4"
-              result="blur"
-            />
-
-            <feMerge>
-
-              <feMergeNode
-                in="blur"
-              />
-
-              <feMergeNode
-                in="SourceGraphic"
-              />
-
-            </feMerge>
-
-          </filter>
-
-        </defs>
-
-
-        <line
-          class="river-pulse-baseline"
-          x1="28"
-          y1="${BASELINE_Y}"
-          x2="1152"
-          y2="${BASELINE_Y}"
-        />
-
-
-        ${guides}
-
-
-        <path
-          class="river-pulse-area"
-          d="${areaPath}"
-          fill="url(#riverPulseAreaGradient)"
-        />
-
-
-        <path
-          class="river-pulse-path"
-          d="${path}"
-          stroke="url(#riverPulseLineGradient)"
-        />
-
-
-        <path
-          class="river-pulse-flow-path"
-          d="${path}"
-        />
-
-
-        ${markers}
-
-      </svg>
-    `;
-  }
-
-
-  // ========================================================
-  // ESTRUTURA
-  // ========================================================
-
-  function createSection() {
-    let section =
-      document.getElementById(
-        "river-pulse-section"
-      );
-
-    if (
-      section
-    ) {
-      return section;
-    }
-
-
-    section =
-      document.createElement(
-        "section"
-      );
-
-
-    section.id =
-      "river-pulse-section";
-
-
-    section.className =
-      "river-pulse-section";
-
-
-    section.innerHTML = `
-      <div class="river-pulse-header">
-
-        <div>
-
-          <div class="river-pulse-kicker">
-            PULSO DO RIO NEGRO
-          </div>
-
-          <h2 class="river-pulse-title">
-            Comportamento ao longo
-            do corredor
-          </h2>
-
-          <div class="river-pulse-subtitle">
-            A curva representa a direção
-            e a intensidade relativa da
-            variação do nível nas últimas
-            72 horas, de montante para
-            jusante.
-          </div>
-
-        </div>
-
-
-        <div class="river-pulse-legend">
-
-          <div class="river-pulse-legend-item">
-
-            <span
-              class="
-                river-pulse-legend-dot
-                up
-              "
-            ></span>
-
-            alta em 72 h
-
-          </div>
-
-
-          <div class="river-pulse-legend-item">
-
-            <span
-              class="
-                river-pulse-legend-dot
-                down
-              "
-            ></span>
-
-            queda em 72 h
-
-          </div>
-
-
-          <div class="river-pulse-legend-item">
-
-            <span
-              class="
-                river-pulse-legend-dot
-                stable
-              "
-            ></span>
-
-            estabilidade
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div class="river-pulse-scroll-hint">
-        Deslize para acompanhar
-        todo o corredor →
-      </div>
-
-
-      <div
-        id="river-pulse-body"
-        class="river-pulse-loading"
-      >
-        Carregando o pulso do rio...
-      </div>
-
-
-      <div
-        id="river-pulse-insight"
-        class="river-pulse-insight"
-        style="display:none;"
-      ></div>
-    `;
-
-
-    const radar =
-      document.getElementById(
-        "river-radar-section"
-      );
-
-
-    if (
-      radar
-    ) {
-      radar.insertAdjacentElement(
-        "beforebegin",
-        section
-      );
-
-      return section;
-    }
-
-
-    const upstream =
-      document.querySelector(
-        ".upstream-section"
-      );
-
-
-    if (
-      upstream
-    ) {
-      upstream.insertAdjacentElement(
-        "afterend",
-        section
-      );
-
-      return section;
-    }
-
-
-    const dashboard =
-      document.querySelector(
-        ".dashboard"
-      );
-
-
-    if (
-      dashboard
-    ) {
-      dashboard.appendChild(
-        section
-      );
-    }
-
-
-    return section;
-  }
-
-
-  // ========================================================
-  // RENDER
-  // ========================================================
-
-  function render(data) {
-    const stations =
-      stationMap(
-        data
-      );
-
-
-    const points =
-      makePoints(
-        stations
-      );
-
-
-    const body =
-      document.getElementById(
-        "river-pulse-body"
-      );
-
-
-    const insightBox =
-      document.getElementById(
-        "river-pulse-insight"
-      );
-
-
-    if (
-      !body ||
-      !insightBox
-    ) {
-      return;
-    }
-
-
-    body.className =
-      "river-pulse-corridor";
-
-
-    body.innerHTML = `
-      <div class="river-pulse-canvas">
-
-        <div class="river-pulse-stations">
-
-          ${
-            STATION_ORDER.map(
-              (code) =>
-                stationHeaderHTML(
-                  code,
-                  stations[code]
-                )
-            ).join("")
-          }
-
-        </div>
-
-
-        <div class="river-pulse-svg-wrap">
-          ${svgHTML(points)}
-        </div>
-
-
-        <div class="river-pulse-short-grid">
-
-          ${
-            STATION_ORDER.map(
-              (code) =>
-                shortCardHTML(
-                  stations[code]
-                )
-            ).join("")
-          }
-
-        </div>
-
-
-        <div class="river-pulse-direction">
-
-          <span>
-            MONTANTE
-          </span>
-
-          <span
-            class="
-              river-pulse-direction-line
-            "
-          ></span>
-
-          <span>
-            JUSANTE
-          </span>
-
-        </div>
-
-      </div>
-    `;
-
-
-    const insight =
-      buildInsight(
-        stations
-      );
-
-
-    insightBox.style.display =
-      "grid";
-
-
-    insightBox.innerHTML = `
-      <div>
-
-        <div class="river-pulse-insight-title">
-          ${insight.title}
-        </div>
-
-        <div class="river-pulse-insight-text">
-          ${insight.text}
-        </div>
-
-      </div>
-
-
-      <div class="river-pulse-note">
-        A curva mostra comportamento
-        relativo entre estações nas
-        últimas 72 h.
-
-        Não representa cota absoluta,
-        velocidade da água ou previsão
-        de chegada da cheia.
-
-        O brilho em movimento apenas
-        indica o sentido
-        montante → jusante.
-      </div>
-    `;
-  }
-
-
-  // ========================================================
-  // CARREGAMENTO
-  // ========================================================
-
-  async function loadPulse() {
-    try {
-      const response =
-        await fetch(
-          `${DATA_URL}?t=${Date.now()}`,
-          {
-            cache: "no-store"
-          }
-        );
-
-
-      if (
-        !response.ok
-      ) {
-        throw new Error(
-          `HTTP ${response.status}`
-        );
-      }
-
-
-      const data =
-        await response.json();
-
-
-      render(
-        data
-      );
-
-    } catch (
-      error
-    ) {
-      const body =
-        document.getElementById(
-          "river-pulse-body"
-        );
-
-
-      if (
-        body
-      ) {
-        body.className =
-          "river-pulse-loading";
-
-        body.textContent =
-          "Não foi possível atualizar " +
-          "o Pulso do Rio Negro agora.";
-      }
-
-
-      console.error(
-        "Erro ao carregar Pulso do Rio Negro:",
-        error
-      );
-    }
-  }
-
-
-  // ========================================================
-  // INICIALIZAÇÃO
-  // ========================================================
-
-  function init() {
-    installStyles();
-
-    createSection();
-
-    loadPulse();
-
-    window.setInterval(
-      loadPulse,
-      REFRESH_MS
-    );
-  }
-
-
-  if (
-    document.readyState ===
-    "loading"
-  ) {
-    document.addEventListener(
-      "DOMContentLoaded",
-      init
-    );
-  } else {
-    init();
-  }
-
-})();
+       

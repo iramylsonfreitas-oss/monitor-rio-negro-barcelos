@@ -1,0 +1,499 @@
+/* =========================================================
+   POSIÇÃO SAZONAL
+   Barcelos x comportamento histórico
+========================================================= */
+
+
+/* =========================
+   CARD PRINCIPAL
+========================= */
+
+.seasonal-card {
+  margin-top: 20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(88, 214, 255, 0.035),
+      rgba(255, 255, 255, 0.01)
+    ),
+    var(--panel);
+}
+
+
+/* =========================
+   RESUMO
+========================= */
+
+.seasonal-summary-grid {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 2fr)
+    minmax(180px, 1fr)
+    minmax(180px, 1fr);
+
+  gap: 10px;
+
+  margin-bottom: 14px;
+}
+
+
+/* =========================
+   TERMÔMETRO SAZONAL
+========================= */
+
+.seasonal-gauge-card {
+  padding: 17px;
+
+  border:
+    1px solid
+    rgba(88, 214, 255, 0.16);
+
+  border-radius: 15px;
+
+  background:
+    rgba(4, 18, 31, 0.38);
+}
+
+
+.seasonal-gauge-top {
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+
+  gap: 14px;
+}
+
+
+.seasonal-mini-label {
+  color: var(--muted);
+
+  font-size: 9px;
+
+  font-weight: 800;
+
+  letter-spacing: 0.09em;
+}
+
+
+.seasonal-position-label {
+  margin-top: 5px;
+
+  color: #f4f8fb;
+
+  font-size: 20px;
+
+  font-weight: 750;
+
+  line-height: 1.2;
+}
+
+
+.seasonal-percentile {
+  min-width: 54px;
+
+  padding:
+    7px 10px;
+
+  border:
+    1px solid
+    rgba(88, 214, 255, 0.32);
+
+  border-radius: 10px;
+
+  background:
+    rgba(88, 214, 255, 0.07);
+
+  color: #58d6ff;
+
+  font-size: 15px;
+
+  font-weight: 800;
+
+  text-align: center;
+}
+
+
+/* =========================
+   ESCALA
+========================= */
+
+.seasonal-gauge {
+  margin-top: 20px;
+}
+
+
+.seasonal-gauge-scale {
+  display: grid;
+
+  grid-template-columns:
+    repeat(5, 1fr);
+
+  margin-bottom: 7px;
+}
+
+
+.seasonal-gauge-scale span {
+  color: #8fa7bc;
+
+  font-size: 8px;
+
+  font-weight: 600;
+
+  line-height: 1.2;
+
+  text-align: center;
+}
+
+
+.seasonal-gauge-track {
+  position: relative;
+
+  height: 11px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.08);
+
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(70, 130, 180, 0.55) 0%,
+      rgba(70, 130, 180, 0.55) 10%,
+
+      rgba(88, 170, 210, 0.55) 10%,
+      rgba(88, 170, 210, 0.55) 25%,
+
+      rgba(105, 190, 180, 0.55) 25%,
+      rgba(105, 190, 180, 0.55) 75%,
+
+      rgba(224, 187, 91, 0.60) 75%,
+      rgba(224, 187, 91, 0.60) 90%,
+
+      rgba(224, 135, 76, 0.65) 90%,
+      rgba(224, 135, 76, 0.65) 100%
+    );
+}
+
+
+.seasonal-gauge-marker {
+  position: absolute;
+
+  top: 50%;
+
+  left: 50%;
+
+  width: 19px;
+
+  height: 19px;
+
+  border:
+    3px solid
+    #071522;
+
+  border-radius: 50%;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 0 0 2px
+    rgba(88, 214, 255, 0.55);
+
+  transform:
+    translate(
+      -50%,
+      -50%
+    );
+
+  transition:
+    left 0.35s ease;
+}
+
+
+/* =========================
+   CARDS NUMÉRICOS
+========================= */
+
+.seasonal-stat-card {
+  padding: 17px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.08);
+
+  border-radius: 15px;
+
+  background:
+    rgba(255, 255, 255, 0.025);
+}
+
+
+.seasonal-stat-value {
+  margin-top: 9px;
+
+  color: #f4f8fb;
+
+  font-size: 27px;
+
+  font-weight: 800;
+
+  letter-spacing: -0.03em;
+
+  line-height: 1.05;
+}
+
+
+.seasonal-stat-detail {
+  margin-top: 8px;
+
+  color: #a9bbc9;
+
+  font-size: 10px;
+
+  font-weight: 600;
+
+  line-height: 1.4;
+}
+
+
+/* =========================
+   STATUS
+========================= */
+
+.seasonal-status {
+  display: inline-flex;
+
+  align-items: center;
+
+  min-height: 30px;
+
+  margin-bottom: 13px;
+
+  padding:
+    7px 11px;
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius: 10px;
+
+  background:
+    rgba(255, 255, 255, 0.025);
+
+  color: var(--muted);
+
+  font-size: 10px;
+
+  font-weight: 600;
+}
+
+
+/* =========================
+   GRÁFICO
+========================= */
+
+.seasonal-chart-container {
+  height: 360px;
+}
+
+
+/* =========================
+   NOTA METODOLÓGICA
+========================= */
+
+.seasonal-note {
+  margin-top: 13px;
+
+  padding-top: 12px;
+
+  border-top:
+    1px solid
+    var(--border);
+
+  color: var(--muted);
+
+  font-size: 10px;
+
+  line-height: 1.55;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (
+  max-width: 900px
+) {
+
+  .seasonal-summary-grid {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0, 1fr)
+      );
+  }
+
+
+  .seasonal-gauge-card {
+    grid-column:
+      1 / -1;
+  }
+
+
+  .seasonal-chart-container {
+    height: 340px;
+  }
+
+}
+
+
+/* =========================
+   CELULAR
+========================= */
+
+@media (
+  max-width: 560px
+) {
+
+  .seasonal-card {
+    margin-top: 14px;
+  }
+
+
+  .seasonal-summary-grid {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0, 1fr)
+      );
+
+    gap: 8px;
+  }
+
+
+  .seasonal-gauge-card {
+    grid-column:
+      1 / -1;
+
+    padding: 13px;
+  }
+
+
+  .seasonal-stat-card {
+    padding: 12px 10px;
+  }
+
+
+  .seasonal-position-label {
+    font-size: 18px;
+  }
+
+
+  .seasonal-percentile {
+    min-width: 48px;
+
+    padding:
+      6px 8px;
+
+    font-size: 13px;
+  }
+
+
+  .seasonal-stat-value {
+    font-size: 22px;
+  }
+
+
+  .seasonal-stat-detail {
+    font-size: 9px;
+  }
+
+
+  .seasonal-gauge {
+    margin-top: 17px;
+  }
+
+
+  .seasonal-gauge-scale span {
+    font-size: 7px;
+  }
+
+
+  .seasonal-status {
+    width: 100%;
+
+    margin-bottom: 10px;
+
+    font-size: 9px;
+
+    line-height: 1.4;
+  }
+
+
+  .seasonal-chart-container {
+    height: 315px;
+  }
+
+
+  .seasonal-note {
+    margin-top: 10px;
+
+    font-size: 9px;
+  }
+
+}
+
+
+/* =========================
+   CELULARES MENORES
+========================= */
+
+@media (
+  max-width: 390px
+) {
+
+  .seasonal-summary-grid {
+    grid-template-columns:
+      1fr 1fr;
+
+    gap: 7px;
+  }
+
+
+  .seasonal-gauge-card {
+    padding: 11px;
+  }
+
+
+  .seasonal-stat-card {
+    padding: 11px 9px;
+  }
+
+
+  .seasonal-position-label {
+    font-size: 17px;
+  }
+
+
+  .seasonal-stat-value {
+    font-size: 20px;
+  }
+
+
+  .seasonal-gauge-scale span {
+    font-size: 6px;
+  }
+
+
+  .seasonal-chart-container {
+    height: 300px;
+  }
+
+}

@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Monitor Rio Negro | Barcelos — V2.5</title>
+<style>
+/* V2.5 — pulso refinado; lógica de dados preservada da V2.4 */
+:root{
+  --bg:#071524;--panel:#0d2236;--panel2:#10283e;--line:rgba(255,255,255,.08);
+  --text:#f3f7fb;--muted:#8da4b8;--blue:#3fa7ff;--cyan:#4fd8ff;
+  --up:#53d8ad;--down:#ff7180;--stable:#b8c6d1;--warn:#f5c451;
+}
+*{box-sizing:border-box}
+html,body{margin:0;max-width:100%;overflow-x:hidden;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+body{min-height:100vh}
+.wrap{width:min(1180px,calc(100% - 24px));margin:0 auto;padding:24px 0 44px}
+header{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin-bottom:18px}
+.eyebrow,.label{font-size:12px;letter-spacing:.14em;font-weight:800;color:var(--muted)}
+h1{font-size:clamp(42px,8vw,70px);line-height:.98;margin:8px 0 6px;letter-spacing:-.055em}
+.subtitle{font-size:18px;color:var(--muted)}
+.status{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:16px;padding:12px 14px;min-width:210px}
+.dot{width:12px;height:12px;border-radius:50%;background:var(--warn);box-shadow:0 0 0 7px rgba(245,196,81,.08)}
+.dot.ok{background:var(--up);box-shadow:0 0 0 7px rgba(83,216,173,.08)}
+.status strong{display:block;font-size:13px}.status small{display:block;color:var(--muted);margin-top:2px}
+.card{background:linear-gradient(145deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:24px;padding:24px;margin-bottom:18px}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:20px}
+.level{font-size:clamp(66px,10vw,112px);font-weight:800;line-height:.95;letter-spacing:-.06em;margin-top:16px}
+.level span{font-size:.36em;color:var(--muted);margin-left:6px;letter-spacing:-.02em}
+.meta{color:var(--muted);font-size:13px;margin-top:14px;line-height:1.55}
+.trend{display:flex;align-items:center;gap:16px;border-left:1px solid var(--line);padding-left:22px}
+.trendIcon{width:68px;height:68px;border-radius:18px;display:grid;place-items:center;font-size:40px;background:rgba(63,167,255,.1);color:var(--blue);flex:0 0 auto}
+.trendText{font-size:32px;font-weight:800;margin-top:5px}.trendSub{font-size:13px;color:var(--muted);margin-top:5px}
+.metrics{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding-top:18px;border-top:1px solid var(--line)}
+.metric{background:rgba(255,255,255,.03);border-radius:16px;padding:14px}
+.metric b{font-size:28px;display:block;margin-top:8px}.metric small{color:var(--muted)}
+.pos{color:var(--up)!important}.neg{color:var(--down)!important}.neu{color:var(--stable)!important}
+.sectionHead{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin-bottom:18px}
+.sectionHead h2{font-size:clamp(26px,4vw,38px);margin:6px 0 0;letter-spacing:-.035em}
+.badge{border:1px solid rgba(245,196,81,.28);color:var(--warn);background:rgba(245,196,81,.08);border-radius:999px;padding:9px 12px;font-size:11px;font-weight:800;white-space:nowrap}
+.progress{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin:18px 0 20px}
+.stage{position:relative;text-align:center;color:#667d90;font-size:10px;font-weight:700}
+.stage:before{content:"";position:absolute;left:50%;right:-50%;top:16px;height:2px;background:rgba(255,255,255,.08)}
+.stage:last-child:before{display:none}
+.ball{position:relative;z-index:1;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;margin:0 auto 8px;border:2px solid rgba(255,255,255,.10);background:#0b1c2c}
+.stage.active{color:#fff}.stage.active .ball{background:#fff;color:#071524;border-color:#fff;box-shadow:0 0 0 8px rgba(245,196,81,.08)}
+.message{background:rgba(255,255,255,.03);border-radius:18px;padding:18px}
+.message h3{font-size:24px;margin:0 0 8px}.message p{margin:0;color:var(--muted);line-height:1.6}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.chip{font-size:11px;border:1px solid var(--line);border-radius:999px;padding:8px 10px;background:rgba(255,255,255,.025)}
+.trigger{margin-top:14px;padding:14px;border:1px solid rgba(245,196,81,.18);border-radius:14px;background:rgba(245,196,81,.05)}
+.trigger .label{color:var(--warn);font-size:10px}.trigger div:last-child{margin-top:5px;font-size:13px}
+.stations{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.station{background:rgba(255,255,255,.025);border:1px solid var(--line);border-radius:18px;padding:16px;min-width:0}
+.station.current{border-color:rgba(63,167,255,.4);background:rgba(63,167,255,.045)}
+.stationName{font-size:18px;font-weight:800}.stationCode{font-size:10px;color:var(--muted);margin-top:2px}.stationLevel{font-size:32px;font-weight:800;margin:16px 0 6px}.stationLevel span{font-size:15px;color:var(--muted)}
+.stationTrend{font-weight:700;font-size:13px}.miniGrid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:14px}.mini{background:rgba(255,255,255,.025);border-radius:10px;padding:8px}.mini span{display:block;color:var(--muted);font-size:9px}.mini b{display:block;font-size:14px;margin-top:3px}
+.stationTime{font-size:10px;color:var(--muted);margin-top:12px}
+
+.waveCard{overflow:hidden}
+.waveCard .sectionHead{align-items:center;margin-bottom:12px}
+.waveIntro{color:var(--muted);font-size:13px;line-height:1.55;margin-top:-3px;margin-bottom:12px;max-width:760px}
+.waveWrap{position:relative;border-radius:20px;background:radial-gradient(circle at 50% 52%,rgba(79,216,255,.075),transparent 46%),linear-gradient(180deg,rgba(16,55,82,.28),rgba(5,25,42,.14));border:1px solid rgba(79,216,255,.09);padding:6px 8px 0;overflow:hidden}
+.waveWrap:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 54%,rgba(34,124,171,.035)),repeating-linear-gradient(180deg,transparent 0,transparent 10px,rgba(255,255,255,.012) 11px);pointer-events:none}
+#waveSvg{position:relative;z-index:1;display:block;width:100%;height:auto;min-height:225px}
+.waveLegend{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;color:var(--muted);font-size:10px}
+.waveLegend span{display:inline-flex;align-items:center;gap:6px}
+.legendDot{width:8px;height:8px;border-radius:50%;display:inline-block}
+.legendDot.up{background:var(--up);box-shadow:0 0 8px rgba(83,216,173,.55)}
+.legendDot.down{background:var(--down);box-shadow:0 0 8px rgba(255,113,128,.55)}
+.legendDot.stable{background:var(--warn);box-shadow:0 0 8px rgba(245,196,81,.45)}
+.waveNote{margin-top:9px;color:#7890a4;font-size:10px;line-height:1.5}
+.techDetails{margin-top:12px;border-top:1px solid var(--line);padding-top:11px}
+.techDetails summary{cursor:pointer;color:var(--muted);font-size:11px;font-weight:750;list-style:none;display:flex;align-items:center;gap:7px}
+.techDetails summary::-webkit-details-marker{display:none}
+.techDetails summary:before{content:"+";display:grid;place-items:center;width:18px;height:18px;border-radius:50%;border:1px solid var(--line);color:#b7c7d3}
+.techDetails[open] summary:before{content:"−"}
+.techDetails .corridor{margin-top:12px}
+.waveGlow{filter:url(#waveGlow)}
+.waveMotion{stroke-dasharray:20 92;animation:waveFlow 4.6s linear infinite;opacity:.58}
+@keyframes waveFlow{to{stroke-dashoffset:-224}}
+
+.corridor{display:grid;gap:10px}.corridorRow{display:grid;grid-template-columns:110px 1fr 58px;gap:10px;align-items:center}.corridorName{font-size:12px;font-weight:700}.track{position:relative;height:20px;background:rgba(255,255,255,.025);border-radius:999px;overflow:hidden}.zero{position:absolute;left:50%;top:0;bottom:0;width:1px;background:rgba(255,255,255,.18)}.bar{position:absolute;top:5px;height:10px;border-radius:999px}.bar.pos{left:50%;background:var(--up)}.bar.neg{right:50%;background:var(--down)}.corridorVal{text-align:right;font-size:13px;font-weight:800}
+.chartWrap{height:230px;border-radius:16px;background:rgba(255,255,255,.02);padding:12px;overflow:hidden}.chartWrap svg{width:100%;height:100%;display:block}
+.chartMeta{display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:10px;margin-top:8px}
+.error{display:none;background:rgba(255,113,128,.08);border:1px solid rgba(255,113,128,.25);color:#ffd8dd;padding:12px 14px;border-radius:14px;margin-bottom:14px;font-size:12px;line-height:1.5}
+footer{color:var(--muted);font-size:10px;text-align:center;padding-top:8px}
+@media(max-width:900px){
+  header{display:block}.status{margin-top:16px;width:100%}
+  .hero{grid-template-columns:1fr}.trend{border-left:0;border-top:1px solid var(--line);padding:18px 0 0}
+  .stations{grid-template-columns:repeat(2,1fr)}
+}
+
+@media(max-width:620px){
+  .waveWrap{padding:3px 0 0;border-radius:16px}
+  #waveSvg{min-height:215px}
+  .waveIntro{font-size:12px;margin-bottom:10px}
+  .waveLegend{gap:10px}
+  .waveCard{padding-left:14px;padding-right:14px}
+}
+@media(max-width:620px){
+  .wrap{width:calc(100% - 18px);padding-top:16px}
+  .card{border-radius:20px;padding:18px}
+  .metrics{grid-template-columns:repeat(2,1fr)}
+  .trendText{font-size:26px}.trendIcon{width:56px;height:56px;font-size:34px}
+  .progress{overflow-x:auto;grid-template-columns:repeat(5,88px);padding-bottom:4px}
+  .stations{grid-template-columns:1fr}
+  .station{display:grid;grid-template-columns:1fr auto;column-gap:12px}
+  .stationName,.stationCode,.stationTrend,.stationTime{grid-column:1}
+  .stationLevel{grid-column:2;grid-row:1/3;margin:0;text-align:right}
+  .miniGrid{grid-column:1/-1}
+  .sectionHead{display:block}.badge{display:inline-block;margin-top:12px}
+  .corridorRow{grid-template-columns:82px 1fr 48px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <div class="eyebrow">MONITORAMENTO HIDROLÓGICO</div>
+      <h1>Rio Negro</h1>
+      <div class="subtitle">Barcelos • Amazonas</div>
+    </div>
+    <div class="status">
+      <div id="dot" class="dot"></div>
+      <div><strong id="statusText">Carregando dados...</strong><small id="statusTime">—</small></div>
+    </div>
+  </header>
+
+  <div id="errorBox" class="error"></div>
+
+  <section class="card hero">
+    <div>
+      <div class="label">NÍVEL ATUAL</div>
+      <div id="level" class="level">—<span>m</span></div>
+      <div id="measureMeta" class="meta">Última medição ANA: —</div>
+    </div>
+    <div class="trend">
+      <div id="trendIcon" class="trendIcon">→</div>
+      <div><div class="label">TENDÊNCIA RECENTE</div><div id="trendText" class="trendText">—</div><div id="trendSub" class="trendSub">baseada nas últimas 6 horas</div></div>
+    </div>
+    <div class="metrics">
+      <div class="metric"><div class="label">ÚLTIMAS 6 HORAS</div><b id="v6">—</b><small>variação do nível</small></div>
+      <div class="metric"><div class="label">ÚLTIMAS 24 HORAS</div><b id="v24">—</b><small>variação do nível</small></div>
+      <div class="metric"><div class="label">ÚLTIMAS 72 HORAS</div><b id="v72">—</b><small>variação acumulada</small></div>
+      <div class="metric"><div class="label">ÚLTIMOS 7 DIAS</div><b id="v7d">—</b><small>variação acumulada</small></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="sectionHead">
+      <div><div class="label">DETECTOR DE REPIQUETE</div><h2>Mudança de tendência em Barcelos</h2></div>
+      <div id="detectorBadge" class="badge">ANALISANDO</div>
+    </div>
+    <div id="progress" class="progress"></div>
+    <div class="message">
+      <h3 id="detectorTitle">Analisando comportamento...</h3>
+      <p id="detectorMessage">Comparando Barcelos com as estações a montante.</p>
+      <div id="reasonChips" class="chips"></div>
+      <div class="trigger"><div class="label">PRÓXIMO GATILHO</div><div id="nextTrigger">Calculando...</div></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="sectionHead"><div><div class="label">RIO NEGRO A MONTANTE</div><h2>Movimento antes de Barcelos</h2></div></div>
+    <div id="stations" class="stations"><div class="meta">Carregando estações...</div></div>
+  </section>
+
+  <section class="card waveCard">
+    <div class="sectionHead">
+      <div>
+        <div class="label">PULSO DO RIO NEGRO</div>
+        <h2>Movimento ao longo do corredor</h2>
+      </div>
+      <div class="badge">72 HORAS</div>
+    </div>
+
+    <div class="waveIntro">
+      A curva mostra onde a alta e a vazante aparecem entre as estações,
+      de montante para jusante.
+    </div>
+
+    <div class="waveWrap">
+      <svg id="waveSvg" viewBox="0 0 1000 320" role="img" aria-label="Movimento relativo do Rio Negro entre Cucuí e Barcelos"></svg>
+    </div>
+
+    <div class="waveLegend">
+      <span><i class="legendDot up"></i> alta em 72 h</span>
+      <span><i class="legendDot down"></i> queda em 72 h</span>
+      <span><i class="legendDot stable"></i> estabilidade</span>
+    </div>
+
+    <div class="waveNote">
+      Leitura relativa das variações de nível nas últimas 72 h.
+      A curva não representa cota absoluta, velocidade da água nem previsão de chegada.
+    </div>
+
+    <details class="techDetails">
+      <summary>Ver comparação numérica de 72 h</summary>
+      <div id="corridor" class="corridor"></div>
+    </details>
+  </section>
+
+  <section class="card">
+    <div class="sectionHead"><div><div class="label">COMPORTAMENTO RECENTE</div><h2>Barcelos nos últimos 30 dias</h2></div><div id="records" class="badge">— medições</div></div>
+    <div class="chartWrap"><svg id="chart30d" viewBox="0 0 1000 260" preserveAspectRatio="none"></svg></div>
+    <div class="chartMeta"><span id="chartStart">—</span><span id="chartEnd">—</span></div>
+  </section>
+
+  <footer>Fonte: Agência Nacional de Águas e Saneamento Básico — ANA • atualização automática</footer>
+</div>
+
+<script>
+(() => {
+  "use strict";
+
+  const ROOT = "https://iramylsonfreitas-oss.github.io/monitor-rio-negro-barcelos/data/";
+  const stages = ["Sem sinal","Sinal a montante","Possível reversão","Em formação","Confirmado"];
+
+  const $ = id => document.getElementById(id);
+
+  function cls(n){
+    n=Number(n);
+    return !Number.isFinite(n)||n===0?"neu":n>0?"pos":"neg";
+  }
+  function fmtVar(n){
+    n=Number(n);
+    if(!Number.isFinite(n)) return "—";
+    if(n===0) return "0 cm";
+    const a=Math.abs(n);
+    const t=(Number.isInteger(a)?a.toFixed(0):a.toFixed(1)).replace(".",",");
+    return `${n>0?"+":"-"}${t} cm`;
+  }
+  function fmtLevel(n){
+    n=Number(n);
+    return Number.isFinite(n)?n.toFixed(2).replace(".",","):"—";
+  }
+  function fmtDate(s){
+    if(!s) return "—";
+    const [d,t=""]=String(s).split(" ");
+    const p=d.split("-");
+    return p.length===3?`${p[2]}/${p[1]}/${p[0]} ${t.slice(0,5)}`:s;
+  }
+  function fmtShort(s){
+    if(!s)return "—";
+    const [d,t=""]=String(s).split(" ");
+    const p=d.split("-");
+    return p.length===3?`${p[2]}/${p[1]} ${t.slice(0,5)}`:s;
+  }
+  async function get(name){
+    const r=await fetch(`${ROOT}${name}?v=${Date.now()}`,{cache:"no-store"});
+    if(!r.ok) throw new Error(`${name}: HTTP ${r.status}`);
+    return r.json();
+  }
+  function setVar(id,val){
+    const el=$(id); el.textContent=fmtVar(val); el.className=cls(val);
+  }
+  function renderLatest(d){
+    $("level").innerHTML=`${fmtLevel(d.nivel_m)}<span>m</span>`;
+    $("measureMeta").textContent=`Última medição ANA: ${fmtDate(d.data_medicao_manaus||d.data_medicao)} • ANA atualizou: ${fmtShort(d.data_atualizacao_manaus||d.data_atualizacao_ana)}`;
+    setVar("v6",d.variacao_6h_cm);setVar("v24",d.variacao_24h_cm);setVar("v72",d.variacao_72h_cm);setVar("v7d",d.variacao_7d_cm);
+    const v6=Number(d.variacao_6h_cm);
+    let text="Estável",icon="→";
+    if(v6>0){text=Math.abs(v6)<=2?"Leve alta":"Subindo";icon="↑"}
+    if(v6<0){text=Math.abs(v6)<=2?"Leve queda":"Descendo";icon="↓"}
+    $("trendText").textContent=text;$("trendIcon").textContent=icon;
+    $("trendSub").textContent=`${fmtVar(v6)} nas últimas 6 horas`;
+    $("dot").classList.add("ok");$("statusText").textContent="Dados ANA carregados";
+    $("statusTime").textContent=`Medição ${fmtShort(d.data_medicao_manaus||d.data_medicao)}`;
+    $("records").textContent=`${d.registros_30d??"—"} medições`;
+  }
+  function renderDetector(d){
+    const level=Math.max(0,Math.min(4,Number(d.nivel)||0));
+    $("detectorBadge").textContent=d.rotulo||"SEM INFORMAÇÃO";
+    $("detectorTitle").textContent=d.titulo||"Situação indisponível";
+    $("detectorMessage").textContent=d.mensagem||"—";
+    $("progress").innerHTML=stages.map((s,i)=>`<div class="stage ${i===level?"active":""}"><div class="ball">${i}</div>${s}</div>`).join("");
+    $("reasonChips").innerHTML=(d.motivos||[]).map(x=>`<div class="chip">${x}</div>`).join("");
+    const c=d.criterios||{};
+    let next="Aguardando novo sinal consistente.";
+    if(level===1) next=`Confirmar alta sustentada em Serrinha: referência de +${Number(c.alta_confirmacao_24h_cm??3).toFixed(0)} cm em 24 h.`;
+    else if(level===2) next="Aguardar persistência da reversão observada em Barcelos.";
+    else if(level===3) next=`Aguardar ${c.confirmacoes??3} verificações consecutivas separadas por ${c.intervalo_confirmacoes_h??6} h.`;
+    else if(level===4) next="Movimento confirmado pelo critério atual do detector.";
+    $("nextTrigger").textContent=next;
+  }
+  function trendInfo(t){
+    if(t==="subindo")return["↑ Subindo","pos"];
+    if(t==="descendo")return["↓ Descendo","neg"];
+    return["→ Estável","neu"];
+  }
+  function renderStations(d){
+    const list=d.estacoes||[];
+    $("stations").innerHTML=list.map(s=>{
+      const [tt,tc]=trendInfo(s.tendencia);
+      return `<article class="station ${s.estacao==="14480002"?"current":""}">
+        <div class="stationName">${s.nome}</div><div class="stationCode">ANA ${s.estacao}</div>
+        <div class="stationLevel">${fmtLevel(s.nivel_m)} <span>m</span></div>
+        <div class="stationTrend ${tc}">${tt}</div>
+        <div class="miniGrid">
+          <div class="mini"><span>6 H</span><b class="${cls(s.variacao_6h_cm)}">${fmtVar(s.variacao_6h_cm)}</b></div>
+          <div class="mini"><span>24 H</span><b class="${cls(s.variacao_24h_cm)}">${fmtVar(s.variacao_24h_cm)}</b></div>
+          <div class="mini"><span>72 H</span><b class="${cls(s.variacao_72h_cm)}">${fmtVar(s.variacao_72h_cm)}</b></div>
+          <div class="mini"><span>7 DIAS</span><b class="${cls(s.variacao_7d_cm)}">${fmtVar(s.variacao_7d_cm)}</b></div>
+        </div>
+        <div class="stationTime">Medição ${fmtShort(s.data_medicao_manaus||s.data_medicao)}</div>
+      </article>`;
+    }).join("");
+    renderCorridor(list);
+  }
+  function smoothPath(points){
+    if(!points.length) return "";
+    if(points.length===1) return `M ${points[0][0]} ${points[0][1]}`;
+    let d=`M ${points[0][0]} ${points[0][1]}`;
+    for(let i=0;i<points.length-1;i++){
+      const p0=points[i-1]||points[i];
+      const p1=points[i];
+      const p2=points[i+1];
+      const p3=points[i+2]||p2;
+      const cp1x=p1[0]+(p2[0]-p0[0])/6;
+      const cp1y=p1[1]+(p2[1]-p0[1])/6;
+      const cp2x=p2[0]-(p3[0]-p1[0])/6;
+      const cp2y=p2[1]-(p3[1]-p1[1])/6;
+      d+=` C ${cp1x.toFixed(1)} ${cp1y.toFixed(1)}, ${cp2x.toFixed(1)} ${cp2y.toFixed(1)}, ${p2[0]} ${p2[1]}`;
+    }
+    return d;
+  }
+
+  function waveColor(n){
+    n=Number(n);
+    if(!Number.isFinite(n)||Math.abs(n)<.5) return "#f5c451";
+    return n>0?"#53d8ad":"#ff7180";
+  }
+
+  function renderCorridor(list){
+    const max=Math.max(1,...list.map(s=>Math.abs(Number(s.variacao_72h_cm)||0)));
+
+    // Comparação técnica preservada como visão secundária recolhida.
+    $("corridor").innerHTML=list.map(s=>{
+      const n=Number(s.variacao_72h_cm)||0;
+      const w=Math.max(2,Math.abs(n)/max*46);
+      return `<div class="corridorRow">
+        <div class="corridorName">${s.nome}</div>
+        <div class="track"><div class="zero"></div><div class="bar ${n>=0?"pos":"neg"}" style="width:${w}%"></div></div>
+        <div class="corridorVal ${cls(n)}">${fmtVar(n)}</div>
+      </div>`;
+    }).join("");
+
+    const svg=$("waveSvg");
+    if(!svg||!list.length) return;
+
+    const xs=[88,294,500,706,912];
+    const baseline=176;
+    const amplitude=60;
+
+    const points=list.map((s,i)=>{
+      const n=Number(s.variacao_72h_cm)||0;
+      const y=baseline-(n/max)*amplitude;
+      return [xs[i]??(88+i*206),y,n,s];
+    });
+
+    const path=smoothPath(points.map(p=>[p[0],p[1]]));
+
+    const stops=points.map(p=>{
+      const pct=(p[0]-88)/(912-88)*100;
+      return `<stop offset="${pct.toFixed(1)}%" stop-color="${waveColor(p[2])}"/>`;
+    }).join("");
+
+    const nodes=points.map((p,i)=>{
+      const [x,y,n,s]=p;
+      const color=waveColor(n);
+      const val=fmtVar(n);
+      const isDestination=String(s.estacao)==="14480002";
+      const anchor=i===0?"start":i===points.length-1?"end":"middle";
+      const tx=i===0?x+2:i===points.length-1?x-2:x;
+
+      const destino=isDestination
+        ? `<g transform="translate(${x-66},2)">
+             <rect x="0" y="0" width="62" height="22" rx="11"
+                   fill="rgba(63,167,255,.12)" stroke="rgba(79,216,255,.28)"/>
+             <text x="31" y="15" text-anchor="middle" fill="#bfefff"
+                   font-size="10" font-weight="800" letter-spacing="1.2">DESTINO</text>
+           </g>`
+        : "";
+
+      return `
+        ${destino}
+        <text x="${tx}" y="34" text-anchor="${anchor}" fill="#f3f7fb" font-size="18" font-weight="800">${s.nome}</text>
+        <text x="${tx}" y="53" text-anchor="${anchor}" fill="#7890a4" font-size="10" font-weight="650">ANA ${s.estacao}</text>
+        <text x="${tx}" y="81" text-anchor="${anchor}" fill="${color}" font-size="26" font-weight="850">${val}</text>
+        <text x="${tx}" y="99" text-anchor="${anchor}" fill="#8da4b8" font-size="10" font-weight="800" letter-spacing="1.2">EM 72 H</text>
+        <line x1="${x}" y1="108" x2="${x}" y2="236" stroke="rgba(255,255,255,.09)" stroke-dasharray="5 7"/>
+        <circle cx="${x}" cy="${y}" r="13" fill="#092036" stroke="${color}" stroke-width="4" opacity=".99"/>
+        <circle cx="${x}" cy="${y}" r="5.5" fill="${color}"/>
+      `;
+    }).join("");
+
+    svg.innerHTML=`
+      <defs>
+        <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">${stops}</linearGradient>
+        <filter id="waveGlow" x="-25%" y="-45%" width="150%" height="190%">
+          <feGaussianBlur stdDeviation="4" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+
+      <text x="500" y="123" text-anchor="middle" fill="#6f8aa0" font-size="11" font-weight="800" letter-spacing="2.6">MONTANTE   →   JUSANTE</text>
+
+      <line x1="64" y1="${baseline}" x2="936" y2="${baseline}" stroke="rgba(255,255,255,.16)" stroke-width="1.4" stroke-dasharray="6 8"/>
+      <text x="68" y="${baseline-8}" text-anchor="start" fill="#6f8799" font-size="9" font-weight="650">linha de referência: estabilidade</text>
+
+      <path d="${path}" fill="none" stroke="rgba(255,255,255,.055)" stroke-width="13" stroke-linecap="round"/>
+      <path d="${path}" fill="none" stroke="url(#waveGradient)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" class="waveGlow"/>
+      <path d="${path}" fill="none" stroke="rgba(238,249,255,.72)" stroke-width="1.8" stroke-linecap="round" class="waveMotion"/>
+
+      ${nodes}
+
+      <text x="500" y="286" text-anchor="middle" fill="#7890a4" font-size="11">acima da linha = alta • abaixo da linha = queda • sobre a linha = estabilidade</text>
+    `;
+  }
+
+  function render30d(series){
+    if(!Array.isArray(series)||series.length<2)return;
+    const step=Math.max(1,Math.floor(series.length/320));
+    const pts=series.filter((_,i)=>i%step===0||i===series.length-1);
+    const vals=pts.map(x=>Number(x.nivel_m)).filter(Number.isFinite);
+    const min=Math.min(...vals), max=Math.max(...vals), span=Math.max(.01,max-min);
+    const W=1000,H=260,pad=20;
+    const points=pts.map((p,i)=>{
+      const x=pad+(W-2*pad)*(i/(pts.length-1));
+      const y=pad+(H-2*pad)*(1-(Number(p.nivel_m)-min)/span);
+      return `${x.toFixed(1)},${y.toFixed(1)}`;
+    }).join(" ");
+    $("chart30d").innerHTML=`
+      <line x1="20" y1="20" x2="20" y2="240" stroke="rgba(255,255,255,.08)"/>
+      <line x1="20" y1="240" x2="980" y2="240" stroke="rgba(255,255,255,.08)"/>
+      <polyline points="${points}" fill="none" stroke="#3fa7ff" stroke-width="4" vector-effect="non-scaling-stroke"/>
+      <text x="28" y="34" fill="#8da4b8" font-size="20">${max.toFixed(2).replace(".",",")} m</text>
+      <text x="28" y="232" fill="#8da4b8" font-size="20">${min.toFixed(2).replace(".",",")} m</text>`;
+    $("chartStart").textContent=fmtShort(pts[0].data_medicao_manaus||pts[0].data_medicao);
+    const last=pts[pts.length-1];
+    $("chartEnd").textContent=fmtShort(last.data_medicao_manaus||last.data_medicao);
+  }
+
+  async function boot(){
+    try{
+      const [latest,repiquete,stations,series]=await Promise.all([
+        get("latest.json"),get("repiquete.json"),get("estacoes.json"),get("series_30d.json")
+      ]);
+      renderLatest(latest);renderDetector(repiquete);renderStations(stations);render30d(series);
+    }catch(e){
+      $("statusText").textContent="Erro ao carregar dados";
+      $("statusTime").textContent="A página abriu, mas uma consulta falhou";
+      $("errorBox").style.display="block";
+      $("errorBox").textContent=`Falha técnica: ${e.message}`;
+      console.error(e);
+    }
+  }
+
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",boot);
+  else boot();
+  setInterval(boot,5*60*1000);
+})();
+</script>
+</body>
+</html>

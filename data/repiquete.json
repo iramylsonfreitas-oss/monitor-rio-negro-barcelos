@@ -1,5 +1,5 @@
 {
-  "gerado_em_utc": "2026-09-26T07:43:04.638347+00:00",
+  "gerado_em_utc": "2026-09-26T08:19:16.441297+00:00",
   "timezone": "America/Manaus",
   "nivel": 1,
   "status": "sinal_montante",
@@ -7,8 +7,8 @@
   "titulo": "Movimento a montante em acompanhamento",
   "mensagem": "Há sinais positivos em estações acima de Barcelos, enquanto Barcelos ainda está em contexto de queda. Isso não confirma uma reversão local.",
   "motivos": [
-    "Barcelos ainda acumula -23.0 cm em 7 dias.",
-    "Barcelos ainda acumula -4.0 cm em 72 h.",
+    "Barcelos ainda acumula -21.0 cm em 7 dias.",
+    "Barcelos ainda acumula -3.0 cm em 72 h.",
     "Serrinha acumula +4.0 cm em 72 h.",
     "Curicuriari acumula +3.0 cm em 72 h.",
     "Taracuá acumula +1.0 cm em 72 h."
@@ -131,7 +131,7 @@
       "variacao_72h_cm": 3.0,
       "variacao_7d_cm": 30.0,
       "tendencia": "estavel",
-      "data_medicao_manaus": "2026-09-26 02:45:00"
+      "data_medicao_manaus": "2026-09-26 03:45:00"
     },
     "serrinha": {
       "nome": "Serrinha",
@@ -141,17 +141,17 @@
       "variacao_72h_cm": 4.0,
       "variacao_7d_cm": 12.0,
       "tendencia": "estavel",
-      "data_medicao_manaus": "2026-09-26 02:30:00"
+      "data_medicao_manaus": "2026-09-26 03:30:00"
     },
     "barcelos": {
       "nome": "Barcelos",
-      "nivel_m": 3.88,
+      "nivel_m": 3.89,
       "variacao_6h_cm": 0.0,
-      "variacao_24h_cm": -1.0,
-      "variacao_72h_cm": -4.0,
-      "variacao_7d_cm": -23.0,
+      "variacao_24h_cm": 0.0,
+      "variacao_72h_cm": -3.0,
+      "variacao_7d_cm": -21.0,
       "tendencia": "estavel",
-      "data_medicao_manaus": "2026-09-26 03:00:00"
+      "data_medicao_manaus": "2026-09-26 04:00:00"
     }
   },
   "aviso": "Detector experimental de mudança de tendência. 'Possível reversão' e 'repiquete em formação' não são confirmações. O estado confirmado exige três verificações consecutivas de alta mínima de +3 cm em 24 h e ganho líquido mínimo de +1 cm entre o primeiro e o terceiro checkpoint. O estado confirmado descreve um movimento já observado, não uma previsão."

@@ -1,13 +1,13 @@
 {
-  "gerado_em_utc": "2026-09-25T13:38:42.695806+00:00",
+  "gerado_em_utc": "2026-09-26T10:25:35.979094+00:00",
   "metodo": "Correlação de Pearson entre variações horárias acumuladas de 24 horas, testando defasagens em passos de 6 horas.",
   "status": "experimental",
   "uso": "Diagnóstico histórico exploratório. Não representa previsão hidrológica nem confirma repiquete.",
   "cobertura_historica": {
     "inicio_manaus": "2023-09-24 00:00:00",
-    "fim_manaus": "2026-09-25 09:00:00",
-    "horas": 26337.0,
-    "dias": 1097.4
+    "fim_manaus": "2026-09-26 06:00:00",
+    "horas": 26358.0,
+    "dias": 1098.2
   },
   "pares": [
     {
@@ -20,7 +20,7 @@
       "melhor_defasagem_dias": 4.5,
       "correlacao": 0.812,
       "forca_correlacao": "alta",
-      "amostras": 19247,
+      "amostras": 19268,
       "passo_testado_h": 6,
       "defasagem_maxima_testada_h": 168
     },
@@ -34,7 +34,7 @@
       "melhor_defasagem_dias": 7.5,
       "correlacao": 0.725,
       "forca_correlacao": "alta",
-      "amostras": 15672,
+      "amostras": 15693,
       "passo_testado_h": 6,
       "defasagem_maxima_testada_h": 240
     },
@@ -48,7 +48,7 @@
       "melhor_defasagem_dias": 9.5,
       "correlacao": 0.478,
       "forca_correlacao": "baixa",
-      "amostras": 18994,
+      "amostras": 19015,
       "passo_testado_h": 6,
       "defasagem_maxima_testada_h": 336
     },
@@ -62,7 +62,7 @@
       "melhor_defasagem_dias": 8.75,
       "correlacao": 0.659,
       "forca_correlacao": "moderada",
-      "amostras": 17984,
+      "amostras": 18005,
       "passo_testado_h": 6,
       "defasagem_maxima_testada_h": 480
     }
@@ -71,24 +71,24 @@
     {
       "estacao": "14110000",
       "nome": "Cucuí",
-      "nivel_m": 16.44,
+      "nivel_m": 16.4,
       "variacao_6h_cm": -1.0,
-      "variacao_24h_cm": -6.0,
-      "variacao_72h_cm": -21.0,
-      "variacao_7d_cm": 2.0,
+      "variacao_24h_cm": -5.0,
+      "variacao_72h_cm": -20.0,
+      "variacao_7d_cm": -13.0,
       "tendencia": "descendo",
-      "data_medicao_manaus": "2026-09-25 09:15:00"
+      "data_medicao_manaus": "2026-09-26 05:15:00"
     },
     {
       "estacao": "14280001",
       "nome": "Taracuá",
-      "nivel_m": 13.54,
-      "variacao_6h_cm": 2.0,
-      "variacao_24h_cm": -4.0,
-      "variacao_72h_cm": -11.0,
-      "variacao_7d_cm": 42.0,
+      "nivel_m": 13.66,
+      "variacao_6h_cm": 4.0,
+      "variacao_24h_cm": 13.0,
+      "variacao_72h_cm": 2.0,
+      "variacao_7d_cm": 34.0,
       "tendencia": "subindo",
-      "data_medicao_manaus": "2026-09-25 09:15:00"
+      "data_medicao_manaus": "2026-09-26 05:15:00"
     },
     {
       "estacao": "14330000",
@@ -96,32 +96,32 @@
       "nivel_m": 9.79,
       "variacao_6h_cm": 0.0,
       "variacao_24h_cm": 0.0,
-      "variacao_72h_cm": 7.0,
-      "variacao_7d_cm": 33.0,
+      "variacao_72h_cm": 2.0,
+      "variacao_7d_cm": 29.0,
       "tendencia": "estavel",
-      "data_medicao_manaus": "2026-09-25 08:45:00"
+      "data_medicao_manaus": "2026-09-26 05:45:00"
     },
     {
       "estacao": "14420000",
       "nome": "Serrinha",
-      "nivel_m": 6.55,
+      "nivel_m": 6.56,
       "variacao_6h_cm": 0.0,
       "variacao_24h_cm": 1.0,
       "variacao_72h_cm": 4.0,
       "variacao_7d_cm": 12.0,
       "tendencia": "estavel",
-      "data_medicao_manaus": "2026-09-25 08:30:00"
+      "data_medicao_manaus": "2026-09-26 05:30:00"
     },
     {
       "estacao": "14480002",
       "nome": "Barcelos",
-      "nivel_m": 3.9,
-      "variacao_6h_cm": 1.0,
-      "variacao_24h_cm": 0.0,
+      "nivel_m": 3.88,
+      "variacao_6h_cm": -1.0,
+      "variacao_24h_cm": -3.0,
       "variacao_72h_cm": -4.0,
-      "variacao_7d_cm": -26.0,
-      "tendencia": "subindo",
-      "data_medicao_manaus": "2026-09-25 09:00:00"
+      "variacao_7d_cm": -22.0,
+      "tendencia": "descendo",
+      "data_medicao_manaus": "2026-09-26 06:00:00"
     }
   ]
 }

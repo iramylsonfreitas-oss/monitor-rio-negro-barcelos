@@ -13,8 +13,8 @@
   },
   "resumo": {
     "periodo_inicio_manaus": "2023-09-24 00:00:00",
-    "periodo_fim_manaus": "2026-09-25 06:00:00",
-    "checkpoints_analisados": 3544,
+    "periodo_fim_manaus": "2026-09-26 06:00:00",
+    "checkpoints_analisados": 3548,
     "ocorrencias_primeiro_limiar": 7,
     "eventos_confirmados": 6,
     "eventos_encerrados": 6,

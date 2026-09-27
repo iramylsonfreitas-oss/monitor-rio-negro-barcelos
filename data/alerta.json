@@ -1,5 +1,5 @@
 {
-  "gerado_em_utc": "2026-09-27T10:43:26.084841+00:00",
+  "gerado_em_utc": "2026-09-27T11:16:57.147953+00:00",
   "timezone": "America/Manaus",
   "nivel": 0,
   "status": "sem_sinal",
@@ -23,10 +23,6 @@
   },
   "ultimas_amostras_serrinha": [
     {
-      "hora_manaus": "2026-09-25 18:00:00",
-      "variacao_24h_cm": 1.0
-    },
-    {
       "hora_manaus": "2026-09-26 00:00:00",
       "variacao_24h_cm": 1.0
     },
@@ -44,6 +40,10 @@
     },
     {
       "hora_manaus": "2026-09-27 00:00:00",
+      "variacao_24h_cm": 0.0
+    },
+    {
+      "hora_manaus": "2026-09-27 06:00:00",
       "variacao_24h_cm": 0.0
     }
   ],
@@ -66,12 +66,12 @@
     "curicuriari": {
       "nome": "Curicuriari",
       "nivel_m": 9.79,
-      "variacao_6h_cm": 1.0,
+      "variacao_6h_cm": 0.0,
       "variacao_24h_cm": 0.0,
       "variacao_72h_cm": 0.0,
-      "variacao_7d_cm": 24.0,
-      "tendencia": "subindo",
-      "data_medicao_manaus": "2026-09-27 05:45:00"
+      "variacao_7d_cm": 23.0,
+      "tendencia": "estavel",
+      "data_medicao_manaus": "2026-09-27 06:45:00"
     },
     "serrinha": {
       "nome": "Serrinha",
@@ -81,17 +81,17 @@
       "variacao_72h_cm": 2.0,
       "variacao_7d_cm": 9.0,
       "tendencia": "estavel",
-      "data_medicao_manaus": "2026-09-27 05:30:00"
+      "data_medicao_manaus": "2026-09-27 06:30:00"
     },
     "barcelos": {
       "nome": "Barcelos",
-      "nivel_m": 3.88,
-      "variacao_6h_cm": -1.0,
-      "variacao_24h_cm": 0.0,
-      "variacao_72h_cm": -2.0,
-      "variacao_7d_cm": -16.0,
-      "tendencia": "descendo",
-      "data_medicao_manaus": "2026-09-27 06:00:00"
+      "nivel_m": 3.89,
+      "variacao_6h_cm": 1.0,
+      "variacao_24h_cm": 1.0,
+      "variacao_72h_cm": -1.0,
+      "variacao_7d_cm": -15.0,
+      "tendencia": "subindo",
+      "data_medicao_manaus": "2026-09-27 07:00:00"
     }
   },
   "aviso": "O alerta é experimental e utiliza relações históricas entre estações. Uma alta em Serrinha não garante uma alta posterior em Barcelos."

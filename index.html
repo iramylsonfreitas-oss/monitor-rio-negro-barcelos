@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Monitor Rio Negro | Barcelos — V2.7</title>
+<title>Monitor Rio Negro | Barcelos — V2.9</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
-/* V2.7 — V2.6 + faixa típica de hoje + destaque do ponto atual */
+/* V2.9 — corrige e reforça gráfico comparativo 2026 x 2025 */
 :root{
   --bg:#071524;--panel:#0d2236;--panel2:#10283e;--line:rgba(255,255,255,.08);
   --text:#f3f7fb;--muted:#8da4b8;--blue:#3fa7ff;--cyan:#4fd8ff;
@@ -139,6 +139,17 @@ footer{color:var(--muted);font-size:10px;text-align:center;padding-top:8px}
 .seasonalStatus{display:inline-flex;align-items:center;min-height:30px;margin-bottom:13px;padding:7px 11px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.025);color:var(--muted);font-size:10px;font-weight:600;line-height:1.4}
 .seasonalChartWrap{position:relative;height:360px;border-radius:16px;background:rgba(255,255,255,.012);padding:8px 4px 0}
 .seasonalNote{margin-top:13px;padding-top:12px;border-top:1px solid var(--line);color:var(--muted);font-size:10px;line-height:1.55}
+.compareCard{background:linear-gradient(145deg,rgba(255,186,94,.04),rgba(255,255,255,.012)),var(--panel)}
+.compareIntro{color:var(--muted);font-size:13px;line-height:1.55;margin-top:-7px;margin-bottom:14px;max-width:800px}
+.compareSummary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:14px}
+.compareStat{padding:16px;border:1px solid rgba(255,255,255,.08);border-radius:15px;background:rgba(255,255,255,.025)}
+.compareStatValue{margin-top:9px;color:#f4f8fb;font-size:26px;font-weight:800;letter-spacing:-.03em;line-height:1.05}
+.compareStatDetail{margin-top:8px;color:#a9bbc9;font-size:10px;font-weight:600;line-height:1.4}
+.compareStatus{display:inline-flex;align-items:center;min-height:24px;color:var(--muted);font-size:10px;font-weight:600;line-height:1.4}
+.compareChartWrap{position:relative;height:350px;border-radius:16px;background:rgba(255,255,255,.012);padding:8px 4px 0}
+.compareNote{margin-top:13px;padding-top:12px;border-top:1px solid var(--line);color:var(--muted);font-size:10px;line-height:1.55}
+@media(max-width:900px){.seasonalSummary{grid-template-columns:repeat(2,minmax(0,1fr))}.seasonalGaugeCard{grid-column:1/-1}.seasonalChartWrap{height:340px}.compareSummary{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.seasonalSummary{grid-template-columns:repeat(2,minmax(0,1fr))}.seasonalGaugeCard,.seasonalStat{grid-column:1/-1}.seasonalGaugeScale span{font-size:7px}.seasonalChartWrap{height:310px}.seasonalIntro{font-size:12px}.compareSummary{grid-template-columns:1fr}.compareChartWrap{height:310px}.compareIntro{font-size:12px}}
 @media(max-width:900px){.seasonalSummary{grid-template-columns:repeat(2,minmax(0,1fr))}.seasonalGaugeCard{grid-column:1/-1}.seasonalChartWrap{height:340px}}
 @media(max-width:620px){.seasonalSummary{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.seasonalGaugeCard{grid-column:1/-1;padding:13px}.seasonalStat{padding:12px 10px}.seasonalPosition{font-size:18px}.seasonalPercent{min-width:48px;padding:6px 8px;font-size:13px}.seasonalPercentNote{font-size:6.5px}.seasonalStatValue{font-size:22px}.seasonalStatDetail{font-size:9px}.seasonalGauge{margin-top:17px}.seasonalGaugeScale span{padding:0 1px;font-size:6.5px}.seasonalChartWrap{height:310px}.seasonalIntro{font-size:12px}}
 
@@ -294,6 +305,57 @@ footer{color:var(--muted);font-size:10px;text-align:center;padding-top:8px}
       Faixa típica = percentis 25–75 da referência móvel. Referência exploratória baseada nos anos históricos disponíveis.
       Os valores de dias vizinhos são utilizados para suavizar a comparação e não representam anos independentes.
       Não se trata de uma climatologia de longo prazo. Quando a data exibida é o dia corrente, a mediana diária ainda é parcial e pode mudar ao longo do dia.
+    </div>
+  </section>
+
+
+  <section class="card compareCard">
+    <div class="sectionHead">
+      <div>
+        <div class="label">COMPARATIVO DIRETO</div>
+        <h2>2026 x 2025 até hoje</h2>
+      </div>
+      <div id="compareRef" class="badge">—</div>
+    </div>
+
+    <div class="compareIntro">
+      Sobreposição da evolução do nível do Rio Negro em Barcelos no ano corrente contra o mesmo período do ano anterior, do início de janeiro até a data mais recente disponível em 2026.
+    </div>
+
+    <div class="compareSummary">
+      <div class="compareStat">
+        <div class="seasonalMiniLabel">DATA DE REFERÊNCIA</div>
+        <div id="compareToday" class="compareStatValue">—</div>
+        <div class="compareStatDetail">mesma data comparada em 2025</div>
+      </div>
+
+      <div class="compareStat">
+        <div class="seasonalMiniLabel">NÍVEL EM 2026</div>
+        <div id="compare2026" class="compareStatValue">—</div>
+        <div id="compare2026Detail" class="compareStatDetail">—</div>
+      </div>
+
+      <div class="compareStat">
+        <div class="seasonalMiniLabel">NÍVEL EM 2025</div>
+        <div id="compare2025" class="compareStatValue">—</div>
+        <div id="compare2025Detail" class="compareStatDetail">—</div>
+      </div>
+
+      <div class="compareStat">
+        <div class="seasonalMiniLabel">DIFERENÇA</div>
+        <div id="compareDiff" class="compareStatValue">—</div>
+        <div id="compareDiffDetail" class="compareStatDetail">2026 menos 2025 na mesma data</div>
+      </div>
+    </div>
+
+    <div id="compareStatus" class="compareStatus">Carregando comparativo 2026 × 2025...</div>
+
+    <div class="compareChartWrap">
+      <canvas id="compareChart"></canvas>
+    </div>
+
+    <div class="compareNote">
+      A linha de 2026 vai apenas até a última data disponível no sistema. A linha de 2025 é recortada exatamente até o mesmo dia do ano para permitir comparação justa entre os dois períodos.
     </div>
   </section>
 
@@ -565,6 +627,7 @@ footer{color:var(--muted);font-size:10px;text-align:center;padding-top:8px}
 
   const DATA_URL = "data/barcelos_anual.json";
   let chart = null;
+  let compareChart = null;
   const $s = id => document.getElementById(id);
 
   function quantile(values,q){
@@ -668,6 +731,158 @@ footer{color:var(--muted);font-size:10px;text-align:center;padding-top:8px}
     }
   };
 
+  
+  function fmtDiffMeters(a,b){
+    if(!Number.isFinite(a)||!Number.isFinite(b)) return "—";
+    const diff=a-b;
+    const sign=diff>0?"+":diff<0?"−":"";
+    return `${sign}${fmt(Math.abs(diff))} m`;
+  }
+
+  function buildCompareLabels(cutoffKey){
+    const cutoff=dayIndex(cutoffKey);
+    const labels=[], keys=[];
+    const dt=new Date(Date.UTC(2024,0,1));
+    while(true){
+      const m=String(dt.getUTCMonth()+1).padStart(2,"0");
+      const d=String(dt.getUTCDate()).padStart(2,"0");
+      const key=`${m}-${d}`;
+      keys.push(key);
+      labels.push(dt.toLocaleDateString("pt-BR",{day:"2-digit",month:"short",timeZone:"UTC"}).replace(".",""));
+      if(dayIndex(key)>=cutoff) break;
+      dt.setUTCDate(dt.getUTCDate()+1);
+    }
+    return {labels,keys};
+  }
+
+  function lastFiniteIndex(arr){
+    for(let i=arr.length-1;i>=0;i--) if(Number.isFinite(arr[i])) return i;
+    return -1;
+  }
+
+  function renderCompare2625(data, latestYear){
+    const status=$s("compareStatus");
+    const canvas=$s("compareChart");
+    if(!status||!canvas) return;
+
+    const series26=(data.series?.["2026"]||data.series?.[latestYear]||[]).slice();
+    const series25=(data.series?.["2025"]||[]).slice();
+
+    if(!series26.length || !series25.length){
+      status.textContent="Comparativo 2026 × 2025 temporariamente indisponível.";
+      return;
+    }
+
+    const latest=series26[series26.length-1];
+    const cutoffKey=latest.dia_mes;
+    const partial=latest.data===manausToday();
+    const {labels,keys}=buildCompareLabels(cutoffKey);
+
+    const map26=Object.fromEntries(series26.map(p=>[p.dia_mes,Number(p.nivel_m)]));
+    const map25=Object.fromEntries(series25.map(p=>[p.dia_mes,Number(p.nivel_m)]));
+    const vals26=keys.map(k=>Object.prototype.hasOwnProperty.call(map26,k)?map26[k]:null);
+    const vals25=keys.map(k=>Object.prototype.hasOwnProperty.call(map25,k)?map25[k]:null);
+
+    const current26=Number(map26[cutoffKey]);
+    const current25=Number(map25[cutoffKey]);
+    const idx26=lastFiniteIndex(vals26);
+    const idx25=lastFiniteIndex(vals25);
+
+    $s("compareRef").textContent="2026 × 2025";
+    $s("compareToday").textContent=dateLong(latest.data);
+    $s("compare2026").textContent=Number.isFinite(current26)?`${fmt(current26)} m`:"—";
+    $s("compare2026Detail").textContent=partial?"valor parcial do dia":"última medição do dia";
+    $s("compare2025").textContent=Number.isFinite(current25)?`${fmt(current25)} m`:"—";
+    $s("compare2025Detail").textContent=`mesma data de ${dateLong(latest.data).split(" de ")[0]}`;
+    $s("compareDiff").textContent=fmtDiffMeters(current26,current25);
+    const compareDeltaCm=Number.isFinite(current26)&&Number.isFinite(current25)
+      ? Math.round((current26-current25)*100)
+      : null;
+    const compareDeltaClass=compareDeltaCm===null
+      ? ""
+      : compareDeltaCm>0
+        ? "pos"
+        : compareDeltaCm<0
+          ? "neg"
+          : "neu";
+    $s("compareDiff").className=`compareStatValue ${compareDeltaClass}`;
+    $s("compareDiffDetail").textContent=compareDeltaCm!==null
+      ? `${compareDeltaCm} cm de diferença entre os dois anos`
+      : "não há dado comparável para a mesma data em 2025";
+    status.textContent=`Período comparado: 1º de janeiro até ${dateLong(latest.data)}.`;
+
+    if(compareChart) compareChart.destroy();
+    compareChart=new Chart(canvas,{
+      type:"line",
+      data:{
+        labels,
+        datasets:[
+          {
+            label:"2025",
+            data:vals25,
+            borderColor:"#f5c451",
+            backgroundColor:"transparent",
+            borderWidth:2.3,
+            borderDash:[7,5],
+            pointRadius:ctx=>ctx.dataIndex===idx25?4:0,
+            pointHoverRadius:ctx=>ctx.dataIndex===idx25?6:4,
+            pointBackgroundColor:"#f5c451",
+            pointBorderColor:"#ffffff",
+            pointBorderWidth:2,
+            tension:.18,
+            spanGaps:false
+          },
+          {
+            label:"2026",
+            data:vals26,
+            borderColor:"#58d6ff",
+            backgroundColor:"transparent",
+            borderWidth:3,
+            pointRadius:ctx=>ctx.dataIndex===idx26?4.5:0,
+            pointHoverRadius:ctx=>ctx.dataIndex===idx26?6.5:4,
+            pointBackgroundColor:"#58d6ff",
+            pointBorderColor:"#ffffff",
+            pointBorderWidth:2,
+            tension:.18,
+            spanGaps:false
+          }
+        ]
+      },
+      options:{
+        responsive:true,
+        maintainAspectRatio:false,
+        animation:false,
+        interaction:{mode:"index",intersect:false},
+        plugins:{
+          legend:{
+            position:"top",
+            labels:{color:"#d8e5ef",usePointStyle:true,boxWidth:10,padding:16,font:{size:11,weight:"600"}}
+          },
+          tooltip:{
+            backgroundColor:"rgba(7,21,36,.96)",
+            titleColor:"#eef5fb",
+            bodyColor:"#d8e5ef",
+            borderColor:"rgba(255,255,255,.10)",
+            borderWidth:1,
+            padding:10,
+            callbacks:{label:c=>`${c.dataset.label}: ${fmt(c.raw)} m`}
+          }
+        },
+        scales:{
+          x:{
+            ticks:{color:"#8fa7bc",maxTicksLimit:10,font:{size:10}},
+            grid:{display:false}
+          },
+          y:{
+            ticks:{color:"#8fa7bc",callback:v=>fmt(v)},
+            grid:{color:"rgba(255,255,255,.08)"},
+            title:{display:true,text:"Nível do rio (m)",color:"#8fa7bc"}
+          }
+        }
+      }
+    });
+  }
+
   async function init(){
     const status=$s("seasonalStatus");if(!status)return;
     try{
@@ -716,7 +931,8 @@ footer{color:var(--muted);font-size:10px;text-align:center;padding-top:8px}
       ]},options:{responsive:true,maintainAspectRatio:false,animation:false,interaction:{mode:"index",intersect:false},plugins:{v26Today:{index:currentIndex,value:level},legend:{position:"top",align:"start",labels:{color:"#d6e1eb",usePointStyle:true,pointStyle:"line",padding:18,filter:item=>item.text!=="__p25"}},tooltip:{filter:item=>item.dataset.label!=="__p25"&&item.raw!==null,callbacks:{label:c=>{
         if(c.dataset.label==="Faixa típica (P25–P75)"){const lo=p25[c.dataIndex],hi=p75[c.dataIndex];if(lo!==null&&hi!==null)return `Faixa típica: ${fmt(lo)}–${fmt(hi)} m`;}
         return `${c.dataset.label}: ${fmt(c.raw)} m`;}}}},scales:{x:{grid:{display:false},ticks:{color:"#8fa7bc",maxRotation:0,autoSkip:false,callback:(v,i)=>({"01-01":"JAN","02-01":"FEV","03-01":"MAR","04-01":"ABR","05-01":"MAI","06-01":"JUN","07-01":"JUL","08-01":"AGO","09-01":"SET","10-01":"OUT","11-01":"NOV","12-01":"DEZ"}[cal.keys[i]]||"")}},y:{beginAtZero:false,grid:{color:"rgba(255,255,255,.055)"},ticks:{color:"#8fa7bc",callback:v=>`${Number(v).toFixed(1).replace(".",",")} m`},title:{display:true,text:"Nível do rio (m)",color:"#8fa7bc"}}}}});
-    }catch(e){console.error("Erro sazonal:",e);status.textContent="Posição sazonal temporariamente indisponível.";}
+      renderCompare2625(data, latestYear);
+    }catch(e){console.error("Erro sazonal:",e);status.textContent="Posição sazonal temporariamente indisponível.";const c=$s("compareStatus");if(c)c.textContent="Comparativo 2026 × 2025 temporariamente indisponível.";}
   }
 
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();

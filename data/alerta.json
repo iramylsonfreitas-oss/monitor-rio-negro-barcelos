@@ -1,12 +1,16 @@
 {
-  "gerado_em_utc": "2026-09-27T02:44:47.991378+00:00",
+  "gerado_em_utc": "2026-09-27T03:18:11.648410+00:00",
   "timezone": "America/Manaus",
-  "nivel": 0,
-  "status": "sem_sinal",
-  "rotulo": "SEM SINAL",
-  "titulo": "Sem sinal de alta confirmada a montante",
-  "mensagem": "Os critérios atuais não indicam um evento de alta confirmado em Serrinha.",
-  "motivos": [],
+  "nivel": 1,
+  "status": "observacao",
+  "rotulo": "EM OBSERVAÇÃO",
+  "titulo": "Mudança a montante em acompanhamento",
+  "mensagem": "Há sinais de elevação a montante, mas Serrinha ainda não atende ao critério de alta sustentada usado pelo detector histórico.",
+  "motivos": [
+    "Serrinha acumula +3.0 cm em 72 h.",
+    "Curicuriari acumula +1.0 cm em 72 h.",
+    "Barcelos ainda acumula -1.0 cm em 72 h."
+  ],
   "criterio_evento_serrinha": {
     "variacao_minima_24h_cm": 3.0,
     "confirmacoes": 3,
@@ -71,17 +75,17 @@
       "variacao_72h_cm": 1.0,
       "variacao_7d_cm": 26.0,
       "tendencia": "subindo",
-      "data_medicao_manaus": "2026-09-26 21:45:00"
+      "data_medicao_manaus": "2026-09-26 22:45:00"
     },
     "serrinha": {
       "nome": "Serrinha",
       "nivel_m": 6.56,
       "variacao_6h_cm": 0.0,
       "variacao_24h_cm": 0.0,
-      "variacao_72h_cm": 2.0,
+      "variacao_72h_cm": 3.0,
       "variacao_7d_cm": 10.0,
       "tendencia": "estavel",
-      "data_medicao_manaus": "2026-09-26 21:30:00"
+      "data_medicao_manaus": "2026-09-26 22:30:00"
     },
     "barcelos": {
       "nome": "Barcelos",
@@ -89,9 +93,9 @@
       "variacao_6h_cm": 0.0,
       "variacao_24h_cm": 0.0,
       "variacao_72h_cm": -1.0,
-      "variacao_7d_cm": -17.0,
+      "variacao_7d_cm": -16.0,
       "tendencia": "estavel",
-      "data_medicao_manaus": "2026-09-26 22:00:00"
+      "data_medicao_manaus": "2026-09-26 23:00:00"
     }
   },
   "aviso": "O alerta é experimental e utiliza relações históricas entre estações. Uma alta em Serrinha não garante uma alta posterior em Barcelos."

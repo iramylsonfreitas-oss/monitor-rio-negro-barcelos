@@ -21990,5 +21990,37 @@
     "nivel_m": 3.88,
     "status_cota": "0",
     "data_atualizacao_ana": "2026-09-27 16:08:54.867"
+  },
+  {
+    "data_medicao": "2026-09-27 16:15:00.0",
+    "data_medicao_manaus": "2026-09-27 15:15:00",
+    "nivel_cm": 388.0,
+    "nivel_m": 3.88,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-09-27 17:09:05.923"
+  },
+  {
+    "data_medicao": "2026-09-27 16:30:00.0",
+    "data_medicao_manaus": "2026-09-27 15:30:00",
+    "nivel_cm": 388.0,
+    "nivel_m": 3.88,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-09-27 17:09:05.927"
+  },
+  {
+    "data_medicao": "2026-09-27 16:45:00.0",
+    "data_medicao_manaus": "2026-09-27 15:45:00",
+    "nivel_cm": 388.0,
+    "nivel_m": 3.88,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-09-27 17:09:05.927"
+  },
+  {
+    "data_medicao": "2026-09-27 17:00:00.0",
+    "data_medicao_manaus": "2026-09-27 16:00:00",
+    "nivel_cm": 388.0,
+    "nivel_m": 3.88,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-09-27 17:09:05.927"
   }
 ]

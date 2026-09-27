@@ -1,5 +1,5 @@
 {
-  "gerado_em_utc": "2026-09-27T11:43:37.931484+00:00",
+  "gerado_em_utc": "2026-09-27T12:24:15.325308+00:00",
   "timezone": "America/Manaus",
   "nivel": 3,
   "status": "repiquete_em_formacao",
@@ -7,11 +7,11 @@
   "titulo": "Barcelos já apresenta variação positiva em 24 h",
   "mensagem": "O rio vinha em queda e passou a apresentar alta em 24 horas. Ainda não há evidência suficiente para classificar o movimento como repiquete confirmado.",
   "motivos": [
-    "Barcelos ainda acumula -15.0 cm em 7 dias.",
+    "Barcelos ainda acumula -14.0 cm em 7 dias.",
     "Barcelos ainda acumula -1.0 cm em 72 h.",
     "Nas últimas 6 h Barcelos subiu +1.0 cm.",
     "Barcelos já apresenta +1.0 cm em 24 h.",
-    "Serrinha acumula +2.0 cm em 72 h.",
+    "Serrinha acumula +1.0 cm em 72 h.",
     "Taracuá acumula +23.0 cm em 72 h."
   ],
   "criterios": {
@@ -108,7 +108,7 @@
     "evento_serrinha_confirmado": false,
     "nivel_alerta_existente": 0,
     "motivos": [
-      "Serrinha acumula +2.0 cm em 72 h.",
+      "Serrinha acumula +1.0 cm em 72 h.",
       "Taracuá acumula +23.0 cm em 72 h."
     ]
   },
@@ -131,17 +131,17 @@
       "variacao_72h_cm": 0.0,
       "variacao_7d_cm": 23.0,
       "tendencia": "estavel",
-      "data_medicao_manaus": "2026-09-27 06:45:00"
+      "data_medicao_manaus": "2026-09-27 07:45:00"
     },
     "serrinha": {
       "nome": "Serrinha",
       "nivel_m": 6.56,
       "variacao_6h_cm": 0.0,
       "variacao_24h_cm": 0.0,
-      "variacao_72h_cm": 2.0,
+      "variacao_72h_cm": 1.0,
       "variacao_7d_cm": 9.0,
       "tendencia": "estavel",
-      "data_medicao_manaus": "2026-09-27 06:30:00"
+      "data_medicao_manaus": "2026-09-27 07:30:00"
     },
     "barcelos": {
       "nome": "Barcelos",
@@ -149,9 +149,9 @@
       "variacao_6h_cm": 1.0,
       "variacao_24h_cm": 1.0,
       "variacao_72h_cm": -1.0,
-      "variacao_7d_cm": -15.0,
+      "variacao_7d_cm": -14.0,
       "tendencia": "subindo",
-      "data_medicao_manaus": "2026-09-27 07:00:00"
+      "data_medicao_manaus": "2026-09-27 08:00:00"
     }
   },
   "aviso": "Detector experimental de mudança de tendência. 'Possível reversão' e 'repiquete em formação' não são confirmações. O estado confirmado exige três verificações consecutivas de alta mínima de +3 cm em 24 h e ganho líquido mínimo de +1 cm entre o primeiro e o terceiro checkpoint. O estado confirmado descreve um movimento já observado, não uma previsão."

@@ -1,5 +1,5 @@
 {
-  "gerado_em_utc": "2026-09-29T01:18:10.787247+00:00",
+  "gerado_em_utc": "2026-09-29T02:17:03.853989+00:00",
   "timezone": "America/Manaus",
   "nivel": 0,
   "status": "sem_sinal_reversao",
@@ -8,6 +8,7 @@
   "mensagem": "Os critérios atuais não identificam uma reversão consistente da tendência em Barcelos.",
   "motivos": [
     "Barcelos ainda acumula -7.0 cm em 7 dias.",
+    "Barcelos já apresenta +1.0 cm em 24 h.",
     "Serrinha acumula +2.0 cm em 72 h.",
     "Curicuriari acumula +7.0 cm em 72 h.",
     "Taracuá acumula +52.0 cm em 72 h."
@@ -104,7 +105,7 @@
     "sinal": true,
     "estacoes_positivas_72h": 3,
     "evento_serrinha_confirmado": false,
-    "nivel_alerta_existente": 1,
+    "nivel_alerta_existente": 0,
     "motivos": [
       "Serrinha acumula +2.0 cm em 72 h.",
       "Curicuriari acumula +7.0 cm em 72 h.",
@@ -114,13 +115,13 @@
   "situacao_atual": {
     "taracua": {
       "nome": "Taracuá",
-      "nivel_m": 14.12,
-      "variacao_6h_cm": 5.0,
+      "nivel_m": 14.13,
+      "variacao_6h_cm": 6.0,
       "variacao_24h_cm": 21.0,
       "variacao_72h_cm": 52.0,
-      "variacao_7d_cm": 48.0,
+      "variacao_7d_cm": 49.0,
       "tendencia": "subindo",
-      "data_medicao_manaus": "2026-09-28 20:15:00"
+      "data_medicao_manaus": "2026-09-28 21:15:00"
     },
     "curicuriari": {
       "nome": "Curicuriari",
@@ -130,7 +131,7 @@
       "variacao_72h_cm": 7.0,
       "variacao_7d_cm": 17.0,
       "tendencia": "subindo",
-      "data_medicao_manaus": "2026-09-28 20:45:00"
+      "data_medicao_manaus": "2026-09-28 21:45:00"
     },
     "serrinha": {
       "nome": "Serrinha",
@@ -140,17 +141,17 @@
       "variacao_72h_cm": 2.0,
       "variacao_7d_cm": 8.0,
       "tendencia": "subindo",
-      "data_medicao_manaus": "2026-09-28 20:30:00"
+      "data_medicao_manaus": "2026-09-28 21:30:00"
     },
     "barcelos": {
       "nome": "Barcelos",
       "nivel_m": 3.89,
       "variacao_6h_cm": -1.0,
-      "variacao_24h_cm": 0.0,
-      "variacao_72h_cm": 1.0,
+      "variacao_24h_cm": 1.0,
+      "variacao_72h_cm": 0.0,
       "variacao_7d_cm": -7.0,
       "tendencia": "descendo",
-      "data_medicao_manaus": "2026-09-28 21:00:00"
+      "data_medicao_manaus": "2026-09-28 22:00:00"
     }
   },
   "aviso": "Detector experimental de mudança de tendência. 'Possível reversão' e 'repiquete em formação' não são confirmações. O estado confirmado exige três verificações consecutivas de alta mínima de +3 cm em 24 h e ganho líquido mínimo de +1 cm entre o primeiro e o terceiro checkpoint. O estado confirmado descreve um movimento já observado, não uma previsão."

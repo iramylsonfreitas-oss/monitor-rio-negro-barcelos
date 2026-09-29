@@ -1,13 +1,13 @@
 {
-  "gerado_em_utc": "2026-09-28T10:30:08.733439+00:00",
+  "gerado_em_utc": "2026-09-29T10:30:29.334944+00:00",
   "metodo": "Correlação de Pearson entre variações horárias acumuladas de 24 horas, testando defasagens em passos de 6 horas.",
   "status": "experimental",
   "uso": "Diagnóstico histórico exploratório. Não representa previsão hidrológica nem confirma repiquete.",
   "cobertura_historica": {
     "inicio_manaus": "2023-09-24 00:00:00",
-    "fim_manaus": "2026-09-28 06:00:00",
-    "horas": 26406.0,
-    "dias": 1100.2
+    "fim_manaus": "2026-09-29 06:00:00",
+    "horas": 26430.0,
+    "dias": 1101.2
   },
   "pares": [
     {
@@ -20,7 +20,7 @@
       "melhor_defasagem_dias": 4.5,
       "correlacao": 0.812,
       "forca_correlacao": "alta",
-      "amostras": 19316,
+      "amostras": 19340,
       "passo_testado_h": 6,
       "defasagem_maxima_testada_h": 168
     },
@@ -32,9 +32,9 @@
       "resultado": "exploratorio",
       "melhor_defasagem_h": 180,
       "melhor_defasagem_dias": 7.5,
-      "correlacao": 0.725,
+      "correlacao": 0.724,
       "forca_correlacao": "alta",
-      "amostras": 15741,
+      "amostras": 15769,
       "passo_testado_h": 6,
       "defasagem_maxima_testada_h": 240
     },
@@ -46,9 +46,9 @@
       "resultado": "exploratorio",
       "melhor_defasagem_h": 240,
       "melhor_defasagem_dias": 10.0,
-      "correlacao": 0.477,
+      "correlacao": 0.476,
       "forca_correlacao": "baixa",
-      "amostras": 19066,
+      "amostras": 19090,
       "passo_testado_h": 6,
       "defasagem_maxima_testada_h": 336
     },
@@ -62,7 +62,7 @@
       "melhor_defasagem_dias": 8.75,
       "correlacao": 0.657,
       "forca_correlacao": "moderada",
-      "amostras": 18053,
+      "amostras": 18077,
       "passo_testado_h": 6,
       "defasagem_maxima_testada_h": 480
     }
@@ -71,57 +71,57 @@
     {
       "estacao": "14110000",
       "nome": "Cucuí",
-      "nivel_m": 16.33,
-      "variacao_6h_cm": -1.0,
-      "variacao_24h_cm": -3.0,
+      "nivel_m": 16.28,
+      "variacao_6h_cm": -2.0,
+      "variacao_24h_cm": -5.0,
       "variacao_72h_cm": -12.0,
-      "variacao_7d_cm": -33.0,
+      "variacao_7d_cm": -38.0,
       "tendencia": "descendo",
-      "data_medicao_manaus": "2026-09-28 05:15:00"
+      "data_medicao_manaus": "2026-09-29 05:15:00"
     },
     {
       "estacao": "14280001",
       "nome": "Taracuá",
-      "nivel_m": 13.99,
+      "nivel_m": 14.19,
       "variacao_6h_cm": 5.0,
-      "variacao_24h_cm": 19.0,
-      "variacao_72h_cm": 46.0,
-      "variacao_7d_cm": 38.0,
+      "variacao_24h_cm": 20.0,
+      "variacao_72h_cm": 53.0,
+      "variacao_7d_cm": 54.0,
       "tendencia": "subindo",
-      "data_medicao_manaus": "2026-09-28 05:15:00"
+      "data_medicao_manaus": "2026-09-29 05:15:00"
     },
     {
       "estacao": "14330000",
       "nome": "Curicuriari",
-      "nivel_m": 9.83,
+      "nivel_m": 9.87,
       "variacao_6h_cm": 1.0,
       "variacao_24h_cm": 4.0,
-      "variacao_72h_cm": 4.0,
-      "variacao_7d_cm": 19.0,
+      "variacao_72h_cm": 8.0,
+      "variacao_7d_cm": 15.0,
       "tendencia": "subindo",
-      "data_medicao_manaus": "2026-09-28 05:45:00"
+      "data_medicao_manaus": "2026-09-29 05:45:00"
     },
     {
       "estacao": "14420000",
       "nome": "Serrinha",
-      "nivel_m": 6.57,
+      "nivel_m": 6.58,
       "variacao_6h_cm": 0.0,
       "variacao_24h_cm": 1.0,
       "variacao_72h_cm": 2.0,
-      "variacao_7d_cm": 8.0,
+      "variacao_7d_cm": 7.0,
       "tendencia": "estavel",
-      "data_medicao_manaus": "2026-09-28 05:30:00"
+      "data_medicao_manaus": "2026-09-29 05:30:00"
     },
     {
       "estacao": "14480002",
       "nome": "Barcelos",
-      "nivel_m": 3.88,
+      "nivel_m": 3.89,
       "variacao_6h_cm": 0.0,
-      "variacao_24h_cm": 0.0,
-      "variacao_72h_cm": -3.0,
-      "variacao_7d_cm": -10.0,
+      "variacao_24h_cm": 1.0,
+      "variacao_72h_cm": 1.0,
+      "variacao_7d_cm": -6.0,
       "tendencia": "estavel",
-      "data_medicao_manaus": "2026-09-28 06:00:00"
+      "data_medicao_manaus": "2026-09-29 06:00:00"
     }
   ]
 }

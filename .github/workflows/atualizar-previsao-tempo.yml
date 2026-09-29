@@ -1,0 +1,149 @@
+name: Atualizar Previsao do Tempo
+
+on:
+  workflow_dispatch:
+
+  schedule:
+    # Horários em UTC.
+    # Manaus = UTC-4:
+    # 04:23 UTC = 00:23
+    # 10:23 UTC = 06:23
+    # 16:23 UTC = 12:23
+    # 22:23 UTC = 18:23
+    - cron: "23 4,10,16,22 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: atualizar-rio-negro
+  cancel-in-progress: false
+
+jobs:
+  atualizar-previsao:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Baixar projeto
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+
+      - name: Consultar Open-Meteo
+        run: |
+          echo "======================================"
+          echo "PREVISÃO DO TEMPO — BARCELOS/AM"
+          echo "======================================"
+
+          sucesso=0
+
+          for tentativa in 1 2 3; do
+            echo
+            echo "Tentativa ${tentativa} de 3..."
+
+            if python collector/weather.py; then
+              sucesso=1
+              break
+            fi
+
+            if [ "${tentativa}" -lt 3 ]; then
+              espera=$((tentativa * 20))
+              echo "Falha temporária. Nova tentativa em ${espera}s..."
+              sleep "${espera}"
+            fi
+          done
+
+          if [ "${sucesso}" -ne 1 ]; then
+            echo
+            echo "ERRO: não foi possível atualizar a previsão."
+            echo "O weather.json anterior, se existente, permanece preservado."
+            exit 1
+          fi
+
+
+      - name: Validar weather.json
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path("data/weather.json")
+
+          if not path.exists():
+              raise SystemExit("ERRO: data/weather.json não foi criado.")
+
+          with path.open(encoding="utf-8") as f:
+              data = json.load(f)
+
+          days = data.get("days")
+
+          if not isinstance(days, list) or len(days) != 5:
+              raise SystemExit(
+                  f"ERRO: weather.json deveria conter 5 dias; contém {len(days) if isinstance(days, list) else 'valor inválido'}."
+              )
+
+          required = {
+              "date",
+              "weather_code",
+              "condition",
+              "t_max_c",
+              "t_min_c",
+              "rain_probability_pct",
+              "rain_mm",
+              "wind_max_kmh",
+              "gust_max_kmh",
+              "uv_index_max",
+          }
+
+          for index, day in enumerate(days, start=1):
+              missing = sorted(required - set(day))
+              if missing:
+                  raise SystemExit(
+                      f"ERRO: dia {index} sem campos obrigatórios: {', '.join(missing)}"
+                  )
+
+          print("weather.json válido.")
+          print("Gerado em Manaus:", data.get("generated_at_manaus"))
+          print("Chuva total prevista em 5 dias:", data.get("rain_total_5d_mm"), "mm")
+          print()
+
+          for day in days:
+              print(
+                  day.get("date"),
+                  "|",
+                  day.get("condition"),
+                  "|",
+                  f'{day.get("t_max_c")}/{day.get("t_min_c")} °C',
+                  "|",
+                  f'{day.get("rain_probability_pct")}% chuva',
+                  "|",
+                  f'{day.get("rain_mm")} mm',
+              )
+          PY
+
+
+      - name: Salvar previsao meteorologica
+        run: |
+          git config user.name "rio-negro-bot"
+          git config user.email "actions@github.com"
+
+          git add data/weather.json
+
+          if git diff --cached --quiet; then
+            echo "Nenhuma alteração meteorológica para salvar."
+            exit 0
+          fi
+
+          git commit -m "Atualiza previsao meteorologica de Barcelos"
+
+          git pull --rebase origin main
+
+          git push origin main

@@ -3,16 +3,27 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Monitor Rio Negro | Barcelos — V3.5</title>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<title>Monitor Rio Negro | Barcelos — V3.6B.4</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 <style>
-/* V3.5 — V3.4 + previsão meteorológica hora a hora */
+/* V3.6B.4 — dependências fixadas e caminhos relativos */
 :root{
   --bg:#071524;--panel:#0d2236;--panel2:#10283e;--line:rgba(255,255,255,.08);
   --text:#f3f7fb;--muted:#8da4b8;--blue:#3fa7ff;--cyan:#4fd8ff;
   --up:#53d8ad;--down:#ff7180;--stable:#b8c6d1;--warn:#f5c451;
 }
 *{box-sizing:border-box}
+.srOnly{
+  position:absolute!important;
+  width:1px!important;
+  height:1px!important;
+  padding:0!important;
+  margin:-1px!important;
+  overflow:hidden!important;
+  clip:rect(0,0,0,0)!important;
+  white-space:nowrap!important;
+  border:0!important;
+}
 html,body{margin:0;max-width:100%;overflow-x:hidden;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
 body{min-height:100vh}
 .wrap{width:min(1180px,calc(100% - 24px));margin:0 auto;padding:24px 0 44px}
@@ -23,8 +34,94 @@ h1{font-size:clamp(42px,8vw,70px);line-height:.98;margin:8px 0 6px;letter-spacin
 .status{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:16px;padding:12px 14px;min-width:210px}
 .dot{width:12px;height:12px;border-radius:50%;background:var(--warn);box-shadow:0 0 0 7px rgba(245,196,81,.08)}
 .dot.ok{background:var(--up);box-shadow:0 0 0 7px rgba(83,216,173,.08)}
+.dot.delay{background:var(--warn);box-shadow:0 0 0 7px rgba(245,196,81,.10)}
+.dot.stale{background:var(--down);box-shadow:0 0 0 7px rgba(255,113,128,.10)}
+.status.ok{border-color:rgba(83,216,173,.22);background:rgba(83,216,173,.045)}
+.status.delay{border-color:rgba(245,196,81,.24);background:rgba(245,196,81,.045)}
+.status.stale{border-color:rgba(255,113,128,.26);background:rgba(255,113,128,.05)}
 .status strong{display:block;font-size:13px}.status small{display:block;color:var(--muted);margin-top:2px}
 .card{background:linear-gradient(145deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:24px;padding:24px;margin-bottom:18px}
+
+/* V3.6B.1 — RESUMO OPERACIONAL */
+.opsCard{
+  padding:15px 18px;
+  background:
+    linear-gradient(145deg,rgba(79,216,255,.035),rgba(255,255,255,.012)),
+    var(--panel);
+}
+.opsHead{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:10px}
+.opsHead h2{font-size:22px;line-height:1.05;margin:5px 0 0;letter-spacing:-.025em}
+.opsHint{font-size:11px;color:var(--muted);white-space:nowrap}
+.opsGrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.opsItem{
+  min-width:0;
+  padding:10px 12px;
+  border-radius:14px;
+  background:rgba(255,255,255,.025);
+  border:1px solid rgba(255,255,255,.055);
+}
+.opsItem .opsLabel{
+  display:block;
+  color:#91a7ba;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.08em;
+  margin-bottom:7px;
+}
+.opsValue{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  min-height:25px;
+  font-size:19px;
+  line-height:1.15;
+  font-weight:800;
+  color:var(--text);
+}
+.opsItem.primary .opsValue{font-size:24px}
+.opsDetail{
+  margin-top:5px;
+  color:var(--muted);
+  font-size:10px;
+  line-height:1.35;
+  min-height:14px;
+}
+.opsMark{
+  width:8px;height:8px;border-radius:50%;flex:0 0 auto;
+  background:var(--stable);
+  box-shadow:0 0 0 4px rgba(184,198,209,.06);
+}
+.opsMark.pos{background:var(--up);box-shadow:0 0 0 4px rgba(83,216,173,.07)}
+.opsMark.warn{background:var(--warn);box-shadow:0 0 0 4px rgba(245,196,81,.07)}
+.opsMark.danger{background:var(--down);box-shadow:0 0 0 4px rgba(255,113,128,.07)}
+.opsValue.pos{color:var(--up)}
+.opsValue.warn{color:var(--warn)}
+.opsValue.danger{color:var(--down)}
+.opsFoot{
+  margin-top:9px;
+  padding-top:8px;
+  border-top:1px solid rgba(255,255,255,.055);
+  color:#8da4b8;
+  font-size:11px;
+  line-height:1.4;
+}
+.opsFoot strong{color:#c9d6e1;font-weight:800}
+@media(max-width:900px){
+  .opsGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .opsItem:last-child{grid-column:1/-1}
+}
+@media(max-width:620px){
+  .opsCard{padding:15px 14px}
+  .opsHead{align-items:flex-start;margin-bottom:11px}
+  .opsHead h2{font-size:20px}
+  .opsHint{display:none}
+  .opsGrid{gap:7px}
+  .opsItem{padding:11px}
+  .opsValue{font-size:17px}
+  .opsItem.primary .opsValue{font-size:21px}
+  .opsDetail{font-size:12px}
+}
+
 .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:20px}
 .level{font-size:clamp(66px,10vw,112px);font-weight:800;line-height:.95;letter-spacing:-.06em;margin-top:16px}
 .level span{font-size:.36em;color:var(--muted);margin-left:6px;letter-spacing:-.02em}
@@ -40,7 +137,7 @@ h1{font-size:clamp(42px,8vw,70px);line-height:.98;margin:8px 0 6px;letter-spacin
 .sectionHead h2{font-size:clamp(26px,4vw,38px);margin:6px 0 0;letter-spacing:-.035em}
 .badge{border:1px solid rgba(245,196,81,.28);color:var(--warn);background:rgba(245,196,81,.08);border-radius:999px;padding:9px 12px;font-size:11px;font-weight:800;white-space:nowrap}
 .progress{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin:18px 0 20px}
-.stage{position:relative;text-align:center;color:#667d90;font-size:10px;font-weight:700}
+.stage{position:relative;text-align:center;color:#8ea3b5;font-size:11px;font-weight:700}
 .stage:before{content:"";position:absolute;left:50%;right:-50%;top:16px;height:2px;background:rgba(255,255,255,.08)}
 .stage:last-child:before{display:none}
 .ball{position:relative;z-index:1;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;margin:0 auto 8px;border:2px solid rgba(255,255,255,.10);background:#0b1c2c}
@@ -49,13 +146,47 @@ h1{font-size:clamp(42px,8vw,70px);line-height:.98;margin:8px 0 6px;letter-spacin
 .message h3{font-size:24px;margin:0 0 8px}.message p{margin:0;color:var(--muted);line-height:1.6}
 .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.chip{font-size:11px;border:1px solid var(--line);border-radius:999px;padding:8px 10px;background:rgba(255,255,255,.025)}
 .trigger{margin-top:14px;padding:14px;border:1px solid rgba(245,196,81,.18);border-radius:14px;background:rgba(245,196,81,.05)}
-.trigger .label{color:var(--warn);font-size:10px}.trigger div:last-child{margin-top:5px;font-size:13px}
+.trigger .label{color:var(--warn);font-size:11px}.trigger div:last-child{margin-top:5px;font-size:13px}
 .stations{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
 .station{background:rgba(255,255,255,.025);border:1px solid var(--line);border-radius:18px;padding:16px;min-width:0}
 .station.current{border-color:rgba(63,167,255,.4);background:rgba(63,167,255,.045)}
-.stationName{font-size:18px;font-weight:800}.stationCode{font-size:10px;color:var(--muted);margin-top:2px}.stationLevel{font-size:32px;font-weight:800;margin:16px 0 6px}.stationLevel span{font-size:15px;color:var(--muted)}
-.stationTrend{font-weight:700;font-size:13px}.miniGrid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:14px}.mini{background:rgba(255,255,255,.025);border-radius:10px;padding:8px}.mini span{display:block;color:var(--muted);font-size:9px}.mini b{display:block;font-size:14px;margin-top:3px}
-.stationTime{font-size:10px;color:var(--muted);margin-top:12px}
+.stationName{font-size:18px;font-weight:800}.stationCode{font-size:11px;color:#9bb0c0;margin-top:2px}
+.stationLevel{
+  font-size:23px;
+  font-weight:780;
+  margin:13px 0 5px;
+  color:#c9d5de;
+  line-height:1.05;
+}
+.stationLevel small{
+  display:block;
+  margin-bottom:4px;
+  color:#8fa5b7;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.08em;
+}
+.stationLevel span{font-size:13px;color:#8fa5b7}
+.stationTrend{font-weight:700;font-size:13px}
+.miniGrid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
+.mini{
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.045);
+  border-radius:10px;
+  padding:9px;
+}
+.mini span{display:block;color:#9fb2c1;font-size:11px;font-weight:750;letter-spacing:.04em}
+.mini b{display:block;font-size:17px;margin-top:4px;line-height:1.1}
+.stationTime{font-size:11px;color:#9bb0c0;margin-top:12px}
+.stationNote{
+  margin-top:12px;
+  padding-top:11px;
+  border-top:1px solid var(--line);
+  color:#9fb2c1;
+  font-size:12px;
+  line-height:1.55;
+}
+.stationNote strong{color:#d6e0e7;font-weight:800}
 
 
 /* =========================================================
@@ -90,15 +221,15 @@ h1{font-size:clamp(42px,8vw,70px);line-height:.98;margin:8px 0 6px;letter-spacin
 .flowNote{
   margin-top:9px;
   color:#71889b;
-  font-size:9.5px;
-  line-height:1.45;
+  font-size:11px;
+  line-height:1.5;
 }
 .flowBranchTag{
   display:inline-flex;
   align-items:center;
   gap:6px;
   color:#8ea9bd;
-  font-size:10px;
+  font-size:11px;
 }
 @media(max-width:620px){
   .flowCard{padding-left:14px;padding-right:14px}
@@ -113,13 +244,13 @@ h1{font-size:clamp(42px,8vw,70px);line-height:.98;margin:8px 0 6px;letter-spacin
 .waveWrap{position:relative;border-radius:20px;background:radial-gradient(circle at 50% 52%,rgba(79,216,255,.075),transparent 46%),linear-gradient(180deg,rgba(16,55,82,.28),rgba(5,25,42,.14));border:1px solid rgba(79,216,255,.09);padding:6px 8px 0;overflow:hidden}
 .waveWrap:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 54%,rgba(34,124,171,.035)),repeating-linear-gradient(180deg,transparent 0,transparent 10px,rgba(255,255,255,.012) 11px);pointer-events:none}
 #waveSvg{position:relative;z-index:1;display:block;width:100%;height:auto;min-height:225px}
-.waveLegend{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;color:var(--muted);font-size:10px}
+.waveLegend{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;color:#9bb0c0;font-size:11px}
 .waveLegend span{display:inline-flex;align-items:center;gap:6px}
 .legendDot{width:8px;height:8px;border-radius:50%;display:inline-block}
 .legendDot.up{background:var(--up);box-shadow:0 0 8px rgba(83,216,173,.55)}
 .legendDot.down{background:var(--down);box-shadow:0 0 8px rgba(255,113,128,.55)}
 .legendDot.stable{background:var(--warn);box-shadow:0 0 8px rgba(245,196,81,.45)}
-.waveNote{margin-top:9px;color:#7890a4;font-size:10px;line-height:1.5}
+.waveNote{margin-top:9px;color:#96aabd;font-size:11px;line-height:1.55}
 .techDetails{margin-top:12px;border-top:1px solid var(--line);padding-top:11px}
 .techDetails summary{cursor:pointer;color:var(--muted);font-size:11px;font-weight:750;list-style:none;display:flex;align-items:center;gap:7px}
 .techDetails summary::-webkit-details-marker{display:none}
@@ -132,9 +263,9 @@ h1{font-size:clamp(42px,8vw,70px);line-height:.98;margin:8px 0 6px;letter-spacin
 
 .corridor{display:grid;gap:10px}.corridorRow{display:grid;grid-template-columns:110px 1fr 58px;gap:10px;align-items:center}.corridorName{font-size:12px;font-weight:700}.track{position:relative;height:20px;background:rgba(255,255,255,.025);border-radius:999px;overflow:hidden}.zero{position:absolute;left:50%;top:0;bottom:0;width:1px;background:rgba(255,255,255,.18)}.bar{position:absolute;top:5px;height:10px;border-radius:999px}.bar.pos{left:50%;background:var(--up)}.bar.neg{right:50%;background:var(--down)}.corridorVal{text-align:right;font-size:13px;font-weight:800}
 .chartWrap{height:230px;border-radius:16px;background:rgba(255,255,255,.02);padding:12px;overflow:hidden}.chartWrap svg{width:100%;height:100%;display:block}
-.chartMeta{display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:10px;margin-top:8px}
+.chartMeta{display:flex;justify-content:space-between;gap:10px;color:#9bb0c0;font-size:11px;margin-top:8px}
 .error{display:none;background:rgba(255,113,128,.08);border:1px solid rgba(255,113,128,.25);color:#ffd8dd;padding:12px 14px;border-radius:14px;margin-bottom:14px;font-size:12px;line-height:1.5}
-footer{color:var(--muted);font-size:10px;text-align:center;padding-top:8px}
+footer{color:#9bb0c0;font-size:11px;text-align:center;padding-top:8px}
 @media(max-width:900px){
   header{display:block}.status{margin-top:16px;width:100%}
   .hero{grid-template-columns:1fr}.trend{border-left:0;border-top:1px solid var(--line);padding:18px 0 0}
@@ -157,7 +288,8 @@ footer{color:var(--muted);font-size:10px;text-align:center;padding-top:8px}
   .stations{grid-template-columns:1fr}
   .station{display:grid;grid-template-columns:1fr auto;column-gap:12px}
   .stationName,.stationCode,.stationTrend,.stationTime{grid-column:1}
-  .stationLevel{grid-column:2;grid-row:1/3;margin:0;text-align:right}
+  .stationLevel{grid-column:2;grid-row:1/3;margin:0;text-align:right;font-size:21px}
+  .stationLevel small{font-size:9.5px}
   .miniGrid{grid-column:1/-1}
   .sectionHead{display:block}.badge{display:inline-block;margin-top:12px}
   .corridorRow{grid-template-columns:82px 1fr 48px}
@@ -172,41 +304,63 @@ footer{color:var(--muted);font-size:10px;text-align:center;padding-top:8px}
 .seasonalSummary{display:grid;grid-template-columns:minmax(0,2fr) minmax(180px,1fr) minmax(180px,1fr);gap:10px;margin-bottom:14px}
 .seasonalGaugeCard{padding:17px;border:1px solid rgba(88,214,255,.16);border-radius:15px;background:rgba(4,18,31,.38)}
 .seasonalGaugeTop{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
-.seasonalMiniLabel{color:var(--muted);font-size:9px;font-weight:800;letter-spacing:.09em}
+.seasonalMiniLabel{color:#9bb0c0;font-size:11px;font-weight:800;letter-spacing:.08em}
 .seasonalPosition{margin-top:5px;color:#f4f8fb;font-size:20px;font-weight:750;line-height:1.2}
 .seasonalPercentBox{display:flex;flex-direction:column;align-items:center;flex-shrink:0}
 .seasonalPercent{min-width:54px;padding:7px 10px;border:1px solid rgba(88,214,255,.32);border-radius:10px;background:rgba(88,214,255,.07);color:#58d6ff;font-size:15px;font-weight:800;text-align:center}
-.seasonalPercentNote{margin-top:5px;color:#738da3;font-size:7px;font-weight:650;line-height:1.2;text-align:center;white-space:nowrap}
+.seasonalPercentNote{margin-top:5px;color:#9bb0c0;font-size:10px;font-weight:650;line-height:1.25;text-align:center;white-space:nowrap}
 .seasonalGauge{margin-top:20px}
 .seasonalGaugeScale{display:grid;grid-template-columns:10fr 15fr 50fr 15fr 10fr;align-items:end;margin-bottom:7px}
-.seasonalGaugeScale span{display:flex;align-items:flex-end;justify-content:center;min-width:0;padding:0 2px;color:#8fa7bc;font-size:8px;font-weight:600;line-height:1.15;text-align:center}
+.seasonalGaugeScale span{display:flex;align-items:flex-end;justify-content:center;min-width:0;padding:0 2px;color:#a2b4c3;font-size:10px;font-weight:650;line-height:1.2;text-align:center}
 .seasonalGaugeTrack{position:relative;height:11px;overflow:visible;border:1px solid rgba(255,255,255,.08);border-radius:999px;background:linear-gradient(90deg,rgba(70,130,180,.55) 0%,rgba(70,130,180,.55) 10%,rgba(88,170,210,.55) 10%,rgba(88,170,210,.55) 25%,rgba(105,190,180,.55) 25%,rgba(105,190,180,.55) 75%,rgba(224,187,91,.60) 75%,rgba(224,187,91,.60) 90%,rgba(224,135,76,.65) 90%,rgba(224,135,76,.65) 100%)}
 .seasonalGaugeMarker{position:absolute;top:50%;left:50%;width:19px;height:19px;border:3px solid #071522;border-radius:50%;background:#fff;box-shadow:0 0 0 2px rgba(88,214,255,.55);transform:translate(-50%,-50%);transition:left .35s ease}
 .seasonalStat{padding:17px;border:1px solid rgba(255,255,255,.08);border-radius:15px;background:rgba(255,255,255,.025)}
 .seasonalStatValue{margin-top:9px;color:#f4f8fb;font-size:27px;font-weight:800;letter-spacing:-.03em;line-height:1.05}
-.seasonalStatDetail{margin-top:8px;color:#a9bbc9;font-size:10px;font-weight:600;line-height:1.4}
-.seasonalRange{margin-top:6px;color:#7f9aae;font-size:9px;font-weight:650}
-.seasonalStatus{display:inline-flex;align-items:center;min-height:30px;margin-bottom:13px;padding:7px 11px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.025);color:var(--muted);font-size:10px;font-weight:600;line-height:1.4}
+.seasonalStatDetail{margin-top:8px;color:#b6c5d0;font-size:11px;font-weight:600;line-height:1.45}
+.seasonalRange{margin-top:6px;color:#9fb2c1;font-size:11px;font-weight:650}
+.seasonalStatus{display:inline-flex;align-items:center;min-height:32px;margin-bottom:13px;padding:8px 11px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.025);color:#9fb2c1;font-size:11px;font-weight:600;line-height:1.45}
 .seasonalChartWrap{position:relative;height:360px;border-radius:16px;background:rgba(255,255,255,.012);padding:8px 4px 0}
-.seasonalNote{margin-top:13px;padding-top:12px;border-top:1px solid var(--line);color:var(--muted);font-size:10px;line-height:1.55}
+.seasonalNote{margin-top:13px;padding-top:12px;border-top:1px solid var(--line);color:#9fb2c1;font-size:11px;line-height:1.6}
 .compareCard{background:linear-gradient(145deg,rgba(255,186,94,.04),rgba(255,255,255,.012)),var(--panel)}
 .compareIntro{color:var(--muted);font-size:13px;line-height:1.55;margin-top:-7px;margin-bottom:14px;max-width:800px}
 .compareSummary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:14px}
 .compareStat{padding:16px;border:1px solid rgba(255,255,255,.08);border-radius:15px;background:rgba(255,255,255,.025)}
 .compareStatValue{margin-top:9px;color:#f4f8fb;font-size:26px;font-weight:800;letter-spacing:-.03em;line-height:1.05}
-.compareStatDetail{margin-top:8px;color:#a9bbc9;font-size:10px;font-weight:600;line-height:1.4}
-.compareStatus{display:inline-flex;align-items:center;min-height:24px;color:var(--muted);font-size:10px;font-weight:600;line-height:1.4}
+.compareStatDetail{margin-top:8px;color:#b6c5d0;font-size:11px;font-weight:600;line-height:1.45}
+.compareStatus{display:inline-flex;align-items:center;min-height:28px;color:#9fb2c1;font-size:11px;font-weight:600;line-height:1.45}
 .compareChartWrap{position:relative;height:350px;border-radius:16px;background:rgba(255,255,255,.012);padding:8px 4px 0}
-.compareNote{margin-top:13px;padding-top:12px;border-top:1px solid var(--line);color:var(--muted);font-size:10px;line-height:1.55}
+.compareNote{margin-top:13px;padding-top:12px;border-top:1px solid var(--line);color:#9fb2c1;font-size:11px;line-height:1.6}
 @media(max-width:900px){.seasonalSummary{grid-template-columns:repeat(2,minmax(0,1fr))}.seasonalGaugeCard{grid-column:1/-1}.seasonalChartWrap{height:340px}.compareSummary{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:620px){.seasonalSummary{grid-template-columns:repeat(2,minmax(0,1fr))}.seasonalGaugeCard,.seasonalStat{grid-column:1/-1}.seasonalGaugeScale span{font-size:7px}.seasonalChartWrap{height:310px}.seasonalIntro{font-size:12px}.compareSummary{grid-template-columns:1fr}.compareChartWrap{height:310px}.compareIntro{font-size:12px}}
+@media(max-width:620px){.seasonalSummary{grid-template-columns:repeat(2,minmax(0,1fr))}.seasonalGaugeCard,.seasonalStat{grid-column:1/-1}.seasonalGaugeScale span{font-size:10px}.seasonalChartWrap{height:310px}.seasonalIntro{font-size:12px}.compareSummary{grid-template-columns:1fr}.compareChartWrap{height:310px}.compareIntro{font-size:12px}}
 @media(max-width:900px){.seasonalSummary{grid-template-columns:repeat(2,minmax(0,1fr))}.seasonalGaugeCard{grid-column:1/-1}.seasonalChartWrap{height:340px}}
-@media(max-width:620px){.seasonalSummary{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.seasonalGaugeCard{grid-column:1/-1;padding:13px}.seasonalStat{padding:12px 10px}.seasonalPosition{font-size:18px}.seasonalPercent{min-width:48px;padding:6px 8px;font-size:13px}.seasonalPercentNote{font-size:6.5px}.seasonalStatValue{font-size:22px}.seasonalStatDetail{font-size:9px}.seasonalGauge{margin-top:17px}.seasonalGaugeScale span{padding:0 1px;font-size:6.5px}.seasonalChartWrap{height:310px}.seasonalIntro{font-size:12px}}
+@media(max-width:620px){.seasonalSummary{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.seasonalGaugeCard{grid-column:1/-1;padding:13px}.seasonalStat{padding:12px 10px}.seasonalPosition{font-size:18px}.seasonalPercent{min-width:48px;padding:6px 8px;font-size:13px}.seasonalPercentNote{font-size:10px}.seasonalStatValue{font-size:22px}.seasonalStatDetail{font-size:11px}.seasonalGauge{margin-top:17px}.seasonalGaugeScale span{padding:0 1px;font-size:9.5px}.seasonalChartWrap{height:310px}.seasonalIntro{font-size:12px}}
 
 
 /* =========================================================
    V3.4 — PREVISÃO METEOROLÓGICA
 ========================================================= */
+.contextDivider{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin:30px 2px 14px;
+  color:#8ea4b7;
+  font-size:11px;
+  font-weight:850;
+  letter-spacing:.12em;
+}
+.contextDivider:before,
+.contextDivider:after{
+  content:"";
+  height:1px;
+  flex:1;
+  background:rgba(255,255,255,.07);
+}
+.contextDivider span{white-space:nowrap}
+@media(max-width:620px){
+  .contextDivider{margin-top:24px;font-size:10px;letter-spacing:.10em}
+}
+
 .weatherCard{
   position:relative;
   overflow:hidden;
@@ -252,9 +406,9 @@ footer{color:var(--muted);font-size:10px;text-align:center;padding-top:8px}
 }
 .weatherSummaryLabel{
   color:#86a4ba;
-  font-size:9px;
+  font-size:11px;
   font-weight:800;
-  letter-spacing:.12em;
+  letter-spacing:.10em;
 }
 .weatherSummaryValue{
   display:flex;
@@ -276,7 +430,7 @@ footer{color:var(--muted);font-size:10px;text-align:center;padding-top:8px}
 .weatherSummarySub{
   margin-top:4px;
   color:#7792a6;
-  font-size:9.5px;
+  font-size:11px;
 }
 
 .weatherDays{
@@ -336,14 +490,14 @@ footer{color:var(--muted);font-size:10px;text-align:center;padding-top:8px}
 .wxDate{
   margin-top:2px;
   color:#7893a8;
-  font-size:9.5px;
+  font-size:11px;
 }
 .wxTodayBadge{
   padding:5px 7px;
   border-radius:999px;
   background:rgba(79,216,255,.08);
   color:#82e4ff;
-  font-size:8px;
+  font-size:10px;
   font-weight:850;
   letter-spacing:.09em;
 }
@@ -418,7 +572,7 @@ footer{color:var(--muted);font-size:10px;text-align:center;padding-top:8px}
 .wxMini span{
   display:block;
   color:#718ba0;
-  font-size:8px;
+  font-size:10px;
   font-weight:750;
   letter-spacing:.06em;
 }
@@ -426,7 +580,7 @@ footer{color:var(--muted);font-size:10px;text-align:center;padding-top:8px}
   display:block;
   margin-top:3px;
   color:#c7d5df;
-  font-size:10.5px;
+  font-size:12px;
 }
 
 .weatherFoot{
@@ -515,7 +669,7 @@ footer{color:var(--muted);font-size:10px;text-align:center;padding-top:8px}
   gap:7px;
   margin-top:11px;
   color:#7895a9;
-  font-size:10.5px;
+  font-size:11px;
   font-weight:650;
 }
 .weatherTapIcon{
@@ -573,8 +727,8 @@ footer{color:var(--muted);font-size:10px;text-align:center;padding-top:8px}
   top:15px;
   right:16px;
   z-index:2;
-  width:36px;
-  height:36px;
+  width:44px;
+  height:44px;
   border:1px solid rgba(255,255,255,.10);
   border-radius:50%;
   background:rgba(255,255,255,.045);
@@ -582,6 +736,10 @@ footer{color:var(--muted);font-size:10px;text-align:center;padding-top:8px}
   font-size:25px;
   line-height:1;
   cursor:pointer;
+}
+.weatherClose:focus-visible{
+  outline:3px solid rgba(79,216,255,.55);
+  outline-offset:3px;
 }
 .weatherDetailTop{
   display:flex;
@@ -626,7 +784,7 @@ footer{color:var(--muted);font-size:10px;text-align:center;padding-top:8px}
 .detailMetric span{
   display:block;
   color:#718da2;
-  font-size:8.5px;
+  font-size:10px;
   font-weight:800;
   letter-spacing:.07em;
 }
@@ -655,7 +813,7 @@ footer{color:var(--muted);font-size:10px;text-align:center;padding-top:8px}
   display:block;
   margin-top:3px;
   color:#718da2;
-  font-size:9.5px;
+  font-size:11px;
 }
 .hourlyRail{
   display:flex;
@@ -699,8 +857,8 @@ footer{color:var(--muted);font-size:10px;text-align:center;padding-top:8px}
 .hourCondition{
   min-height:30px;
   color:#8ca5b7;
-  font-size:9.5px;
-  line-height:1.25;
+  font-size:11px;
+  line-height:1.3;
 }
 .hourTemp{
   margin-top:6px;
@@ -712,13 +870,13 @@ footer{color:var(--muted);font-size:10px;text-align:center;padding-top:8px}
 .hourChance{
   margin-top:7px;
   color:#70defd;
-  font-size:10.5px;
+  font-size:11px;
   font-weight:780;
 }
 .hourRainValue{
   margin-top:3px;
   color:#d5eef8;
-  font-size:10px;
+  font-size:11px;
   font-weight:720;
 }
 .hourRainTrack{
@@ -753,7 +911,7 @@ footer{color:var(--muted);font-size:10px;text-align:center;padding-top:8px}
 .hourMeta span{
   display:block;
   color:#688499;
-  font-size:7px;
+  font-size:9.5px;
   font-weight:780;
   letter-spacing:.04em;
 }
@@ -761,7 +919,7 @@ footer{color:var(--muted);font-size:10px;text-align:center;padding-top:8px}
   display:block;
   margin-top:2px;
   color:#b9cad6;
-  font-size:8.5px;
+  font-size:10px;
 }
 .hourlyLegend{
   display:flex;
@@ -769,7 +927,7 @@ footer{color:var(--muted);font-size:10px;text-align:center;padding-top:8px}
   gap:12px;
   margin-top:2px;
   color:#6f899d;
-  font-size:9px;
+  font-size:11px;
 }
 .legendRain{
   display:inline-block;
@@ -871,13 +1029,59 @@ body.weatherModalOpen{
       <h1>Rio Negro</h1>
       <div class="subtitle">Barcelos • Amazonas</div>
     </div>
-    <div class="status">
+    <div id="dataStatus" class="status">
       <div id="dot" class="dot"></div>
       <div><strong id="statusText">Carregando dados...</strong><small id="statusTime">—</small></div>
     </div>
   </header>
 
   <div id="errorBox" class="error"></div>
+
+  <section class="card opsCard" aria-labelledby="opsTitle">
+    <div class="opsHead">
+      <div>
+        <div class="label">RESUMO OPERACIONAL</div>
+        <h2 id="opsTitle">Situação agora</h2>
+      </div>
+      <div class="opsHint">Leitura rápida • Barcelos/AM</div>
+    </div>
+
+    <div class="opsGrid" aria-live="polite">
+      <div class="opsItem primary">
+        <span class="opsLabel">NÍVEL EM BARCELOS</span>
+        <div id="opsLevel" class="opsValue">—</div>
+        <div id="opsLevelDetail" class="opsDetail">Aguardando dado ANA</div>
+      </div>
+
+      <div class="opsItem">
+        <span class="opsLabel">TENDÊNCIA • 6 H</span>
+        <div id="opsTrend" class="opsValue">—</div>
+        <div id="opsTrendDetail" class="opsDetail">Aguardando variação</div>
+      </div>
+
+      <div class="opsItem">
+        <span class="opsLabel">MOVIMENTO A MONTANTE</span>
+        <div id="opsUpstream" class="opsValue"><span class="opsMark"></span>—</div>
+        <div id="opsUpstreamDetail" class="opsDetail">Aguardando detector</div>
+      </div>
+
+      <div class="opsItem">
+        <span class="opsLabel">REPIQUETE EM BARCELOS</span>
+        <div id="opsRepiquete" class="opsValue"><span class="opsMark"></span>—</div>
+        <div id="opsRepiqueteDetail" class="opsDetail">Detector experimental</div>
+      </div>
+
+      <div class="opsItem">
+        <span class="opsLabel">ATUALIDADE DO DADO</span>
+        <div id="opsFreshness" class="opsValue"><span class="opsMark"></span>—</div>
+        <div id="opsFreshnessDetail" class="opsDetail">Aguardando medição</div>
+      </div>
+    </div>
+
+    <div class="opsFoot">
+      <strong>Como ler:</strong> movimento a montante indica variações positivas observadas rio acima; isso, por si só, não significa repiquete em Barcelos.
+    </div>
+  </section>
 
   <section class="card hero">
     <div>
@@ -898,82 +1102,6 @@ body.weatherModalOpen{
   </section>
 
 
-  <section class="card weatherCard">
-    <div class="weatherHead">
-      <div class="weatherTitle">
-        <div class="label">PREVISÃO METEOROLÓGICA</div>
-        <h2>Barcelos • próximos 5 dias</h2>
-        <div class="weatherIntro">
-          Condições previstas para Barcelos. Este módulo é meteorológico e não representa previsão do nível do Rio Negro.
-        </div>
-      </div>
-
-      <div class="weatherSummary">
-        <div class="weatherSummaryLabel">CHUVA PREVISTA • 5 DIAS</div>
-        <div id="weatherRainTotal" class="weatherSummaryValue">—<span>mm</span></div>
-        <div id="weatherRainSub" class="weatherSummarySub">aguardando previsão</div>
-      </div>
-    </div>
-
-    <div id="weatherDays" class="weatherDays">
-      <div class="meta">Carregando previsão meteorológica...</div>
-    </div>
-
-    <div class="weatherTapHint">
-      <span class="weatherTapIcon">↗</span>
-      Toque em qualquer dia para abrir a previsão hora a hora.
-    </div>
-
-    <div class="weatherFoot">
-      <div class="weatherSource">
-        Dados meteorológicos via
-        <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a>
-      </div>
-      <div id="weatherStatus" class="weatherStatus">Atualização: —</div>
-    </div>
-  </section>
-
-
-  <div id="weatherModal" class="weatherModal" aria-hidden="true">
-    <div class="weatherModalBackdrop" data-weather-close></div>
-
-    <section class="weatherSheet" role="dialog" aria-modal="true" aria-labelledby="weatherDetailTitle">
-      <div class="weatherSheetHandle" aria-hidden="true"></div>
-
-      <button id="weatherClose" class="weatherClose" type="button" aria-label="Fechar previsão detalhada">×</button>
-
-      <div class="weatherDetailTop">
-        <div>
-          <div class="label">PREVISÃO HORA A HORA</div>
-          <h3 id="weatherDetailTitle">—</h3>
-          <div id="weatherDetailCondition" class="weatherDetailCondition">—</div>
-        </div>
-
-        <div id="weatherDetailIcon" class="weatherDetailIcon"></div>
-      </div>
-
-      <div id="weatherDetailSummary" class="weatherDetailSummary"></div>
-
-      <div class="hourlySectionTitle">
-        <div>
-          <strong>Como o dia deve evoluir</strong>
-          <span>deslize horizontalmente para ver as 24 horas</span>
-        </div>
-      </div>
-
-      <div id="hourlyRail" class="hourlyRail"></div>
-
-      <div class="hourlyLegend">
-        <span><i class="legendRain"></i> barra azul = chuva prevista naquela hora</span>
-        <span>Horário local de Manaus</span>
-      </div>
-
-      <div class="weatherDetailNote">
-        Previsão meteorológica para Barcelos. Estes dados não representam previsão do nível do Rio Negro.
-      </div>
-    </section>
-  </div>
-
   <section class="card">
     <div class="sectionHead">
       <div><div class="label">DETECTOR DE REPIQUETE</div><h2>Mudança de tendência em Barcelos</h2></div>
@@ -991,6 +1119,9 @@ body.weatherModalOpen{
   <section class="card">
     <div class="sectionHead"><div><div class="label">RIO NEGRO A MONTANTE</div><h2>Movimento antes de Barcelos</h2></div></div>
     <div id="stations" class="stations"><div class="meta">Carregando estações...</div></div>
+    <div class="stationNote">
+      <strong>Como comparar:</strong> cada estação usa uma referência local de nível. Para comparar o comportamento entre estações, observe principalmente as variações de 6 h, 24 h, 72 h e 7 dias.
+    </div>
   </section>
 
 
@@ -1108,7 +1239,8 @@ body.weatherModalOpen{
     <div id="seasonalStatus" class="seasonalStatus">Calculando referência sazonal...</div>
 
     <div class="seasonalChartWrap">
-      <canvas id="seasonalChart"></canvas>
+      <canvas id="seasonalChart" role="img" aria-label="Gráfico da posição sazonal de Barcelos, com faixa típica P25 a P75, mediana e série do ano atual." aria-describedby="seasonalChartDesc"></canvas>
+      <p id="seasonalChartDesc" class="srOnly">O gráfico compara o nível atual de Barcelos com a referência sazonal disponível no sistema.</p>
     </div>
 
     <div class="seasonalNote">
@@ -1161,7 +1293,8 @@ body.weatherModalOpen{
     <div id="compareStatus" class="compareStatus">Carregando comparativo 2026 × 2025...</div>
 
     <div class="compareChartWrap">
-      <canvas id="compareChart"></canvas>
+      <canvas id="compareChart" role="img" aria-label="Gráfico comparativo dos níveis de Barcelos em 2026 e 2025 até a mesma data do ano." aria-describedby="compareChartDesc"></canvas>
+      <p id="compareChartDesc" class="srOnly">O gráfico permite comparar a trajetória de 2026 com a de 2025 até a mesma data do calendário.</p>
     </div>
 
     <div class="compareNote">
@@ -1171,9 +1304,90 @@ body.weatherModalOpen{
 
   <section class="card">
     <div class="sectionHead"><div><div class="label">COMPORTAMENTO RECENTE</div><h2>Barcelos nos últimos 30 dias</h2></div><div id="records" class="badge">— medições</div></div>
-    <div class="chartWrap"><svg id="chart30d" viewBox="0 0 1000 260" preserveAspectRatio="none"></svg></div>
+    <div class="chartWrap"><svg id="chart30d" viewBox="0 0 1000 260" preserveAspectRatio="none" role="img" aria-label="Série do nível do Rio Negro em Barcelos nos últimos 30 dias"></svg></div>
     <div class="chartMeta"><span id="chartStart">—</span><span id="chartEnd">—</span></div>
   </section>
+
+  <div class="contextDivider" aria-hidden="true">
+    <span>CONTEXTO METEOROLÓGICO LOCAL</span>
+  </div>
+
+  <section class="card weatherCard">
+    <div class="weatherHead">
+      <div class="weatherTitle">
+        <div class="label">PREVISÃO METEOROLÓGICA</div>
+        <h2>Barcelos • próximos 5 dias</h2>
+        <div class="weatherIntro">
+          Condições previstas para Barcelos. Este módulo é meteorológico e não representa previsão do nível do Rio Negro.
+        </div>
+      </div>
+
+      <div class="weatherSummary">
+        <div class="weatherSummaryLabel">CHUVA PREVISTA • 5 DIAS</div>
+        <div id="weatherRainTotal" class="weatherSummaryValue">—<span>mm</span></div>
+        <div id="weatherRainSub" class="weatherSummarySub">aguardando previsão</div>
+      </div>
+    </div>
+
+    <div id="weatherDays" class="weatherDays">
+      <div class="meta">Carregando previsão meteorológica...</div>
+    </div>
+
+    <div class="weatherTapHint">
+      <span class="weatherTapIcon">↗</span>
+      Toque em qualquer dia para abrir a previsão hora a hora.
+    </div>
+
+    <div class="weatherFoot">
+      <div class="weatherSource">
+        Dados meteorológicos via
+        <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a>
+      </div>
+      <div id="weatherStatus" class="weatherStatus">Atualização: —</div>
+    </div>
+  </section>
+
+
+  <div id="weatherModal" class="weatherModal" aria-hidden="true">
+    <div class="weatherModalBackdrop" data-weather-close></div>
+
+    <section class="weatherSheet" role="dialog" aria-modal="true" aria-labelledby="weatherDetailTitle">
+      <div class="weatherSheetHandle" aria-hidden="true"></div>
+
+      <button id="weatherClose" class="weatherClose" type="button" aria-label="Fechar previsão detalhada">×</button>
+
+      <div class="weatherDetailTop">
+        <div>
+          <div class="label">PREVISÃO HORA A HORA</div>
+          <h3 id="weatherDetailTitle">—</h3>
+          <div id="weatherDetailCondition" class="weatherDetailCondition">—</div>
+        </div>
+
+        <div id="weatherDetailIcon" class="weatherDetailIcon"></div>
+      </div>
+
+      <div id="weatherDetailSummary" class="weatherDetailSummary"></div>
+
+      <div class="hourlySectionTitle">
+        <div>
+          <strong>Como o dia deve evoluir</strong>
+          <span>deslize horizontalmente para ver as 24 horas</span>
+        </div>
+      </div>
+
+      <div id="hourlyRail" class="hourlyRail"></div>
+
+      <div class="hourlyLegend">
+        <span><i class="legendRain"></i> barra azul = chuva prevista naquela hora</span>
+        <span>Horário local de Manaus</span>
+      </div>
+
+      <div class="weatherDetailNote">
+        Previsão meteorológica para Barcelos. Estes dados não representam previsão do nível do Rio Negro.
+      </div>
+    </section>
+  </div>
+
 
   <footer>Fonte: Agência Nacional de Águas e Saneamento Básico — ANA • atualização automática</footer>
 </div>
@@ -1182,8 +1396,8 @@ body.weatherModalOpen{
 (() => {
   "use strict";
 
-  const ROOT = "https://iramylsonfreitas-oss.github.io/monitor-rio-negro-barcelos/data/";
-  const stages = ["Sem sinal","Sinal a montante","Possível reversão","Em formação","Confirmado"];
+  const ROOT = "./data/";
+  const stages = ["Sem sinal","Movimento a montante","Possível reversão","Em formação","Confirmado"];
 
   const $ = id => document.getElementById(id);
 
@@ -1215,6 +1429,93 @@ body.weatherModalOpen{
     const p=d.split("-");
     return p.length===3?`${p[2]}/${p[1]} ${t.slice(0,5)}`:s;
   }
+  function fmtAge(minutes){
+    const n=Math.max(0,Math.round(Number(minutes)));
+    if(!Number.isFinite(n)) return "idade não informada";
+    if(n<60) return `${n} min`;
+    const h=Math.floor(n/60);
+    const m=n%60;
+    return m?`${h}h${String(m).padStart(2,"0")}`:`${h}h`;
+  }
+  let latestFreshnessData=null;
+
+  function parseManausMeasurement(d){
+    const raw=d.data_medicao_manaus||d.data_medicao;
+    if(!raw) return null;
+
+    let iso=String(raw).trim().replace(" ","T");
+
+    // data_medicao_manaus vem sem offset. Manaus = UTC-4 o ano inteiro.
+    if(!/[zZ]$|[+-]\d{2}:\d{2}$/.test(iso)){
+      iso+= "-04:00";
+    }
+
+    const dt=new Date(iso);
+    return Number.isNaN(dt.getTime())?null:dt;
+  }
+
+  function currentAgeMinutes(d){
+    const measurement=parseManausMeasurement(d);
+
+    if(measurement){
+      return Math.max(
+        0,
+        Math.floor((Date.now()-measurement.getTime())/60000)
+      );
+    }
+
+    const fallback=Number(d.idade_dado_min);
+    return Number.isFinite(fallback)?Math.max(0,Math.round(fallback)):NaN;
+  }
+
+  function renderDataFreshness(d){
+    latestFreshnessData=d;
+
+    const status=$("dataStatus");
+    const dot=$("dot");
+    const age=currentAgeMinutes(d);
+    const stale=d.dado_desatualizado===true || (Number.isFinite(age) && age>180);
+
+    status.classList.remove("ok","delay","stale");
+    dot.classList.remove("ok","delay","stale");
+
+    let label="Atualidade não verificada";
+    let state="delay";
+
+    if(stale){
+      label="Dados desatualizados";
+      state="stale";
+    }else if(Number.isFinite(age) && age>120){
+      label="Dados com atraso";
+      state="delay";
+    }else if(Number.isFinite(age)){
+      label="Dados atuais";
+      state="ok";
+    }
+
+    status.classList.add(state);
+    dot.classList.add(state);
+    $("statusText").textContent=label;
+
+    const when=fmtShort(d.data_medicao_manaus||d.data_medicao);
+    $("statusTime").textContent=Number.isFinite(age)
+      ? `Medição há ${fmtAge(age)} • ${when}`
+      : `Medição ${when}`;
+
+    status.setAttribute(
+      "aria-label",
+      `${label}. ${$("statusTime").textContent}`
+    );
+  }
+
+  // Mantém a idade correta mesmo se a página ficar aberta.
+  setInterval(()=>{
+    if(latestFreshnessData){
+      renderDataFreshness(latestFreshnessData);
+      renderOperationalSummary();
+    }
+  },60*1000);
+
   async function get(name){
     const r=await fetch(`${ROOT}${name}?v=${Date.now()}`,{cache:"no-store"});
     if(!r.ok) throw new Error(`${name}: HTTP ${r.status}`);
@@ -1223,7 +1524,113 @@ body.weatherModalOpen{
   function setVar(id,val){
     const el=$(id); el.textContent=fmtVar(val); el.className=cls(val);
   }
+
+  let operationalLatest=null;
+  let operationalRepiquete=null;
+
+  function setOpsValue(id,text,tone=""){
+    const el=$(id);
+    if(!el)return;
+    el.className=`opsValue${tone?` ${tone}`:""}`;
+    el.textContent=text;
+  }
+
+  function setOpsMarkedValue(id,text,tone=""){
+    const el=$(id);
+    if(!el)return;
+    el.className=`opsValue${tone?` ${tone}`:""}`;
+    el.innerHTML=`<span class="opsMark${tone?` ${tone}`:""}"></span><span></span>`;
+    el.lastElementChild.textContent=text;
+  }
+
+  function operationalTrend(d){
+    const v6=Number(d?.variacao_6h_cm);
+    if(!Number.isFinite(v6))return["Indisponível",""];
+    if(v6>0)return[Math.abs(v6)<=2?"Leve alta":"Subindo","pos"];
+    if(v6<0)return[Math.abs(v6)<=2?"Leve queda":"Descendo","danger"];
+    return["Estável",""];
+  }
+
+  function operationalRepiqueteStatus(d){
+    if(!d)return["Indisponível",""];
+    const level=Math.max(0,Math.min(4,Number(d.nivel)||0));
+    const confirmed=d.evento_barcelos?.confirmado===true || level===4;
+    if(confirmed)return["Confirmado","warn"];
+    if(level===3)return["Em formação","warn"];
+    if(level===2)return["Possível reversão","warn"];
+    return["Não confirmado",""];
+  }
+
+  function renderOperationalSummary(){
+    const latest=operationalLatest;
+    const detector=operationalRepiquete;
+
+    if(latest){
+      setOpsValue("opsLevel",`${fmtLevel(latest.nivel_m)} m`);
+      $("opsLevelDetail").textContent=`Medição ${fmtShort(latest.data_medicao_manaus||latest.data_medicao)}`;
+
+      const [trend,tone]=operationalTrend(latest);
+      setOpsValue("opsTrend",trend,tone);
+      $("opsTrendDetail").textContent=`${fmtVar(latest.variacao_6h_cm)} nas últimas 6 h`;
+
+      const age=currentAgeMinutes(latest);
+      let freshText="Atualidade não verificada";
+      let freshTone="warn";
+
+      if(Number.isFinite(age)){
+        if(latest.dado_desatualizado===true || age>180){
+          freshText=`Desatualizado • ${fmtAge(age)}`;
+          freshTone="danger";
+        }else if(age>120){
+          freshText=`Com atraso • ${fmtAge(age)}`;
+          freshTone="warn";
+        }else{
+          freshText=`Atual • ${fmtAge(age)}`;
+          freshTone="pos";
+        }
+      }
+
+      setOpsMarkedValue("opsFreshness",freshText,freshTone);
+      $("opsFreshnessDetail").textContent=`Medição ${fmtShort(latest.data_medicao_manaus||latest.data_medicao)}`;
+    }else{
+      setOpsValue("opsLevel","Indisponível");
+      $("opsLevelDetail").textContent="Nível atual não carregado";
+      setOpsValue("opsTrend","Indisponível");
+      $("opsTrendDetail").textContent="Tendência não carregada";
+      setOpsMarkedValue("opsFreshness","Indisponível","danger");
+      $("opsFreshnessDetail").textContent="Sem medição atual";
+    }
+
+    if(detector){
+      const upstream=detector.contexto_montante||{};
+      const signal=upstream.sinal===true;
+      const n=Number(upstream.estacoes_positivas_72h);
+
+      setOpsMarkedValue(
+        "opsUpstream",
+        signal?"Presente":"Não detectado",
+        signal?"warn":""
+      );
+
+      $("opsUpstreamDetail").textContent=
+        signal && Number.isFinite(n)
+          ? `${n} estação${n===1?"":"ões"} com variação positiva em 72 h`
+          : "Sem movimento positivo agregado no critério atual";
+
+      const [repText,repTone]=operationalRepiqueteStatus(detector);
+      setOpsMarkedValue("opsRepiquete",repText,repTone);
+      $("opsRepiqueteDetail").textContent="Detector experimental • estado observado em Barcelos";
+    }else{
+      setOpsMarkedValue("opsUpstream","Indisponível","danger");
+      $("opsUpstreamDetail").textContent="Contexto a montante não carregado";
+      setOpsMarkedValue("opsRepiquete","Indisponível","danger");
+      $("opsRepiqueteDetail").textContent="Detector não carregado";
+    }
+  }
+
   function renderLatest(d){
+    operationalLatest=d;
+    renderOperationalSummary();
     $("level").innerHTML=`${fmtLevel(d.nivel_m)}<span>m</span>`;
     $("measureMeta").textContent=`Última medição ANA: ${fmtDate(d.data_medicao_manaus||d.data_medicao)} • ANA atualizou: ${fmtShort(d.data_atualizacao_manaus||d.data_atualizacao_ana)}`;
     setVar("v6",d.variacao_6h_cm);setVar("v24",d.variacao_24h_cm);setVar("v72",d.variacao_72h_cm);setVar("v7d",d.variacao_7d_cm);
@@ -1233,11 +1640,12 @@ body.weatherModalOpen{
     if(v6<0){text=Math.abs(v6)<=2?"Leve queda":"Descendo";icon="↓"}
     $("trendText").textContent=text;$("trendIcon").textContent=icon;
     $("trendSub").textContent=`${fmtVar(v6)} nas últimas 6 horas`;
-    $("dot").classList.add("ok");$("statusText").textContent="Dados ANA carregados";
-    $("statusTime").textContent=`Medição ${fmtShort(d.data_medicao_manaus||d.data_medicao)}`;
+    renderDataFreshness(d);
     $("records").textContent=`${d.registros_30d??"—"} medições`;
   }
   function renderDetector(d){
+    operationalRepiquete=d;
+    renderOperationalSummary();
     const level=Math.max(0,Math.min(4,Number(d.nivel)||0));
     $("detectorBadge").textContent=d.rotulo||"SEM INFORMAÇÃO";
     $("detectorTitle").textContent=d.titulo||"Situação indisponível";
@@ -1261,9 +1669,10 @@ body.weatherModalOpen{
     const list=d.estacoes||[];
     $("stations").innerHTML=list.map(s=>{
       const [tt,tc]=trendInfo(s.tendencia);
-      return `<article class="station ${s.estacao==="14480002"?"current":""}">
+      return `<article class="station ${s.estacao==="14480002"?"current":""}"
+        aria-label="${s.nome}. Nível local ${fmtLevel(s.nivel_m)} metros. Variação em 6 horas ${fmtVar(s.variacao_6h_cm)}, em 24 horas ${fmtVar(s.variacao_24h_cm)}, em 72 horas ${fmtVar(s.variacao_72h_cm)} e em 7 dias ${fmtVar(s.variacao_7d_cm)}.">
         <div class="stationName">${s.nome}</div><div class="stationCode">ANA ${s.estacao}</div>
-        <div class="stationLevel">${fmtLevel(s.nivel_m)} <span>m</span></div>
+        <div class="stationLevel"><small>NÍVEL LOCAL</small>${fmtLevel(s.nivel_m)} <span>m</span></div>
         <div class="stationTrend ${tc}">${tt}</div>
         <div class="miniGrid">
           <div class="mini"><span>6 H</span><b class="${cls(s.variacao_6h_cm)}">${fmtVar(s.variacao_6h_cm)}</b></div>
@@ -1555,17 +1964,92 @@ body.weatherModalOpen{
   }
 
   async function boot(){
-    try{
-      const [latest,repiquete,stations,series]=await Promise.all([
-        get("latest.json"),get("repiquete.json"),get("estacoes.json"),get("series_30d.json")
-      ]);
-      renderLatest(latest);renderDetector(repiquete);renderStations(stations);render30d(series);
-    }catch(e){
-      $("statusText").textContent="Erro ao carregar dados";
-      $("statusTime").textContent="A página abriu, mas uma consulta falhou";
-      $("errorBox").style.display="block";
-      $("errorBox").textContent=`Falha técnica: ${e.message}`;
-      console.error(e);
+    const errorBox=$("errorBox");
+    errorBox.style.display="none";
+    errorBox.textContent="";
+
+    const requests=[
+      ["Nível atual",get("latest.json")],
+      ["Detector de repiquete",get("repiquete.json")],
+      ["Estações a montante",get("estacoes.json")],
+      ["Série de 30 dias",get("series_30d.json")]
+    ];
+
+    const results=await Promise.allSettled(
+      requests.map(([,promise])=>promise)
+    );
+
+    const failures=[];
+
+    // 1. Nível atual de Barcelos
+    if(results[0].status==="fulfilled"){
+      renderLatest(results[0].value);
+    }else{
+      operationalLatest=null;
+      renderOperationalSummary();
+      const status=$("dataStatus");
+      const dot=$("dot");
+      status.classList.remove("ok","delay");
+      status.classList.add("stale");
+      dot.classList.remove("ok","delay");
+      dot.classList.add("stale");
+      $("statusText").textContent="Nível atual indisponível";
+      $("statusTime").textContent="Falha ao consultar o dado atual";
+      status.setAttribute(
+        "aria-label",
+        "Nível atual indisponível. Falha ao consultar o dado atual."
+      );
+      failures.push(requests[0][0]);
+      console.error("latest.json:",results[0].reason);
+    }
+
+    // 2. Detector de repiquete
+    if(results[1].status==="fulfilled"){
+      renderDetector(results[1].value);
+    }else{
+      operationalRepiquete=null;
+      renderOperationalSummary();
+      $("detectorBadge").textContent="INDISPONÍVEL";
+      $("detectorTitle").textContent="Detector temporariamente indisponível";
+      $("detectorMessage").textContent=
+        "O restante do monitor continua disponível. Este módulo será consultado novamente na próxima atualização.";
+      $("progress").innerHTML="";
+      $("reasonChips").innerHTML="";
+      $("nextTrigger").textContent="Aguardando nova tentativa de carregamento.";
+      failures.push(requests[1][0]);
+      console.error("repiquete.json:",results[1].reason);
+    }
+
+    // 3. Estações, convergência e Pulso
+    if(results[2].status==="fulfilled"){
+      renderStations(results[2].value);
+    }else{
+      $("stations").innerHTML=
+        '<div class="meta">Dados das estações temporariamente indisponíveis.</div>';
+      $("flowSvg").innerHTML=
+        '<text x="500" y="180" text-anchor="middle" fill="#8da4b8" font-size="18">Estações temporariamente indisponíveis</text>';
+      $("waveSvg").innerHTML=
+        '<text x="500" y="165" text-anchor="middle" fill="#8da4b8" font-size="18">Pulso temporariamente indisponível</text>';
+      failures.push(requests[2][0]);
+      console.error("estacoes.json:",results[2].reason);
+    }
+
+    // 4. Série recente
+    if(results[3].status==="fulfilled"){
+      render30d(results[3].value);
+    }else{
+      $("chart30d").innerHTML=
+        '<text x="500" y="135" text-anchor="middle" fill="#8da4b8" font-size="20">Série de 30 dias temporariamente indisponível</text>';
+      $("chartStart").textContent="—";
+      $("chartEnd").textContent="—";
+      failures.push(requests[3][0]);
+      console.error("series_30d.json:",results[3].reason);
+    }
+
+    if(failures.length){
+      errorBox.style.display="block";
+      errorBox.textContent=
+        `Alguns módulos não puderam ser atualizados agora: ${failures.join(", ")}. Os demais continuam funcionando normalmente.`;
     }
   }
 
@@ -1810,7 +2294,7 @@ body.weatherModalOpen{
         plugins:{
           legend:{
             position:"top",
-            labels:{color:"#d8e5ef",usePointStyle:true,boxWidth:10,padding:16,font:{size:11,weight:"600"}}
+            labels:{color:"#d8e5ef",usePointStyle:true,boxWidth:10,padding:16,font:{size:12,weight:"600"}}
           },
           tooltip:{
             backgroundColor:"rgba(7,21,36,.96)",
@@ -1824,13 +2308,13 @@ body.weatherModalOpen{
         },
         scales:{
           x:{
-            ticks:{color:"#8fa7bc",maxTicksLimit:10,font:{size:10}},
+            ticks:{color:"#a2b4c3",maxTicksLimit:10,font:{size:11}},
             grid:{display:false}
           },
           y:{
-            ticks:{color:"#8fa7bc",callback:v=>fmt(v)},
+            ticks:{color:"#a2b4c3",font:{size:11},callback:v=>fmt(v)},
             grid:{color:"rgba(255,255,255,.08)"},
-            title:{display:true,text:"Nível do rio (m)",color:"#8fa7bc"}
+            title:{display:true,text:"Nível do rio (m)",color:"#a2b4c3",font:{size:12}}
           }
         }
       }
@@ -1884,7 +2368,7 @@ body.weatherModalOpen{
          tension:.18,spanGaps:false}
       ]},options:{responsive:true,maintainAspectRatio:false,animation:false,interaction:{mode:"index",intersect:false},plugins:{v26Today:{index:currentIndex,value:level},legend:{position:"top",align:"start",labels:{color:"#d6e1eb",usePointStyle:true,pointStyle:"line",padding:18,filter:item=>item.text!=="__p25"}},tooltip:{filter:item=>item.dataset.label!=="__p25"&&item.raw!==null,callbacks:{label:c=>{
         if(c.dataset.label==="Faixa típica (P25–P75)"){const lo=p25[c.dataIndex],hi=p75[c.dataIndex];if(lo!==null&&hi!==null)return `Faixa típica: ${fmt(lo)}–${fmt(hi)} m`;}
-        return `${c.dataset.label}: ${fmt(c.raw)} m`;}}}},scales:{x:{grid:{display:false},ticks:{color:"#8fa7bc",maxRotation:0,autoSkip:false,callback:(v,i)=>({"01-01":"JAN","02-01":"FEV","03-01":"MAR","04-01":"ABR","05-01":"MAI","06-01":"JUN","07-01":"JUL","08-01":"AGO","09-01":"SET","10-01":"OUT","11-01":"NOV","12-01":"DEZ"}[cal.keys[i]]||"")}},y:{beginAtZero:false,grid:{color:"rgba(255,255,255,.055)"},ticks:{color:"#8fa7bc",callback:v=>`${Number(v).toFixed(1).replace(".",",")} m`},title:{display:true,text:"Nível do rio (m)",color:"#8fa7bc"}}}}});
+        return `${c.dataset.label}: ${fmt(c.raw)} m`;}}}},scales:{x:{grid:{display:false},ticks:{color:"#a2b4c3",font:{size:11},maxRotation:0,autoSkip:false,callback:(v,i)=>({"01-01":"JAN","02-01":"FEV","03-01":"MAR","04-01":"ABR","05-01":"MAI","06-01":"JUN","07-01":"JUL","08-01":"AGO","09-01":"SET","10-01":"OUT","11-01":"NOV","12-01":"DEZ"}[cal.keys[i]]||"")}},y:{beginAtZero:false,grid:{color:"rgba(255,255,255,.055)"},ticks:{color:"#a2b4c3",font:{size:11},callback:v=>`${Number(v).toFixed(1).replace(".",",")} m`},title:{display:true,text:"Nível do rio (m)",color:"#a2b4c3",font:{size:12}}}}}});
       renderCompare2625(data, latestYear);
     }catch(e){console.error("Erro sazonal:",e);status.textContent="Posição sazonal temporariamente indisponível.";const c=$s("compareStatus");if(c)c.textContent="Comparativo 2026 × 2025 temporariamente indisponível.";}
   }
@@ -1898,8 +2382,7 @@ body.weatherModalOpen{
 (() => {
   "use strict";
 
-  const WEATHER_URL =
-    "https://iramylsonfreitas-oss.github.io/monitor-rio-negro-barcelos/data/weather.json";
+  const WEATHER_URL = "./data/weather.json";
 
   const $w = id => document.getElementById(id);
 
@@ -2197,6 +2680,7 @@ body.weatherModalOpen{
       return `<article
         class="wxDay ${category} ${isToday?"today":""}"
         data-date="${d.date}"
+        role="button"
         role="button"
         tabindex="0"
         aria-label="Abrir previsão hora a hora de ${isToday?"hoje":dayLabel(d.date)} ${shortDate(d.date)}"

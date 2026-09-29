@@ -69,63 +69,306 @@ jobs:
           fi
 
 
-      - name: Validar weather.json
+      - name: Validar weather.json v2
         run: |
           python - <<'PY'
           import json
+          import math
+          from datetime import datetime
           from pathlib import Path
 
           path = Path("data/weather.json")
 
-          if not path.exists():
-              raise SystemExit("ERRO: data/weather.json não foi criado.")
+          def fail(message):
+              raise SystemExit(f"ERRO: {message}")
 
-          with path.open(encoding="utf-8") as f:
-              data = json.load(f)
-
-          days = data.get("days")
-
-          if not isinstance(days, list) or len(days) != 5:
-              raise SystemExit(
-                  f"ERRO: weather.json deveria conter 5 dias; contém {len(days) if isinstance(days, list) else 'valor inválido'}."
+          def is_number(value):
+              return (
+                  isinstance(value, (int, float))
+                  and not isinstance(value, bool)
+                  and math.isfinite(float(value))
               )
 
-          required = {
+          def require_number(obj, field, context):
+              if field not in obj:
+                  fail(f"{context} sem campo obrigatório '{field}'.")
+              if not is_number(obj[field]):
+                  fail(f"{context}: '{field}' deve ser numérico.")
+              return float(obj[field])
+
+          def require_int_like(obj, field, context):
+              value = require_number(obj, field, context)
+              if not value.is_integer():
+                  fail(f"{context}: '{field}' deve ser inteiro.")
+              return int(value)
+
+          def require_text(obj, field, context):
+              value = obj.get(field)
+              if not isinstance(value, str) or not value.strip():
+                  fail(f"{context}: '{field}' deve ser texto não vazio.")
+              return value
+
+          if not path.exists():
+              fail("data/weather.json não foi criado.")
+
+          try:
+              with path.open(encoding="utf-8") as f:
+                  data = json.load(f)
+          except json.JSONDecodeError as exc:
+              fail(f"weather.json não é JSON válido: {exc}")
+
+          if not isinstance(data, dict):
+              fail("weather.json deve conter um objeto JSON na raiz.")
+
+          if data.get("schema_version") != 2:
+              fail(
+                  f"schema_version deveria ser 2; recebido {data.get('schema_version')!r}."
+              )
+
+          if data.get("forecast_days") != 5:
+              fail(
+                  f"forecast_days deveria ser 5; recebido {data.get('forecast_days')!r}."
+              )
+
+          if data.get("hourly_detail") is not True:
+              fail("hourly_detail deveria ser true.")
+
+          source = data.get("source")
+          if not isinstance(source, dict):
+              fail("bloco source ausente ou inválido.")
+          require_text(source, "name", "source")
+          require_text(source, "url", "source")
+
+          location = data.get("location")
+          if not isinstance(location, dict):
+              fail("bloco location ausente ou inválido.")
+          require_text(location, "name", "location")
+          require_text(location, "state", "location")
+          require_text(location, "country", "location")
+          require_text(location, "timezone", "location")
+          require_number(location, "latitude", "location")
+          require_number(location, "longitude", "location")
+
+          for stamp_field in ("generated_at_utc", "generated_at_manaus"):
+              stamp = require_text(data, stamp_field, "raiz")
+              try:
+                  datetime.fromisoformat(stamp.replace("Z", "+00:00"))
+              except ValueError:
+                  fail(f"{stamp_field} não está em formato ISO válido: {stamp!r}")
+
+          rain_total = require_number(data, "rain_total_5d_mm", "raiz")
+          if rain_total < 0:
+              fail("rain_total_5d_mm não pode ser negativo.")
+
+          days = data.get("days")
+          if not isinstance(days, list) or len(days) != 5:
+              fail(
+                  "weather.json deveria conter exatamente 5 dias; "
+                  f"contém {len(days) if isinstance(days, list) else 'valor inválido'}."
+              )
+
+          daily_required_text = (
               "date",
-              "weather_code",
               "condition",
+              "condition_category",
+          )
+
+          daily_required_number = (
+              "weather_code",
               "t_max_c",
               "t_min_c",
               "rain_probability_pct",
               "rain_mm",
               "wind_max_kmh",
+              "wind_direction_deg",
               "gust_max_kmh",
               "uv_index_max",
-          }
+          )
+
+          hourly_required_text = (
+              "datetime",
+              "time",
+              "condition",
+              "condition_category",
+          )
+
+          hourly_required_number = (
+              "weather_code",
+              "temperature_c",
+              "rain_probability_pct",
+              "rain_mm",
+              "humidity_pct",
+              "wind_kmh",
+              "gust_kmh",
+          )
+
+          seen_dates = set()
+          previous_date = None
+          calculated_rain_total = 0.0
 
           for index, day in enumerate(days, start=1):
-              missing = sorted(required - set(day))
-              if missing:
-                  raise SystemExit(
-                      f"ERRO: dia {index} sem campos obrigatórios: {', '.join(missing)}"
+              context = f"dia {index}"
+
+              if not isinstance(day, dict):
+                  fail(f"{context} não é um objeto JSON.")
+
+              for field in daily_required_text:
+                  require_text(day, field, context)
+
+              for field in daily_required_number:
+                  require_number(day, field, context)
+
+              date_text = day["date"]
+              try:
+                  day_date = datetime.strptime(date_text, "%Y-%m-%d").date()
+              except ValueError:
+                  fail(f"{context}: date inválida: {date_text!r}")
+
+              if date_text in seen_dates:
+                  fail(f"data diária duplicada: {date_text}.")
+              seen_dates.add(date_text)
+
+              if previous_date is not None and day_date <= previous_date:
+                  fail("os 5 dias não estão em ordem cronológica crescente.")
+              previous_date = day_date
+
+              rain_probability = require_int_like(
+                  day, "rain_probability_pct", context
+              )
+              if not 0 <= rain_probability <= 100:
+                  fail(f"{context}: rain_probability_pct fora de 0..100.")
+
+              weather_code = require_int_like(day, "weather_code", context)
+              if weather_code < 0:
+                  fail(f"{context}: weather_code inválido.")
+
+              wind_direction = require_int_like(
+                  day, "wind_direction_deg", context
+              )
+              if not 0 <= wind_direction <= 360:
+                  fail(f"{context}: wind_direction_deg fora de 0..360.")
+
+              if day["rain_mm"] < 0:
+                  fail(f"{context}: rain_mm não pode ser negativo.")
+              if day["wind_max_kmh"] < 0 or day["gust_max_kmh"] < 0:
+                  fail(f"{context}: vento/rajada não podem ser negativos.")
+              if day["uv_index_max"] < 0:
+                  fail(f"{context}: uv_index_max não pode ser negativo.")
+
+              calculated_rain_total += float(day["rain_mm"])
+
+              hours = day.get("hours")
+              if not isinstance(hours, list) or len(hours) != 24:
+                  fail(
+                      f"{context} ({date_text}) deveria conter exatamente 24 horas; "
+                      f"contém {len(hours) if isinstance(hours, list) else 'valor inválido'}."
                   )
 
-          print("weather.json válido.")
-          print("Gerado em Manaus:", data.get("generated_at_manaus"))
-          print("Chuva total prevista em 5 dias:", data.get("rain_total_5d_mm"), "mm")
+              seen_times = set()
+
+              for hour_index, hour in enumerate(hours, start=1):
+                  hour_context = f"{context}, hora {hour_index}"
+
+                  if not isinstance(hour, dict):
+                      fail(f"{hour_context} não é um objeto JSON.")
+
+                  for field in hourly_required_text:
+                      require_text(hour, field, hour_context)
+
+                  for field in hourly_required_number:
+                      require_number(hour, field, hour_context)
+
+                  try:
+                      dt = datetime.fromisoformat(hour["datetime"])
+                  except ValueError:
+                      fail(
+                          f"{hour_context}: datetime inválido: "
+                          f"{hour['datetime']!r}"
+                      )
+
+                  if dt.date() != day_date:
+                      fail(
+                          f"{hour_context}: datetime pertence a {dt.date()}, "
+                          f"mas o dia é {date_text}."
+                      )
+
+                  expected_time = dt.strftime("%H:%M")
+                  if hour["time"] != expected_time:
+                      fail(
+                          f"{hour_context}: time {hour['time']!r} não corresponde "
+                          f"ao datetime ({expected_time})."
+                      )
+
+                  if hour["time"] in seen_times:
+                      fail(
+                          f"{context} ({date_text}) contém hora duplicada: "
+                          f"{hour['time']}."
+                      )
+                  seen_times.add(hour["time"])
+
+                  probability = require_int_like(
+                      hour, "rain_probability_pct", hour_context
+                  )
+                  if not 0 <= probability <= 100:
+                      fail(
+                          f"{hour_context}: rain_probability_pct fora de 0..100."
+                      )
+
+                  humidity = require_int_like(
+                      hour, "humidity_pct", hour_context
+                  )
+                  if not 0 <= humidity <= 100:
+                      fail(f"{hour_context}: humidity_pct fora de 0..100.")
+
+                  code = require_int_like(hour, "weather_code", hour_context)
+                  if code < 0:
+                      fail(f"{hour_context}: weather_code inválido.")
+
+                  if hour["rain_mm"] < 0:
+                      fail(f"{hour_context}: rain_mm não pode ser negativo.")
+                  if hour["wind_kmh"] < 0 or hour["gust_kmh"] < 0:
+                      fail(
+                          f"{hour_context}: vento/rajada não podem ser negativos."
+                      )
+
+              expected_times = {f"{hour:02d}:00" for hour in range(24)}
+              if seen_times != expected_times:
+                  missing = sorted(expected_times - seen_times)
+                  extra = sorted(seen_times - expected_times)
+                  fail(
+                      f"{context} ({date_text}) não contém as 24 horas esperadas. "
+                      f"Faltando: {missing or 'nenhuma'}; extras: {extra or 'nenhuma'}."
+                  )
+
+          calculated_rain_total = round(calculated_rain_total, 1)
+          if abs(calculated_rain_total - float(rain_total)) > 0.11:
+              fail(
+                  "rain_total_5d_mm não confere com a soma dos 5 dias: "
+                  f"arquivo={rain_total}, soma={calculated_rain_total}."
+              )
+
+          print("weather.json v2 válido.")
+          print("Schema:", data["schema_version"])
+          print("Dias:", len(days))
+          print("Detalhamento horário:", data["hourly_detail"])
+          print("Horas por dia:", ", ".join(str(len(day["hours"])) for day in days))
+          print("Gerado em Manaus:", data["generated_at_manaus"])
+          print("Chuva total prevista em 5 dias:", data["rain_total_5d_mm"], "mm")
           print()
 
           for day in days:
               print(
-                  day.get("date"),
+                  day["date"],
                   "|",
-                  day.get("condition"),
+                  day["condition"],
                   "|",
-                  f'{day.get("t_max_c")}/{day.get("t_min_c")} °C',
+                  f'{day["t_max_c"]}/{day["t_min_c"]} °C',
                   "|",
-                  f'{day.get("rain_probability_pct")}% chuva',
+                  f'{day["rain_probability_pct"]}% chuva',
                   "|",
-                  f'{day.get("rain_mm")} mm',
+                  f'{day["rain_mm"]} mm',
+                  "|",
+                  f'{len(day["hours"])} horas',
               )
           PY
 

@@ -1,5 +1,5 @@
 {
-  "gerado_em_utc": "2026-09-29T12:25:14.641251+00:00",
+  "gerado_em_utc": "2026-09-29T12:52:49.944098+00:00",
   "timezone": "America/Manaus",
   "nivel": 0,
   "status": "sem_sinal_reversao",
@@ -115,13 +115,13 @@
   "situacao_atual": {
     "taracua": {
       "nome": "Taracuá",
-      "nivel_m": 14.2,
+      "nivel_m": 14.21,
       "variacao_6h_cm": 5.0,
       "variacao_24h_cm": 19.0,
       "variacao_72h_cm": 53.0,
-      "variacao_7d_cm": 55.0,
+      "variacao_7d_cm": 56.0,
       "tendencia": "subindo",
-      "data_medicao_manaus": "2026-09-29 07:15:00"
+      "data_medicao_manaus": "2026-09-29 08:15:00"
     },
     "curicuriari": {
       "nome": "Curicuriari",
@@ -131,7 +131,7 @@
       "variacao_72h_cm": 8.0,
       "variacao_7d_cm": 15.0,
       "tendencia": "subindo",
-      "data_medicao_manaus": "2026-09-29 07:45:00"
+      "data_medicao_manaus": "2026-09-29 08:45:00"
     },
     "serrinha": {
       "nome": "Serrinha",
@@ -141,7 +141,7 @@
       "variacao_72h_cm": 2.0,
       "variacao_7d_cm": 7.0,
       "tendencia": "estavel",
-      "data_medicao_manaus": "2026-09-29 07:30:00"
+      "data_medicao_manaus": "2026-09-29 08:30:00"
     },
     "barcelos": {
       "nome": "Barcelos",

@@ -13,8 +13,8 @@
     "longitude": -62.9245,
     "timezone": "America/Manaus"
   },
-  "generated_at_utc": "2026-09-29T16:36:04+00:00",
-  "generated_at_manaus": "2026-09-29T12:36:04-04:00",
+  "generated_at_utc": "2026-09-29T16:47:35+00:00",
+  "generated_at_manaus": "2026-09-29T12:47:35-04:00",
   "forecast_days": 5,
   "hourly_detail": true,
   "rain_total_5d_mm": 13.5,

@@ -1,5 +1,5 @@
 {
-  "gerado_em_utc": "2026-09-29T14:20:37.092660+00:00",
+  "gerado_em_utc": "2026-09-29T14:49:07.086138+00:00",
   "timezone": "America/Manaus",
   "nivel": 0,
   "status": "sem_sinal_reversao",
@@ -115,13 +115,13 @@
   "situacao_atual": {
     "taracua": {
       "nome": "Taracuá",
-      "nivel_m": 14.21,
-      "variacao_6h_cm": 4.0,
-      "variacao_24h_cm": 18.0,
+      "nivel_m": 14.22,
+      "variacao_6h_cm": 5.0,
+      "variacao_24h_cm": 19.0,
       "variacao_72h_cm": 53.0,
-      "variacao_7d_cm": 56.0,
+      "variacao_7d_cm": 57.0,
       "tendencia": "subindo",
-      "data_medicao_manaus": "2026-09-29 09:15:00"
+      "data_medicao_manaus": "2026-09-29 10:15:00"
     },
     "curicuriari": {
       "nome": "Curicuriari",

@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Monitor Rio Negro | Barcelos — V3.6B.4</title>
+<title>Monitor Rio Negro | Barcelos — V3.7A.2</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 <style>
-/* V3.6B.4 — dependências fixadas e caminhos relativos */
+/* V3.7A.2 — acabamento visual do corredor completo até Manaus */
 :root{
   --bg:#071524;--panel:#0d2236;--panel2:#10283e;--line:rgba(255,255,255,.08);
   --text:#f3f7fb;--muted:#8da4b8;--blue:#3fa7ff;--cyan:#4fd8ff;
@@ -147,7 +147,16 @@ h1{font-size:clamp(42px,8vw,70px);line-height:.98;margin:8px 0 6px;letter-spacin
 .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.chip{font-size:11px;border:1px solid var(--line);border-radius:999px;padding:8px 10px;background:rgba(255,255,255,.025)}
 .trigger{margin-top:14px;padding:14px;border:1px solid rgba(245,196,81,.18);border-radius:14px;background:rgba(245,196,81,.05)}
 .trigger .label{color:var(--warn);font-size:11px}.trigger div:last-child{margin-top:5px;font-size:13px}
-.stations{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.stations{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+.station.downstream{border-color:rgba(245,196,81,.24);background:rgba(245,196,81,.025)}
+.stationRole{
+  display:inline-flex;align-items:center;min-height:20px;margin-top:8px;padding:4px 7px;
+  border:1px solid rgba(255,255,255,.08);border-radius:999px;
+  color:#9fb2c1;background:rgba(255,255,255,.025);
+  font-size:9.5px;font-weight:850;letter-spacing:.08em;
+}
+.station.current .stationRole{color:#bfefff;border-color:rgba(79,216,255,.25);background:rgba(79,216,255,.06)}
+.station.downstream .stationRole{color:#f7d98a;border-color:rgba(245,196,81,.22);background:rgba(245,196,81,.05)}
 .station{background:rgba(255,255,255,.025);border:1px solid var(--line);border-radius:18px;padding:16px;min-width:0}
 .station.current{border-color:rgba(63,167,255,.4);background:rgba(63,167,255,.045)}
 .stationName{font-size:18px;font-weight:800}.stationCode{font-size:11px;color:#9bb0c0;margin-top:2px}
@@ -176,7 +185,7 @@ h1{font-size:clamp(42px,8vw,70px);line-height:.98;margin:8px 0 6px;letter-spacin
   padding:9px;
 }
 .mini span{display:block;color:#9fb2c1;font-size:11px;font-weight:750;letter-spacing:.04em}
-.mini b{display:block;font-size:17px;margin-top:4px;line-height:1.1}
+.mini b{display:block;font-size:clamp(14px,1.35vw,17px);margin-top:4px;line-height:1.1;white-space:nowrap;letter-spacing:-.02em}
 .stationTime{font-size:11px;color:#9bb0c0;margin-top:12px}
 .stationNote{
   margin-top:12px;
@@ -187,6 +196,11 @@ h1{font-size:clamp(42px,8vw,70px);line-height:.98;margin:8px 0 6px;letter-spacin
   line-height:1.55;
 }
 .stationNote strong{color:#d6e0e7;font-weight:800}
+.stationDirection{margin-top:8px;color:#9fb2c1;font-size:11px;font-weight:800;letter-spacing:.11em}
+@media(min-width:1101px){
+  .station{padding:14px}
+  .mini{padding:8px 7px}
+}
 
 
 /* =========================================================
@@ -220,9 +234,9 @@ h1{font-size:clamp(42px,8vw,70px);line-height:.98;margin:8px 0 6px;letter-spacin
 #flowSvg{position:relative;z-index:1;display:block;width:100%;height:auto;min-height:235px}
 .flowNote{
   margin-top:9px;
-  color:#71889b;
-  font-size:11px;
-  line-height:1.5;
+  color:#91a6b7;
+  font-size:11.5px;
+  line-height:1.55;
 }
 .flowBranchTag{
   display:inline-flex;
@@ -235,7 +249,7 @@ h1{font-size:clamp(42px,8vw,70px);line-height:.98;margin:8px 0 6px;letter-spacin
   .flowCard{padding-left:14px;padding-right:14px}
   .flowIntro{font-size:12px}
   .flowWrap{border-radius:16px;overflow-x:auto}
-  #flowSvg{min-width:820px;min-height:225px}
+  #flowSvg{min-width:980px;min-height:225px}
 }
 
 .waveCard{overflow:hidden}
@@ -266,6 +280,9 @@ h1{font-size:clamp(42px,8vw,70px);line-height:.98;margin:8px 0 6px;letter-spacin
 .chartMeta{display:flex;justify-content:space-between;gap:10px;color:#9bb0c0;font-size:11px;margin-top:8px}
 .error{display:none;background:rgba(255,113,128,.08);border:1px solid rgba(255,113,128,.25);color:#ffd8dd;padding:12px 14px;border-radius:14px;margin-bottom:14px;font-size:12px;line-height:1.5}
 footer{color:#9bb0c0;font-size:11px;text-align:center;padding-top:8px}
+@media(max-width:1100px){
+  .stations{grid-template-columns:repeat(3,1fr)}
+}
 @media(max-width:900px){
   header{display:block}.status{margin-top:16px;width:100%}
   .hero{grid-template-columns:1fr}.trend{border-left:0;border-top:1px solid var(--line);padding:18px 0 0}
@@ -292,6 +309,7 @@ footer{color:#9bb0c0;font-size:11px;text-align:center;padding-top:8px}
   .stationLevel small{font-size:9.5px}
   .miniGrid{grid-column:1/-1}
   .sectionHead{display:block}.badge{display:inline-block;margin-top:12px}
+  .stationDirection{font-size:10px;letter-spacing:.08em}
   .corridorRow{grid-template-columns:82px 1fr 48px}
 }
 
@@ -1117,10 +1135,10 @@ body.weatherModalOpen{
   </section>
 
   <section class="card">
-    <div class="sectionHead"><div><div class="label">RIO NEGRO A MONTANTE</div><h2>Movimento antes de Barcelos</h2></div></div>
+    <div class="sectionHead"><div><div class="label">ESTAÇÕES MONITORADAS</div><h2>Corredor monitorado do Rio Negro</h2><div class="stationDirection">MONTANTE → BARCELOS → JUSANTE</div></div></div>
     <div id="stations" class="stations"><div class="meta">Carregando estações...</div></div>
     <div class="stationNote">
-      <strong>Como comparar:</strong> cada estação usa uma referência local de nível. Para comparar o comportamento entre estações, observe principalmente as variações de 6 h, 24 h, 72 h e 7 dias.
+      <strong>Como comparar:</strong> cada estação usa uma referência local de nível. Para comparar o comportamento entre estações, observe principalmente as variações de 6 h, 24 h, 72 h e 7 dias. Manaus aparece como contexto a jusante de Barcelos e não entra no sinal de movimento a montante nem na confirmação de repiquete.
     </div>
   </section>
 
@@ -1128,24 +1146,25 @@ body.weatherModalOpen{
   <section class="card flowCard">
     <div class="sectionHead">
       <div>
-        <div class="label">CONEXÃO A MONTANTE</div>
-        <h2>Como as águas chegam a Barcelos</h2>
+        <div class="label">CORREDOR DO RIO NEGRO</div>
+        <h2>Como o corredor se comporta de montante a jusante</h2>
       </div>
       <div class="badge">72 HORAS</div>
     </div>
 
     <div class="flowIntro">
       Cucuí e Taracuá são mostradas em ramos separados antes da convergência.
-      A partir daí, a leitura segue por Curicuriari, Serrinha e Barcelos.
+      A leitura segue por Curicuriari e Serrinha até Barcelos e continua até Manaus,
+      usada aqui como referência a jusante.
     </div>
 
     <div class="flowWrap">
-      <svg id="flowSvg" viewBox="0 0 1000 335" role="img"
-           aria-label="Esquema das estações Cucuí e Taracuá convergindo antes de Curicuriari, Serrinha e Barcelos"></svg>
+      <svg id="flowSvg" viewBox="0 0 1200 335" role="img"
+           aria-label="Esquema topológico do corredor monitorado do Rio Negro, com Cucuí e Taracuá a montante, Barcelos como ponto central e Manaus a jusante"></svg>
     </div>
 
     <div class="flowNote">
-      Esquema topológico das estações. Níveis usam referências locais e não representam cotas diretamente comparáveis entre estações.
+      Esquema topológico das estações. Níveis usam referências locais e não representam cotas diretamente comparáveis entre estações. Manaus fornece contexto a jusante; sua variação não é tratada como causa ou sinal antecipado de Barcelos.
     </div>
   </section>
 
@@ -1158,13 +1177,10 @@ body.weatherModalOpen{
       <div class="badge">72 HORAS</div>
     </div>
 
-    <div class="waveIntro">
-      A curva mostra onde a alta e a vazante aparecem entre as estações,
-      de montante para jusante.
-    </div>
+    <div class="waveIntro">A curva compara a variação de 72 h entre as estações, de montante a jusante.</div>
 
     <div class="waveWrap">
-      <svg id="waveSvg" viewBox="0 0 1000 320" role="img" aria-label="Movimento relativo do Rio Negro entre Cucuí e Barcelos"></svg>
+      <svg id="waveSvg" viewBox="0 0 1000 320" role="img" aria-label="Movimento relativo do Rio Negro entre as estações monitoradas, de Cucuí e Taracuá até Manaus, com Barcelos antes da referência a jusante"></svg>
     </div>
 
     <div class="waveLegend">
@@ -1175,6 +1191,7 @@ body.weatherModalOpen{
 
     <div class="waveNote">
       Leitura relativa das variações de nível nas últimas 72 h.
+      Manaus é uma referência a jusante e não entra no detector de movimento a montante.
       A curva não representa cota absoluta, velocidade da água nem previsão de chegada.
     </div>
 
@@ -1667,11 +1684,18 @@ body.weatherModalOpen{
   }
   function renderStations(d){
     const list=d.estacoes||[];
+    const upstreamCodes=new Set(["14110000","14280001","14330000","14420000"]);
     $("stations").innerHTML=list.map(s=>{
       const [tt,tc]=trendInfo(s.tendencia);
-      return `<article class="station ${s.estacao==="14480002"?"current":""}"
-        aria-label="${s.nome}. Nível local ${fmtLevel(s.nivel_m)} metros. Variação em 6 horas ${fmtVar(s.variacao_6h_cm)}, em 24 horas ${fmtVar(s.variacao_24h_cm)}, em 72 horas ${fmtVar(s.variacao_72h_cm)} e em 7 dias ${fmtVar(s.variacao_7d_cm)}.">
+      const code=String(s.estacao);
+      const isBarcelos=code==="14480002";
+      const isManaus=code==="14990000";
+      const role=isBarcelos?"BARCELOS":isManaus?"JUSANTE":upstreamCodes.has(code)?"MONTANTE":"CORREDOR";
+      const extraClass=isBarcelos?"current":isManaus?"downstream":"";
+      return `<article class="station ${extraClass}"
+        aria-label="${s.nome}. ${role.toLowerCase()}. Nível local ${fmtLevel(s.nivel_m)} metros. Variação em 6 horas ${fmtVar(s.variacao_6h_cm)}, em 24 horas ${fmtVar(s.variacao_24h_cm)}, em 72 horas ${fmtVar(s.variacao_72h_cm)} e em 7 dias ${fmtVar(s.variacao_7d_cm)}.">
         <div class="stationName">${s.nome}</div><div class="stationCode">ANA ${s.estacao}</div>
+        <div class="stationRole">${role}</div>
         <div class="stationLevel"><small>NÍVEL LOCAL</small>${fmtLevel(s.nivel_m)} <span>m</span></div>
         <div class="stationTrend ${tc}">${tt}</div>
         <div class="miniGrid">
@@ -1697,17 +1721,18 @@ body.weatherModalOpen{
       byCode["14280001"],
       byCode["14330000"],
       byCode["14420000"],
-      byCode["14480002"]
+      byCode["14480002"],
+      byCode["14990000"]
     ];
 
     if(stations.some(s=>!s)){
-      svg.innerHTML=`<text x="500" y="180" text-anchor="middle" fill="#8da4b8" font-size="18">
+      svg.innerHTML=`<text x="600" y="180" text-anchor="middle" fill="#8da4b8" font-size="18">
         Esquema temporariamente indisponível
       </text>`;
       return;
     }
 
-    const [cucui,taraqua,curicuriari,serrinha,barcelos]=stations;
+    const [cucui,taraqua,curicuriari,serrinha,barcelos,manaus]=stations;
 
     const colorFor=n=>{
       n=Number(n);
@@ -1717,17 +1742,17 @@ body.weatherModalOpen{
 
     const variationText=s=>fmtVar(Number(s.variacao_72h_cm)||0);
 
-    const stationBlock=(s,x,y,anchor="middle",destino=false)=>{
+    const stationBlock=(s,x,y,anchor="middle",badgeText="")=>{
       const c=colorFor(s.variacao_72h_cm);
       const tx=anchor==="start"?x+16:anchor==="end"?x-16:x;
       const level=fmtLevel(s.nivel_m);
       const variation=variationText(s);
-      const badge=destino?`
-        <g transform="translate(${x-35},${y-91})">
-          <rect x="0" y="0" width="70" height="20" rx="10"
+      const badge=badgeText?`
+        <g transform="translate(${x-42},${y-91})">
+          <rect x="0" y="0" width="84" height="20" rx="10"
                 fill="rgba(63,167,255,.12)" stroke="rgba(79,216,255,.28)"/>
-          <text x="35" y="14" text-anchor="middle" fill="#bfefff"
-                font-size="9" font-weight="800" letter-spacing="1.1">DESTINO</text>
+          <text x="42" y="14" text-anchor="middle" fill="#bfefff"
+                font-size="9" font-weight="800" letter-spacing="1.0">${badgeText}</text>
         </g>`:"";
 
       return `
@@ -1759,7 +1784,7 @@ body.weatherModalOpen{
         </linearGradient>
         <linearGradient id="mainRiver" x1="0%" y1="0%" x2="100%" y2="0%">
           <stop offset="0%" stop-color="#58e1ff"/>
-          <stop offset="45%" stop-color="#4ab8ff"/>
+          <stop offset="58%" stop-color="#4ab8ff"/>
           <stop offset="100%" stop-color="#3f9dff"/>
         </linearGradient>
         <filter id="flowGlow" x="-20%" y="-50%" width="140%" height="200%">
@@ -1772,59 +1797,63 @@ body.weatherModalOpen{
       </defs>
 
       <text x="42" y="26" fill="#6f8aa0" font-size="10" font-weight="800" letter-spacing="1.8">
-        DOIS RAMOS A MONTANTE
+        RAMOS A MONTANTE
       </text>
-      <text x="510" y="26" fill="#6f8aa0" font-size="10" font-weight="800" letter-spacing="1.8">
-        CORREDOR APÓS A CONVERGÊNCIA
+      <text x="640" y="26" text-anchor="middle" fill="#6f8aa0" font-size="10" font-weight="800" letter-spacing="1.8">
+        MONTANTE   →   BARCELOS   →   JUSANTE
       </text>
 
-      <path d="M 92 108 C 175 108, 220 110, 320 180"
+      <path d="M 88 108 C 165 108, 210 112, 285 180"
             fill="none" stroke="rgba(255,255,255,.055)" stroke-width="15" stroke-linecap="round"/>
-      <path d="M 92 108 C 175 108, 220 110, 320 180"
+      <path d="M 88 108 C 165 108, 210 112, 285 180"
             fill="none" stroke="url(#branchTop)" stroke-width="7" stroke-linecap="round"
             class="waveGlow"/>
 
-      <path d="M 92 252 C 175 252, 220 248, 320 180"
+      <path d="M 88 252 C 165 252, 210 248, 285 180"
             fill="none" stroke="rgba(255,255,255,.055)" stroke-width="15" stroke-linecap="round"/>
-      <path d="M 92 252 C 175 252, 220 248, 320 180"
+      <path d="M 88 252 C 165 252, 210 248, 285 180"
             fill="none" stroke="url(#branchBottom)" stroke-width="7" stroke-linecap="round"
             class="waveGlow"/>
 
-      <path d="M 320 180 C 410 180, 470 180, 520 180
-               C 610 180, 660 180, 710 180
-               C 800 180, 850 180, 905 180"
+      <path d="M 285 180 C 370 180, 410 180, 465 180
+               C 540 180, 590 180, 640 180
+               C 720 180, 770 180, 830 180
+               C 910 180, 985 180, 1110 180"
             fill="none" stroke="rgba(255,255,255,.055)" stroke-width="15" stroke-linecap="round"/>
-      <path d="M 320 180 C 410 180, 470 180, 520 180
-               C 610 180, 660 180, 710 180
-               C 800 180, 850 180, 905 180"
+      <path d="M 285 180 C 370 180, 410 180, 465 180
+               C 540 180, 590 180, 640 180
+               C 720 180, 770 180, 830 180
+               C 910 180, 985 180, 1110 180"
             fill="none" stroke="url(#mainRiver)" stroke-width="7" stroke-linecap="round"
             filter="url(#flowGlow)"/>
 
-      <line x1="382" y1="180" x2="430" y2="180" stroke="rgba(116,231,255,.68)" stroke-width="1.5" marker-end="url(#arrowFlow)"/>
-      <line x1="592" y1="180" x2="640" y2="180" stroke="rgba(116,231,255,.68)" stroke-width="1.5" marker-end="url(#arrowFlow)"/>
-      <line x1="782" y1="180" x2="830" y2="180" stroke="rgba(116,231,255,.68)" stroke-width="1.5" marker-end="url(#arrowFlow)"/>
+      <line x1="330" y1="180" x2="385" y2="180" stroke="rgba(116,231,255,.68)" stroke-width="1.5" marker-end="url(#arrowFlow)"/>
+      <line x1="505" y1="180" x2="560" y2="180" stroke="rgba(116,231,255,.68)" stroke-width="1.5" marker-end="url(#arrowFlow)"/>
+      <line x1="680" y1="180" x2="740" y2="180" stroke="rgba(116,231,255,.68)" stroke-width="1.5" marker-end="url(#arrowFlow)"/>
+      <line x1="875" y1="180" x2="965" y2="180" stroke="rgba(116,231,255,.68)" stroke-width="1.5" marker-end="url(#arrowFlow)"/>
 
-      <circle cx="320" cy="180" r="14" fill="#0a2034" stroke="#d7efff" stroke-width="4"/>
-      <circle cx="320" cy="180" r="5" fill="#74e7ff"/>
-      <g transform="translate(270,82)">
+      <circle cx="285" cy="180" r="14" fill="#0a2034" stroke="#d7efff" stroke-width="4"/>
+      <circle cx="285" cy="180" r="5" fill="#74e7ff"/>
+      <g transform="translate(235,82)">
         <rect x="0" y="0" width="100" height="36" rx="12"
               fill="rgba(7,21,36,.94)" stroke="rgba(116,231,255,.35)"/>
         <text x="50" y="15" text-anchor="middle" fill="#eef8ff" font-size="10" font-weight="800">CONVERGÊNCIA</text>
         <text x="50" y="28" text-anchor="middle" fill="#83a6bc" font-size="9">a montante</text>
       </g>
-      <line x1="320" y1="118" x2="320" y2="162" stroke="rgba(207,239,255,.55)" stroke-width="1.2"/>
+      <line x1="285" y1="118" x2="285" y2="162" stroke="rgba(207,239,255,.55)" stroke-width="1.2"/>
 
-      ${stationBlock(cucui,92,108,"start",false)}
-      ${stationBlock(taraqua,92,252,"start",false)}
-      ${stationBlock(curicuriari,520,180,"middle",false)}
-      ${stationBlock(serrinha,710,180,"middle",false)}
-      ${stationBlock(barcelos,905,180,"end",true)}
+      ${stationBlock(cucui,88,108,"start","")}
+      ${stationBlock(taraqua,88,252,"start","")}
+      ${stationBlock(curicuriari,465,180,"middle","")}
+      ${stationBlock(serrinha,640,180,"middle","")}
+      ${stationBlock(barcelos,830,180,"middle","BARCELOS")}
+      ${stationBlock(manaus,1110,180,"end","JUSANTE")}
 
-      <text x="145" y="313" text-anchor="middle" fill="#7890a4" font-size="10">
+      <text x="145" y="313" text-anchor="middle" fill="#93a7b8" font-size="11">
         Cucuí e Taracuá são exibidas separadamente
       </text>
-      <text x="625" y="313" text-anchor="middle" fill="#7890a4" font-size="10">
-        Após a convergência, o corredor segue para Barcelos
+      <text x="735" y="313" text-anchor="middle" fill="#93a7b8" font-size="11">
+        Manaus amplia a leitura do corredor após Barcelos
       </text>
     `;
   }
@@ -1854,36 +1883,43 @@ body.weatherModalOpen{
   }
 
   function renderCorridor(list){
-    const max=Math.max(1,...list.map(s=>Math.abs(Number(s.variacao_72h_cm)||0)));
+    const orderedCodes=["14110000","14280001","14330000","14420000","14480002","14990000"];
+    const byCode=Object.fromEntries((list||[]).map(s=>[String(s.estacao),s]));
+    const ordered=orderedCodes.map(code=>byCode[code]).filter(Boolean);
+    const usable=ordered.length?ordered:(list||[]);
+    const max=Math.max(1,...usable.map(s=>Math.abs(Number(s.variacao_72h_cm)||0)));
 
     // Comparação técnica preservada como visão secundária recolhida.
-    $("corridor").innerHTML=list.map(s=>{
+    $("corridor").innerHTML=usable.map(s=>{
       const n=Number(s.variacao_72h_cm)||0;
       const w=Math.max(2,Math.abs(n)/max*46);
+      const role=String(s.estacao)==="14990000"?" • jusante":String(s.estacao)==="14480002"?" • Barcelos":"";
       return `<div class="corridorRow">
-        <div class="corridorName">${s.nome}</div>
+        <div class="corridorName">${s.nome}${role}</div>
         <div class="track"><div class="zero"></div><div class="bar ${n>=0?"pos":"neg"}" style="width:${w}%"></div></div>
         <div class="corridorVal ${cls(n)}">${fmtVar(n)}</div>
       </div>`;
     }).join("");
 
     const svg=$("waveSvg");
-    if(!svg||!list.length) return;
+    if(!svg||!usable.length) return;
 
-    const xs=[88,294,500,706,912];
+    const left=70,right=930;
+    const step=usable.length>1?(right-left)/(usable.length-1):0;
+    const xs=usable.map((_,i)=>left+i*step);
     const baseline=176;
     const amplitude=60;
 
-    const points=list.map((s,i)=>{
+    const points=usable.map((s,i)=>{
       const n=Number(s.variacao_72h_cm)||0;
       const y=baseline-(n/max)*amplitude;
-      return [xs[i]??(88+i*206),y,n,s];
+      return [xs[i],y,n,s];
     });
 
     const path=smoothPath(points.map(p=>[p[0],p[1]]));
 
     const stops=points.map(p=>{
-      const pct=(p[0]-88)/(912-88)*100;
+      const pct=(p[0]-left)/(right-left)*100;
       return `<stop offset="${pct.toFixed(1)}%" stop-color="${waveColor(p[2])}"/>`;
     }).join("");
 
@@ -1891,25 +1927,34 @@ body.weatherModalOpen{
       const [x,y,n,s]=p;
       const color=waveColor(n);
       const val=fmtVar(n);
-      const isDestination=String(s.estacao)==="14480002";
+      const code=String(s.estacao);
+      const isBarcelos=code==="14480002";
+      const isManaus=code==="14990000";
       const anchor=i===0?"start":i===points.length-1?"end":"middle";
       const tx=i===0?x+2:i===points.length-1?x-2:x;
 
-      const destino=isDestination
-        ? `<g transform="translate(${x-66},2)">
-             <rect x="0" y="0" width="62" height="22" rx="11"
+      const badge=isBarcelos
+        ? `<g transform="translate(${x-38},2)">
+             <rect x="0" y="0" width="76" height="22" rx="11"
                    fill="rgba(63,167,255,.12)" stroke="rgba(79,216,255,.28)"/>
-             <text x="31" y="15" text-anchor="middle" fill="#bfefff"
-                   font-size="10" font-weight="800" letter-spacing="1.2">DESTINO</text>
+             <text x="38" y="15" text-anchor="middle" fill="#bfefff"
+                   font-size="9" font-weight="800" letter-spacing="1.0">BARCELOS</text>
            </g>`
-        : "";
+        : isManaus
+          ? `<g transform="translate(${x-68},2)">
+               <rect x="0" y="0" width="66" height="22" rx="11"
+                     fill="rgba(245,196,81,.08)" stroke="rgba(245,196,81,.24)"/>
+               <text x="33" y="15" text-anchor="middle" fill="#f7d98a"
+                     font-size="9" font-weight="800" letter-spacing="1.0">JUSANTE</text>
+             </g>`
+          : "";
 
       return `
-        ${destino}
-        <text x="${tx}" y="34" text-anchor="${anchor}" fill="#f3f7fb" font-size="18" font-weight="800">${s.nome}</text>
-        <text x="${tx}" y="53" text-anchor="${anchor}" fill="#7890a4" font-size="10" font-weight="650">ANA ${s.estacao}</text>
-        <text x="${tx}" y="81" text-anchor="${anchor}" fill="${color}" font-size="26" font-weight="850">${val}</text>
-        <text x="${tx}" y="99" text-anchor="${anchor}" fill="#8da4b8" font-size="10" font-weight="800" letter-spacing="1.2">EM 72 H</text>
+        ${badge}
+        <text x="${tx}" y="34" text-anchor="${anchor}" fill="#f3f7fb" font-size="17" font-weight="800">${s.nome}</text>
+        <text x="${tx}" y="53" text-anchor="${anchor}" fill="#7890a4" font-size="9" font-weight="650">ANA ${s.estacao}</text>
+        <text x="${tx}" y="81" text-anchor="${anchor}" fill="${color}" font-size="24" font-weight="850">${val}</text>
+        <text x="${tx}" y="99" text-anchor="${anchor}" fill="#8da4b8" font-size="9" font-weight="800" letter-spacing="1.1">EM 72 H</text>
         <line x1="${x}" y1="108" x2="${x}" y2="236" stroke="rgba(255,255,255,.09)" stroke-dasharray="5 7"/>
         <circle cx="${x}" cy="${y}" r="13" fill="#092036" stroke="${color}" stroke-width="4" opacity=".99"/>
         <circle cx="${x}" cy="${y}" r="5.5" fill="${color}"/>
@@ -1925,10 +1970,10 @@ body.weatherModalOpen{
         </filter>
       </defs>
 
-      <text x="500" y="123" text-anchor="middle" fill="#6f8aa0" font-size="11" font-weight="800" letter-spacing="2.6">MONTANTE   →   JUSANTE</text>
+      <text x="500" y="123" text-anchor="middle" fill="#6f8aa0" font-size="11" font-weight="800" letter-spacing="2.4">MONTANTE   →   BARCELOS   →   JUSANTE</text>
 
-      <line x1="64" y1="${baseline}" x2="936" y2="${baseline}" stroke="rgba(255,255,255,.16)" stroke-width="1.4" stroke-dasharray="6 8"/>
-      <text x="68" y="${baseline-8}" text-anchor="start" fill="#6f8799" font-size="9" font-weight="650">linha de referência: estabilidade</text>
+      <line x1="54" y1="${baseline}" x2="946" y2="${baseline}" stroke="rgba(255,255,255,.16)" stroke-width="1.4" stroke-dasharray="6 8"/>
+      <text x="58" y="${baseline-8}" text-anchor="start" fill="#6f8799" font-size="9" font-weight="650">linha de referência: estabilidade</text>
 
       <path d="${path}" fill="none" stroke="rgba(255,255,255,.055)" stroke-width="13" stroke-linecap="round"/>
       <path d="${path}" fill="none" stroke="url(#waveGradient)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" class="waveGlow"/>
@@ -1971,7 +2016,7 @@ body.weatherModalOpen{
     const requests=[
       ["Nível atual",get("latest.json")],
       ["Detector de repiquete",get("repiquete.json")],
-      ["Estações a montante",get("estacoes.json")],
+      ["Estações do corredor",get("estacoes.json")],
       ["Série de 30 dias",get("series_30d.json")]
     ];
 
@@ -2020,7 +2065,7 @@ body.weatherModalOpen{
       console.error("repiquete.json:",results[1].reason);
     }
 
-    // 3. Estações, convergência e Pulso
+    // 3. Estações, corredor e Pulso
     if(results[2].status==="fulfilled"){
       renderStations(results[2].value);
     }else{

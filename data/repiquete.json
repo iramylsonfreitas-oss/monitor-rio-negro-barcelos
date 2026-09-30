@@ -1,5 +1,5 @@
 {
-  "gerado_em_utc": "2026-09-30T21:18:42.614335+00:00",
+  "gerado_em_utc": "2026-09-30T21:47:48.904325+00:00",
   "timezone": "America/Manaus",
   "nivel": 0,
   "status": "sem_sinal_reversao",
@@ -10,7 +10,7 @@
     "Barcelos ainda acumula -3.0 cm em 7 dias.",
     "Serrinha acumula +3.0 cm em 72 h.",
     "Curicuriari acumula +8.0 cm em 72 h.",
-    "Taracuá acumula +47.0 cm em 72 h."
+    "Taracuá acumula +46.0 cm em 72 h."
   ],
   "criterios": {
     "queda_previa_7d_cm": -10.0,
@@ -108,19 +108,19 @@
     "motivos": [
       "Serrinha acumula +3.0 cm em 72 h.",
       "Curicuriari acumula +8.0 cm em 72 h.",
-      "Taracuá acumula +47.0 cm em 72 h."
+      "Taracuá acumula +46.0 cm em 72 h."
     ]
   },
   "situacao_atual": {
     "taracua": {
       "nome": "Taracuá",
       "nivel_m": 14.35,
-      "variacao_6h_cm": 3.0,
-      "variacao_24h_cm": 11.0,
-      "variacao_72h_cm": 47.0,
-      "variacao_7d_cm": 71.0,
+      "variacao_6h_cm": 2.0,
+      "variacao_24h_cm": 10.0,
+      "variacao_72h_cm": 46.0,
+      "variacao_7d_cm": 70.0,
       "tendencia": "subindo",
-      "data_medicao_manaus": "2026-09-30 16:15:00"
+      "data_medicao_manaus": "2026-09-30 17:15:00"
     },
     "curicuriari": {
       "nome": "Curicuriari",

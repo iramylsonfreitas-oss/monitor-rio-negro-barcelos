@@ -33,6 +33,7 @@ ESTACOES = {
     "14330000": "Curicuriari",
     "14420000": "Serrinha",
     "14480002": "Barcelos",
+    "14990000": "Manaus",
 }
 
 BARCELOS = "14480002"
@@ -720,7 +721,7 @@ def main():
 
 
     # ------------------------------------------
-    # CONSULTA CONJUNTA DAS 5 ESTAÇÕES
+    # CONSULTA CONJUNTA DAS 6 ESTAÇÕES
     # ------------------------------------------
 
     query = urllib.parse.urlencode(

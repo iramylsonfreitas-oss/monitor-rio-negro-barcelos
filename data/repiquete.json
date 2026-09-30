@@ -1,5 +1,5 @@
 {
-  "gerado_em_utc": "2026-09-30T12:54:05.123595+00:00",
+  "gerado_em_utc": "2026-09-30T13:22:23.801217+00:00",
   "timezone": "America/Manaus",
   "nivel": 0,
   "status": "sem_sinal_reversao",
@@ -151,7 +151,7 @@
       "variacao_72h_cm": -1.0,
       "variacao_7d_cm": -3.0,
       "tendencia": "descendo",
-      "data_medicao_manaus": "2026-09-30 08:00:00"
+      "data_medicao_manaus": "2026-09-30 09:00:00"
     }
   },
   "aviso": "Detector experimental de mudança de tendência. 'Possível reversão' e 'repiquete em formação' não são confirmações. O estado confirmado exige três verificações consecutivas de alta mínima de +3 cm em 24 h e ganho líquido mínimo de +1 cm entre o primeiro e o terceiro checkpoint. O estado confirmado descreve um movimento já observado, não uma previsão."

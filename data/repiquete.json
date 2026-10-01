@@ -1,5 +1,5 @@
 {
-  "gerado_em_utc": "2026-10-01T06:26:27.650419+00:00",
+  "gerado_em_utc": "2026-10-01T06:53:15.778404+00:00",
   "timezone": "America/Manaus",
   "nivel": 0,
   "status": "sem_sinal_reversao",
@@ -9,8 +9,8 @@
   "motivos": [
     "Barcelos ainda acumula -2.0 cm em 7 dias.",
     "Serrinha acumula +5.0 cm em 72 h.",
-    "Curicuriari acumula +8.0 cm em 72 h.",
-    "Taracuá acumula +41.0 cm em 72 h."
+    "Curicuriari acumula +7.0 cm em 72 h.",
+    "Taracuá acumula +42.0 cm em 72 h."
   ],
   "criterios": {
     "queda_previa_7d_cm": -10.0,
@@ -107,30 +107,30 @@
     "nivel_alerta_existente": 1,
     "motivos": [
       "Serrinha acumula +5.0 cm em 72 h.",
-      "Curicuriari acumula +8.0 cm em 72 h.",
-      "Taracuá acumula +41.0 cm em 72 h."
+      "Curicuriari acumula +7.0 cm em 72 h.",
+      "Taracuá acumula +42.0 cm em 72 h."
     ]
   },
   "situacao_atual": {
     "taracua": {
       "nome": "Taracuá",
-      "nivel_m": 14.37,
-      "variacao_6h_cm": 1.0,
-      "variacao_24h_cm": 8.0,
-      "variacao_72h_cm": 41.0,
-      "variacao_7d_cm": 75.0,
+      "nivel_m": 14.38,
+      "variacao_6h_cm": 2.0,
+      "variacao_24h_cm": 9.0,
+      "variacao_72h_cm": 42.0,
+      "variacao_7d_cm": 77.0,
       "tendencia": "subindo",
-      "data_medicao_manaus": "2026-10-01 01:15:00"
+      "data_medicao_manaus": "2026-10-01 02:15:00"
     },
     "curicuriari": {
       "nome": "Curicuriari",
       "nivel_m": 9.9,
       "variacao_6h_cm": 1.0,
       "variacao_24h_cm": 2.0,
-      "variacao_72h_cm": 8.0,
+      "variacao_72h_cm": 7.0,
       "variacao_7d_cm": 11.0,
       "tendencia": "subindo",
-      "data_medicao_manaus": "2026-10-01 01:45:00"
+      "data_medicao_manaus": "2026-10-01 02:45:00"
     },
     "serrinha": {
       "nome": "Serrinha",
@@ -140,7 +140,7 @@
       "variacao_72h_cm": 5.0,
       "variacao_7d_cm": 8.0,
       "tendencia": "subindo",
-      "data_medicao_manaus": "2026-10-01 01:30:00"
+      "data_medicao_manaus": "2026-10-01 02:30:00"
     },
     "barcelos": {
       "nome": "Barcelos",

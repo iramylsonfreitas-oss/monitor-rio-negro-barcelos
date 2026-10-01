@@ -1,5 +1,5 @@
 {
-  "gerado_em_utc": "2026-10-01T12:26:12.970587+00:00",
+  "gerado_em_utc": "2026-10-01T12:53:34.197577+00:00",
   "timezone": "America/Manaus",
   "nivel": 1,
   "status": "observacao",
@@ -75,7 +75,7 @@
       "variacao_72h_cm": 6.0,
       "variacao_7d_cm": 11.0,
       "tendencia": "estavel",
-      "data_medicao_manaus": "2026-10-01 07:45:00"
+      "data_medicao_manaus": "2026-10-01 08:45:00"
     },
     "serrinha": {
       "nome": "Serrinha",
@@ -83,9 +83,9 @@
       "variacao_6h_cm": 0.0,
       "variacao_24h_cm": 2.0,
       "variacao_72h_cm": 5.0,
-      "variacao_7d_cm": 7.0,
+      "variacao_7d_cm": 8.0,
       "tendencia": "estavel",
-      "data_medicao_manaus": "2026-10-01 07:30:00"
+      "data_medicao_manaus": "2026-10-01 08:30:00"
     },
     "barcelos": {
       "nome": "Barcelos",

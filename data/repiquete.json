@@ -1,5 +1,5 @@
 {
-  "gerado_em_utc": "2026-10-01T07:48:21.728346+00:00",
+  "gerado_em_utc": "2026-10-01T08:23:11.089257+00:00",
   "timezone": "America/Manaus",
   "nivel": 0,
   "status": "sem_sinal_reversao",
@@ -130,17 +130,17 @@
       "variacao_72h_cm": 7.0,
       "variacao_7d_cm": 11.0,
       "tendencia": "subindo",
-      "data_medicao_manaus": "2026-10-01 02:45:00"
+      "data_medicao_manaus": "2026-10-01 03:45:00"
     },
     "serrinha": {
       "nome": "Serrinha",
       "nivel_m": 6.62,
-      "variacao_6h_cm": 1.0,
+      "variacao_6h_cm": 0.0,
       "variacao_24h_cm": 3.0,
       "variacao_72h_cm": 5.0,
       "variacao_7d_cm": 8.0,
-      "tendencia": "subindo",
-      "data_medicao_manaus": "2026-10-01 02:30:00"
+      "tendencia": "estavel",
+      "data_medicao_manaus": "2026-10-01 03:30:00"
     },
     "barcelos": {
       "nome": "Barcelos",
@@ -150,7 +150,7 @@
       "variacao_72h_cm": 0.0,
       "variacao_7d_cm": -2.0,
       "tendencia": "estavel",
-      "data_medicao_manaus": "2026-10-01 03:00:00"
+      "data_medicao_manaus": "2026-10-01 04:00:00"
     }
   },
   "aviso": "Detector experimental de mudança de tendência. 'Possível reversão' e 'repiquete em formação' não são confirmações. O estado confirmado exige três verificações consecutivas de alta mínima de +3 cm em 24 h e ganho líquido mínimo de +1 cm entre o primeiro e o terceiro checkpoint. O estado confirmado descreve um movimento já observado, não uma previsão."

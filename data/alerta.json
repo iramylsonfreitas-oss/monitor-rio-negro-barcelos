@@ -1,5 +1,5 @@
 {
-  "gerado_em_utc": "2026-10-01T00:52:53.885007+00:00",
+  "gerado_em_utc": "2026-10-01T01:19:52.339253+00:00",
   "timezone": "America/Manaus",
   "nivel": 1,
   "status": "observacao",
@@ -9,7 +9,8 @@
   "motivos": [
     "Serrinha apresenta +2.0 cm em 24 h.",
     "Serrinha acumula +4.0 cm em 72 h.",
-    "Curicuriari acumula +7.0 cm em 72 h."
+    "Curicuriari acumula +7.0 cm em 72 h.",
+    "Barcelos ainda acumula -1.0 cm em 72 h."
   ],
   "criterio_evento_serrinha": {
     "variacao_minima_24h_cm": 3.0,
@@ -89,13 +90,13 @@
     },
     "barcelos": {
       "nome": "Barcelos",
-      "nivel_m": 3.89,
-      "variacao_6h_cm": 1.0,
-      "variacao_24h_cm": 0.0,
-      "variacao_72h_cm": 1.0,
+      "nivel_m": 3.88,
+      "variacao_6h_cm": 0.0,
+      "variacao_24h_cm": -1.0,
+      "variacao_72h_cm": -1.0,
       "variacao_7d_cm": -2.0,
-      "tendencia": "subindo",
-      "data_medicao_manaus": "2026-09-30 20:00:00"
+      "tendencia": "estavel",
+      "data_medicao_manaus": "2026-09-30 21:00:00"
     }
   },
   "aviso": "O alerta é experimental e utiliza relações históricas entre estações. Uma alta em Serrinha não garante uma alta posterior em Barcelos."

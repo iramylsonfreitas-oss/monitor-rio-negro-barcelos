@@ -1,0 +1,35 @@
+name: Barcelos Moura V5 Robustez Multiescala
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validar-v5:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar projeto
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validar robustez multiescala
+        run: |
+          python collector/validar_barcelos_moura_v5.py
+
+      - name: Salvar resultados
+        uses: actions/upload-artifact@v4
+        with:
+          name: barcelos-moura-v5
+          path: |
+            artifacts/barcelos_moura_v5_robustos.csv
+            artifacts/barcelos_moura_v5_rejeitados.csv
+            artifacts/barcelos_moura_v5_escalas.csv
+            artifacts/resumo_barcelos_moura_v5.json
+          retention-days: 14

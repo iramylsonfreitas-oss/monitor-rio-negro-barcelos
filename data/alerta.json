@@ -1,5 +1,5 @@
 {
-  "gerado_em_utc": "2026-10-02T10:19:24.951045+00:00",
+  "gerado_em_utc": "2026-10-02T10:47:36.714838+00:00",
   "timezone": "America/Manaus",
   "nivel": 2,
   "status": "alta_confirmada_montante",
@@ -56,10 +56,10 @@
   ],
   "historico_serrinha_barcelos": {
     "disponivel": true,
-    "eventos_serrinha": 40,
+    "eventos_serrinha": 41,
     "eventos_barcelos": 19,
     "eventos_correspondentes": 17,
-    "taxa_correspondencia": 0.425,
+    "taxa_correspondencia": 0.415,
     "mediana_dias": 3.75,
     "q25_dias": 2.75,
     "q75_dias": 4.25,

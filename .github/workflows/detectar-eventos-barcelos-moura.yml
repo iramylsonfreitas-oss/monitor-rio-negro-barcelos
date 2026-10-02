@@ -1,0 +1,33 @@
+name: Detectar Eventos Barcelos Moura
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  detectar-eventos:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar projeto
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Detectar eventos Barcelos Moura
+        run: |
+          python collector/detectar_eventos_barcelos_moura.py
+
+      - name: Salvar resultados do teste
+        uses: actions/upload-artifact@v4
+        with:
+          name: eventos-barcelos-moura
+          path: |
+            artifacts/eventos_barcelos_moura.csv
+            artifacts/resumo_eventos_barcelos_moura.json
+          retention-days: 14

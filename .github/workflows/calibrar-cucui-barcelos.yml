@@ -1,0 +1,35 @@
+name: Calibrar Cucui Barcelos Multiescala
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  calibrar-cucui-barcelos:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar projeto
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Calibrar Cucui para Barcelos
+        run: |
+          python collector/calibrar_cucui_barcelos.py
+
+      - name: Salvar resultados
+        uses: actions/upload-artifact@v4
+        with:
+          name: cucui-barcelos-calibracao
+          path: |
+            artifacts/cucui_barcelos_robustos.csv
+            artifacts/cucui_barcelos_rejeitados.csv
+            artifacts/cucui_barcelos_escalas.csv
+            artifacts/resumo_cucui_barcelos.json
+          retention-days: 14

@@ -1,0 +1,35 @@
+name: Validar Curicuriari Serrinha Multiescala
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validar-curicuriari-serrinha:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar projeto
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validar Curicuriari para Serrinha
+        run: |
+          python collector/validar_curicuriari_serrinha.py
+
+      - name: Salvar resultados
+        uses: actions/upload-artifact@v4
+        with:
+          name: curicuriari-serrinha-validacao
+          path: |
+            artifacts/curicuriari_serrinha_robustos.csv
+            artifacts/curicuriari_serrinha_rejeitados.csv
+            artifacts/curicuriari_serrinha_escalas.csv
+            artifacts/resumo_curicuriari_serrinha.json
+          retention-days: 14

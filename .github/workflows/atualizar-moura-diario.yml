@@ -1,11 +1,7 @@
-name: Atualizar Historico Moura
+name: Atualizar Historico Moura - Manual
 
 on:
   workflow_dispatch:
-
-  schedule:
-    # 10:47 UTC = 06:47 em Manaus
-    - cron: "47 10 * * *"
 
 permissions:
   contents: write
@@ -19,18 +15,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Baixar projeto
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-
       - name: Configurar Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-
 
       - name: Atualizar historico de Moura
         env:
@@ -39,7 +32,6 @@ jobs:
         run: |
           python collector/moura_historico.py
 
-
       - name: Conferir Moura no historico
         run: |
           python - <<'PY'
@@ -47,12 +39,7 @@ jobs:
 
           arquivo = "data/history/hourly.csv"
 
-          with open(
-              arquivo,
-              "r",
-              encoding="utf-8",
-              newline=""
-          ) as f:
+          with open(arquivo, "r", encoding="utf-8", newline="") as f:
               rows = [
                   row
                   for row in csv.DictReader(f)
@@ -60,36 +47,15 @@ jobs:
               ]
 
           if not rows:
-              raise RuntimeError(
-                  "Nenhum registro de Moura encontrado."
-              )
+              raise RuntimeError("Nenhum registro de Moura encontrado.")
 
-          rows.sort(
-              key=lambda row: row["hora_manaus"]
-          )
+          rows.sort(key=lambda row: row["hora_manaus"])
 
-          print(
-              "Registros horarios de Moura:",
-              len(rows)
-          )
-
-          print(
-              "Primeiro registro:",
-              rows[0]["hora_manaus"]
-          )
-
-          print(
-              "Ultimo registro:",
-              rows[-1]["hora_manaus"]
-          )
-
-          print(
-              "Ultimo nivel:",
-              rows[-1]["nivel_m"],
-              "m"
-          )
+          print("Registros horarios de Moura:", len(rows))
+          print("Primeiro registro:", rows[0]["hora_manaus"])
+          print("Ultimo registro:", rows[-1]["hora_manaus"])
+          print("Ultimo nivel:", rows[-1]["nivel_m"], "m")
           PY
-
 
       - name: Salvar historico de Moura
         run: |
@@ -103,8 +69,6 @@ jobs:
             exit 0
           fi
 
-          git commit -m "Atualiza historico diario de Moura"
-
+          git commit -m "Atualiza historico manual de Moura"
           git pull --rebase origin main
-
           git push origin main

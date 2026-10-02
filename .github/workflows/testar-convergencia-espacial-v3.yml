@@ -1,0 +1,33 @@
+name: Testar Motor Convergencia Espacial V3
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  testar-convergencia-v3:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Baixar projeto
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Executar motor de convergencia V3
+        run: python collector/convergencia_espacial_v3.py
+
+      - name: Salvar resultados
+        uses: actions/upload-artifact@v4
+        with:
+          name: convergencia-espacial-v3
+          path: |
+            artifacts/convergencia_v3.json
+            artifacts/convergencia_v3_detalhes.csv
+            artifacts/convergencia_v3_cadeias.csv
+          retention-days: 14

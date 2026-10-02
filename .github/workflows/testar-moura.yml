@@ -1,0 +1,167 @@
+name: Testar estacao Moura 14840000
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  testar-moura:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar projeto
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Testar Moura sem alterar producao
+        env:
+          ANA_IDENTIFIER: ${{ secrets.ANA_IDENTIFIER }}
+          ANA_PASSWORD: ${{ secrets.ANA_PASSWORD }}
+        run: |
+          python - <<'PY'
+          import json
+          import statistics
+          from collections import Counter, defaultdict
+          from datetime import datetime
+
+          from collector import ana
+
+          ana.ESTACOES = {
+              "14840000": "Moura"
+          }
+          ana.BARCELOS = "14840000"
+
+          ana.main()
+
+          with open("data/latest.json", encoding="utf-8") as f:
+              latest = json.load(f)
+
+          with open("data/series_30d.json", encoding="utf-8") as f:
+              series = json.load(f)
+
+          if not series:
+              raise RuntimeError("Moura retornou serie vazia.")
+
+          times = [
+              datetime.strptime(
+                  row["data_medicao_manaus"],
+                  "%Y-%m-%d %H:%M:%S"
+              )
+              for row in series
+          ]
+
+          intervals = [
+              round(
+                  (times[i] - times[i - 1]).total_seconds() / 60,
+                  1
+              )
+              for i in range(1, len(times))
+          ]
+
+          interval_counts = Counter(intervals)
+          gaps = [value for value in intervals if value > 30]
+
+          per_day = defaultdict(int)
+          for dt in times:
+              per_day[dt.strftime("%Y-%m-%d")] += 1
+
+          ordered_days = sorted(per_day.items())
+
+          interior_days = (
+              ordered_days[1:-1]
+              if len(ordered_days) > 2
+              else ordered_days
+          )
+
+          complete_days = sum(
+              1
+              for _, count in interior_days
+              if count >= 90
+          )
+
+          status_counts = Counter(
+              str(row.get("status_cota"))
+              for row in series
+          )
+
+          print()
+          print("======================================")
+          print("TESTE DA ESTACAO MOURA - ANA 14840000")
+          print("======================================")
+          print()
+
+          print("Ultima medicao:", latest.get("data_medicao_manaus"))
+          print("Nivel local:", latest.get("nivel_m"), "m")
+          print("Idade do dado:", latest.get("idade_dado_min"), "min")
+          print("Dado desatualizado:", latest.get("dado_desatualizado"))
+          print()
+
+          print("Variacao 6 h:", latest.get("variacao_6h_cm"), "cm")
+          print("Variacao 24 h:", latest.get("variacao_24h_cm"), "cm")
+          print("Variacao 72 h:", latest.get("variacao_72h_cm"), "cm")
+          print("Variacao 7 dias:", latest.get("variacao_7d_cm"), "cm")
+          print("Tendencia:", latest.get("tendencia"))
+          print()
+
+          print("Registros em 30 dias:", len(series))
+          print("Primeira medicao:", times[0].strftime("%Y-%m-%d %H:%M:%S"))
+          print("Ultima medicao:", times[-1].strftime("%Y-%m-%d %H:%M:%S"))
+          print("Dias com dados:", len(ordered_days))
+          print()
+
+          if intervals:
+              print("Intervalo mediano:", statistics.median(intervals), "min")
+              print(
+                  "Intervalo mais comum:",
+                  interval_counts.most_common(1)[0][0],
+                  "min"
+              )
+              print("Maior intervalo:", max(intervals), "min")
+              print("Lacunas > 30 min:", len(gaps))
+
+          print()
+
+          print(
+              "Dias interiores completos (>= 90 leituras/dia):",
+              complete_days,
+              "de",
+              len(interior_days)
+          )
+
+          if interior_days:
+              counts = [count for _, count in interior_days]
+
+              print(
+                  "Leituras/dia - mediana:",
+                  statistics.median(counts)
+              )
+              print("Leituras/dia - minimo:", min(counts))
+              print("Leituras/dia - maximo:", max(counts))
+
+          print()
+
+          print("Status de cota encontrados:", dict(status_counts))
+
+          print()
+          print("Amostra dos ultimos 8 registros:")
+
+          for row in series[-8:]:
+              print(
+                  row.get("data_medicao_manaus"),
+                  "|",
+                  row.get("nivel_m"),
+                  "m",
+                  "| status",
+                  row.get("status_cota")
+              )
+
+          print()
+          print("TESTE CONCLUIDO COM SUCESSO.")
+          print("Nenhum arquivo deste teste sera enviado ao repositorio.")
+          PY

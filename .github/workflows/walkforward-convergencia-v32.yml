@@ -1,0 +1,35 @@
+name: Walk-forward Motor Convergencia V3.2
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  walkforward-v32:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Baixar projeto
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Executar walk-forward V3.2
+        run: python collector/walkforward_convergencia_v32.py
+
+      - name: Salvar resultados
+        uses: actions/upload-artifact@v4
+        with:
+          name: walkforward-convergencia-v32
+          path: |
+            artifacts/walkforward_v32_folds.csv
+            artifacts/walkforward_v32_top_parametros.csv
+            artifacts/walkforward_v32_alertas_teste.csv
+            artifacts/walkforward_v32_regimes.csv
+            artifacts/walkforward_v32_resumo.json
+          retention-days: 14

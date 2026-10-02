@@ -1,0 +1,118 @@
+name: Integrar Moura ao Painel
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: atualizar-rio-negro
+  cancel-in-progress: false
+
+jobs:
+  integrar-moura:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar projeto
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Aplicar integracao de Moura
+        run: |
+          python collector/integrar_moura_painel.py
+          python -m py_compile collector/ana.py
+
+      - name: Atualizar dados ANA com Moura
+        env:
+          ANA_IDENTIFIER: ${{ secrets.ANA_IDENTIFIER }}
+          ANA_PASSWORD: ${{ secrets.ANA_PASSWORD }}
+        run: |
+          python collector/ana_resiliente.py
+
+      - name: Preservar historico nesta implantacao
+        run: |
+          git restore data/history/hourly.csv || true
+
+      - name: Validar Moura no painel
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          with open(
+              "data/estacoes.json",
+              encoding="utf-8"
+          ) as f:
+              data = json.load(f)
+
+          stations = {
+              str(item.get("estacao")): item
+              for item in data.get("estacoes", [])
+          }
+
+          if "14840000" not in stations:
+              raise RuntimeError(
+                  "Moura 14840000 nao apareceu em data/estacoes.json."
+              )
+
+          moura = stations["14840000"]
+
+          print("Moura:", moura.get("nome"))
+          print("Nivel:", moura.get("nivel_m"), "m")
+          print("6 h:", moura.get("variacao_6h_cm"), "cm")
+          print("24 h:", moura.get("variacao_24h_cm"), "cm")
+          print("72 h:", moura.get("variacao_72h_cm"), "cm")
+          print("7 dias:", moura.get("variacao_7d_cm"), "cm")
+          print("Tendencia:", moura.get("tendencia"))
+          print("Medicao:", moura.get("data_medicao_manaus"))
+
+          index = Path("index.html").read_text(
+              encoding="utf-8"
+          )
+
+          required = [
+              '14840000',
+              'JUSANTE • VALIDAÇÃO',
+              'VALIDAÇÃO</text>',
+              'V3.7A.3',
+          ]
+
+          for item in required:
+              if item not in index:
+                  raise RuntimeError(
+                      f"Marcador ausente no index.html: {item}"
+                  )
+
+          print()
+          print("Painel validado com Moura.")
+          PY
+
+      - name: Salvar integracao
+        run: |
+          git config user.name "rio-negro-bot"
+          git config user.email "actions@github.com"
+
+          git add collector/ana.py
+          git add index.html
+          git add data/latest.json
+          git add data/series_30d.json
+          git add data/estacoes.json
+
+          if git diff --cached --quiet; then
+            echo "Nenhuma alteracao para salvar."
+            exit 0
+          fi
+
+          git commit -m "Integra Moura ao corredor monitorado"
+
+          git pull --rebase origin main
+
+          git push origin main

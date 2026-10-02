@@ -1,0 +1,35 @@
+name: Barcelos Moura V4 Janelas Moveis
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  analisar-v4:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar projeto
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Analisar janelas moveis V4
+        run: |
+          python collector/analisar_barcelos_moura_v4.py
+
+      - name: Salvar resultados
+        uses: actions/upload-artifact@v4
+        with:
+          name: barcelos-moura-v4
+          path: |
+            artifacts/barcelos_moura_v4_aceitos.csv
+            artifacts/barcelos_moura_v4_rejeitados.csv
+            artifacts/barcelos_moura_v4_curvas_lag.csv
+            artifacts/resumo_barcelos_moura_v4.json
+          retention-days: 14

@@ -1,0 +1,33 @@
+name: Testar Motor Convergencia Espacial V1
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  testar-convergencia:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar projeto
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Executar motor de convergencia
+        run: |
+          python collector/convergencia_espacial_v1.py
+
+      - name: Salvar resultados
+        uses: actions/upload-artifact@v4
+        with:
+          name: convergencia-espacial-v1
+          path: |
+            artifacts/convergencia.json
+            artifacts/convergencia_detalhes.csv
+          retention-days: 14

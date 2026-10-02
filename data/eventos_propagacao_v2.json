@@ -1,5 +1,5 @@
 {
-  "gerado_em_utc": "2026-10-01T10:30:32.243303+00:00",
+  "gerado_em_utc": "2026-10-02T10:29:01.217526+00:00",
   "versao": 2,
   "status": "experimental",
   "metodo": "Detector por mudança de estado. Uma alta começa após três observações consecutivas com variação de 24 horas >= 3 cm e termina somente após quatro observações consecutivas com variação de 24 horas <= 1 cm.",
@@ -1527,14 +1527,14 @@
           "duracao_h": null,
           "duracao_dias": null,
           "variacao_inicial_cm": 4.0,
-          "variacao_maxima_24h_cm": 4.0,
+          "variacao_maxima_24h_cm": 4.5,
           "aberto": true
         }
       ]
     },
     "14420000": {
       "nome": "Serrinha",
-      "quantidade": 40,
+      "quantidade": 41,
       "eventos": [
         {
           "inicio": "2023-10-19 18:00:00",
@@ -1895,6 +1895,15 @@
           "variacao_inicial_cm": 3.0,
           "variacao_maxima_24h_cm": 8.0,
           "aberto": false
+        },
+        {
+          "inicio": "2026-10-01 12:00:00",
+          "fim": null,
+          "duracao_h": null,
+          "duracao_dias": null,
+          "variacao_inicial_cm": 3.0,
+          "variacao_maxima_24h_cm": 5.5,
+          "aberto": true
         }
       ]
     },
@@ -2082,10 +2091,10 @@
       "nome_origem": "Serrinha",
       "destino": "14480002",
       "nome_destino": "Barcelos",
-      "eventos_montante": 40,
+      "eventos_montante": 41,
       "eventos_barcelos": 19,
       "eventos_correspondentes": 17,
-      "taxa_correspondencia": 0.425,
+      "taxa_correspondencia": 0.415,
       "eventos": [
         {
           "inicio_montante": "2023-12-11 06:00:00",

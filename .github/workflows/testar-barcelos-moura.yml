@@ -1,0 +1,25 @@
+name: Testar Barcelos Moura
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  testar-barcelos-moura:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Baixar projeto
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Testar defasagem Barcelos Moura
+        run: |
+          python collector/testar_barcelos_moura.py

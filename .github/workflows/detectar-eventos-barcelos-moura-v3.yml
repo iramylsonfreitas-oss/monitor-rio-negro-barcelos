@@ -1,0 +1,35 @@
+name: Detectar Eventos Barcelos Moura V3
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  detectar-eventos-v3:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar projeto
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Detectar e parear eventos V3
+        run: |
+          python collector/detectar_eventos_barcelos_moura_v3.py
+
+      - name: Salvar resultados
+        uses: actions/upload-artifact@v4
+        with:
+          name: eventos-barcelos-moura-v3
+          path: |
+            artifacts/eventos_barcelos_moura_v3_aceitos.csv
+            artifacts/eventos_barcelos_moura_v3_rejeitados.csv
+            artifacts/candidatos_barcelos_moura_v3.csv
+            artifacts/resumo_eventos_barcelos_moura_v3.json
+          retention-days: 14

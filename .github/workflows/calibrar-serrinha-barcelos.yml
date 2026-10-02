@@ -1,0 +1,35 @@
+name: Calibrar Serrinha Barcelos Multiescala
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  calibrar-serrinha-barcelos:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar projeto
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Calibrar Serrinha para Barcelos
+        run: |
+          python collector/calibrar_serrinha_barcelos.py
+
+      - name: Salvar resultados
+        uses: actions/upload-artifact@v4
+        with:
+          name: serrinha-barcelos-calibracao
+          path: |
+            artifacts/serrinha_barcelos_robustos.csv
+            artifacts/serrinha_barcelos_rejeitados.csv
+            artifacts/serrinha_barcelos_escalas.csv
+            artifacts/resumo_serrinha_barcelos.json
+          retention-days: 14

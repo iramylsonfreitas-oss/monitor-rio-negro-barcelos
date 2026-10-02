@@ -1,0 +1,35 @@
+name: Calibrar Curicuriari Barcelos Multiescala
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  calibrar-curicuriari-barcelos:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar projeto
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Calibrar Curicuriari para Barcelos
+        run: |
+          python collector/calibrar_curicuriari_barcelos.py
+
+      - name: Salvar resultados
+        uses: actions/upload-artifact@v4
+        with:
+          name: curicuriari-barcelos-calibracao
+          path: |
+            artifacts/curicuriari_barcelos_robustos.csv
+            artifacts/curicuriari_barcelos_rejeitados.csv
+            artifacts/curicuriari_barcelos_escalas.csv
+            artifacts/resumo_curicuriari_barcelos.json
+          retention-days: 14

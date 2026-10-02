@@ -1,0 +1,34 @@
+name: Backtest Motor Convergencia Espacial V3.1 Causal
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  backtest-v31:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar projeto
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Executar backtest V3.1 causal
+        run: python collector/backtest_convergencia_v31.py
+
+      - name: Salvar resultados
+        uses: actions/upload-artifact@v4
+        with:
+          name: backtest-convergencia-v31-causal
+          path: |
+            artifacts/backtest_v31_alertas_causais.csv
+            artifacts/backtest_v31_eventos_barcelos.csv
+            artifacts/backtest_v31_metricas.csv
+            artifacts/backtest_v31_metricas_anuais.csv
+            artifacts/backtest_v31_resumo.json
+          retention-days: 14

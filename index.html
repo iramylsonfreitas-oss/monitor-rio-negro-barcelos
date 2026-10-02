@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Monitor Rio Negro | Barcelos — V3.7A.2</title>
+<title>Monitor Rio Negro | Barcelos — V3.7A.3</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 <style>
-/* V3.7A.2 — acabamento visual do corredor completo até Manaus */
+/* V3.7A.3 — corredor completo com Moura entre Barcelos e Manaus */
 :root{
   --bg:#071524;--panel:#0d2236;--panel2:#10283e;--line:rgba(255,255,255,.08);
   --text:#f3f7fb;--muted:#8da4b8;--blue:#3fa7ff;--cyan:#4fd8ff;
@@ -147,8 +147,9 @@ h1{font-size:clamp(42px,8vw,70px);line-height:.98;margin:8px 0 6px;letter-spacin
 .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.chip{font-size:11px;border:1px solid var(--line);border-radius:999px;padding:8px 10px;background:rgba(255,255,255,.025)}
 .trigger{margin-top:14px;padding:14px;border:1px solid rgba(245,196,81,.18);border-radius:14px;background:rgba(245,196,81,.05)}
 .trigger .label{color:var(--warn);font-size:11px}.trigger div:last-child{margin-top:5px;font-size:13px}
-.stations{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+.stations{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px}
 .station.downstream{border-color:rgba(245,196,81,.24);background:rgba(245,196,81,.025)}
+.station.validation{border-color:rgba(79,216,255,.28);background:rgba(79,216,255,.035)}
 .stationRole{
   display:inline-flex;align-items:center;min-height:20px;margin-top:8px;padding:4px 7px;
   border:1px solid rgba(255,255,255,.08);border-radius:999px;
@@ -156,6 +157,7 @@ h1{font-size:clamp(42px,8vw,70px);line-height:.98;margin:8px 0 6px;letter-spacin
   font-size:9.5px;font-weight:850;letter-spacing:.08em;
 }
 .station.current .stationRole{color:#bfefff;border-color:rgba(79,216,255,.25);background:rgba(79,216,255,.06)}
+.station.validation .stationRole{color:#bfefff;border-color:rgba(79,216,255,.25);background:rgba(79,216,255,.06)}
 .station.downstream .stationRole{color:#f7d98a;border-color:rgba(245,196,81,.22);background:rgba(245,196,81,.05)}
 .station{background:rgba(255,255,255,.025);border:1px solid var(--line);border-radius:18px;padding:16px;min-width:0}
 .station.current{border-color:rgba(63,167,255,.4);background:rgba(63,167,255,.045)}
@@ -1138,7 +1140,7 @@ body.weatherModalOpen{
     <div class="sectionHead"><div><div class="label">ESTAÇÕES MONITORADAS</div><h2>Corredor monitorado do Rio Negro</h2><div class="stationDirection">MONTANTE → BARCELOS → JUSANTE</div></div></div>
     <div id="stations" class="stations"><div class="meta">Carregando estações...</div></div>
     <div class="stationNote">
-      <strong>Como comparar:</strong> cada estação usa uma referência local de nível. Para comparar o comportamento entre estações, observe principalmente as variações de 6 h, 24 h, 72 h e 7 dias. Manaus aparece como contexto a jusante de Barcelos e não entra no sinal de movimento a montante nem na confirmação de repiquete.
+      <strong>Como comparar:</strong> cada estação usa uma referência local de nível. Para comparar o comportamento entre estações, observe principalmente as variações de 6 h, 24 h, 72 h e 7 dias. Moura aparece como estação de validação a jusante de Barcelos; Manaus amplia o contexto do corredor. Nenhuma das duas entra no sinal de movimento a montante nem na confirmação de repiquete em Barcelos.
     </div>
   </section>
 
@@ -1154,17 +1156,17 @@ body.weatherModalOpen{
 
     <div class="flowIntro">
       Cucuí e Taracuá são mostradas em ramos separados antes da convergência.
-      A leitura segue por Curicuriari e Serrinha até Barcelos e continua até Manaus,
-      usada aqui como referência a jusante.
+      A leitura segue por Curicuriari e Serrinha até Barcelos, continua por Moura
+      e chega a Manaus. Moura funciona como validação a jusante; Manaus amplia o contexto do corredor.
     </div>
 
     <div class="flowWrap">
       <svg id="flowSvg" viewBox="0 0 1200 335" role="img"
-           aria-label="Esquema topológico do corredor monitorado do Rio Negro, com Cucuí e Taracuá a montante, Barcelos como ponto central e Manaus a jusante"></svg>
+           aria-label="Esquema topológico do corredor monitorado do Rio Negro, com Cucuí e Taracuá a montante, Barcelos como ponto central, Moura como validação a jusante e Manaus como referência a jusante"></svg>
     </div>
 
     <div class="flowNote">
-      Esquema topológico das estações. Níveis usam referências locais e não representam cotas diretamente comparáveis entre estações. Manaus fornece contexto a jusante; sua variação não é tratada como causa ou sinal antecipado de Barcelos.
+      Esquema topológico das estações. Níveis usam referências locais e não representam cotas diretamente comparáveis entre estações. Moura é usada como validação a jusante de Barcelos; Manaus fornece contexto adicional. As variações a jusante não são tratadas como causa nem como sinal antecipado de Barcelos.
     </div>
   </section>
 
@@ -1180,7 +1182,7 @@ body.weatherModalOpen{
     <div class="waveIntro">A curva compara a variação de 72 h entre as estações, de montante a jusante.</div>
 
     <div class="waveWrap">
-      <svg id="waveSvg" viewBox="0 0 1000 320" role="img" aria-label="Movimento relativo do Rio Negro entre as estações monitoradas, de Cucuí e Taracuá até Manaus, com Barcelos antes da referência a jusante"></svg>
+      <svg id="waveSvg" viewBox="0 0 1000 320" role="img" aria-label="Movimento relativo do Rio Negro entre as estações monitoradas, de Cucuí e Taracuá até Manaus, passando por Barcelos e Moura a jusante"></svg>
     </div>
 
     <div class="waveLegend">
@@ -1191,7 +1193,7 @@ body.weatherModalOpen{
 
     <div class="waveNote">
       Leitura relativa das variações de nível nas últimas 72 h.
-      Manaus é uma referência a jusante e não entra no detector de movimento a montante.
+      Moura é uma estação de validação a jusante de Barcelos e Manaus é uma referência adicional do corredor; nenhuma entra no detector de movimento a montante.
       A curva não representa cota absoluta, velocidade da água nem previsão de chegada.
     </div>
 
@@ -1689,9 +1691,10 @@ body.weatherModalOpen{
       const [tt,tc]=trendInfo(s.tendencia);
       const code=String(s.estacao);
       const isBarcelos=code==="14480002";
+      const isMoura=code==="14840000";
       const isManaus=code==="14990000";
-      const role=isBarcelos?"BARCELOS":isManaus?"JUSANTE":upstreamCodes.has(code)?"MONTANTE":"CORREDOR";
-      const extraClass=isBarcelos?"current":isManaus?"downstream":"";
+      const role=isBarcelos?"BARCELOS":isMoura?"JUSANTE • VALIDAÇÃO":isManaus?"JUSANTE • REFERÊNCIA":upstreamCodes.has(code)?"MONTANTE":"CORREDOR";
+      const extraClass=isBarcelos?"current":isMoura?"validation":isManaus?"downstream":"";
       return `<article class="station ${extraClass}"
         aria-label="${s.nome}. ${role.toLowerCase()}. Nível local ${fmtLevel(s.nivel_m)} metros. Variação em 6 horas ${fmtVar(s.variacao_6h_cm)}, em 24 horas ${fmtVar(s.variacao_24h_cm)}, em 72 horas ${fmtVar(s.variacao_72h_cm)} e em 7 dias ${fmtVar(s.variacao_7d_cm)}.">
         <div class="stationName">${s.nome}</div><div class="stationCode">ANA ${s.estacao}</div>
@@ -1722,6 +1725,7 @@ body.weatherModalOpen{
       byCode["14330000"],
       byCode["14420000"],
       byCode["14480002"],
+      byCode["14840000"],
       byCode["14990000"]
     ];
 
@@ -1732,7 +1736,7 @@ body.weatherModalOpen{
       return;
     }
 
-    const [cucui,taraqua,curicuriari,serrinha,barcelos,manaus]=stations;
+    const [cucui,taraqua,curicuriari,serrinha,barcelos,moura,manaus]=stations;
 
     const colorFor=n=>{
       n=Number(n);
@@ -1844,16 +1848,17 @@ body.weatherModalOpen{
 
       ${stationBlock(cucui,88,108,"start","")}
       ${stationBlock(taraqua,88,252,"start","")}
-      ${stationBlock(curicuriari,465,180,"middle","")}
-      ${stationBlock(serrinha,640,180,"middle","")}
-      ${stationBlock(barcelos,830,180,"middle","BARCELOS")}
+      ${stationBlock(curicuriari,430,180,"middle","")}
+      ${stationBlock(serrinha,585,180,"middle","")}
+      ${stationBlock(barcelos,740,180,"middle","BARCELOS")}
+      ${stationBlock(moura,900,180,"middle","VALIDAÇÃO")}
       ${stationBlock(manaus,1110,180,"end","JUSANTE")}
 
       <text x="145" y="313" text-anchor="middle" fill="#93a7b8" font-size="11">
         Cucuí e Taracuá são exibidas separadamente
       </text>
-      <text x="735" y="313" text-anchor="middle" fill="#93a7b8" font-size="11">
-        Manaus amplia a leitura do corredor após Barcelos
+      <text x="760" y="313" text-anchor="middle" fill="#93a7b8" font-size="11">
+        Moura valida o comportamento a jusante; Manaus amplia o contexto do corredor
       </text>
     `;
   }
@@ -1883,7 +1888,7 @@ body.weatherModalOpen{
   }
 
   function renderCorridor(list){
-    const orderedCodes=["14110000","14280001","14330000","14420000","14480002","14990000"];
+    const orderedCodes=["14110000","14280001","14330000","14420000","14480002","14840000","14990000"];
     const byCode=Object.fromEntries((list||[]).map(s=>[String(s.estacao),s]));
     const ordered=orderedCodes.map(code=>byCode[code]).filter(Boolean);
     const usable=ordered.length?ordered:(list||[]);
@@ -1893,7 +1898,8 @@ body.weatherModalOpen{
     $("corridor").innerHTML=usable.map(s=>{
       const n=Number(s.variacao_72h_cm)||0;
       const w=Math.max(2,Math.abs(n)/max*46);
-      const role=String(s.estacao)==="14990000"?" • jusante":String(s.estacao)==="14480002"?" • Barcelos":"";
+      const code=String(s.estacao);
+      const role=code==="14990000"?" • referência jusante":code==="14840000"?" • validação":code==="14480002"?" • Barcelos":"";
       return `<div class="corridorRow">
         <div class="corridorName">${s.nome}${role}</div>
         <div class="track"><div class="zero"></div><div class="bar ${n>=0?"pos":"neg"}" style="width:${w}%"></div></div>
@@ -1929,6 +1935,7 @@ body.weatherModalOpen{
       const val=fmtVar(n);
       const code=String(s.estacao);
       const isBarcelos=code==="14480002";
+      const isMoura=code==="14840000";
       const isManaus=code==="14990000";
       const anchor=i===0?"start":i===points.length-1?"end":"middle";
       const tx=i===0?x+2:i===points.length-1?x-2:x;
@@ -1940,14 +1947,21 @@ body.weatherModalOpen{
              <text x="38" y="15" text-anchor="middle" fill="#bfefff"
                    font-size="9" font-weight="800" letter-spacing="1.0">BARCELOS</text>
            </g>`
-        : isManaus
-          ? `<g transform="translate(${x-68},2)">
-               <rect x="0" y="0" width="66" height="22" rx="11"
-                     fill="rgba(245,196,81,.08)" stroke="rgba(245,196,81,.24)"/>
-               <text x="33" y="15" text-anchor="middle" fill="#f7d98a"
-                     font-size="9" font-weight="800" letter-spacing="1.0">JUSANTE</text>
+        : isMoura
+          ? `<g transform="translate(${x-40},2)">
+               <rect x="0" y="0" width="80" height="22" rx="11"
+                     fill="rgba(79,216,255,.08)" stroke="rgba(79,216,255,.28)"/>
+               <text x="40" y="15" text-anchor="middle" fill="#bfefff"
+                     font-size="9" font-weight="800" letter-spacing="1.0">VALIDAÇÃO</text>
              </g>`
-          : "";
+          : isManaus
+            ? `<g transform="translate(${x-68},2)">
+                 <rect x="0" y="0" width="66" height="22" rx="11"
+                       fill="rgba(245,196,81,.08)" stroke="rgba(245,196,81,.24)"/>
+                 <text x="33" y="15" text-anchor="middle" fill="#f7d98a"
+                       font-size="9" font-weight="800" letter-spacing="1.0">JUSANTE</text>
+               </g>`
+            : "";
 
       return `
         ${badge}

@@ -1,5 +1,5 @@
 {
-  "gerado_em_utc": "2026-10-02T22:18:14.290659+00:00",
+  "gerado_em_utc": "2026-10-02T22:46:08.512863+00:00",
   "timezone": "America/Manaus",
   "nivel": 0,
   "status": "sem_sinal_reversao",
@@ -122,7 +122,7 @@
       "variacao_72h_cm": 16.0,
       "variacao_7d_cm": 82.0,
       "tendencia": "descendo",
-      "data_medicao_manaus": "2026-10-02 17:15:00"
+      "data_medicao_manaus": "2026-10-02 18:15:00"
     },
     "curicuriari": {
       "nome": "Curicuriari",

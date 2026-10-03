@@ -1,5 +1,5 @@
 {
-  "gerado_em_utc": "2026-10-03T10:17:22.651307+00:00",
+  "gerado_em_utc": "2026-10-03T11:04:25.594338+00:00",
   "timezone": "America/Manaus",
   "nivel": 0,
   "status": "sem_sinal_reversao",
@@ -120,9 +120,9 @@
       "variacao_6h_cm": 0.0,
       "variacao_24h_cm": 0.0,
       "variacao_72h_cm": 13.0,
-      "variacao_7d_cm": 77.0,
+      "variacao_7d_cm": 76.0,
       "tendencia": "estavel",
-      "data_medicao_manaus": "2026-10-03 05:15:00"
+      "data_medicao_manaus": "2026-10-03 06:15:00"
     },
     "curicuriari": {
       "nome": "Curicuriari",
@@ -132,7 +132,7 @@
       "variacao_72h_cm": 14.0,
       "variacao_7d_cm": 23.0,
       "tendencia": "subindo",
-      "data_medicao_manaus": "2026-10-03 05:45:00"
+      "data_medicao_manaus": "2026-10-03 06:45:00"
     },
     "serrinha": {
       "nome": "Serrinha",
@@ -142,7 +142,7 @@
       "variacao_72h_cm": 9.0,
       "variacao_7d_cm": 13.0,
       "tendencia": "subindo",
-      "data_medicao_manaus": "2026-10-03 05:30:00"
+      "data_medicao_manaus": "2026-10-03 06:30:00"
     },
     "barcelos": {
       "nome": "Barcelos",

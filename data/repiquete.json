@@ -1,5 +1,5 @@
 {
-  "gerado_em_utc": "2026-10-03T00:25:19.442205+00:00",
+  "gerado_em_utc": "2026-10-03T00:51:54.194596+00:00",
   "timezone": "America/Manaus",
   "nivel": 0,
   "status": "sem_sinal_reversao",
@@ -11,7 +11,7 @@
     "Barcelos já apresenta +2.0 cm em 24 h.",
     "Serrinha acumula +9.0 cm em 72 h.",
     "Curicuriari acumula +13.0 cm em 72 h.",
-    "Taracuá acumula +15.0 cm em 72 h.",
+    "Taracuá acumula +14.0 cm em 72 h.",
     "O detector principal registra alta sustentada em Serrinha."
   ],
   "criterios": {
@@ -110,7 +110,7 @@
     "motivos": [
       "Serrinha acumula +9.0 cm em 72 h.",
       "Curicuriari acumula +13.0 cm em 72 h.",
-      "Taracuá acumula +15.0 cm em 72 h.",
+      "Taracuá acumula +14.0 cm em 72 h.",
       "O detector principal registra alta sustentada em Serrinha."
     ]
   },
@@ -120,10 +120,10 @@
       "nivel_m": 14.41,
       "variacao_6h_cm": -1.0,
       "variacao_24h_cm": -1.0,
-      "variacao_72h_cm": 15.0,
+      "variacao_72h_cm": 14.0,
       "variacao_7d_cm": 81.0,
       "tendencia": "descendo",
-      "data_medicao_manaus": "2026-10-02 19:15:00"
+      "data_medicao_manaus": "2026-10-02 20:15:00"
     },
     "curicuriari": {
       "nome": "Curicuriari",
@@ -133,7 +133,7 @@
       "variacao_72h_cm": 13.0,
       "variacao_7d_cm": 21.0,
       "tendencia": "subindo",
-      "data_medicao_manaus": "2026-10-02 19:45:00"
+      "data_medicao_manaus": "2026-10-02 20:45:00"
     },
     "serrinha": {
       "nome": "Serrinha",
@@ -143,7 +143,7 @@
       "variacao_72h_cm": 9.0,
       "variacao_7d_cm": 12.0,
       "tendencia": "subindo",
-      "data_medicao_manaus": "2026-10-02 19:30:00"
+      "data_medicao_manaus": "2026-10-02 20:30:00"
     },
     "barcelos": {
       "nome": "Barcelos",

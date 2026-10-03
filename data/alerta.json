@@ -1,5 +1,5 @@
 {
-  "gerado_em_utc": "2026-10-02T23:44:12.042176+00:00",
+  "gerado_em_utc": "2026-10-03T00:25:18.671860+00:00",
   "timezone": "America/Manaus",
   "nivel": 2,
   "status": "alta_confirmada_montante",
@@ -51,7 +51,7 @@
     },
     {
       "hora_manaus": "2026-10-02 18:00:00",
-      "variacao_24h_cm": 1.5
+      "variacao_24h_cm": 1.0
     }
   ],
   "historico_serrinha_barcelos": {
@@ -81,33 +81,33 @@
   "situacao_atual": {
     "curicuriari": {
       "nome": "Curicuriari",
-      "nivel_m": 9.99,
+      "nivel_m": 10.0,
       "variacao_6h_cm": 3.0,
-      "variacao_24h_cm": 7.0,
-      "variacao_72h_cm": 12.0,
-      "variacao_7d_cm": 19.0,
+      "variacao_24h_cm": 8.0,
+      "variacao_72h_cm": 13.0,
+      "variacao_7d_cm": 21.0,
       "tendencia": "subindo",
-      "data_medicao_manaus": "2026-10-02 18:45:00"
+      "data_medicao_manaus": "2026-10-02 19:45:00"
     },
     "serrinha": {
       "nome": "Serrinha",
-      "nivel_m": 6.67,
-      "variacao_6h_cm": 0.0,
-      "variacao_24h_cm": 1.0,
-      "variacao_72h_cm": 8.0,
-      "variacao_7d_cm": 11.0,
-      "tendencia": "estavel",
-      "data_medicao_manaus": "2026-10-02 18:30:00"
+      "nivel_m": 6.68,
+      "variacao_6h_cm": 1.0,
+      "variacao_24h_cm": 3.0,
+      "variacao_72h_cm": 9.0,
+      "variacao_7d_cm": 12.0,
+      "tendencia": "subindo",
+      "data_medicao_manaus": "2026-10-02 19:30:00"
     },
     "barcelos": {
       "nome": "Barcelos",
-      "nivel_m": 3.9,
-      "variacao_6h_cm": 0.0,
-      "variacao_24h_cm": 1.0,
-      "variacao_72h_cm": 1.0,
-      "variacao_7d_cm": 1.0,
-      "tendencia": "estavel",
-      "data_medicao_manaus": "2026-10-02 19:00:00"
+      "nivel_m": 3.91,
+      "variacao_6h_cm": 1.0,
+      "variacao_24h_cm": 2.0,
+      "variacao_72h_cm": 2.0,
+      "variacao_7d_cm": 2.0,
+      "tendencia": "subindo",
+      "data_medicao_manaus": "2026-10-02 20:00:00"
     }
   },
   "aviso": "O alerta é experimental e utiliza relações históricas entre estações. Uma alta em Serrinha não garante uma alta posterior em Barcelos."

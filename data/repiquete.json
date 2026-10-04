@@ -1,5 +1,5 @@
 {
-  "gerado_em_utc": "2026-10-04T22:45:37.659540+00:00",
+  "gerado_em_utc": "2026-10-04T23:16:24.383625+00:00",
   "timezone": "America/Manaus",
   "nivel": 0,
   "status": "sem_sinal_reversao",
@@ -8,7 +8,7 @@
   "mensagem": "Os critérios atuais não identificam uma reversão consistente da tendência em Barcelos.",
   "motivos": [
     "Barcelos já apresenta +1.0 cm em 24 h.",
-    "Serrinha acumula +10.0 cm em 72 h.",
+    "Serrinha acumula +8.0 cm em 72 h.",
     "Curicuriari acumula +17.0 cm em 72 h.",
     "O detector principal registra alta sustentada em Serrinha."
   ],
@@ -106,7 +106,7 @@
     "evento_serrinha_confirmado": true,
     "nivel_alerta_existente": 2,
     "motivos": [
-      "Serrinha acumula +10.0 cm em 72 h.",
+      "Serrinha acumula +8.0 cm em 72 h.",
       "Curicuriari acumula +17.0 cm em 72 h.",
       "O detector principal registra alta sustentada em Serrinha."
     ]
@@ -126,21 +126,21 @@
       "nome": "Curicuriari",
       "nivel_m": 10.09,
       "variacao_6h_cm": 1.0,
-      "variacao_24h_cm": 5.0,
+      "variacao_24h_cm": 4.0,
       "variacao_72h_cm": 17.0,
-      "variacao_7d_cm": 28.0,
+      "variacao_7d_cm": 27.0,
       "tendencia": "subindo",
-      "data_medicao_manaus": "2026-10-04 17:45:00"
+      "data_medicao_manaus": "2026-10-04 18:45:00"
     },
     "serrinha": {
       "nome": "Serrinha",
       "nivel_m": 6.74,
       "variacao_6h_cm": 1.0,
       "variacao_24h_cm": 4.0,
-      "variacao_72h_cm": 10.0,
+      "variacao_72h_cm": 8.0,
       "variacao_7d_cm": 17.0,
       "tendencia": "subindo",
-      "data_medicao_manaus": "2026-10-04 17:30:00"
+      "data_medicao_manaus": "2026-10-04 18:30:00"
     },
     "barcelos": {
       "nome": "Barcelos",
@@ -150,7 +150,7 @@
       "variacao_72h_cm": 4.0,
       "variacao_7d_cm": 5.0,
       "tendencia": "estavel",
-      "data_medicao_manaus": "2026-10-04 18:00:00"
+      "data_medicao_manaus": "2026-10-04 19:00:00"
     }
   },
   "aviso": "Detector experimental de mudança de tendência. 'Possível reversão' e 'repiquete em formação' não são confirmações. O estado confirmado exige três verificações consecutivas de alta mínima de +3 cm em 24 h e ganho líquido mínimo de +1 cm entre o primeiro e o terceiro checkpoint. O estado confirmado descreve um movimento já observado, não uma previsão."

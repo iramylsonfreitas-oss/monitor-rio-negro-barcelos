@@ -1,13 +1,13 @@
 {
-  "gerado_em_utc": "2026-10-03T10:27:08.840597+00:00",
+  "gerado_em_utc": "2026-10-04T16:44:34.821446+00:00",
   "metodo": "Correlação de Pearson entre variações horárias acumuladas de 24 horas, testando defasagens em passos de 6 horas.",
   "status": "experimental",
   "uso": "Diagnóstico histórico exploratório. Não representa previsão hidrológica nem confirma repiquete.",
   "cobertura_historica": {
     "inicio_manaus": "2023-09-24 00:00:00",
-    "fim_manaus": "2026-10-03 06:00:00",
-    "horas": 26526.0,
-    "dias": 1105.2
+    "fim_manaus": "2026-10-04 12:00:00",
+    "horas": 26556.0,
+    "dias": 1106.5
   },
   "pares": [
     {
@@ -20,7 +20,7 @@
       "melhor_defasagem_dias": 4.5,
       "correlacao": 0.812,
       "forca_correlacao": "alta",
-      "amostras": 19436,
+      "amostras": 19466,
       "passo_testado_h": 6,
       "defasagem_maxima_testada_h": 168
     },
@@ -34,7 +34,7 @@
       "melhor_defasagem_dias": 7.5,
       "correlacao": 0.724,
       "forca_correlacao": "alta",
-      "amostras": 15863,
+      "amostras": 15893,
       "passo_testado_h": 6,
       "defasagem_maxima_testada_h": 240
     },
@@ -44,11 +44,11 @@
       "destino": "14480002",
       "nome_destino": "Barcelos",
       "resultado": "exploratorio",
-      "melhor_defasagem_h": 234,
-      "melhor_defasagem_dias": 9.75,
-      "correlacao": 0.475,
+      "melhor_defasagem_h": 240,
+      "melhor_defasagem_dias": 10.0,
+      "correlacao": 0.474,
       "forca_correlacao": "baixa",
-      "amostras": 19183,
+      "amostras": 19216,
       "passo_testado_h": 6,
       "defasagem_maxima_testada_h": 336
     },
@@ -60,9 +60,9 @@
       "resultado": "exploratorio",
       "melhor_defasagem_h": 210,
       "melhor_defasagem_dias": 8.75,
-      "correlacao": 0.657,
+      "correlacao": 0.656,
       "forca_correlacao": "moderada",
-      "amostras": 18173,
+      "amostras": 18203,
       "passo_testado_h": 6,
       "defasagem_maxima_testada_h": 480
     }
@@ -71,57 +71,57 @@
     {
       "estacao": "14110000",
       "nome": "Cucuí",
-      "nivel_m": 15.84,
+      "nivel_m": 15.75,
       "variacao_6h_cm": -2.0,
-      "variacao_24h_cm": -11.0,
-      "variacao_72h_cm": -35.0,
-      "variacao_7d_cm": -56.0,
+      "variacao_24h_cm": -7.0,
+      "variacao_72h_cm": -29.0,
+      "variacao_7d_cm": -61.0,
       "tendencia": "descendo",
-      "data_medicao_manaus": "2026-10-03 05:15:00"
+      "data_medicao_manaus": "2026-10-04 12:15:00"
     },
     {
       "estacao": "14280001",
       "nome": "Taracuá",
-      "nivel_m": 14.43,
-      "variacao_6h_cm": 0.0,
-      "variacao_24h_cm": 0.0,
-      "variacao_72h_cm": 13.0,
-      "variacao_7d_cm": 77.0,
-      "tendencia": "estavel",
-      "data_medicao_manaus": "2026-10-03 05:15:00"
+      "nivel_m": 14.38,
+      "variacao_6h_cm": -1.0,
+      "variacao_24h_cm": -4.0,
+      "variacao_72h_cm": -2.0,
+      "variacao_7d_cm": 53.0,
+      "tendencia": "descendo",
+      "data_medicao_manaus": "2026-10-04 12:15:00"
     },
     {
       "estacao": "14330000",
       "nome": "Curicuriari",
-      "nivel_m": 10.02,
+      "nivel_m": 10.08,
       "variacao_6h_cm": 1.0,
-      "variacao_24h_cm": 7.0,
-      "variacao_72h_cm": 14.0,
-      "variacao_7d_cm": 23.0,
+      "variacao_24h_cm": 5.0,
+      "variacao_72h_cm": 17.0,
+      "variacao_7d_cm": 27.0,
       "tendencia": "subindo",
-      "data_medicao_manaus": "2026-10-03 05:45:00"
+      "data_medicao_manaus": "2026-10-04 11:45:00"
     },
     {
       "estacao": "14420000",
       "nome": "Serrinha",
-      "nivel_m": 6.69,
+      "nivel_m": 6.73,
       "variacao_6h_cm": 1.0,
-      "variacao_24h_cm": 3.0,
-      "variacao_72h_cm": 9.0,
-      "variacao_7d_cm": 13.0,
+      "variacao_24h_cm": 4.0,
+      "variacao_72h_cm": 10.0,
+      "variacao_7d_cm": 17.0,
       "tendencia": "subindo",
-      "data_medicao_manaus": "2026-10-03 05:30:00"
+      "data_medicao_manaus": "2026-10-04 11:30:00"
     },
     {
       "estacao": "14480002",
       "nome": "Barcelos",
-      "nivel_m": 3.91,
-      "variacao_6h_cm": 0.0,
+      "nivel_m": 3.93,
+      "variacao_6h_cm": 1.0,
       "variacao_24h_cm": 2.0,
-      "variacao_72h_cm": 3.0,
-      "variacao_7d_cm": 3.0,
-      "tendencia": "estavel",
-      "data_medicao_manaus": "2026-10-03 06:00:00"
+      "variacao_72h_cm": 5.0,
+      "variacao_7d_cm": 5.0,
+      "tendencia": "subindo",
+      "data_medicao_manaus": "2026-10-04 12:00:00"
     }
   ]
 }

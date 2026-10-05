@@ -1,2 +1,3 @@
 registrado_em_utc,registrado_em_manaus,estado,estado_hidrologico,qualidade_dados,v4_autorizada,score,sobreposicao_h,janela_inicio,janela_fim,core_ativas,cadeias_completas_validas,pares_validos_diagnosticos,motivo_registro
 2026-10-05T00:58:24.469396+00:00,2026-10-04 20:58:24,observacao,observacao,ATUAL,true,,,,,2,0,2,primeiro_registro
+2026-10-05T01:18:56.257362+00:00,2026-10-04 21:18:56,observacao,observacao,ATUAL,true,,,,,2,0,2,mudanca_janela

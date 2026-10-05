@@ -1,0 +1,80 @@
+name: Testar V4.1 Operacional em Sombra
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  testar-v41:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Baixar projeto
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Executar V4.1 em sombra
+        env:
+          ANA_IDENTIFIER: ${{ secrets.ANA_IDENTIFIER }}
+          ANA_PASSWORD: ${{ secrets.ANA_PASSWORD }}
+        run: |
+          python collector/v41_operacional.py
+
+      - name: Conferir resultado
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          for name in [
+              "status_coleta.json",
+              "qualidade_dados.json",
+              "convergencia_v4_sombra.json",
+          ]:
+              path = Path("data") / name
+              if not path.exists():
+                  raise SystemExit(f"ERRO: {path} não foi criado.")
+
+              data = json.loads(path.read_text(encoding="utf-8"))
+              print()
+              print("=" * 50)
+              print(name)
+              print("=" * 50)
+
+              for key in [
+                  "status",
+                  "estado",
+                  "estado_hidrologico",
+                  "v4_autorizada",
+                  "publicado_no_painel",
+                  "mensagem",
+              ]:
+                  if key in data:
+                      print(f"{key}: {data.get(key)}")
+
+          print()
+          print("Teste V4.1 concluído. Nenhum arquivo será commitado.")
+          PY
+
+      - name: Salvar artefatos de teste
+        uses: actions/upload-artifact@v4
+        with:
+          name: teste-v41-sombra
+          path: |
+            data/status_coleta.json
+            data/qualidade_dados.json
+            data/convergencia_v4_sombra.json
+            data/convergencia_v4_detalhes_sombra.json
+            data/history/alertas_v4.csv
+            data/alerta.json
+            data/repiquete.json
+          if-no-files-found: warn
+          retention-days: 14

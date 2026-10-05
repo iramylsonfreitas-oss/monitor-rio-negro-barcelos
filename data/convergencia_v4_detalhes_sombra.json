@@ -1,26 +1,26 @@
 {
   "modelo": "convergencia_espacial_v4_1_sombra",
-  "gerado_em_utc": "2026-10-05T21:32:33.530884+00:00",
+  "gerado_em_utc": "2026-10-05T21:48:22.789773+00:00",
   "modo": "sombra",
   "publicado_no_painel": false,
   "qualidade_dados": {
     "versao": "4.1",
-    "gerado_em_utc": "2026-10-05T21:32:31.062250+00:00",
+    "gerado_em_utc": "2026-10-05T21:48:20.997805+00:00",
     "status": "ATUAL",
     "v4_autorizada": true,
     "limite_idade_core_min": 180,
-    "maior_idade_core_min": 62,
+    "maior_idade_core_min": 78,
     "coleta": {
       "status": "ATUALIZADO",
       "fallback_ultima_leitura_valida": false,
-      "ultima_coleta_bem_sucedida_utc": "2026-10-05T21:32:31.060967+00:00"
+      "ultima_coleta_bem_sucedida_utc": "2026-10-05T21:48:20.996740+00:00"
     },
     "core": [
       {
         "estacao": "14280001",
         "nome": "Taracuá",
         "presente": true,
-        "idade_min": 17,
+        "idade_min": 33,
         "nivel_m": 14.25,
         "data_medicao_manaus": "2026-10-05 17:15:00",
         "ok": true
@@ -29,7 +29,7 @@
         "estacao": "14330000",
         "nome": "Curicuriari",
         "presente": true,
-        "idade_min": 47,
+        "idade_min": 63,
         "nivel_m": 10.1,
         "data_medicao_manaus": "2026-10-05 16:45:00",
         "ok": true
@@ -38,7 +38,7 @@
         "estacao": "14420000",
         "nome": "Serrinha",
         "presente": true,
-        "idade_min": 62,
+        "idade_min": 78,
         "nivel_m": 6.78,
         "data_medicao_manaus": "2026-10-05 16:30:00",
         "ok": true
@@ -47,7 +47,7 @@
         "estacao": "14480002",
         "nome": "Barcelos",
         "presente": true,
-        "idade_min": 32,
+        "idade_min": 48,
         "nivel_m": 3.94,
         "data_medicao_manaus": "2026-10-05 17:00:00",
         "ok": true

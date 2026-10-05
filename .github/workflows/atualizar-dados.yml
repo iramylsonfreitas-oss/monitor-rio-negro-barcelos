@@ -18,36 +18,109 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Baixar projeto
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
 
       - name: Configurar Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
-
-      - name: Consultar ANA
+      - name: Executar V4.1 operacional em sombra
         env:
           ANA_IDENTIFIER: ${{ secrets.ANA_IDENTIFIER }}
           ANA_PASSWORD: ${{ secrets.ANA_PASSWORD }}
         run: |
-          python collector/ana_resiliente.py
+          python collector/v41_operacional.py
 
-
-      - name: Gerar alerta atual
+      - name: Validar V4.1
         run: |
-          python collector/alerta.py
+          python - <<'PY'
+          import json
+          from pathlib import Path
 
+          required = [
+              Path("data/status_coleta.json"),
+              Path("data/qualidade_dados.json"),
+              Path("data/convergencia_v4_sombra.json"),
+              Path("data/convergencia_v4_detalhes_sombra.json"),
+              Path("data/history/alertas_v4.csv"),
+              Path("data/latest.json"),
+              Path("data/series_30d.json"),
+              Path("data/estacoes.json"),
+              Path("data/alerta.json"),
+              Path("data/repiquete.json"),
+          ]
 
-      - name: Detectar repiquete
-        run: |
-          python collector/repiquete.py
+          missing = [str(p) for p in required if not p.exists()]
+          if missing:
+              raise SystemExit(
+                  "ERRO: arquivos obrigatorios ausentes: "
+                  + ", ".join(missing)
+              )
 
+          status = json.loads(
+              Path("data/status_coleta.json").read_text(encoding="utf-8")
+          )
+          qualidade = json.loads(
+              Path("data/qualidade_dados.json").read_text(encoding="utf-8")
+          )
+          sombra = json.loads(
+              Path("data/convergencia_v4_sombra.json").read_text(encoding="utf-8")
+          )
+
+          coleta = status.get("status")
+          qualidade_status = qualidade.get("status")
+          autorizada = qualidade.get("v4_autorizada")
+          estado = sombra.get("estado")
+
+          valid_collection = {
+              "ATUALIZADO",
+              "FONTE_INDISPONIVEL",
+          }
+          if coleta not in valid_collection:
+              raise SystemExit(
+                  f"ERRO: estado inesperado da coleta: {coleta}"
+              )
+
+          if coleta == "ATUALIZADO":
+              if qualidade_status != "ATUAL" or autorizada is not True:
+                  raise SystemExit(
+                      "ERRO: coleta atualizada sem qualidade ATUAL/V4 autorizada."
+                  )
+
+          if coleta == "FONTE_INDISPONIVEL":
+              if qualidade_status != "FONTE_INDISPONIVEL":
+                  raise SystemExit(
+                      "ERRO: fallback sem qualidade FONTE_INDISPONIVEL."
+                  )
+              if autorizada is not False:
+                  raise SystemExit(
+                      "ERRO: V4 nao pode ficar autorizada durante fallback."
+                  )
+              if estado != "dados_indisponiveis":
+                  raise SystemExit(
+                      "ERRO: sombra deveria sinalizar dados_indisponiveis."
+                  )
+
+          if sombra.get("publicado_no_painel") is not False:
+              raise SystemExit(
+                  "ERRO: V4.1 deixou de estar em modo sombra."
+              )
+
+          print("======================================")
+          print("V4.1 OPERACIONAL")
+          print("======================================")
+          print("Coleta:", coleta)
+          print("Qualidade:", qualidade_status)
+          print("V4 autorizada:", autorizada)
+          print("Estado sombra:", estado)
+          print("Estado hidrologico:", sombra.get("estado_hidrologico"))
+          print("Publicado no painel:", sombra.get("publicado_no_painel"))
+          print("Fallback:", status.get("fallback_ultima_leitura_valida"))
+          PY
 
       - name: Conferir dados atuais
         run: |
@@ -58,456 +131,91 @@ jobs:
           python - <<'PY'
           import json
 
-          with open(
-              "data/estacoes.json",
-              encoding="utf-8"
-          ) as f:
+          with open("data/estacoes.json", encoding="utf-8") as f:
               data = json.load(f)
 
-          for station in data.get(
-              "estacoes",
-              []
-          ):
-
+          for station in data.get("estacoes", []):
               print()
-              print(
-                  station["nome"],
-                  station["estacao"]
-              )
-
-              print(
-                  "Nível:",
-                  station["nivel_m"],
-                  "m"
-              )
-
-              print(
-                  "6 h:",
-                  station[
-                      "variacao_6h_cm"
-                  ],
-                  "cm"
-              )
-
-              print(
-                  "24 h:",
-                  station[
-                      "variacao_24h_cm"
-                  ],
-                  "cm"
-              )
-
-              print(
-                  "72 h:",
-                  station[
-                      "variacao_72h_cm"
-                  ],
-                  "cm"
-              )
-
-              print(
-                  "7 dias:",
-                  station[
-                      "variacao_7d_cm"
-                  ],
-                  "cm"
-              )
-
-              print(
-                  "Tendência:",
-                  station[
-                      "tendencia"
-                  ]
-              )
-
-              print(
-                  "Medição:",
-                  station.get(
-                      "data_medicao_manaus"
-                  )
-              )
+              print(station["nome"], station["estacao"])
+              print("Nivel:", station["nivel_m"], "m")
+              print("6 h:", station["variacao_6h_cm"], "cm")
+              print("24 h:", station["variacao_24h_cm"], "cm")
+              print("72 h:", station["variacao_72h_cm"], "cm")
+              print("7 dias:", station["variacao_7d_cm"], "cm")
+              print("Tendencia:", station["tendencia"])
+              print("Medicao:", station.get("data_medicao_manaus"))
           PY
 
-
-      - name: Conferir alerta
+      - name: Conferir alerta publico atual
         run: |
-          echo "======================================"
-          echo "ALERTA ATUAL"
-          echo "======================================"
-
-          if [ ! -f data/alerta.json ]; then
-            echo "ERRO:"
-            echo "data/alerta.json não foi criado."
-            exit 1
-          fi
-
           python - <<'PY'
           import json
 
-          with open(
-              "data/alerta.json",
-              encoding="utf-8"
-          ) as f:
+          with open("data/alerta.json", encoding="utf-8") as f:
               alerta = json.load(f)
 
-          print(
-              "Status:",
-              alerta.get(
-                  "rotulo"
-              )
-          )
-
-          print(
-              "Nível:",
-              alerta.get(
-                  "nivel"
-              )
-          )
-
-          print(
-              "Título:",
-              alerta.get(
-                  "titulo"
-              )
-          )
-
-          print()
-
-          print(
-              "Mensagem:"
-          )
-
-          print(
-              alerta.get(
-                  "mensagem"
-              )
-          )
-
-          print()
-
-          evento = (
-              alerta.get(
-                  "evento_serrinha"
-              )
-              or {}
-          )
-
-          print(
-              "Evento confirmado em Serrinha:",
-              evento.get(
-                  "confirmado"
-              )
-          )
-
-          print(
-              "Início do evento:",
-              evento.get(
-                  "inicio_manaus"
-              )
-          )
-
-          print()
-
-          historico = (
-              alerta.get(
-                  "historico_serrinha_barcelos"
-              )
-              or {}
-          )
-
-          print(
-              "Histórico Serrinha → Barcelos"
-          )
-
-          print(
-              "Eventos em Serrinha:",
-              historico.get(
-                  "eventos_serrinha"
-              )
-          )
-
-          print(
-              "Correspondentes:",
-              historico.get(
-                  "eventos_correspondentes"
-              )
-          )
-
-          print(
-              "Mediana:",
-              historico.get(
-                  "mediana_dias"
-              ),
-              "dias"
-          )
-
-          print(
-              "Faixa central:",
-              historico.get(
-                  "q25_dias"
-              ),
-              "a",
-              historico.get(
-                  "q75_dias"
-              ),
-              "dias"
-          )
-
-          print()
-
-          janela = (
-              alerta.get(
-                  "janela_historica"
-              )
-              or {}
-          )
-
-          print(
-              "Janela aplicável agora:",
-              janela.get(
-                  "aplicavel"
-              )
-          )
-
-          if janela.get(
-              "aplicavel"
-          ):
-
-              print(
-                  "Início:",
-                  janela.get(
-                      "inicio_janela_manaus"
-                  )
-              )
-
-              print(
-                  "Mediana:",
-                  janela.get(
-                      "mediana_manaus"
-                  )
-              )
-
-              print(
-                  "Fim:",
-                  janela.get(
-                      "fim_janela_manaus"
-                  )
-              )
-
-          print()
-
-          print(
-              "Motivos:"
-          )
-
-          for motivo in (
-              alerta.get(
-                  "motivos"
-              )
-              or []
-          ):
-              print(
-                  "-",
-                  motivo
-              )
-
-          print()
-
-          print(
-              "Últimas amostras de Serrinha:"
-          )
-
-          for sample in (
-              alerta.get(
-                  "ultimas_amostras_serrinha"
-              )
-              or []
-          ):
-
-              print(
-                  sample.get(
-                      "hora_manaus"
-                  ),
-                  "|",
-                  sample.get(
-                      "variacao_24h_cm"
-                  ),
-                  "cm/24h"
-              )
+          print("======================================")
+          print("ALERTA PUBLICO ATUAL")
+          print("======================================")
+          print("Status:", alerta.get("rotulo"))
+          print("Nivel:", alerta.get("nivel"))
+          print("Titulo:", alerta.get("titulo"))
+          print("Mensagem:", alerta.get("mensagem"))
           PY
-
 
       - name: Conferir detector de repiquete
         run: |
-          echo "======================================"
-          echo "DETECTOR DE REPIQUETE"
-          echo "======================================"
-
-          if [ ! -f data/repiquete.json ]; then
-            echo "ERRO:"
-            echo "data/repiquete.json não foi criado."
-            exit 1
-          fi
-
           python - <<'PY'
           import json
 
-          with open(
-              "data/repiquete.json",
-              encoding="utf-8"
-          ) as f:
+          with open("data/repiquete.json", encoding="utf-8") as f:
               data = json.load(f)
 
-          print(
-              "Nível:",
-              data.get(
-                  "nivel"
-              )
-          )
-
-          print(
-              "Status:",
-              data.get(
-                  "rotulo"
-              )
-          )
-
-          print(
-              "Título:",
-              data.get(
-                  "titulo"
-              )
-          )
-
-          print()
-
-          print(
-              "Mensagem:"
-          )
-
-          print(
-              data.get(
-                  "mensagem"
-              )
-          )
-
-          print()
-
-          print(
-              "Motivos:"
-          )
-
-          for motivo in (
-              data.get(
-                  "motivos"
-              )
-              or []
-          ):
-              print(
-                  "-",
-                  motivo
-              )
-
-          print()
-
-          contexto = (
-              data.get(
-                  "contexto_montante"
-              )
-              or {}
-          )
-
-          print(
-              "Sinal a montante:",
-              contexto.get(
-                  "sinal"
-              )
-          )
-
-          print(
-              "Estações positivas em 72 h:",
-              contexto.get(
-                  "estacoes_positivas_72h"
-              )
-          )
-
-          print(
-              "Evento confirmado em Serrinha:",
-              contexto.get(
-                  "evento_serrinha_confirmado"
-              )
-          )
-
-          print()
-
-          evento = (
-              data.get(
-                  "evento_barcelos"
-              )
-              or {}
-          )
-
-          print(
-              "Repiquete confirmado:",
-              evento.get(
-                  "confirmado"
-              )
-          )
-
-          print(
-              "Início:",
-              evento.get(
-                  "inicio_manaus"
-              )
-          )
-
-          print()
-
-          print(
-              "Últimos checkpoints de Barcelos:"
-          )
-
-          for sample in (
-              data.get(
-                  "ultimos_checkpoints_barcelos"
-              )
-              or []
-          ):
-
-              print(
-                  sample.get(
-                      "hora_manaus"
-                  ),
-                  "|",
-                  "6h:",
-                  sample.get(
-                      "variacao_6h_cm"
-                  ),
-                  "|",
-                  "24h:",
-                  sample.get(
-                      "variacao_24h_cm"
-                  ),
-                  "|",
-                  "72h:",
-                  sample.get(
-                      "variacao_72h_cm"
-                  ),
-                  "|",
-                  "7d:",
-                  sample.get(
-                      "variacao_7d_cm"
-                  )
-              )
+          print("======================================")
+          print("DETECTOR DE REPIQUETE")
+          print("======================================")
+          print("Nivel:", data.get("nivel"))
+          print("Status:", data.get("rotulo"))
+          print("Titulo:", data.get("titulo"))
+          print("Mensagem:", data.get("mensagem"))
           PY
 
+      - name: Conferir V4.1 em sombra
+        run: |
+          python - <<'PY'
+          import csv
+          import json
+          from pathlib import Path
 
-      - name: Descartar alteracao do historico nesta execucao
+          sombra = json.loads(
+              Path("data/convergencia_v4_sombra.json").read_text(
+                  encoding="utf-8"
+              )
+          )
+
+          print("======================================")
+          print("V4.1 EM SOMBRA")
+          print("======================================")
+          print("Estado:", sombra.get("estado"))
+          print("Estado hidrologico:", sombra.get("estado_hidrologico"))
+          print("Mensagem:", sombra.get("mensagem"))
+          print("Janela:", sombra.get("janela_previsao_barcelos"))
+          print("Publicado no painel:", sombra.get("publicado_no_painel"))
+
+          history = Path("data/history/alertas_v4.csv")
+          with history.open("r", encoding="utf-8", newline="") as f:
+              rows = list(csv.DictReader(f))
+
+          print("Registros historicos V4.1:", len(rows))
+          if rows:
+              print("Ultimo registro:", rows[-1])
+          PY
+
+      - name: Descartar alteracao do historico hidrologico nesta execucao
         run: |
           git restore data/history/hourly.csv || true
 
-
-      - name: Salvar dados em tempo real, alerta e repiquete
+      - name: Salvar dados em tempo real e V4.1 sombra
         run: |
           git config user.name "rio-negro-bot"
           git config user.email "actions@github.com"
@@ -518,12 +226,18 @@ jobs:
           git add data/alerta.json
           git add data/repiquete.json
 
+          git add data/status_coleta.json
+          git add data/qualidade_dados.json
+          git add data/convergencia_v4_sombra.json
+          git add data/convergencia_v4_detalhes_sombra.json
+          git add data/history/alertas_v4.csv
+
           if git diff --cached --quiet; then
-            echo "Nenhuma alteração para salvar."
+            echo "Nenhuma alteracao para salvar."
             exit 0
           fi
 
-          git commit -m "Atualiza dados ANA, alerta e repiquete"
+          git commit -m "Atualiza dados e V4.1 em sombra"
 
           git pull --rebase origin main
 

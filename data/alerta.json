@@ -1,5 +1,5 @@
 {
-  "gerado_em_utc": "2026-10-05T13:24:56.747162+00:00",
+  "gerado_em_utc": "2026-10-05T13:52:05.636835+00:00",
   "timezone": "America/Manaus",
   "nivel": 2,
   "status": "alta_confirmada_montante",
@@ -87,17 +87,17 @@
       "variacao_72h_cm": 15.0,
       "variacao_7d_cm": 26.0,
       "tendencia": "estavel",
-      "data_medicao_manaus": "2026-10-05 08:45:00"
+      "data_medicao_manaus": "2026-10-05 09:45:00"
     },
     "serrinha": {
       "nome": "Serrinha",
       "nivel_m": 6.77,
       "variacao_6h_cm": 1.0,
       "variacao_24h_cm": 4.0,
-      "variacao_72h_cm": 11.0,
+      "variacao_72h_cm": 10.0,
       "variacao_7d_cm": 20.0,
       "tendencia": "subindo",
-      "data_medicao_manaus": "2026-10-05 08:30:00"
+      "data_medicao_manaus": "2026-10-05 09:30:00"
     },
     "barcelos": {
       "nome": "Barcelos",

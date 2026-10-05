@@ -1,5 +1,5 @@
 {
-  "gerado_em_utc": "2026-10-05T00:29:07.111939+00:00",
+  "gerado_em_utc": "2026-10-05T00:54:30.141507+00:00",
   "timezone": "America/Manaus",
   "nivel": 2,
   "status": "alta_confirmada_montante",
@@ -81,23 +81,23 @@
   "situacao_atual": {
     "curicuriari": {
       "nome": "Curicuriari",
-      "nivel_m": 10.09,
-      "variacao_6h_cm": 1.0,
-      "variacao_24h_cm": 4.0,
-      "variacao_72h_cm": 17.0,
-      "variacao_7d_cm": 27.0,
+      "nivel_m": 10.1,
+      "variacao_6h_cm": 2.0,
+      "variacao_24h_cm": 5.0,
+      "variacao_72h_cm": 18.0,
+      "variacao_7d_cm": 28.0,
       "tendencia": "subindo",
-      "data_medicao_manaus": "2026-10-04 19:45:00"
+      "data_medicao_manaus": "2026-10-04 20:45:00"
     },
     "serrinha": {
       "nome": "Serrinha",
       "nivel_m": 6.74,
-      "variacao_6h_cm": 1.0,
+      "variacao_6h_cm": 0.0,
       "variacao_24h_cm": 4.0,
       "variacao_72h_cm": 9.0,
       "variacao_7d_cm": 17.0,
-      "tendencia": "subindo",
-      "data_medicao_manaus": "2026-10-04 19:30:00"
+      "tendencia": "estavel",
+      "data_medicao_manaus": "2026-10-04 20:30:00"
     },
     "barcelos": {
       "nome": "Barcelos",

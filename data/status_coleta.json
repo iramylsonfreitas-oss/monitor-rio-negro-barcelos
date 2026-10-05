@@ -1,12 +1,12 @@
 {
   "versao": "4.1",
-  "gerado_em_utc": "2026-10-05T06:57:09.334371+00:00",
+  "gerado_em_utc": "2026-10-05T07:26:36.351214+00:00",
   "status": "ATUALIZADO",
   "fonte": "ANA - HidroWebService",
-  "tentativa_utilizada": 1,
+  "tentativa_utilizada": 2,
   "fallback_ultima_leitura_valida": false,
   "estacoes_recebidas": 7,
   "estacoes_esperadas": 7,
-  "ultima_coleta_bem_sucedida_utc": "2026-10-05T06:57:09.334371+00:00",
+  "ultima_coleta_bem_sucedida_utc": "2026-10-05T07:26:36.351214+00:00",
   "erro": null
 }

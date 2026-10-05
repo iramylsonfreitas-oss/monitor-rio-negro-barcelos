@@ -1,53 +1,53 @@
 {
   "modelo": "convergencia_espacial_v4_1_sombra",
-  "gerado_em_utc": "2026-10-05T12:26:18.532706+00:00",
+  "gerado_em_utc": "2026-10-05T12:55:36.664131+00:00",
   "modo": "sombra",
   "publicado_no_painel": false,
   "qualidade_dados": {
     "versao": "4.1",
-    "gerado_em_utc": "2026-10-05T12:26:17.221979+00:00",
+    "gerado_em_utc": "2026-10-05T12:55:34.691648+00:00",
     "status": "ATUAL",
     "v4_autorizada": true,
     "limite_idade_core_min": 180,
-    "maior_idade_core_min": 71,
+    "maior_idade_core_min": 55,
     "coleta": {
       "status": "ATUALIZADO",
       "fallback_ultima_leitura_valida": false,
-      "ultima_coleta_bem_sucedida_utc": "2026-10-05T12:26:17.220739+00:00"
+      "ultima_coleta_bem_sucedida_utc": "2026-10-05T12:55:34.690489+00:00"
     },
     "core": [
       {
         "estacao": "14280001",
         "nome": "Taracuá",
         "presente": true,
-        "idade_min": 71,
+        "idade_min": 40,
         "nivel_m": 14.3,
-        "data_medicao_manaus": "2026-10-05 07:15:00",
+        "data_medicao_manaus": "2026-10-05 08:15:00",
         "ok": true
       },
       {
         "estacao": "14330000",
         "nome": "Curicuriari",
         "presente": true,
-        "idade_min": 41,
+        "idade_min": 10,
         "nivel_m": 10.1,
-        "data_medicao_manaus": "2026-10-05 07:45:00",
+        "data_medicao_manaus": "2026-10-05 08:45:00",
         "ok": true
       },
       {
         "estacao": "14420000",
         "nome": "Serrinha",
         "presente": true,
-        "idade_min": 56,
+        "idade_min": 25,
         "nivel_m": 6.77,
-        "data_medicao_manaus": "2026-10-05 07:30:00",
+        "data_medicao_manaus": "2026-10-05 08:30:00",
         "ok": true
       },
       {
         "estacao": "14480002",
         "nome": "Barcelos",
         "presente": true,
-        "idade_min": 26,
+        "idade_min": 55,
         "nivel_m": 3.94,
         "data_medicao_manaus": "2026-10-05 08:00:00",
         "ok": true
@@ -63,7 +63,7 @@
         "motivo": "sem_sinal_suficiente_de_subida",
         "v24": -9.0,
         "v72": -12.0,
-        "v7d": 29.0
+        "v7d": 28.0
       },
       "14330000": {
         "ativo": true,
@@ -88,7 +88,7 @@
           "id": "E78",
           "inicio": "2026-09-25 17:00:00",
           "ultimo_ativo": "2026-10-02 05:00:00",
-          "idade_ultimo_ativo_h": 74.0
+          "idade_ultimo_ativo_h": 75.0
         }
       ],
       "14330000": [
@@ -96,13 +96,13 @@
           "id": "E65",
           "inicio": "2026-09-28 02:00:00",
           "ultimo_ativo": "2026-09-28 08:00:00",
-          "idade_ultimo_ativo_h": 167.0
+          "idade_ultimo_ativo_h": 168.0
         },
         {
           "id": "E66",
           "inicio": "2026-10-01 23:00:00",
           "ultimo_ativo": "2026-10-04 12:00:00",
-          "idade_ultimo_ativo_h": 19.0
+          "idade_ultimo_ativo_h": 20.0
         }
       ],
       "14420000": [
@@ -110,13 +110,13 @@
           "id": "E49",
           "inicio": "2026-10-01 18:00:00",
           "ultimo_ativo": "2026-10-01 18:00:00",
-          "idade_ultimo_ativo_h": 85.0
+          "idade_ultimo_ativo_h": 86.0
         },
         {
           "id": "E50",
           "inicio": "2026-10-04 14:00:00",
           "ultimo_ativo": "2026-10-05 06:00:00",
-          "idade_ultimo_ativo_h": 1.0
+          "idade_ultimo_ativo_h": 2.0
         }
       ]
     },
@@ -136,14 +136,14 @@
             "id": "E65",
             "inicio": "2026-09-28 02:00:00",
             "ultimo_ativo": "2026-09-28 08:00:00",
-            "idade_ultimo_ativo_h": 167.0,
+            "idade_ultimo_ativo_h": 168.0,
             "amplitude_cm": 4.0
           },
           {
             "id": "E49",
             "inicio": "2026-10-01 18:00:00",
             "ultimo_ativo": "2026-10-01 18:00:00",
-            "idade_ultimo_ativo_h": 85.0,
+            "idade_ultimo_ativo_h": 86.0,
             "amplitude_cm": 1.0
           }
         ],
@@ -163,7 +163,7 @@
           "fim": "2026-10-04 23:00:00",
           "duracao_h": 6.2
         },
-        "score": 0.131
+        "score": 0.13
       },
       {
         "tipo": "par",
@@ -180,14 +180,14 @@
             "id": "E66",
             "inicio": "2026-10-01 23:00:00",
             "ultimo_ativo": "2026-10-04 12:00:00",
-            "idade_ultimo_ativo_h": 19.0,
+            "idade_ultimo_ativo_h": 20.0,
             "amplitude_cm": 16.0
           },
           {
             "id": "E50",
             "inicio": "2026-10-04 14:00:00",
             "ultimo_ativo": "2026-10-05 06:00:00",
-            "idade_ultimo_ativo_h": 1.0,
+            "idade_ultimo_ativo_h": 2.0,
             "amplitude_cm": 3.0
           }
         ],
@@ -207,7 +207,7 @@
           "fim": "2026-10-08 20:00:00",
           "duracao_h": 31.2
         },
-        "score": 0.918
+        "score": 0.917
       }
     ]
   }

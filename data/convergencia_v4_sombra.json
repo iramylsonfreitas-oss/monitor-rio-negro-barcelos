@@ -1,6 +1,6 @@
 {
   "modelo": "convergencia_espacial_v4_1_sombra",
-  "gerado_em_utc": "2026-10-05T02:20:03.130420+00:00",
+  "gerado_em_utc": "2026-10-05T02:49:07.900158+00:00",
   "estado": "observacao",
   "mensagem": "Ha movimentacao no corredor, mas sem evidencia suficiente para publicar uma data prevista para Barcelos.",
   "confianca": "nao_aplicavel",
@@ -30,6 +30,6 @@
   "qualidade_dados": {
     "status": "ATUAL",
     "v4_autorizada": true,
-    "maior_idade_core_min": 65
+    "maior_idade_core_min": 79
   }
 }

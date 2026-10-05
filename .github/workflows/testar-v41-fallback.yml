@@ -1,0 +1,97 @@
+name: Testar V4.1 - Falha ANA e Fallback
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  testar-fallback-v41:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Baixar projeto
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Registrar hashes antes do teste
+        run: |
+          sha256sum \
+            data/latest.json \
+            data/series_30d.json \
+            data/estacoes.json \
+            data/history/hourly.csv \
+            > /tmp/hashes_antes.txt
+          cat /tmp/hashes_antes.txt
+
+      - name: Simular indisponibilidade da ANA
+        env:
+          ANA_IDENTIFIER: ${{ secrets.ANA_IDENTIFIER }}
+          ANA_PASSWORD: ${{ secrets.ANA_PASSWORD }}
+          V41_SIMULAR_FALHA: "1"
+        run: |
+          python collector/v41_operacional.py
+
+      - name: Validar fallback V4.1
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          status = json.loads(Path("data/status_coleta.json").read_text(encoding="utf-8"))
+          qualidade = json.loads(Path("data/qualidade_dados.json").read_text(encoding="utf-8"))
+          sombra = json.loads(Path("data/convergencia_v4_sombra.json").read_text(encoding="utf-8"))
+
+          assert status.get("status") == "FONTE_INDISPONIVEL", status
+          assert status.get("fallback_ultima_leitura_valida") is True, status
+          assert qualidade.get("status") == "FONTE_INDISPONIVEL", qualidade
+          assert qualidade.get("v4_autorizada") is False, qualidade
+          assert sombra.get("estado") == "dados_indisponiveis", sombra
+          assert sombra.get("publicado_no_painel") is False, sombra
+
+          print("Fallback: OK")
+          print("Coleta:", status.get("status"))
+          print("Última leitura válida preservada:", status.get("fallback_ultima_leitura_valida"))
+          print("Qualidade:", qualidade.get("status"))
+          print("V4 autorizada:", qualidade.get("v4_autorizada"))
+          print("Estado sombra:", sombra.get("estado"))
+          PY
+
+      - name: Confirmar que dados válidos não foram sobrescritos
+        run: |
+          sha256sum \
+            data/latest.json \
+            data/series_30d.json \
+            data/estacoes.json \
+            data/history/hourly.csv \
+            > /tmp/hashes_depois.txt
+
+          echo "ANTES:"
+          cat /tmp/hashes_antes.txt
+          echo
+          echo "DEPOIS:"
+          cat /tmp/hashes_depois.txt
+          echo
+
+          diff -u /tmp/hashes_antes.txt /tmp/hashes_depois.txt
+          echo "OK: os quatro arquivos de dados válidos permaneceram idênticos."
+
+      - name: Salvar diagnóstico
+        uses: actions/upload-artifact@v4
+        with:
+          name: teste-v41-fallback
+          path: |
+            data/status_coleta.json
+            data/qualidade_dados.json
+            data/convergencia_v4_sombra.json
+            data/convergencia_v4_detalhes_sombra.json
+            data/history/alertas_v4.csv
+          if-no-files-found: warn
+          retention-days: 14

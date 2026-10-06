@@ -1,6 +1,6 @@
 {
   "modelo": "convergencia_espacial_v4_1_sombra",
-  "gerado_em_utc": "2026-10-06T06:24:57.109741+00:00",
+  "gerado_em_utc": "2026-10-06T06:53:57.713883+00:00",
   "estado": "observacao",
   "mensagem": "Ha movimentacao no corredor, mas sem evidencia suficiente para publicar uma data prevista para Barcelos.",
   "confianca": "nao_aplicavel",
@@ -21,7 +21,7 @@
     "forca_sinal": "fraco",
     "v24": -8.0,
     "v72": -23.0,
-    "v7d": -66.0
+    "v7d": -67.0
   },
   "nota": "A V4 so publica janela estimada quando existe cadeia completa e qualificada. Pares consecutivos permanecem apenas como observacao interna.",
   "modo": "sombra",
@@ -30,6 +30,6 @@
   "qualidade_dados": {
     "status": "ATUAL",
     "v4_autorizada": true,
-    "maior_idade_core_min": 69
+    "maior_idade_core_min": 53
   }
 }

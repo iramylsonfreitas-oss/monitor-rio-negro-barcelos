@@ -1,48 +1,48 @@
 {
   "versao": "4.1",
-  "gerado_em_utc": "2026-10-06T06:24:55.862230+00:00",
+  "gerado_em_utc": "2026-10-06T06:53:55.220777+00:00",
   "status": "ATUAL",
   "v4_autorizada": true,
   "limite_idade_core_min": 180,
-  "maior_idade_core_min": 69,
+  "maior_idade_core_min": 53,
   "coleta": {
     "status": "ATUALIZADO",
     "fallback_ultima_leitura_valida": false,
-    "ultima_coleta_bem_sucedida_utc": "2026-10-06T06:24:55.861101+00:00"
+    "ultima_coleta_bem_sucedida_utc": "2026-10-06T06:53:55.219446+00:00"
   },
   "core": [
     {
       "estacao": "14280001",
       "nome": "Taracuá",
       "presente": true,
-      "idade_min": 69,
-      "nivel_m": 14.22,
-      "data_medicao_manaus": "2026-10-06 01:15:00",
+      "idade_min": 38,
+      "nivel_m": 14.21,
+      "data_medicao_manaus": "2026-10-06 02:15:00",
       "ok": true
     },
     {
       "estacao": "14330000",
       "nome": "Curicuriari",
       "presente": true,
-      "idade_min": 39,
+      "idade_min": 8,
       "nivel_m": 10.09,
-      "data_medicao_manaus": "2026-10-06 01:45:00",
+      "data_medicao_manaus": "2026-10-06 02:45:00",
       "ok": true
     },
     {
       "estacao": "14420000",
       "nome": "Serrinha",
       "presente": true,
-      "idade_min": 54,
+      "idade_min": 23,
       "nivel_m": 6.8,
-      "data_medicao_manaus": "2026-10-06 01:30:00",
+      "data_medicao_manaus": "2026-10-06 02:30:00",
       "ok": true
     },
     {
       "estacao": "14480002",
       "nome": "Barcelos",
       "presente": true,
-      "idade_min": 24,
+      "idade_min": 53,
       "nivel_m": 3.95,
       "data_medicao_manaus": "2026-10-06 02:00:00",
       "ok": true

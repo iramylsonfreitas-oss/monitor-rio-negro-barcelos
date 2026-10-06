@@ -1,35 +1,35 @@
 {
   "modelo": "convergencia_espacial_v4_1_sombra",
-  "gerado_em_utc": "2026-10-06T03:19:40.291249+00:00",
+  "gerado_em_utc": "2026-10-06T03:49:27.222447+00:00",
   "modo": "sombra",
   "publicado_no_painel": false,
   "qualidade_dados": {
     "versao": "4.1",
-    "gerado_em_utc": "2026-10-06T03:19:37.841228+00:00",
+    "gerado_em_utc": "2026-10-06T03:49:24.774508+00:00",
     "status": "ATUAL",
     "v4_autorizada": true,
     "limite_idade_core_min": 180,
-    "maior_idade_core_min": 64,
+    "maior_idade_core_min": 79,
     "coleta": {
       "status": "ATUALIZADO",
       "fallback_ultima_leitura_valida": false,
-      "ultima_coleta_bem_sucedida_utc": "2026-10-06T03:19:37.839947+00:00"
+      "ultima_coleta_bem_sucedida_utc": "2026-10-06T03:49:24.773196+00:00"
     },
     "core": [
       {
         "estacao": "14280001",
         "nome": "Taracuá",
         "presente": true,
-        "idade_min": 64,
-        "nivel_m": 14.23,
-        "data_medicao_manaus": "2026-10-05 22:15:00",
+        "idade_min": 34,
+        "nivel_m": 14.22,
+        "data_medicao_manaus": "2026-10-05 23:15:00",
         "ok": true
       },
       {
         "estacao": "14330000",
         "nome": "Curicuriari",
         "presente": true,
-        "idade_min": 34,
+        "idade_min": 64,
         "nivel_m": 10.1,
         "data_medicao_manaus": "2026-10-05 22:45:00",
         "ok": true
@@ -38,7 +38,7 @@
         "estacao": "14420000",
         "nome": "Serrinha",
         "presente": true,
-        "idade_min": 49,
+        "idade_min": 79,
         "nivel_m": 6.8,
         "data_medicao_manaus": "2026-10-05 22:30:00",
         "ok": true
@@ -47,7 +47,7 @@
         "estacao": "14480002",
         "nome": "Barcelos",
         "presente": true,
-        "idade_min": 19,
+        "idade_min": 49,
         "nivel_m": 3.95,
         "data_medicao_manaus": "2026-10-05 23:00:00",
         "ok": true
@@ -61,9 +61,9 @@
         "ativo": false,
         "forca": "fraco",
         "motivo": "sem_sinal_suficiente_de_subida",
-        "v24": -11.0,
-        "v72": -18.0,
-        "v7d": 10.0
+        "v24": -12.0,
+        "v72": -21.0,
+        "v7d": 8.0
       },
       "14330000": {
         "ativo": true,
@@ -88,7 +88,7 @@
           "id": "E78",
           "inicio": "2026-09-25 17:00:00",
           "ultimo_ativo": "2026-10-02 05:00:00",
-          "idade_ultimo_ativo_h": 89.0
+          "idade_ultimo_ativo_h": 90.0
         }
       ],
       "14330000": [

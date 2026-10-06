@@ -1,0 +1,99 @@
+name: Coleta privada V5 em sombra
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/coleta-privada-v5.yml"
+  schedule:
+    - cron: "22,52 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: coleta-privada-v5
+  cancel-in-progress: false
+
+jobs:
+  coletar:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+
+    steps:
+      - name: Disparar coletor privado
+        env:
+          ANA_IDENTIFIER: ${{ secrets.ANA_IDENTIFIER }}
+          ANA_PASSWORD: ${{ secrets.ANA_PASSWORD }}
+          COLLECTOR_URL: https://monitor-rio-negro-v5.vercel.app/api/collector
+          OIDC_AUDIENCE: monitor-rio-negro-private-collector
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import urllib.parse
+          import urllib.request
+
+          audience = os.environ["OIDC_AUDIENCE"]
+          oidc_url = (
+              os.environ["ACTIONS_ID_TOKEN_REQUEST_URL"]
+              + "&audience="
+              + urllib.parse.quote(audience, safe="")
+          )
+
+          oidc_req = urllib.request.Request(
+              oidc_url,
+              headers={
+                  "Authorization":
+                      "Bearer " + os.environ["ACTIONS_ID_TOKEN_REQUEST_TOKEN"]
+              },
+          )
+
+          with urllib.request.urlopen(oidc_req, timeout=20) as response:
+              oidc_token = json.load(response)["value"]
+
+          payload = json.dumps(
+              {
+                  "ana_identifier": os.environ["ANA_IDENTIFIER"],
+                  "ana_password": os.environ["ANA_PASSWORD"],
+              }
+          ).encode("utf-8")
+
+          req = urllib.request.Request(
+              os.environ["COLLECTOR_URL"],
+              data=payload,
+              method="POST",
+              headers={
+                  "Authorization": "Bearer " + oidc_token,
+                  "Content-Type": "application/json",
+                  "User-Agent": "GitHub-Actions-Private-V5",
+              },
+          )
+
+          with urllib.request.urlopen(req, timeout=70) as response:
+              result = json.load(response)
+
+          safe = {
+              "ok": result.get("ok"),
+              "collection_status": result.get("collection_status"),
+              "fallback": result.get("fallback"),
+              "quality": result.get("quality"),
+              "v4_authorized": result.get("v4_authorized"),
+              "shadow_state": result.get("shadow_state"),
+              "uploaded_files": result.get("uploaded_files"),
+              "history_rows_upserted": result.get("history_rows_upserted"),
+          }
+
+          print(json.dumps(safe, ensure_ascii=False))
+
+          if not result.get("ok"):
+              raise SystemExit(1)
+          if result.get("collection_status") not in (
+              "ATUALIZADO",
+              "FONTE_INDISPONIVEL",
+          ):
+              raise SystemExit(2)
+          PY

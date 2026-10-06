@@ -1,5 +1,5 @@
 {
-  "gerado_em_utc": "2026-10-06T03:49:25.354572+00:00",
+  "gerado_em_utc": "2026-10-06T04:20:45.230141+00:00",
   "timezone": "America/Manaus",
   "nivel": 2,
   "status": "alta_confirmada_montante",
@@ -84,10 +84,10 @@
       "nivel_m": 10.1,
       "variacao_6h_cm": 0.0,
       "variacao_24h_cm": 0.0,
-      "variacao_72h_cm": 10.0,
+      "variacao_72h_cm": 9.0,
       "variacao_7d_cm": 24.0,
       "tendencia": "estavel",
-      "data_medicao_manaus": "2026-10-05 22:45:00"
+      "data_medicao_manaus": "2026-10-05 23:45:00"
     },
     "serrinha": {
       "nome": "Serrinha",
@@ -97,7 +97,7 @@
       "variacao_72h_cm": 12.0,
       "variacao_7d_cm": 22.0,
       "tendencia": "subindo",
-      "data_medicao_manaus": "2026-10-05 22:30:00"
+      "data_medicao_manaus": "2026-10-05 23:30:00"
     },
     "barcelos": {
       "nome": "Barcelos",
@@ -107,7 +107,7 @@
       "variacao_72h_cm": 4.0,
       "variacao_7d_cm": 6.0,
       "tendencia": "subindo",
-      "data_medicao_manaus": "2026-10-05 23:00:00"
+      "data_medicao_manaus": "2026-10-06 00:00:00"
     }
   },
   "aviso": "O alerta é experimental e utiliza relações históricas entre estações. Uma alta em Serrinha não garante uma alta posterior em Barcelos."

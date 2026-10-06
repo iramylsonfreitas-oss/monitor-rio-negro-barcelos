@@ -36,6 +36,7 @@ jobs:
           import os
           import urllib.parse
           import urllib.request
+          import urllib.error
 
           audience = os.environ["OIDC_AUDIENCE"]
           oidc_url = (
@@ -73,11 +74,25 @@ jobs:
               },
           )
 
-          with urllib.request.urlopen(req, timeout=70) as response:
-              result = json.load(response)
+          try:
+              with urllib.request.urlopen(req, timeout=70) as response:
+                  result = json.load(response)
+          except urllib.error.HTTPError as exc:
+              body = exc.read().decode("utf-8", errors="replace")
+              try:
+                  result = json.loads(body)
+              except Exception:
+                  result = {
+                      "ok": False,
+                      "error": "http_error",
+                      "status": exc.code,
+                  }
 
           safe = {
               "ok": result.get("ok"),
+              "error": result.get("error"),
+              "type": result.get("type"),
+              "detail": result.get("detail"),
               "collection_status": result.get("collection_status"),
               "fallback": result.get("fallback"),
               "quality": result.get("quality"),

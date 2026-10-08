@@ -3,7 +3,7 @@
   "nome": "Barcelos",
   "unidade": "m",
   "agregacao": "mediana diária dos níveis horários",
-  "gerado_em_utc": "2026-10-07T10:36:33.189505+00:00",
+  "gerado_em_utc": "2026-10-08T10:33:04.841855+00:00",
   "anos": [
     "2023",
     "2024",
@@ -33,9 +33,9 @@
       "nivel_max_m": 9.72
     },
     "2026": {
-      "dias_disponiveis": 268,
+      "dias_disponiveis": 269,
       "primeira_data": "2026-01-01",
-      "ultima_data": "2026-10-07",
+      "ultima_data": "2026-10-08",
       "nivel_min_m": 2.96,
       "nivel_max_m": 9.401
     }
@@ -6633,7 +6633,13 @@
       {
         "data": "2026-10-07",
         "dia_mes": "10-07",
-        "nivel_m": 3.97,
+        "nivel_m": 3.98,
+        "amostras_horarias": 24
+      },
+      {
+        "data": "2026-10-08",
+        "dia_mes": "10-08",
+        "nivel_m": 3.99,
         "amostras_horarias": 7
       }
     ]

@@ -1,13 +1,13 @@
 {
-  "gerado_em_utc": "2026-10-07T10:36:32.515537+00:00",
+  "gerado_em_utc": "2026-10-08T10:33:04.152951+00:00",
   "metodo": "Correlação de Pearson entre variações horárias acumuladas de 24 horas, testando defasagens em passos de 6 horas.",
   "status": "experimental",
   "uso": "Diagnóstico histórico exploratório. Não representa previsão hidrológica nem confirma repiquete.",
   "cobertura_historica": {
     "inicio_manaus": "2023-09-24 00:00:00",
-    "fim_manaus": "2026-10-07 06:00:00",
-    "horas": 26622.0,
-    "dias": 1109.2
+    "fim_manaus": "2026-10-08 06:00:00",
+    "horas": 26646.0,
+    "dias": 1110.2
   },
   "pares": [
     {
@@ -20,7 +20,7 @@
       "melhor_defasagem_dias": 4.5,
       "correlacao": 0.812,
       "forca_correlacao": "alta",
-      "amostras": 19532,
+      "amostras": 19556,
       "passo_testado_h": 6,
       "defasagem_maxima_testada_h": 168
     },
@@ -34,7 +34,7 @@
       "melhor_defasagem_dias": 7.5,
       "correlacao": 0.724,
       "forca_correlacao": "alta",
-      "amostras": 15959,
+      "amostras": 15983,
       "passo_testado_h": 6,
       "defasagem_maxima_testada_h": 240
     },
@@ -48,7 +48,7 @@
       "melhor_defasagem_dias": 10.0,
       "correlacao": 0.474,
       "forca_correlacao": "baixa",
-      "amostras": 19282,
+      "amostras": 19306,
       "passo_testado_h": 6,
       "defasagem_maxima_testada_h": 336
     },
@@ -62,7 +62,7 @@
       "melhor_defasagem_dias": 8.75,
       "correlacao": 0.656,
       "forca_correlacao": "moderada",
-      "amostras": 18269,
+      "amostras": 18293,
       "passo_testado_h": 6,
       "defasagem_maxima_testada_h": 480
     }
@@ -71,57 +71,57 @@
     {
       "estacao": "14110000",
       "nome": "Cucuí",
-      "nivel_m": 15.54,
-      "variacao_6h_cm": -2.0,
-      "variacao_24h_cm": -7.0,
-      "variacao_72h_cm": -23.0,
-      "variacao_7d_cm": -65.0,
-      "tendencia": "descendo",
-      "data_medicao_manaus": "2026-10-07 06:15:00"
+      "nivel_m": 15.5,
+      "variacao_6h_cm": 0.0,
+      "variacao_24h_cm": -4.0,
+      "variacao_72h_cm": -19.0,
+      "variacao_7d_cm": -58.0,
+      "tendencia": "estavel",
+      "data_medicao_manaus": "2026-10-08 06:15:00"
     },
     {
       "estacao": "14280001",
       "nome": "Taracuá",
-      "nivel_m": 14.08,
-      "variacao_6h_cm": -3.0,
-      "variacao_24h_cm": -11.0,
+      "nivel_m": 14.0,
+      "variacao_6h_cm": -2.0,
+      "variacao_24h_cm": -8.0,
       "variacao_72h_cm": -31.0,
-      "variacao_7d_cm": -22.0,
+      "variacao_7d_cm": -38.0,
       "tendencia": "descendo",
-      "data_medicao_manaus": "2026-10-07 06:15:00"
+      "data_medicao_manaus": "2026-10-08 06:15:00"
     },
     {
       "estacao": "14330000",
       "nome": "Curicuriari",
-      "nivel_m": 10.09,
-      "variacao_6h_cm": 0.0,
-      "variacao_24h_cm": 0.0,
-      "variacao_72h_cm": 2.0,
-      "variacao_7d_cm": 21.0,
-      "tendencia": "estavel",
-      "data_medicao_manaus": "2026-10-07 05:45:00"
+      "nivel_m": 10.06,
+      "variacao_6h_cm": -1.0,
+      "variacao_24h_cm": -3.0,
+      "variacao_72h_cm": -4.0,
+      "variacao_7d_cm": 16.0,
+      "tendencia": "descendo",
+      "data_medicao_manaus": "2026-10-08 05:45:00"
     },
     {
       "estacao": "14420000",
       "nome": "Serrinha",
-      "nivel_m": 6.83,
+      "nivel_m": 6.85,
       "variacao_6h_cm": 0.0,
-      "variacao_24h_cm": 3.0,
-      "variacao_72h_cm": 11.0,
+      "variacao_24h_cm": 2.0,
+      "variacao_72h_cm": 9.0,
       "variacao_7d_cm": 23.0,
       "tendencia": "estavel",
-      "data_medicao_manaus": "2026-10-07 05:30:00"
+      "data_medicao_manaus": "2026-10-08 05:30:00"
     },
     {
       "estacao": "14480002",
       "nome": "Barcelos",
-      "nivel_m": 3.97,
+      "nivel_m": 3.99,
       "variacao_6h_cm": 0.0,
       "variacao_24h_cm": 2.0,
       "variacao_72h_cm": 5.0,
-      "variacao_7d_cm": 9.0,
+      "variacao_7d_cm": 11.0,
       "tendencia": "estavel",
-      "data_medicao_manaus": "2026-10-07 06:00:00"
+      "data_medicao_manaus": "2026-10-08 06:00:00"
     }
   ]
 }

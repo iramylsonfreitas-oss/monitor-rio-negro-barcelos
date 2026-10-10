@@ -1,5 +1,5 @@
 {
-  "gerado_em_utc": "2026-10-09T10:33:03.073719+00:00",
+  "gerado_em_utc": "2026-10-10T10:28:10.086328+00:00",
   "versao": 2,
   "status": "experimental",
   "metodo": "Detector por mudança de estado. Uma alta começa após três observações consecutivas com variação de 24 horas >= 3 cm e termina somente após quatro observações consecutivas com variação de 24 horas <= 1 cm.",
@@ -1898,12 +1898,12 @@
         },
         {
           "inicio": "2026-10-01 12:00:00",
-          "fim": null,
-          "duracao_h": null,
-          "duracao_dias": null,
+          "fim": "2026-10-08 12:00:00",
+          "duracao_h": 168.0,
+          "duracao_dias": 7.0,
           "variacao_inicial_cm": 3.0,
           "variacao_maxima_24h_cm": 5.5,
-          "aberto": true
+          "aberto": false
         }
       ]
     },

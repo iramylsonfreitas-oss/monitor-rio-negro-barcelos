@@ -1,15 +1,15 @@
 {
   "estacao": "14480002",
   "nome": "Barcelos",
-  "nivel_cm": 405.0,
-  "nivel_m": 4.05,
-  "data_medicao": "2026-10-12 07:00:00.0",
-  "data_medicao_manaus": "2026-10-12 06:00:00",
-  "data_atualizacao_ana": "2026-10-12 07:09:11.32",
-  "data_atualizacao_manaus": "2026-10-12 06:09:11",
+  "nivel_cm": 406.0,
+  "nivel_m": 4.06,
+  "data_medicao": "2026-10-13 07:00:00.0",
+  "data_medicao_manaus": "2026-10-13 06:00:00",
+  "data_atualizacao_ana": "2026-10-13 07:09:06.54",
+  "data_atualizacao_manaus": "2026-10-13 06:09:06",
   "variacao_6h_cm": 0.0,
-  "variacao_24h_cm": 0.0,
-  "variacao_72h_cm": 4.0,
+  "variacao_24h_cm": 1.0,
+  "variacao_72h_cm": 3.0,
   "variacao_7d_cm": 11.0,
   "tendencia": "estavel",
   "idade_dado_min": 34,
@@ -17,5 +17,5 @@
   "status_cota": "0",
   "registros_30d": 2717,
   "fonte": "ANA - HidroWebService",
-  "coletado_em_utc": "2026-10-12T10:34:40.573779+00:00"
+  "coletado_em_utc": "2026-10-13T10:34:38.310089+00:00"
 }

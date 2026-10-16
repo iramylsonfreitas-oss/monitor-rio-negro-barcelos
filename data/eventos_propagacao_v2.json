@@ -1,5 +1,5 @@
 {
-  "gerado_em_utc": "2026-10-15T10:44:28.394696+00:00",
+  "gerado_em_utc": "2026-10-16T10:44:08.318805+00:00",
   "versao": 2,
   "status": "experimental",
   "metodo": "Detector por mudança de estado. Uma alta começa após três observações consecutivas com variação de 24 horas >= 3 cm e termina somente após quatro observações consecutivas com variação de 24 horas <= 1 cm.",
@@ -489,7 +489,7 @@
           "duracao_h": null,
           "duracao_dias": null,
           "variacao_inicial_cm": 3.0,
-          "variacao_maxima_24h_cm": 9.0,
+          "variacao_maxima_24h_cm": 14.0,
           "aberto": true
         }
       ]
@@ -1123,7 +1123,7 @@
     },
     "14330000": {
       "nome": "Curicuriari",
-      "quantidade": 46,
+      "quantidade": 47,
       "eventos": [
         {
           "inicio": "2023-10-18 12:00:00",
@@ -1538,6 +1538,15 @@
           "variacao_inicial_cm": 4.0,
           "variacao_maxima_24h_cm": 7.0,
           "aberto": false
+        },
+        {
+          "inicio": "2026-10-15 00:00:00",
+          "fim": null,
+          "duracao_h": null,
+          "duracao_dias": null,
+          "variacao_inicial_cm": 4.0,
+          "variacao_maxima_24h_cm": 9.0,
+          "aberto": true
         }
       ]
     },
@@ -2326,10 +2335,10 @@
       "nome_origem": "Curicuriari",
       "destino": "14480002",
       "nome_destino": "Barcelos",
-      "eventos_montante": 46,
+      "eventos_montante": 47,
       "eventos_barcelos": 19,
       "eventos_correspondentes": 13,
-      "taxa_correspondencia": 0.283,
+      "taxa_correspondencia": 0.277,
       "eventos": [
         {
           "inicio_montante": "2023-12-08 00:00:00",

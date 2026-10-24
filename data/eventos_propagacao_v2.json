@@ -1,5 +1,5 @@
 {
-  "gerado_em_utc": "2026-10-22T10:43:14.859722+00:00",
+  "gerado_em_utc": "2026-10-24T10:41:12.722367+00:00",
   "versao": 2,
   "status": "experimental",
   "metodo": "Detector por mudança de estado. Uma alta começa após três observações consecutivas com variação de 24 horas >= 3 cm e termina somente após quatro observações consecutivas com variação de 24 horas <= 1 cm.",
@@ -13,7 +13,7 @@
   "eventos_por_estacao": {
     "14110000": {
       "nome": "Cucuí",
-      "quantidade": 53,
+      "quantidade": 54,
       "eventos": [
         {
           "inicio": "2023-10-19 18:00:00",
@@ -491,6 +491,15 @@
           "variacao_inicial_cm": 3.0,
           "variacao_maxima_24h_cm": 14.0,
           "aberto": false
+        },
+        {
+          "inicio": "2026-10-22 00:00:00",
+          "fim": null,
+          "duracao_h": null,
+          "duracao_dias": null,
+          "variacao_inicial_cm": 3.0,
+          "variacao_maxima_24h_cm": 7.0,
+          "aberto": true
         }
       ]
     },
@@ -2724,10 +2733,10 @@
       "nome_origem": "Cucuí",
       "destino": "14480002",
       "nome_destino": "Barcelos",
-      "eventos_montante": 53,
+      "eventos_montante": 54,
       "eventos_barcelos": 19,
       "eventos_correspondentes": 13,
-      "taxa_correspondencia": 0.245,
+      "taxa_correspondencia": 0.241,
       "eventos": [
         {
           "inicio_montante": "2023-11-25 06:00:00",

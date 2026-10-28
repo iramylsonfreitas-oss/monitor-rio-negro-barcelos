@@ -6,8 +6,6 @@ on:
       - main
     paths:
       - ".github/workflows/coleta-privada-v5.yml"
-  schedule:
-    - cron: "22,52 * * * *"
   workflow_dispatch:
 
 permissions:

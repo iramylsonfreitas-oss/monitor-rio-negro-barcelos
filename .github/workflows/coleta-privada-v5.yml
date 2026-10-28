@@ -24,6 +24,29 @@ jobs:
     timeout-minutes: 3
 
     steps:
+      - name: Verificar disponibilidade da rota de coleta
+        run: |
+          python - <<'PY'
+          import json
+          import urllib.error
+          import urllib.request
+
+          url = "https://monitor-rio-negro-v5.vercel.app/api/collector"
+          try:
+              with urllib.request.urlopen(url, timeout=25) as response:
+                  raise SystemExit("Falha: coletor aceitou acesso sem autenticação.")
+          except urllib.error.HTTPError as exc:
+              try:
+                  body = json.loads(exc.read().decode("utf-8"))
+              except Exception:
+                  body = {}
+              if exc.code != 401 or body.get("error") != "unauthorized":
+                  raise SystemExit(
+                      f"Coletor indisponível ou protegido incorretamente: HTTP {exc.code}"
+                  )
+          print("Rota de coleta disponível e autenticação obrigatória.")
+          PY
+
       - name: Disparar coletor privado
         env:
           ANA_IDENTIFIER: ${{ secrets.ANA_IDENTIFIER }}
@@ -106,9 +129,39 @@ jobs:
 
           if not result.get("ok"):
               raise SystemExit(1)
-          if result.get("collection_status") not in (
-              "ATUALIZADO",
-              "FONTE_INDISPONIVEL",
-          ):
-              raise SystemExit(2)
+          if result.get("collection_status") != "ATUALIZADO":
+              raise SystemExit("Coleta não atualizada.")
+          if result.get("fallback") or result.get("quality") != "ATUAL":
+              raise SystemExit("Coleta com dados de fallback ou qualidade insuficiente.")
+          if result.get("v4_authorized") is not True:
+              raise SystemExit("Dados não autorizados para publicação.")
+          PY
+
+      - name: Verificar atualização persistida
+        run: |
+          python - <<'PY'
+          import json
+          import urllib.error
+          import urllib.request
+
+          url = "https://monitor-rio-negro-v5.vercel.app/api/health"
+          req = urllib.request.Request(
+              url,
+              headers={"Cache-Control": "no-cache", "User-Agent": "RioNegro-Collector-Health"},
+          )
+          try:
+              with urllib.request.urlopen(req, timeout=35) as response:
+                  result = json.load(response)
+                  status = response.status
+          except urllib.error.HTTPError as exc:
+              raise SystemExit(f"Saúde da coleta falhou: HTTP {exc.code}")
+          if status != 200 or result.get("ok") is not True:
+              raise SystemExit("Saúde da coleta não confirmou dados atualizados.")
+          print(
+              json.dumps(
+                  {"ok": True, "age_min": result.get("age_min"),
+                   "collection_status": result.get("collection_status")},
+                  ensure_ascii=False,
+              )
+          )
           PY

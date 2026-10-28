@@ -21,7 +21,7 @@ concurrency:
 jobs:
   coletar:
     runs-on: ubuntu-24.04
-    timeout-minutes: 3
+    timeout-minutes: 8
 
     steps:
       - name: Verificar disponibilidade da rota de coleta
@@ -97,44 +97,58 @@ jobs:
               },
           )
 
-          try:
-              with urllib.request.urlopen(req, timeout=70) as response:
-                  result = json.load(response)
-          except urllib.error.HTTPError as exc:
-              body = exc.read().decode("utf-8", errors="replace")
+          import time
+          
+          for attempt in range(1, 4):
+              print(f"Tentativa de coleta {attempt}/3")
               try:
-                  result = json.loads(body)
-              except Exception:
-                  result = {
-                      "ok": False,
-                      "error": "http_error",
-                      "status": exc.code,
-                  }
-
-          safe = {
-              "ok": result.get("ok"),
-              "error": result.get("error"),
-              "type": result.get("type"),
-              "detail": result.get("detail"),
-              "collection_status": result.get("collection_status"),
-              "fallback": result.get("fallback"),
-              "quality": result.get("quality"),
-              "v4_authorized": result.get("v4_authorized"),
-              "shadow_state": result.get("shadow_state"),
-              "uploaded_files": result.get("uploaded_files"),
-              "history_rows_upserted": result.get("history_rows_upserted"),
-          }
-
-          print(json.dumps(safe, ensure_ascii=False))
-
-          if not result.get("ok"):
-              raise SystemExit(1)
-          if result.get("collection_status") != "ATUALIZADO":
-              raise SystemExit("Coleta não atualizada.")
-          if result.get("fallback") or result.get("quality") != "ATUAL":
-              raise SystemExit("Coleta com dados de fallback ou qualidade insuficiente.")
-          if result.get("v4_authorized") is not True:
-              raise SystemExit("Dados não autorizados para publicação.")
+                  with urllib.request.urlopen(req, timeout=70) as response:
+                      result = json.load(response)
+              except urllib.error.HTTPError as exc:
+                  body = exc.read().decode("utf-8", errors="replace")
+                  try:
+                      result = json.loads(body)
+                  except Exception:
+                      result = {"ok": False, "error": "http_error", "status": exc.code}
+              except (urllib.error.URLError, TimeoutError) as exc:
+                  result = {"ok": False, "error": "collector_network_error", "type": type(exc).__name__}
+          
+              safe = {
+                  "attempt": attempt,
+                  "ok": result.get("ok"),
+                  "error": result.get("error"),
+                  "type": result.get("type"),
+                  "collection_status": result.get("collection_status"),
+                  "fallback": result.get("fallback"),
+                  "quality": result.get("quality"),
+                  "v4_authorized": result.get("v4_authorized"),
+                  "shadow_state": result.get("shadow_state"),
+                  "uploaded_files": result.get("uploaded_files"),
+                  "history_rows_upserted": result.get("history_rows_upserted"),
+              }
+              print(json.dumps(safe, ensure_ascii=False))
+          
+              healthy = (
+                  result.get("ok") is True
+                  and result.get("collection_status") == "ATUALIZADO"
+                  and not result.get("fallback")
+                  and result.get("quality") == "ATUAL"
+                  and result.get("v4_authorized") is True
+              )
+              if healthy:
+                  break
+          
+              retryable = (
+                  result.get("collection_status") == "FONTE_INDISPONIVEL"
+                  or result.get("error") == "collector_network_error"
+                  or result.get("error") == "private_collector_failed"
+                  or result.get("status") in (429, 502, 503, 504)
+              )
+              if not retryable or attempt == 3:
+                  raise SystemExit("Coleta sem dados novos válidos; causa registrada nos logs.")
+              wait_seconds = 15 * attempt
+              print(f"Falha transitória. Nova tentativa em {wait_seconds}s.")
+              time.sleep(wait_seconds)
           PY
 
       - name: Verificar atualização persistida

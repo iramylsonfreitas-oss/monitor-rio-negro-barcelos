@@ -1,773 +1,5 @@
 [
   {
-    "data_medicao": "2026-10-01 00:00:00.0",
-    "data_medicao_manaus": "2026-09-30 23:00:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 18:46:15.75"
-  },
-  {
-    "data_medicao": "2026-10-01 00:15:00.0",
-    "data_medicao_manaus": "2026-09-30 23:15:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 01:09:06.217"
-  },
-  {
-    "data_medicao": "2026-10-01 00:30:00.0",
-    "data_medicao_manaus": "2026-09-30 23:30:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 01:09:06.22"
-  },
-  {
-    "data_medicao": "2026-10-01 00:45:00.0",
-    "data_medicao_manaus": "2026-09-30 23:45:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 01:09:06.22"
-  },
-  {
-    "data_medicao": "2026-10-01 01:00:00.0",
-    "data_medicao_manaus": "2026-10-01 00:00:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 01:09:06.227"
-  },
-  {
-    "data_medicao": "2026-10-01 01:15:00.0",
-    "data_medicao_manaus": "2026-10-01 00:15:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 02:08:55.637"
-  },
-  {
-    "data_medicao": "2026-10-01 01:30:00.0",
-    "data_medicao_manaus": "2026-10-01 00:30:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 02:08:55.64"
-  },
-  {
-    "data_medicao": "2026-10-01 01:45:00.0",
-    "data_medicao_manaus": "2026-10-01 00:45:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 02:08:55.64"
-  },
-  {
-    "data_medicao": "2026-10-01 02:00:00.0",
-    "data_medicao_manaus": "2026-10-01 01:00:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 02:08:55.643"
-  },
-  {
-    "data_medicao": "2026-10-01 02:15:00.0",
-    "data_medicao_manaus": "2026-10-01 01:15:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 03:08:53.507"
-  },
-  {
-    "data_medicao": "2026-10-01 02:30:00.0",
-    "data_medicao_manaus": "2026-10-01 01:30:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 03:08:53.507"
-  },
-  {
-    "data_medicao": "2026-10-01 02:45:00.0",
-    "data_medicao_manaus": "2026-10-01 01:45:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 03:08:53.51"
-  },
-  {
-    "data_medicao": "2026-10-01 03:00:00.0",
-    "data_medicao_manaus": "2026-10-01 02:00:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 03:08:53.51"
-  },
-  {
-    "data_medicao": "2026-10-01 03:15:00.0",
-    "data_medicao_manaus": "2026-10-01 02:15:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 04:08:55.42"
-  },
-  {
-    "data_medicao": "2026-10-01 03:30:00.0",
-    "data_medicao_manaus": "2026-10-01 02:30:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 04:08:55.42"
-  },
-  {
-    "data_medicao": "2026-10-01 03:45:00.0",
-    "data_medicao_manaus": "2026-10-01 02:45:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 04:08:55.423"
-  },
-  {
-    "data_medicao": "2026-10-01 04:00:00.0",
-    "data_medicao_manaus": "2026-10-01 03:00:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 04:08:55.423"
-  },
-  {
-    "data_medicao": "2026-10-01 04:15:00.0",
-    "data_medicao_manaus": "2026-10-01 03:15:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 05:08:51.08"
-  },
-  {
-    "data_medicao": "2026-10-01 04:30:00.0",
-    "data_medicao_manaus": "2026-10-01 03:30:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 05:08:51.08"
-  },
-  {
-    "data_medicao": "2026-10-01 04:45:00.0",
-    "data_medicao_manaus": "2026-10-01 03:45:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 05:08:51.083"
-  },
-  {
-    "data_medicao": "2026-10-01 05:00:00.0",
-    "data_medicao_manaus": "2026-10-01 04:00:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 05:08:51.083"
-  },
-  {
-    "data_medicao": "2026-10-01 05:15:00.0",
-    "data_medicao_manaus": "2026-10-01 04:15:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 06:08:53.39"
-  },
-  {
-    "data_medicao": "2026-10-01 05:30:00.0",
-    "data_medicao_manaus": "2026-10-01 04:30:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 06:08:53.393"
-  },
-  {
-    "data_medicao": "2026-10-01 05:45:00.0",
-    "data_medicao_manaus": "2026-10-01 04:45:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 06:08:53.397"
-  },
-  {
-    "data_medicao": "2026-10-01 06:00:00.0",
-    "data_medicao_manaus": "2026-10-01 05:00:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 06:08:53.397"
-  },
-  {
-    "data_medicao": "2026-10-01 06:15:00.0",
-    "data_medicao_manaus": "2026-10-01 05:15:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 07:08:55.45"
-  },
-  {
-    "data_medicao": "2026-10-01 06:30:00.0",
-    "data_medicao_manaus": "2026-10-01 05:30:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 07:08:55.453"
-  },
-  {
-    "data_medicao": "2026-10-01 06:45:00.0",
-    "data_medicao_manaus": "2026-10-01 05:45:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 07:08:55.453"
-  },
-  {
-    "data_medicao": "2026-10-01 07:00:00.0",
-    "data_medicao_manaus": "2026-10-01 06:00:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 07:08:55.457"
-  },
-  {
-    "data_medicao": "2026-10-01 07:15:00.0",
-    "data_medicao_manaus": "2026-10-01 06:15:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 08:08:58.2"
-  },
-  {
-    "data_medicao": "2026-10-01 07:30:00.0",
-    "data_medicao_manaus": "2026-10-01 06:30:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 08:08:58.2"
-  },
-  {
-    "data_medicao": "2026-10-01 07:45:00.0",
-    "data_medicao_manaus": "2026-10-01 06:45:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 08:08:58.2"
-  },
-  {
-    "data_medicao": "2026-10-01 08:00:00.0",
-    "data_medicao_manaus": "2026-10-01 07:00:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 08:08:58.203"
-  },
-  {
-    "data_medicao": "2026-10-01 08:15:00.0",
-    "data_medicao_manaus": "2026-10-01 07:15:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 09:08:56.357"
-  },
-  {
-    "data_medicao": "2026-10-01 08:30:00.0",
-    "data_medicao_manaus": "2026-10-01 07:30:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 09:08:56.36"
-  },
-  {
-    "data_medicao": "2026-10-01 08:45:00.0",
-    "data_medicao_manaus": "2026-10-01 07:45:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 09:08:56.363"
-  },
-  {
-    "data_medicao": "2026-10-01 09:00:00.0",
-    "data_medicao_manaus": "2026-10-01 08:00:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 09:08:56.363"
-  },
-  {
-    "data_medicao": "2026-10-01 09:15:00.0",
-    "data_medicao_manaus": "2026-10-01 08:15:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 10:08:53.92"
-  },
-  {
-    "data_medicao": "2026-10-01 09:30:00.0",
-    "data_medicao_manaus": "2026-10-01 08:30:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 10:08:53.92"
-  },
-  {
-    "data_medicao": "2026-10-01 09:45:00.0",
-    "data_medicao_manaus": "2026-10-01 08:45:00",
-    "nivel_cm": 389.0,
-    "nivel_m": 3.89,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 10:08:53.923"
-  },
-  {
-    "data_medicao": "2026-10-01 10:00:00.0",
-    "data_medicao_manaus": "2026-10-01 09:00:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 10:08:53.923"
-  },
-  {
-    "data_medicao": "2026-10-01 10:15:00.0",
-    "data_medicao_manaus": "2026-10-01 09:15:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 11:09:01.49"
-  },
-  {
-    "data_medicao": "2026-10-01 10:30:00.0",
-    "data_medicao_manaus": "2026-10-01 09:30:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 11:09:01.49"
-  },
-  {
-    "data_medicao": "2026-10-01 10:45:00.0",
-    "data_medicao_manaus": "2026-10-01 09:45:00",
-    "nivel_cm": 389.0,
-    "nivel_m": 3.89,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 11:09:01.49"
-  },
-  {
-    "data_medicao": "2026-10-01 11:00:00.0",
-    "data_medicao_manaus": "2026-10-01 10:00:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 11:09:01.493"
-  },
-  {
-    "data_medicao": "2026-10-01 11:15:00.0",
-    "data_medicao_manaus": "2026-10-01 10:15:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 12:08:56.887"
-  },
-  {
-    "data_medicao": "2026-10-01 11:30:00.0",
-    "data_medicao_manaus": "2026-10-01 10:30:00",
-    "nivel_cm": 389.0,
-    "nivel_m": 3.89,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 12:08:56.893"
-  },
-  {
-    "data_medicao": "2026-10-01 11:45:00.0",
-    "data_medicao_manaus": "2026-10-01 10:45:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 12:08:56.897"
-  },
-  {
-    "data_medicao": "2026-10-01 12:00:00.0",
-    "data_medicao_manaus": "2026-10-01 11:00:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 12:08:56.897"
-  },
-  {
-    "data_medicao": "2026-10-01 12:15:00.0",
-    "data_medicao_manaus": "2026-10-01 11:15:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 13:08:55.947"
-  },
-  {
-    "data_medicao": "2026-10-01 12:30:00.0",
-    "data_medicao_manaus": "2026-10-01 11:30:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 13:08:55.95"
-  },
-  {
-    "data_medicao": "2026-10-01 12:45:00.0",
-    "data_medicao_manaus": "2026-10-01 11:45:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 13:08:55.95"
-  },
-  {
-    "data_medicao": "2026-10-01 13:00:00.0",
-    "data_medicao_manaus": "2026-10-01 12:00:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 13:08:55.953"
-  },
-  {
-    "data_medicao": "2026-10-01 13:15:00.0",
-    "data_medicao_manaus": "2026-10-01 12:15:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 14:08:56.823"
-  },
-  {
-    "data_medicao": "2026-10-01 13:30:00.0",
-    "data_medicao_manaus": "2026-10-01 12:30:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 14:08:56.827"
-  },
-  {
-    "data_medicao": "2026-10-01 13:45:00.0",
-    "data_medicao_manaus": "2026-10-01 12:45:00",
-    "nivel_cm": 389.0,
-    "nivel_m": 3.89,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 14:08:56.827"
-  },
-  {
-    "data_medicao": "2026-10-01 14:00:00.0",
-    "data_medicao_manaus": "2026-10-01 13:00:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 14:08:56.83"
-  },
-  {
-    "data_medicao": "2026-10-01 14:15:00.0",
-    "data_medicao_manaus": "2026-10-01 13:15:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 15:08:55.88"
-  },
-  {
-    "data_medicao": "2026-10-01 14:30:00.0",
-    "data_medicao_manaus": "2026-10-01 13:30:00",
-    "nivel_cm": 389.0,
-    "nivel_m": 3.89,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 15:08:55.88"
-  },
-  {
-    "data_medicao": "2026-10-01 14:45:00.0",
-    "data_medicao_manaus": "2026-10-01 13:45:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 15:08:55.883"
-  },
-  {
-    "data_medicao": "2026-10-01 15:00:00.0",
-    "data_medicao_manaus": "2026-10-01 14:00:00",
-    "nivel_cm": 388.0,
-    "nivel_m": 3.88,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 15:08:55.883"
-  },
-  {
-    "data_medicao": "2026-10-01 15:15:00.0",
-    "data_medicao_manaus": "2026-10-01 14:15:00",
-    "nivel_cm": 389.0,
-    "nivel_m": 3.89,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 16:08:56.097"
-  },
-  {
-    "data_medicao": "2026-10-01 15:30:00.0",
-    "data_medicao_manaus": "2026-10-01 14:30:00",
-    "nivel_cm": 390.0,
-    "nivel_m": 3.9,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 16:08:56.097"
-  },
-  {
-    "data_medicao": "2026-10-01 15:45:00.0",
-    "data_medicao_manaus": "2026-10-01 14:45:00",
-    "nivel_cm": 389.0,
-    "nivel_m": 3.89,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 16:08:56.1"
-  },
-  {
-    "data_medicao": "2026-10-01 16:00:00.0",
-    "data_medicao_manaus": "2026-10-01 15:00:00",
-    "nivel_cm": 389.0,
-    "nivel_m": 3.89,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 16:08:56.1"
-  },
-  {
-    "data_medicao": "2026-10-01 16:15:00.0",
-    "data_medicao_manaus": "2026-10-01 15:15:00",
-    "nivel_cm": 390.0,
-    "nivel_m": 3.9,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 17:08:59.167"
-  },
-  {
-    "data_medicao": "2026-10-01 16:30:00.0",
-    "data_medicao_manaus": "2026-10-01 15:30:00",
-    "nivel_cm": 389.0,
-    "nivel_m": 3.89,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 17:08:59.17"
-  },
-  {
-    "data_medicao": "2026-10-01 16:45:00.0",
-    "data_medicao_manaus": "2026-10-01 15:45:00",
-    "nivel_cm": 390.0,
-    "nivel_m": 3.9,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 17:08:59.17"
-  },
-  {
-    "data_medicao": "2026-10-01 17:00:00.0",
-    "data_medicao_manaus": "2026-10-01 16:00:00",
-    "nivel_cm": 389.0,
-    "nivel_m": 3.89,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 17:08:59.173"
-  },
-  {
-    "data_medicao": "2026-10-01 17:15:00.0",
-    "data_medicao_manaus": "2026-10-01 16:15:00",
-    "nivel_cm": 389.0,
-    "nivel_m": 3.89,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 18:08:57.307"
-  },
-  {
-    "data_medicao": "2026-10-01 17:30:00.0",
-    "data_medicao_manaus": "2026-10-01 16:30:00",
-    "nivel_cm": 389.0,
-    "nivel_m": 3.89,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 18:08:57.31"
-  },
-  {
-    "data_medicao": "2026-10-01 17:45:00.0",
-    "data_medicao_manaus": "2026-10-01 16:45:00",
-    "nivel_cm": 389.0,
-    "nivel_m": 3.89,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 18:08:57.31"
-  },
-  {
-    "data_medicao": "2026-10-01 18:00:00.0",
-    "data_medicao_manaus": "2026-10-01 17:00:00",
-    "nivel_cm": 389.0,
-    "nivel_m": 3.89,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 18:08:57.31"
-  },
-  {
-    "data_medicao": "2026-10-01 18:15:00.0",
-    "data_medicao_manaus": "2026-10-01 17:15:00",
-    "nivel_cm": 389.0,
-    "nivel_m": 3.89,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 19:09:04.843"
-  },
-  {
-    "data_medicao": "2026-10-01 18:30:00.0",
-    "data_medicao_manaus": "2026-10-01 17:30:00",
-    "nivel_cm": 389.0,
-    "nivel_m": 3.89,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 19:09:04.847"
-  },
-  {
-    "data_medicao": "2026-10-01 18:45:00.0",
-    "data_medicao_manaus": "2026-10-01 17:45:00",
-    "nivel_cm": 389.0,
-    "nivel_m": 3.89,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 19:09:04.85"
-  },
-  {
-    "data_medicao": "2026-10-01 19:00:00.0",
-    "data_medicao_manaus": "2026-10-01 18:00:00",
-    "nivel_cm": 389.0,
-    "nivel_m": 3.89,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 19:09:04.85"
-  },
-  {
-    "data_medicao": "2026-10-01 19:15:00.0",
-    "data_medicao_manaus": "2026-10-01 18:15:00",
-    "nivel_cm": 389.0,
-    "nivel_m": 3.89,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 20:08:55.933"
-  },
-  {
-    "data_medicao": "2026-10-01 19:30:00.0",
-    "data_medicao_manaus": "2026-10-01 18:30:00",
-    "nivel_cm": 389.0,
-    "nivel_m": 3.89,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 20:08:55.933"
-  },
-  {
-    "data_medicao": "2026-10-01 19:45:00.0",
-    "data_medicao_manaus": "2026-10-01 18:45:00",
-    "nivel_cm": 389.0,
-    "nivel_m": 3.89,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 20:08:55.937"
-  },
-  {
-    "data_medicao": "2026-10-01 20:00:00.0",
-    "data_medicao_manaus": "2026-10-01 19:00:00",
-    "nivel_cm": 389.0,
-    "nivel_m": 3.89,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 20:08:55.937"
-  },
-  {
-    "data_medicao": "2026-10-01 20:15:00.0",
-    "data_medicao_manaus": "2026-10-01 19:15:00",
-    "nivel_cm": 389.0,
-    "nivel_m": 3.89,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 21:09:00.143"
-  },
-  {
-    "data_medicao": "2026-10-01 20:30:00.0",
-    "data_medicao_manaus": "2026-10-01 19:30:00",
-    "nivel_cm": 389.0,
-    "nivel_m": 3.89,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 21:09:00.147"
-  },
-  {
-    "data_medicao": "2026-10-01 20:45:00.0",
-    "data_medicao_manaus": "2026-10-01 19:45:00",
-    "nivel_cm": 389.0,
-    "nivel_m": 3.89,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 21:09:00.147"
-  },
-  {
-    "data_medicao": "2026-10-01 21:00:00.0",
-    "data_medicao_manaus": "2026-10-01 20:00:00",
-    "nivel_cm": 389.0,
-    "nivel_m": 3.89,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 21:09:00.15"
-  },
-  {
-    "data_medicao": "2026-10-01 21:15:00.0",
-    "data_medicao_manaus": "2026-10-01 20:15:00",
-    "nivel_cm": 389.0,
-    "nivel_m": 3.89,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 22:08:55.71"
-  },
-  {
-    "data_medicao": "2026-10-01 21:30:00.0",
-    "data_medicao_manaus": "2026-10-01 20:30:00",
-    "nivel_cm": 389.0,
-    "nivel_m": 3.89,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 22:08:55.71"
-  },
-  {
-    "data_medicao": "2026-10-01 21:45:00.0",
-    "data_medicao_manaus": "2026-10-01 20:45:00",
-    "nivel_cm": 389.0,
-    "nivel_m": 3.89,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 22:08:55.713"
-  },
-  {
-    "data_medicao": "2026-10-01 22:00:00.0",
-    "data_medicao_manaus": "2026-10-01 21:00:00",
-    "nivel_cm": 389.0,
-    "nivel_m": 3.89,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 22:08:55.713"
-  },
-  {
-    "data_medicao": "2026-10-01 22:15:00.0",
-    "data_medicao_manaus": "2026-10-01 21:15:00",
-    "nivel_cm": 389.0,
-    "nivel_m": 3.89,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 23:08:58.11"
-  },
-  {
-    "data_medicao": "2026-10-01 22:30:00.0",
-    "data_medicao_manaus": "2026-10-01 21:30:00",
-    "nivel_cm": 389.0,
-    "nivel_m": 3.89,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 23:08:58.11"
-  },
-  {
-    "data_medicao": "2026-10-01 22:45:00.0",
-    "data_medicao_manaus": "2026-10-01 21:45:00",
-    "nivel_cm": 389.0,
-    "nivel_m": 3.89,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 23:08:58.113"
-  },
-  {
-    "data_medicao": "2026-10-01 23:00:00.0",
-    "data_medicao_manaus": "2026-10-01 22:00:00",
-    "nivel_cm": 389.0,
-    "nivel_m": 3.89,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-01 23:08:58.113"
-  },
-  {
-    "data_medicao": "2026-10-01 23:15:00.0",
-    "data_medicao_manaus": "2026-10-01 22:15:00",
-    "nivel_cm": 389.0,
-    "nivel_m": 3.89,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-02 00:08:56.813"
-  },
-  {
-    "data_medicao": "2026-10-01 23:30:00.0",
-    "data_medicao_manaus": "2026-10-01 22:30:00",
-    "nivel_cm": 389.0,
-    "nivel_m": 3.89,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-02 00:08:56.817"
-  },
-  {
-    "data_medicao": "2026-10-01 23:45:00.0",
-    "data_medicao_manaus": "2026-10-01 22:45:00",
-    "nivel_cm": 389.0,
-    "nivel_m": 3.89,
-    "status_cota": "0",
-    "data_atualizacao_ana": "2026-10-02 00:08:56.817"
-  },
-  {
     "data_medicao": "2026-10-02 00:00:00.0",
     "data_medicao_manaus": "2026-10-01 23:00:00",
     "nivel_cm": 389.0,
@@ -21894,5 +21126,773 @@
     "nivel_m": 3.95,
     "status_cota": "0",
     "data_atualizacao_ana": "2026-10-29 13:09:18.077"
+  },
+  {
+    "data_medicao": "2026-10-29 13:15:00.0",
+    "data_medicao_manaus": "2026-10-29 12:15:00",
+    "nivel_cm": 395.0,
+    "nivel_m": 3.95,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-29 14:09:36.337"
+  },
+  {
+    "data_medicao": "2026-10-29 13:30:00.0",
+    "data_medicao_manaus": "2026-10-29 12:30:00",
+    "nivel_cm": 395.0,
+    "nivel_m": 3.95,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-29 14:09:36.34"
+  },
+  {
+    "data_medicao": "2026-10-29 13:45:00.0",
+    "data_medicao_manaus": "2026-10-29 12:45:00",
+    "nivel_cm": 395.0,
+    "nivel_m": 3.95,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-29 14:09:36.34"
+  },
+  {
+    "data_medicao": "2026-10-29 14:00:00.0",
+    "data_medicao_manaus": "2026-10-29 13:00:00",
+    "nivel_cm": 395.0,
+    "nivel_m": 3.95,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-29 14:09:36.343"
+  },
+  {
+    "data_medicao": "2026-10-29 14:15:00.0",
+    "data_medicao_manaus": "2026-10-29 13:15:00",
+    "nivel_cm": 395.0,
+    "nivel_m": 3.95,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-29 15:09:16.493"
+  },
+  {
+    "data_medicao": "2026-10-29 14:30:00.0",
+    "data_medicao_manaus": "2026-10-29 13:30:00",
+    "nivel_cm": 395.0,
+    "nivel_m": 3.95,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-29 15:09:16.493"
+  },
+  {
+    "data_medicao": "2026-10-29 14:45:00.0",
+    "data_medicao_manaus": "2026-10-29 13:45:00",
+    "nivel_cm": 395.0,
+    "nivel_m": 3.95,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-29 15:09:16.497"
+  },
+  {
+    "data_medicao": "2026-10-29 15:00:00.0",
+    "data_medicao_manaus": "2026-10-29 14:00:00",
+    "nivel_cm": 395.0,
+    "nivel_m": 3.95,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-29 15:09:16.5"
+  },
+  {
+    "data_medicao": "2026-10-29 15:15:00.0",
+    "data_medicao_manaus": "2026-10-29 14:15:00",
+    "nivel_cm": 395.0,
+    "nivel_m": 3.95,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-29 16:09:14.95"
+  },
+  {
+    "data_medicao": "2026-10-29 15:30:00.0",
+    "data_medicao_manaus": "2026-10-29 14:30:00",
+    "nivel_cm": 395.0,
+    "nivel_m": 3.95,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-29 16:09:14.953"
+  },
+  {
+    "data_medicao": "2026-10-29 15:45:00.0",
+    "data_medicao_manaus": "2026-10-29 14:45:00",
+    "nivel_cm": 395.0,
+    "nivel_m": 3.95,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-29 16:09:14.953"
+  },
+  {
+    "data_medicao": "2026-10-29 16:00:00.0",
+    "data_medicao_manaus": "2026-10-29 15:00:00",
+    "nivel_cm": 395.0,
+    "nivel_m": 3.95,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-29 16:09:14.98"
+  },
+  {
+    "data_medicao": "2026-10-29 16:15:00.0",
+    "data_medicao_manaus": "2026-10-29 15:15:00",
+    "nivel_cm": 395.0,
+    "nivel_m": 3.95,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-29 17:13:23.197"
+  },
+  {
+    "data_medicao": "2026-10-29 16:30:00.0",
+    "data_medicao_manaus": "2026-10-29 15:30:00",
+    "nivel_cm": 395.0,
+    "nivel_m": 3.95,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-29 17:13:23.2"
+  },
+  {
+    "data_medicao": "2026-10-29 16:45:00.0",
+    "data_medicao_manaus": "2026-10-29 15:45:00",
+    "nivel_cm": 395.0,
+    "nivel_m": 3.95,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-29 17:13:23.203"
+  },
+  {
+    "data_medicao": "2026-10-29 17:00:00.0",
+    "data_medicao_manaus": "2026-10-29 16:00:00",
+    "nivel_cm": 395.0,
+    "nivel_m": 3.95,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-29 17:13:23.203"
+  },
+  {
+    "data_medicao": "2026-10-29 17:15:00.0",
+    "data_medicao_manaus": "2026-10-29 16:15:00",
+    "nivel_cm": 395.0,
+    "nivel_m": 3.95,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-29 18:09:55.613"
+  },
+  {
+    "data_medicao": "2026-10-29 17:30:00.0",
+    "data_medicao_manaus": "2026-10-29 16:30:00",
+    "nivel_cm": 395.0,
+    "nivel_m": 3.95,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-29 18:09:55.62"
+  },
+  {
+    "data_medicao": "2026-10-29 17:45:00.0",
+    "data_medicao_manaus": "2026-10-29 16:45:00",
+    "nivel_cm": 394.0,
+    "nivel_m": 3.94,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-29 18:09:55.623"
+  },
+  {
+    "data_medicao": "2026-10-29 18:00:00.0",
+    "data_medicao_manaus": "2026-10-29 17:00:00",
+    "nivel_cm": 394.0,
+    "nivel_m": 3.94,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-29 18:09:55.623"
+  },
+  {
+    "data_medicao": "2026-10-29 18:15:00.0",
+    "data_medicao_manaus": "2026-10-29 17:15:00",
+    "nivel_cm": 394.0,
+    "nivel_m": 3.94,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-29 19:09:11.957"
+  },
+  {
+    "data_medicao": "2026-10-29 18:30:00.0",
+    "data_medicao_manaus": "2026-10-29 17:30:00",
+    "nivel_cm": 394.0,
+    "nivel_m": 3.94,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-29 19:09:11.957"
+  },
+  {
+    "data_medicao": "2026-10-29 18:45:00.0",
+    "data_medicao_manaus": "2026-10-29 17:45:00",
+    "nivel_cm": 394.0,
+    "nivel_m": 3.94,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-29 19:09:11.96"
+  },
+  {
+    "data_medicao": "2026-10-29 19:00:00.0",
+    "data_medicao_manaus": "2026-10-29 18:00:00",
+    "nivel_cm": 394.0,
+    "nivel_m": 3.94,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-29 19:09:11.96"
+  },
+  {
+    "data_medicao": "2026-10-29 19:15:00.0",
+    "data_medicao_manaus": "2026-10-29 18:15:00",
+    "nivel_cm": 394.0,
+    "nivel_m": 3.94,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-29 20:09:15.153"
+  },
+  {
+    "data_medicao": "2026-10-29 19:30:00.0",
+    "data_medicao_manaus": "2026-10-29 18:30:00",
+    "nivel_cm": 394.0,
+    "nivel_m": 3.94,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-29 20:09:15.157"
+  },
+  {
+    "data_medicao": "2026-10-29 19:45:00.0",
+    "data_medicao_manaus": "2026-10-29 18:45:00",
+    "nivel_cm": 394.0,
+    "nivel_m": 3.94,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-29 20:09:15.157"
+  },
+  {
+    "data_medicao": "2026-10-29 20:00:00.0",
+    "data_medicao_manaus": "2026-10-29 19:00:00",
+    "nivel_cm": 394.0,
+    "nivel_m": 3.94,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-29 20:09:15.16"
+  },
+  {
+    "data_medicao": "2026-10-29 20:15:00.0",
+    "data_medicao_manaus": "2026-10-29 19:15:00",
+    "nivel_cm": 394.0,
+    "nivel_m": 3.94,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-29 21:39:10.767"
+  },
+  {
+    "data_medicao": "2026-10-29 20:30:00.0",
+    "data_medicao_manaus": "2026-10-29 19:30:00",
+    "nivel_cm": 394.0,
+    "nivel_m": 3.94,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-29 21:39:10.77"
+  },
+  {
+    "data_medicao": "2026-10-29 20:45:00.0",
+    "data_medicao_manaus": "2026-10-29 19:45:00",
+    "nivel_cm": 394.0,
+    "nivel_m": 3.94,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-29 21:39:10.77"
+  },
+  {
+    "data_medicao": "2026-10-29 21:00:00.0",
+    "data_medicao_manaus": "2026-10-29 20:00:00",
+    "nivel_cm": 394.0,
+    "nivel_m": 3.94,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-29 21:39:10.773"
+  },
+  {
+    "data_medicao": "2026-10-29 21:15:00.0",
+    "data_medicao_manaus": "2026-10-29 20:15:00",
+    "nivel_cm": 394.0,
+    "nivel_m": 3.94,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-29 22:09:12.24"
+  },
+  {
+    "data_medicao": "2026-10-29 21:30:00.0",
+    "data_medicao_manaus": "2026-10-29 20:30:00",
+    "nivel_cm": 394.0,
+    "nivel_m": 3.94,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-29 22:09:12.24"
+  },
+  {
+    "data_medicao": "2026-10-29 21:45:00.0",
+    "data_medicao_manaus": "2026-10-29 20:45:00",
+    "nivel_cm": 394.0,
+    "nivel_m": 3.94,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-29 22:09:12.243"
+  },
+  {
+    "data_medicao": "2026-10-29 22:00:00.0",
+    "data_medicao_manaus": "2026-10-29 21:00:00",
+    "nivel_cm": 394.0,
+    "nivel_m": 3.94,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-29 22:09:12.243"
+  },
+  {
+    "data_medicao": "2026-10-29 22:15:00.0",
+    "data_medicao_manaus": "2026-10-29 21:15:00",
+    "nivel_cm": 394.0,
+    "nivel_m": 3.94,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-29 23:09:21.567"
+  },
+  {
+    "data_medicao": "2026-10-29 22:30:00.0",
+    "data_medicao_manaus": "2026-10-29 21:30:00",
+    "nivel_cm": 394.0,
+    "nivel_m": 3.94,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-29 23:09:21.57"
+  },
+  {
+    "data_medicao": "2026-10-29 22:45:00.0",
+    "data_medicao_manaus": "2026-10-29 21:45:00",
+    "nivel_cm": 394.0,
+    "nivel_m": 3.94,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-29 23:09:21.58"
+  },
+  {
+    "data_medicao": "2026-10-29 23:00:00.0",
+    "data_medicao_manaus": "2026-10-29 22:00:00",
+    "nivel_cm": 393.0,
+    "nivel_m": 3.93,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-29 23:09:21.58"
+  },
+  {
+    "data_medicao": "2026-10-29 23:15:00.0",
+    "data_medicao_manaus": "2026-10-29 22:15:00",
+    "nivel_cm": 393.0,
+    "nivel_m": 3.93,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 00:09:14.127"
+  },
+  {
+    "data_medicao": "2026-10-29 23:30:00.0",
+    "data_medicao_manaus": "2026-10-29 22:30:00",
+    "nivel_cm": 393.0,
+    "nivel_m": 3.93,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 00:09:14.13"
+  },
+  {
+    "data_medicao": "2026-10-29 23:45:00.0",
+    "data_medicao_manaus": "2026-10-29 22:45:00",
+    "nivel_cm": 393.0,
+    "nivel_m": 3.93,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 00:09:14.13"
+  },
+  {
+    "data_medicao": "2026-10-30 00:00:00.0",
+    "data_medicao_manaus": "2026-10-29 23:00:00",
+    "nivel_cm": 393.0,
+    "nivel_m": 3.93,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 00:09:14.13"
+  },
+  {
+    "data_medicao": "2026-10-30 00:15:00.0",
+    "data_medicao_manaus": "2026-10-29 23:15:00",
+    "nivel_cm": 393.0,
+    "nivel_m": 3.93,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 01:09:27.727"
+  },
+  {
+    "data_medicao": "2026-10-30 00:30:00.0",
+    "data_medicao_manaus": "2026-10-29 23:30:00",
+    "nivel_cm": 393.0,
+    "nivel_m": 3.93,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 01:09:27.73"
+  },
+  {
+    "data_medicao": "2026-10-30 00:45:00.0",
+    "data_medicao_manaus": "2026-10-29 23:45:00",
+    "nivel_cm": 393.0,
+    "nivel_m": 3.93,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 01:09:27.737"
+  },
+  {
+    "data_medicao": "2026-10-30 01:00:00.0",
+    "data_medicao_manaus": "2026-10-30 00:00:00",
+    "nivel_cm": 393.0,
+    "nivel_m": 3.93,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 01:09:27.737"
+  },
+  {
+    "data_medicao": "2026-10-30 01:15:00.0",
+    "data_medicao_manaus": "2026-10-30 00:15:00",
+    "nivel_cm": 393.0,
+    "nivel_m": 3.93,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 02:09:14.777"
+  },
+  {
+    "data_medicao": "2026-10-30 01:30:00.0",
+    "data_medicao_manaus": "2026-10-30 00:30:00",
+    "nivel_cm": 393.0,
+    "nivel_m": 3.93,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 02:09:14.78"
+  },
+  {
+    "data_medicao": "2026-10-30 01:45:00.0",
+    "data_medicao_manaus": "2026-10-30 00:45:00",
+    "nivel_cm": 393.0,
+    "nivel_m": 3.93,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 02:09:14.783"
+  },
+  {
+    "data_medicao": "2026-10-30 02:00:00.0",
+    "data_medicao_manaus": "2026-10-30 01:00:00",
+    "nivel_cm": 393.0,
+    "nivel_m": 3.93,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 02:09:14.787"
+  },
+  {
+    "data_medicao": "2026-10-30 02:15:00.0",
+    "data_medicao_manaus": "2026-10-30 01:15:00",
+    "nivel_cm": 393.0,
+    "nivel_m": 3.93,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 03:09:12.653"
+  },
+  {
+    "data_medicao": "2026-10-30 02:30:00.0",
+    "data_medicao_manaus": "2026-10-30 01:30:00",
+    "nivel_cm": 393.0,
+    "nivel_m": 3.93,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 03:09:12.66"
+  },
+  {
+    "data_medicao": "2026-10-30 02:45:00.0",
+    "data_medicao_manaus": "2026-10-30 01:45:00",
+    "nivel_cm": 393.0,
+    "nivel_m": 3.93,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 03:09:12.66"
+  },
+  {
+    "data_medicao": "2026-10-30 03:00:00.0",
+    "data_medicao_manaus": "2026-10-30 02:00:00",
+    "nivel_cm": 393.0,
+    "nivel_m": 3.93,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 03:09:12.663"
+  },
+  {
+    "data_medicao": "2026-10-30 03:15:00.0",
+    "data_medicao_manaus": "2026-10-30 02:15:00",
+    "nivel_cm": 393.0,
+    "nivel_m": 3.93,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 04:09:13.72"
+  },
+  {
+    "data_medicao": "2026-10-30 03:30:00.0",
+    "data_medicao_manaus": "2026-10-30 02:30:00",
+    "nivel_cm": 393.0,
+    "nivel_m": 3.93,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 04:09:13.72"
+  },
+  {
+    "data_medicao": "2026-10-30 03:45:00.0",
+    "data_medicao_manaus": "2026-10-30 02:45:00",
+    "nivel_cm": 392.0,
+    "nivel_m": 3.92,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 04:09:13.723"
+  },
+  {
+    "data_medicao": "2026-10-30 04:00:00.0",
+    "data_medicao_manaus": "2026-10-30 03:00:00",
+    "nivel_cm": 392.0,
+    "nivel_m": 3.92,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 04:09:13.727"
+  },
+  {
+    "data_medicao": "2026-10-30 04:15:00.0",
+    "data_medicao_manaus": "2026-10-30 03:15:00",
+    "nivel_cm": 392.0,
+    "nivel_m": 3.92,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 05:09:12.597"
+  },
+  {
+    "data_medicao": "2026-10-30 04:30:00.0",
+    "data_medicao_manaus": "2026-10-30 03:30:00",
+    "nivel_cm": 392.0,
+    "nivel_m": 3.92,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 05:09:12.6"
+  },
+  {
+    "data_medicao": "2026-10-30 04:45:00.0",
+    "data_medicao_manaus": "2026-10-30 03:45:00",
+    "nivel_cm": 392.0,
+    "nivel_m": 3.92,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 05:09:12.6"
+  },
+  {
+    "data_medicao": "2026-10-30 05:00:00.0",
+    "data_medicao_manaus": "2026-10-30 04:00:00",
+    "nivel_cm": 392.0,
+    "nivel_m": 3.92,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 05:09:12.603"
+  },
+  {
+    "data_medicao": "2026-10-30 05:15:00.0",
+    "data_medicao_manaus": "2026-10-30 04:15:00",
+    "nivel_cm": 392.0,
+    "nivel_m": 3.92,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 06:09:13.24"
+  },
+  {
+    "data_medicao": "2026-10-30 05:30:00.0",
+    "data_medicao_manaus": "2026-10-30 04:30:00",
+    "nivel_cm": 392.0,
+    "nivel_m": 3.92,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 06:09:13.243"
+  },
+  {
+    "data_medicao": "2026-10-30 05:45:00.0",
+    "data_medicao_manaus": "2026-10-30 04:45:00",
+    "nivel_cm": 392.0,
+    "nivel_m": 3.92,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 06:09:13.247"
+  },
+  {
+    "data_medicao": "2026-10-30 06:00:00.0",
+    "data_medicao_manaus": "2026-10-30 05:00:00",
+    "nivel_cm": 392.0,
+    "nivel_m": 3.92,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 06:09:13.247"
+  },
+  {
+    "data_medicao": "2026-10-30 06:15:00.0",
+    "data_medicao_manaus": "2026-10-30 05:15:00",
+    "nivel_cm": 392.0,
+    "nivel_m": 3.92,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 07:09:12.543"
+  },
+  {
+    "data_medicao": "2026-10-30 06:30:00.0",
+    "data_medicao_manaus": "2026-10-30 05:30:00",
+    "nivel_cm": 392.0,
+    "nivel_m": 3.92,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 07:09:12.547"
+  },
+  {
+    "data_medicao": "2026-10-30 06:45:00.0",
+    "data_medicao_manaus": "2026-10-30 05:45:00",
+    "nivel_cm": 392.0,
+    "nivel_m": 3.92,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 07:09:12.55"
+  },
+  {
+    "data_medicao": "2026-10-30 07:00:00.0",
+    "data_medicao_manaus": "2026-10-30 06:00:00",
+    "nivel_cm": 392.0,
+    "nivel_m": 3.92,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 07:09:12.55"
+  },
+  {
+    "data_medicao": "2026-10-30 07:15:00.0",
+    "data_medicao_manaus": "2026-10-30 06:15:00",
+    "nivel_cm": 392.0,
+    "nivel_m": 3.92,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 08:09:56.117"
+  },
+  {
+    "data_medicao": "2026-10-30 07:30:00.0",
+    "data_medicao_manaus": "2026-10-30 06:30:00",
+    "nivel_cm": 392.0,
+    "nivel_m": 3.92,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 08:09:56.117"
+  },
+  {
+    "data_medicao": "2026-10-30 07:45:00.0",
+    "data_medicao_manaus": "2026-10-30 06:45:00",
+    "nivel_cm": 392.0,
+    "nivel_m": 3.92,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 08:09:56.12"
+  },
+  {
+    "data_medicao": "2026-10-30 08:00:00.0",
+    "data_medicao_manaus": "2026-10-30 07:00:00",
+    "nivel_cm": 392.0,
+    "nivel_m": 3.92,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 08:09:56.12"
+  },
+  {
+    "data_medicao": "2026-10-30 08:15:00.0",
+    "data_medicao_manaus": "2026-10-30 07:15:00",
+    "nivel_cm": 392.0,
+    "nivel_m": 3.92,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 09:09:17.093"
+  },
+  {
+    "data_medicao": "2026-10-30 08:30:00.0",
+    "data_medicao_manaus": "2026-10-30 07:30:00",
+    "nivel_cm": 392.0,
+    "nivel_m": 3.92,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 09:09:17.097"
+  },
+  {
+    "data_medicao": "2026-10-30 08:45:00.0",
+    "data_medicao_manaus": "2026-10-30 07:45:00",
+    "nivel_cm": 392.0,
+    "nivel_m": 3.92,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 09:09:17.097"
+  },
+  {
+    "data_medicao": "2026-10-30 09:00:00.0",
+    "data_medicao_manaus": "2026-10-30 08:00:00",
+    "nivel_cm": 392.0,
+    "nivel_m": 3.92,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 09:09:17.1"
+  },
+  {
+    "data_medicao": "2026-10-30 09:15:00.0",
+    "data_medicao_manaus": "2026-10-30 08:15:00",
+    "nivel_cm": 391.0,
+    "nivel_m": 3.91,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 10:09:13.937"
+  },
+  {
+    "data_medicao": "2026-10-30 09:30:00.0",
+    "data_medicao_manaus": "2026-10-30 08:30:00",
+    "nivel_cm": 392.0,
+    "nivel_m": 3.92,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 10:09:13.94"
+  },
+  {
+    "data_medicao": "2026-10-30 09:45:00.0",
+    "data_medicao_manaus": "2026-10-30 08:45:00",
+    "nivel_cm": 392.0,
+    "nivel_m": 3.92,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 10:09:13.94"
+  },
+  {
+    "data_medicao": "2026-10-30 10:00:00.0",
+    "data_medicao_manaus": "2026-10-30 09:00:00",
+    "nivel_cm": 393.0,
+    "nivel_m": 3.93,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 10:09:13.943"
+  },
+  {
+    "data_medicao": "2026-10-30 10:15:00.0",
+    "data_medicao_manaus": "2026-10-30 09:15:00",
+    "nivel_cm": 394.0,
+    "nivel_m": 3.94,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 11:09:16.99"
+  },
+  {
+    "data_medicao": "2026-10-30 10:30:00.0",
+    "data_medicao_manaus": "2026-10-30 09:30:00",
+    "nivel_cm": 394.0,
+    "nivel_m": 3.94,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 11:09:16.99"
+  },
+  {
+    "data_medicao": "2026-10-30 10:45:00.0",
+    "data_medicao_manaus": "2026-10-30 09:45:00",
+    "nivel_cm": 394.0,
+    "nivel_m": 3.94,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 11:09:16.993"
+  },
+  {
+    "data_medicao": "2026-10-30 11:00:00.0",
+    "data_medicao_manaus": "2026-10-30 10:00:00",
+    "nivel_cm": 394.0,
+    "nivel_m": 3.94,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 11:09:16.993"
+  },
+  {
+    "data_medicao": "2026-10-30 11:15:00.0",
+    "data_medicao_manaus": "2026-10-30 10:15:00",
+    "nivel_cm": 394.0,
+    "nivel_m": 3.94,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 12:09:16.977"
+  },
+  {
+    "data_medicao": "2026-10-30 11:30:00.0",
+    "data_medicao_manaus": "2026-10-30 10:30:00",
+    "nivel_cm": 394.0,
+    "nivel_m": 3.94,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 12:09:16.98"
+  },
+  {
+    "data_medicao": "2026-10-30 11:45:00.0",
+    "data_medicao_manaus": "2026-10-30 10:45:00",
+    "nivel_cm": 394.0,
+    "nivel_m": 3.94,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 12:09:16.983"
+  },
+  {
+    "data_medicao": "2026-10-30 12:00:00.0",
+    "data_medicao_manaus": "2026-10-30 11:00:00",
+    "nivel_cm": 394.0,
+    "nivel_m": 3.94,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 12:09:16.983"
+  },
+  {
+    "data_medicao": "2026-10-30 12:15:00.0",
+    "data_medicao_manaus": "2026-10-30 11:15:00",
+    "nivel_cm": 394.0,
+    "nivel_m": 3.94,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 13:09:15.373"
+  },
+  {
+    "data_medicao": "2026-10-30 12:30:00.0",
+    "data_medicao_manaus": "2026-10-30 11:30:00",
+    "nivel_cm": 393.0,
+    "nivel_m": 3.93,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 13:09:15.38"
+  },
+  {
+    "data_medicao": "2026-10-30 12:45:00.0",
+    "data_medicao_manaus": "2026-10-30 11:45:00",
+    "nivel_cm": 394.0,
+    "nivel_m": 3.94,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 13:09:15.38"
+  },
+  {
+    "data_medicao": "2026-10-30 13:00:00.0",
+    "data_medicao_manaus": "2026-10-30 12:00:00",
+    "nivel_cm": 393.0,
+    "nivel_m": 3.93,
+    "status_cota": "0",
+    "data_atualizacao_ana": "2026-10-30 13:09:15.383"
   }
 ]

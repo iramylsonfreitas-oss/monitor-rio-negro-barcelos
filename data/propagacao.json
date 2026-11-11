@@ -1,13 +1,13 @@
 {
-  "gerado_em_utc": "2026-11-10T17:50:08.624807+00:00",
+  "gerado_em_utc": "2026-11-11T17:53:29.144187+00:00",
   "metodo": "Correlação de Pearson entre variações horárias acumuladas de 24 horas, testando defasagens em passos de 6 horas.",
   "status": "experimental",
   "uso": "Diagnóstico histórico exploratório. Não representa previsão hidrológica nem confirma repiquete.",
   "cobertura_historica": {
     "inicio_manaus": "2023-09-24 00:00:00",
-    "fim_manaus": "2026-11-10 13:00:00",
-    "horas": 27445.0,
-    "dias": 1143.5
+    "fim_manaus": "2026-11-11 13:00:00",
+    "horas": 27469.0,
+    "dias": 1144.5
   },
   "pares": [
     {
@@ -71,46 +71,46 @@
     {
       "estacao": "14110000",
       "nome": "Cucuí",
-      "nivel_m": 14.57,
-      "variacao_6h_cm": 1.0,
-      "variacao_24h_cm": 1.0,
-      "variacao_72h_cm": -2.0,
-      "variacao_7d_cm": -31.0,
+      "nivel_m": 14.63,
+      "variacao_6h_cm": 2.0,
+      "variacao_24h_cm": 6.0,
+      "variacao_72h_cm": 6.0,
+      "variacao_7d_cm": -12.0,
       "tendencia": "subindo",
-      "data_medicao_manaus": "2026-11-10 13:15:00"
+      "data_medicao_manaus": "2026-11-11 13:15:00"
     },
     {
       "estacao": "14280001",
       "nome": "Taracuá",
-      "nivel_m": 11.88,
-      "variacao_6h_cm": -1.0,
-      "variacao_24h_cm": -5.0,
-      "variacao_72h_cm": -8.0,
-      "variacao_7d_cm": 24.0,
+      "nivel_m": 11.84,
+      "variacao_6h_cm": -2.0,
+      "variacao_24h_cm": -4.0,
+      "variacao_72h_cm": -12.0,
+      "variacao_7d_cm": 7.0,
       "tendencia": "descendo",
-      "data_medicao_manaus": "2026-11-10 13:15:00"
+      "data_medicao_manaus": "2026-11-11 13:15:00"
     },
     {
       "estacao": "14330000",
       "nome": "Curicuriari",
-      "nivel_m": 7.76,
+      "nivel_m": 7.74,
       "variacao_6h_cm": -1.0,
-      "variacao_24h_cm": -1.0,
-      "variacao_72h_cm": -2.0,
-      "variacao_7d_cm": -8.0,
+      "variacao_24h_cm": -2.0,
+      "variacao_72h_cm": -5.0,
+      "variacao_7d_cm": -1.0,
       "tendencia": "descendo",
-      "data_medicao_manaus": "2026-11-10 12:45:00"
+      "data_medicao_manaus": "2026-11-11 13:45:00"
     },
     {
       "estacao": "14420000",
       "nome": "Serrinha",
       "nivel_m": 5.24,
-      "variacao_6h_cm": -1.0,
-      "variacao_24h_cm": -3.0,
-      "variacao_72h_cm": -7.0,
-      "variacao_7d_cm": -48.0,
-      "tendencia": "descendo",
-      "data_medicao_manaus": "2026-11-10 12:30:00"
+      "variacao_6h_cm": 0.0,
+      "variacao_24h_cm": -1.0,
+      "variacao_72h_cm": -4.0,
+      "variacao_7d_cm": -34.0,
+      "tendencia": "estavel",
+      "data_medicao_manaus": "2026-11-11 13:30:00"
     },
     {
       "estacao": "14480002",

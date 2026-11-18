@@ -180,13 +180,13 @@ jobs:
 
 
   auditar_lacuna:
-    if: github.event_name == 'push' && contains(github.event.head_commit.message, '[auditar-lacuna-20261118]')
+    if: github.event_name == 'push' && contains(github.event.head_commit.message, '[auditar-lacuna-esquema-20261118]')
     runs-on: ubuntu-24.04
     timeout-minutes: 4
     permissions:
       contents: read
     steps:
-      - name: Conferir lacuna de Barcelos nas rotas oficiais da ANA
+      - name: Conferir consulta histórica com os parâmetros atuais da ANA
         env:
           ANA_IDENTIFIER: ${{ secrets.ANA_IDENTIFIER }}
           ANA_PASSWORD: ${{ secrets.ANA_PASSWORD }}
@@ -203,6 +203,7 @@ jobs:
           from zoneinfo import ZoneInfo
           
           BASE = "https://www.ana.gov.br/hidrowebservice/EstacoesTelemetricas/"
+          SCHEMA = "https://www.ana.gov.br/hidrowebservice/v3/api-docs"
           LOCAL = ZoneInfo("America/Manaus")
           ANA_ZONE = ZoneInfo("America/Sao_Paulo")
           START = datetime(2026, 11, 10, 7, tzinfo=LOCAL)
@@ -301,6 +302,38 @@ jobs:
                       "RangeIntervaloDeBusca": "DIAS_30",
                   }),
               ]
+          
+              # Read parameter names from the provider's current public schema.
+              try:
+                  schema = read(SCHEMA, {"Accept": "application/json"}, timeout=20)
+                  path = "/EstacoesTelemetricas/HidroinfoanaSerieTelemetricaAdotada/v1"
+                  operation = schema.get("paths", {}).get(path, {}).get("get", {})
+                  parameters = operation.get("parameters", [])
+                  print("ANA_V1_PARAMETERS=" + json.dumps([
+                      {"name": p.get("name"), "required": p.get("required"), "schema": p.get("schema")}
+                      for p in parameters if p.get("in") == "query"
+                  ], ensure_ascii=False))
+                  query = {}
+                  import unicodedata
+                  for parameter in parameters:
+                      if parameter.get("in") != "query":
+                          continue
+                      name = parameter.get("name", "")
+                      normalized = "".join(c for c in unicodedata.normalize("NFD", name).lower() if c.isalnum())
+                      if "estac" in normalized or "codigo" in normalized:
+                          query[name] = STATION
+                      elif "tipofiltro" in normalized:
+                          query[name] = "DATA_LEITURA"
+                      elif "data" in normalized and "busca" in normalized:
+                          query[name] = "2026-11-17"
+                      elif "range" in normalized or "intervalo" in normalized:
+                          choices = parameter.get("schema", {}).get("enum", [])
+                          query[name] = "DIAS_30" if "DIAS_30" in choices else "HORA_24"
+                  if query and any("estac" in "".join(c for c in unicodedata.normalize("NFD", name).lower() if c.isalnum()) for name in query):
+                      routes[1] = ("adopted_v1_current_schema", "HidroinfoanaSerieTelemetricaAdotada/v1", query)
+              except Exception as error:
+                  print("ANA_SCHEMA_ERROR=" + type(error).__name__)
+          
               results = []
               for name, route, query in routes:
                   try:
